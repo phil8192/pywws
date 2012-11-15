@@ -36,6 +36,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="language.html" title="How to make a language file for pywws"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -66,11 +69,11 @@
 <p>You could post weather updates to your &#8216;normal&#8217; Twitter account, but I think it&#8217;s better to have a separate account just for weather reports. This could be useful to someone who lives in your area, but doesn&#8217;t want to know what you had for breakfast.</p>
 </li>
 <li><p class="first">Authorise pywws to post to your Twitter account.</p>
-<p>Make sure no other pywws software is running, then run the <tt class="xref py py-mod docutils literal"><span class="pre">TwitterAuth</span></tt> program:</p>
+<p>Make sure no other pywws software is running, then run the <a class="reference internal" href="../api/TwitterAuth.html#module-TwitterAuth"><tt class="xref py py-mod docutils literal"><span class="pre">TwitterAuth</span></tt></a> program:</p>
 <div class="highlight-python"><pre>python TwitterAuth.py /data/weather</pre>
 </div>
 <p>(Replace <tt class="docutils literal"><span class="pre">/data/weather</span></tt> with your data directory.)</p>
-<p>This will open a web browser window (or give you a URL to copy to your web browser) where you can log in to your Twitter account and authorise pywws to post. Your web browser will then show a 7 digit number which you need to copy to the <tt class="xref py py-mod docutils literal"><span class="pre">TwitterAuth</span></tt> program. If successful, your weather.ini file will now have a <tt class="docutils literal"><span class="pre">[twitter]</span></tt> section with <tt class="docutils literal"><span class="pre">secret</span></tt> and <tt class="docutils literal"><span class="pre">key</span></tt> entries. (Don&#8217;t disclose these to anyone else.)</p>
+<p>This will open a web browser window (or give you a URL to copy to your web browser) where you can log in to your Twitter account and authorise pywws to post. Your web browser will then show a 7 digit number which you need to copy to the <a class="reference internal" href="../api/TwitterAuth.html#module-TwitterAuth"><tt class="xref py py-mod docutils literal"><span class="pre">TwitterAuth</span></tt></a> program. If successful, your weather.ini file will now have a <tt class="docutils literal"><span class="pre">[twitter]</span></tt> section with <tt class="docutils literal"><span class="pre">secret</span></tt> and <tt class="docutils literal"><span class="pre">key</span></tt> entries. (Don&#8217;t disclose these to anyone else.)</p>
 </li>
 <li><p class="first">Add location data (optional).</p>
 <p>Edit your weather.ini file and add <tt class="docutils literal"><span class="pre">latitude</span></tt> and <tt class="docutils literal"><span class="pre">longitude</span></tt> entries to the <tt class="docutils literal"><span class="pre">[twitter]</span></tt> section. For example:</p>
@@ -90,7 +93,7 @@ cat tweet.txt</pre>
 <p>(Replace <tt class="docutils literal"><span class="pre">/data/weather</span></tt> and <tt class="docutils literal"><span class="pre">~/weather/templates</span></tt> with your data and template directories.) If you need to change the template (e.g. to change the units or language used) you can edit it now or later.</p>
 </li>
 <li><p class="first">Post your first weather Tweet.</p>
-<p>Now everything is prepared for <tt class="xref py py-mod docutils literal"><span class="pre">pywws.ToTwitter</span></tt> to be run:</p>
+<p>Now everything is prepared for <a class="reference internal" href="../api/pywws.ToTwitter.html#module-pywws.ToTwitter"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.ToTwitter</span></tt></a> to be run:</p>
 <div class="highlight-python"><pre>python pywws/ToTwitter.py /data/weather tweet.txt</pre>
 </div>
 <p>If this works, your new Twitter account will have posted its first weather report. (You should delete the tweet.txt file now.)</p>
@@ -145,6 +148,9 @@ cat tweet.txt</pre>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="language.html" title="How to make a language file for pywws"
              >next</a> |</li>

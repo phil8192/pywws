@@ -36,6 +36,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="LiveLog.html" title="LiveLog"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -51,8 +54,47 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="hourly">
-<h1>Hourly<a class="headerlink" href="#hourly" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-Hourly">
+<span id="hourly"></span><h1>Hourly<a class="headerlink" href="#module-Hourly" title="Permalink to this headline">¶</a></h1>
+<p>Get weather data, process it, prepare graphs &amp; text files and
+upload to a web site.</p>
+<p>Typically run every hour from cron.</p>
+<div class="highlight-python"><pre>usage: python Hourly.py [options] data_dir
+options are:
+ -h or --help     display this help
+ -v or --verbose  increase amount of reassuring messages
+data_dir is the root directory of the weather data (e.g. $(HOME)/weather/data)</pre>
+</div>
+<p>This script does little more than call other modules in sequence to
+get data from the weather station, process it, plot some graphs,
+generate some text files and upload the results to a web site.</p>
+<p>For more information on using <tt class="docutils literal"><span class="pre">Hourly.py</span></tt>, see
+<a class="reference internal" href="../guides/hourlylogging.html"><em>How to set up &#8216;hourly&#8217; logging with pywws</em></a>.</p>
+<p class="rubric">Functions</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><a class="reference internal" href="#Hourly.Hourly" title="Hourly.Hourly"><tt class="xref py py-obj docutils literal"><span class="pre">Hourly</span></tt></a>(data_dir)</td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#Hourly.main" title="Hourly.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="Hourly.Hourly">
+<tt class="descclassname">Hourly.</tt><tt class="descname">Hourly</tt><big>(</big><em>data_dir</em><big>)</big><a class="reference internal" href="../_modules/Hourly.html#Hourly"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Hourly.Hourly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="Hourly.main">
+<tt class="descclassname">Hourly.</tt><tt class="descname">main</tt><big>(</big><em>argv=None</em><big>)</big><a class="reference internal" href="../_modules/Hourly.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Hourly.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 
 
@@ -90,6 +132,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="LiveLog.html" title="LiveLog"
              >next</a> |</li>

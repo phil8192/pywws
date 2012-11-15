@@ -36,6 +36,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="pywws.toservice.html" title="pywws.toservice"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -51,8 +54,63 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="pywws-totwitter">
-<h1>pywws.ToTwitter<a class="headerlink" href="#pywws-totwitter" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-pywws.ToTwitter">
+<span id="pywws-totwitter"></span><h1>pywws.ToTwitter<a class="headerlink" href="#module-pywws.ToTwitter" title="Permalink to this headline">¶</a></h1>
+<p>Post a message to Twitter</p>
+<div class="highlight-python"><pre>usage: python ToTwitter.py [options] data_dir file
+options are:
+ -h | --help  display this help
+data_dir is the root directory of the weather data
+file is the text file to be uploaded</pre>
+</div>
+<p>This module posts a brief message to <a class="reference external" href="https://twitter.com/">Twitter</a>. Before posting to Twitter you need to set up
+an account and then authorise pywws by running the
+<a class="reference internal" href="TwitterAuth.html#module-TwitterAuth"><tt class="xref py py-mod docutils literal"><span class="pre">TwitterAuth</span></tt></a> program. See <a class="reference internal" href="../guides/twitter.html"><em>How to configure pywws to post messages to Twitter</em></a> for
+detailed instructions.</p>
+<p class="rubric">Functions</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><a class="reference internal" href="#pywws.ToTwitter.main" title="pywws.ToTwitter.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><a class="reference internal" href="#pywws.ToTwitter.ToTwitter" title="pywws.ToTwitter.ToTwitter"><tt class="xref py py-obj docutils literal"><span class="pre">ToTwitter</span></tt></a>(params)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="pywws.ToTwitter.ToTwitter">
+<em class="property">class </em><tt class="descclassname">pywws.ToTwitter.</tt><tt class="descname">ToTwitter</tt><big>(</big><em>params</em><big>)</big><a class="reference internal" href="../_modules/pywws/ToTwitter.html#ToTwitter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.ToTwitter.ToTwitter" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="pywws.ToTwitter.ToTwitter.Upload">
+<tt class="descname">Upload</tt><big>(</big><em>tweet</em><big>)</big><a class="reference internal" href="../_modules/pywws/ToTwitter.html#ToTwitter.Upload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.ToTwitter.ToTwitter.Upload" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pywws.ToTwitter.ToTwitter.UploadFile">
+<tt class="descname">UploadFile</tt><big>(</big><em>file</em><big>)</big><a class="reference internal" href="../_modules/pywws/ToTwitter.html#ToTwitter.UploadFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.ToTwitter.ToTwitter.UploadFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pywws.ToTwitter.main">
+<tt class="descclassname">pywws.ToTwitter.</tt><tt class="descname">main</tt><big>(</big><em>argv=None</em><big>)</big><a class="reference internal" href="../_modules/pywws/ToTwitter.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.ToTwitter.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 
 
@@ -90,6 +148,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="pywws.toservice.html" title="pywws.toservice"
              >next</a> |</li>

@@ -36,6 +36,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="hourlylogging.html" title="How to set up ‘hourly’ logging with pywws"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -84,7 +87,7 @@ cd ~/weather</pre>
 <p>You may be able to install these using your operating system&#8217;s package manager. This is a lot easier than downloading and compiling the source files from the project websites. Note that some Linux distributions may use different names for some of the packages, e.g. in Ubuntu, pyusb is python-usb.</p>
 </li>
 <li><p class="first">Test the weather station connection.</p>
-<p>Connect the weather station (if not already connected) then run the <tt class="xref py py-mod docutils literal"><span class="pre">TestWeatherStation</span></tt> program. Change to the pywws source directory first. For example:</p>
+<p>Connect the weather station (if not already connected) then run the <a class="reference internal" href="../api/TestWeatherStation.html#module-TestWeatherStation"><tt class="xref py py-mod docutils literal"><span class="pre">TestWeatherStation</span></tt></a> program. Change to the pywws source directory first. For example:</p>
 <div class="highlight-python"><pre>cd ~/weather/pywws-10.08_r235
 python TestWeatherStation.py</pre>
 </div>
@@ -111,7 +114,7 @@ python TestWeatherStation.py</pre>
 <p>This directory is referred to elsewhere in the pywws documentation as your data directory.</p>
 <p>Make sure your computer has the right date &amp; time, and time zone, as these are used to label the weather station data. If you haven&#8217;t already done so, it&#8217;s worth setting up NTP to synchronise your computer to a &#8216;time server&#8217;.</p>
 <p>Make sure your weather station has the correct offset between &#8216;absolute&#8217; and &#8216;relative&#8217; atmospheric pressure. See the instruction book for details on how to set this.</p>
-<p>The first time you run <tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt> it will create a configuration file in your data directory called &#8216;weather.ini&#8217; and then stop. You need to edit the configuration file and change the line <tt class="docutils literal"><span class="pre">ws</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">Unknown</span></tt> to <tt class="docutils literal"><span class="pre">ws</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">1080</span></tt> or <tt class="docutils literal"><span class="pre">ws</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">3080</span></tt>. (If your weather station console displays solar illuminance you have a 3080 type, all others are 1080.) Then run <tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt> again. This may take several minutes, as it will copy all the data stored in your station&#8217;s memory. The <tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt> program has a &#8216;verbose&#8217; option that increases the amount of messages it displays while running. This is useful when running it manually, for example:</p>
+<p>The first time you run <a class="reference internal" href="../api/pywws.LogData.html#module-pywws.LogData"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt></a> it will create a configuration file in your data directory called &#8216;weather.ini&#8217; and then stop. You need to edit the configuration file and change the line <tt class="docutils literal"><span class="pre">ws</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">Unknown</span></tt> to <tt class="docutils literal"><span class="pre">ws</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">1080</span></tt> or <tt class="docutils literal"><span class="pre">ws</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">3080</span></tt>. (If your weather station console displays solar illuminance you have a 3080 type, all others are 1080.) Then run <a class="reference internal" href="../api/pywws.LogData.html#module-pywws.LogData"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt></a> again. This may take several minutes, as it will copy all the data stored in your station&#8217;s memory. The <a class="reference internal" href="../api/pywws.LogData.html#module-pywws.LogData"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt></a> program has a &#8216;verbose&#8217; option that increases the amount of messages it displays while running. This is useful when running it manually, for example:</p>
 <div class="highlight-python"><pre>python pywws/LogData.py -vvv ~/weather/data</pre>
 </div>
 <p>(Replace <tt class="docutils literal"><span class="pre">~/weather/data</span></tt> with your data directory, if it&#8217;s different.)</p>
@@ -126,7 +129,7 @@ python TestWeatherStation.py</pre>
 </div>
 </li>
 <li><p class="first">Set some configuration options.</p>
-<p>After running <tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt> there should be a configuration file in your data directory called &#8216;weather.ini&#8217;. Open this with a text editor. You should find something like the following:</p>
+<p>After running <a class="reference internal" href="../api/pywws.LogData.html#module-pywws.LogData"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt></a> there should be a configuration file in your data directory called &#8216;weather.ini&#8217;. Open this with a text editor. You should find something like the following:</p>
 <div class="highlight-python"><pre>[fixed]
 ws type = 1080
 pressure offset = 7.4
@@ -150,18 +153,18 @@ day end hour = 9</pre>
 <p>For more detail on the configuration file options, see <a class="reference internal" href="weather_ini.html"><em>weather.ini - configuration file format</em></a>.</p>
 </li>
 <li><p class="first">Process the raw data.</p>
-<p><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt> just copies the raw data from the weather station. To do something useful with that data you probably need hourly, daily and monthly summaries. These are created by the <tt class="xref py py-mod docutils literal"><span class="pre">pywws.Process</span></tt> program. For example:</p>
+<p><a class="reference internal" href="../api/pywws.LogData.html#module-pywws.LogData"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt></a> just copies the raw data from the weather station. To do something useful with that data you probably need hourly, daily and monthly summaries. These are created by the <a class="reference internal" href="../api/pywws.Process.html#module-pywws.Process"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Process</span></tt></a> program. For example:</p>
 <div class="highlight-python"><pre>python pywws/Process.py ~/weather/data</pre>
 </div>
 <p>You should now have some processed files to look at:</p>
 <div class="highlight-python"><pre>more ~/weather/data/weather/daily/2010/2010-10-01.txt</pre>
 </div>
-<p>If you ever change your <tt class="docutils literal"><span class="pre">day</span> <span class="pre">end</span> <span class="pre">hour</span></tt> configuration setting, you will need to reprocess all your weather data. You can do this by running the <tt class="xref py py-mod docutils literal"><span class="pre">Reprocess</span></tt> program:</p>
+<p>If you ever change your <tt class="docutils literal"><span class="pre">day</span> <span class="pre">end</span> <span class="pre">hour</span></tt> configuration setting, you will need to reprocess all your weather data. You can do this by running the <a class="reference internal" href="../api/Reprocess.html#module-Reprocess"><tt class="xref py py-mod docutils literal"><span class="pre">Reprocess</span></tt></a> program:</p>
 <div class="highlight-python"><pre>python Reprocess.py ~/weather/data</pre>
 </div>
 </li>
 <li><p class="first">Set the weather station logging interval.</p>
-<p>Your weather station probably left the factory with a 30 minute logging interval. This enables the station to store about 11 weeks of data. Most pywws users set up their computers to read data from the station every hour, and only need the station to store enough data to cover computer failures. The recommended interval is 5 minutes, which still allows 2 weeks of storage. Use the <tt class="xref py py-mod docutils literal"><span class="pre">SetWeatherStation</span></tt> program to set the interval:</p>
+<p>Your weather station probably left the factory with a 30 minute logging interval. This enables the station to store about 11 weeks of data. Most pywws users set up their computers to read data from the station every hour, and only need the station to store enough data to cover computer failures. The recommended interval is 5 minutes, which still allows 2 weeks of storage. Use the <a class="reference internal" href="../api/SetWeatherStation.html#module-SetWeatherStation"><tt class="xref py py-mod docutils literal"><span class="pre">SetWeatherStation</span></tt></a> program to set the interval:</p>
 <div class="highlight-python"><pre>python SetWeatherStation.py -r 5</pre>
 </div>
 <p>You are now ready to set up regular or continuous logging, as described in <a class="reference internal" href="hourlylogging.html"><em>How to set up &#8216;hourly&#8217; logging with pywws</em></a> or <a class="reference internal" href="livelogging.html"><em>How to set up &#8216;live&#8217; logging with pywws</em></a>.</p>
@@ -208,6 +211,9 @@ day end hour = 9</pre>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="hourlylogging.html" title="How to set up ‘hourly’ logging with pywws"
              >next</a> |</li>

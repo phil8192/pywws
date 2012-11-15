@@ -36,6 +36,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="pywws.WindRose.html" title="pywws.WindRose"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -263,8 +266,104 @@
 <p>Sets the title of the subplot. A single line of text, for example: <tt class="docutils literal"><span class="pre">&lt;title&gt;Temperature</span> <span class="pre">(°C)&lt;/title&gt;</span></tt>. This title appears within the plot area, next to a short segment of the line colour used for the subplot.</p>
 </div>
 </div>
-<div class="section" id="detailed-api">
-<h2>Detailed API<a class="headerlink" href="#detailed-api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pywws.Plot">
+<span id="detailed-api"></span><h2>Detailed API<a class="headerlink" href="#module-pywws.Plot" title="Permalink to this headline">¶</a></h2>
+<p>Plot graphs of weather data according to an XML recipe.</p>
+<p>usage: python Plot.py [options] data_dir temp_dir xml_file output_file
+options are:</p>
+<blockquote>
+-h or &#8211;help            display this help</blockquote>
+<p>data_dir is the root directory of the weather data
+temp_dir is a workspace for temporary files e.g. /tmp
+xml_file is the name of the source file that describes the plot
+output_file is the name of the image file to be created e.g. 24hrs.png</p>
+<p class="rubric">Functions</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><a class="reference internal" href="#pywws.Plot.main" title="pywws.Plot.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><a class="reference internal" href="#pywws.Plot.BasePlotter" title="pywws.Plot.BasePlotter"><tt class="xref py py-obj docutils literal"><span class="pre">BasePlotter</span></tt></a>(params,&nbsp;raw_data,&nbsp;hourly_data,&nbsp;...)</td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#pywws.Plot.GraphPlotter" title="pywws.Plot.GraphPlotter"><tt class="xref py py-obj docutils literal"><span class="pre">GraphPlotter</span></tt></a>(params,&nbsp;raw_data,&nbsp;hourly_data,&nbsp;...)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="pywws.Plot.BasePlotter">
+<em class="property">class </em><tt class="descclassname">pywws.Plot.</tt><tt class="descname">BasePlotter</tt><big>(</big><em>params</em>, <em>raw_data</em>, <em>hourly_data</em>, <em>daily_data</em>, <em>monthly_data</em>, <em>work_dir</em><big>)</big><a class="reference internal" href="../_modules/pywws/Plot.html#BasePlotter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.BasePlotter" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="pywws.Plot.BasePlotter.DoPlot">
+<tt class="descname">DoPlot</tt><big>(</big><em>input_file</em>, <em>output_file</em><big>)</big><a class="reference internal" href="../_modules/pywws/Plot.html#BasePlotter.DoPlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.BasePlotter.DoPlot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pywws.Plot.BasePlotter.GetChildren">
+<tt class="descname">GetChildren</tt><big>(</big><em>node</em>, <em>name</em><big>)</big><a class="reference internal" href="../_modules/pywws/Plot.html#BasePlotter.GetChildren"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.BasePlotter.GetChildren" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pywws.Plot.BasePlotter.GetValue">
+<tt class="descname">GetValue</tt><big>(</big><em>node</em>, <em>name</em>, <em>default</em><big>)</big><a class="reference internal" href="../_modules/pywws/Plot.html#BasePlotter.GetValue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.BasePlotter.GetValue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pywws.Plot.Record">
+<em class="property">class </em><tt class="descclassname">pywws.Plot.</tt><tt class="descname">Record</tt><a class="reference internal" href="../_modules/pywws/Plot.html#Record"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.Record" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="pywws.Plot.GraphPlotter">
+<em class="property">class </em><tt class="descclassname">pywws.Plot.</tt><tt class="descname">GraphPlotter</tt><big>(</big><em>params</em>, <em>raw_data</em>, <em>hourly_data</em>, <em>daily_data</em>, <em>monthly_data</em>, <em>work_dir</em><big>)</big><a class="reference internal" href="../_modules/pywws/Plot.html#GraphPlotter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.GraphPlotter" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="pywws.Plot.GraphPlotter.GetPlotList">
+<tt class="descname">GetPlotList</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/pywws/Plot.html#GraphPlotter.GetPlotList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.GraphPlotter.GetPlotList" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pywws.Plot.GraphPlotter.GetDefaultRows">
+<tt class="descname">GetDefaultRows</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/pywws/Plot.html#GraphPlotter.GetDefaultRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.GraphPlotter.GetDefaultRows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pywws.Plot.GraphPlotter.GetDefaultPlotSize">
+<tt class="descname">GetDefaultPlotSize</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/pywws/Plot.html#GraphPlotter.GetDefaultPlotSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.GraphPlotter.GetDefaultPlotSize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pywws.Plot.GraphPlotter.GetPreamble">
+<tt class="descname">GetPreamble</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/pywws/Plot.html#GraphPlotter.GetPreamble"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.GraphPlotter.GetPreamble" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pywws.Plot.GraphPlotter.PlotData">
+<tt class="descname">PlotData</tt><big>(</big><em>plot_no</em>, <em>plot</em>, <em>source</em><big>)</big><a class="reference internal" href="../_modules/pywws/Plot.html#GraphPlotter.PlotData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.GraphPlotter.PlotData" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pywws.Plot.main">
+<tt class="descclassname">pywws.Plot.</tt><tt class="descname">main</tt><big>(</big><em>argv=None</em><big>)</big><a class="reference internal" href="../_modules/pywws/Plot.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 </div>
 
@@ -318,7 +417,7 @@
 <li><a class="reference internal" href="#id2">title</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#detailed-api">Detailed API</a></li>
+<li><a class="reference internal" href="#module-pywws.Plot">Detailed API</a></li>
 </ul>
 </li>
 </ul>
@@ -352,6 +451,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="pywws.WindRose.html" title="pywws.WindRose"
              >next</a> |</li>

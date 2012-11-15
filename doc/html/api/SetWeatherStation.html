@@ -36,6 +36,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="TestWeatherStation.html" title="TestWeatherStation"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -51,8 +54,61 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="setweatherstation">
-<h1>SetWeatherStation<a class="headerlink" href="#setweatherstation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-SetWeatherStation">
+<span id="setweatherstation"></span><h1>SetWeatherStation<a class="headerlink" href="#module-SetWeatherStation" title="Permalink to this headline">¶</a></h1>
+<p>Set some weather station parameters.</p>
+<p>usage: python SetWeatherStation.py [options]
+options are:</p>
+<blockquote>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-h</span></kbd></td>
+<td><div class="first last line-block">
+<div class="line">&#8211;help           display this help</div>
+</div>
+</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-c</span></kbd></td>
+<td><div class="first line-block">
+<div class="line">&#8211;clock          set weather station clock to computer time</div>
+</div>
+<p class="last">(unlikely to work)</p>
+</td></tr>
+</tbody>
+</table>
+<p>-p f | &#8211;pressure f     set relative pressure to n hPa
+-r n | &#8211;read_period n  set logging interval to n minutes
+-v   | &#8211;verbose        increase error message verbosity
+-z   | &#8211;zero_memory    clear the weather station logged readings</p>
+</blockquote>
+<p class="rubric">Functions</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><a class="reference internal" href="#SetWeatherStation.bcd_encode" title="SetWeatherStation.bcd_encode"><tt class="xref py py-obj docutils literal"><span class="pre">bcd_encode</span></tt></a>(value)</td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#SetWeatherStation.main" title="SetWeatherStation.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="SetWeatherStation.bcd_encode">
+<tt class="descclassname">SetWeatherStation.</tt><tt class="descname">bcd_encode</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../_modules/SetWeatherStation.html#bcd_encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#SetWeatherStation.bcd_encode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="SetWeatherStation.main">
+<tt class="descclassname">SetWeatherStation.</tt><tt class="descname">main</tt><big>(</big><em>argv=None</em><big>)</big><a class="reference internal" href="../_modules/SetWeatherStation.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#SetWeatherStation.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 
 
@@ -90,6 +146,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="TestWeatherStation.html" title="TestWeatherStation"
              >next</a> |</li>

@@ -36,6 +36,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="USBQualityTest.html" title="USBQualityTest"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -51,8 +54,53 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="testweatherstation">
-<h1>TestWeatherStation<a class="headerlink" href="#testweatherstation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-TestWeatherStation">
+<span id="testweatherstation"></span><h1>TestWeatherStation<a class="headerlink" href="#module-TestWeatherStation" title="Permalink to this headline">¶</a></h1>
+<p>Test connection to weather station.</p>
+<p>This is a simple utility to test communication with the weather
+station. If this doesn&#8217;t work, then there&#8217;s a problem that needs to be
+sorted out before trying any of the other programs. Likely problems
+include not properly installing <a class="reference external" href="http://libusb.wiki.sourceforge.net/">libusb</a> or <a class="reference external" href="http://pyusb.berlios.de/">PyUSB</a>. Less likely problems include an
+incompatibility between libusb and some operating systems. The most
+unlikely problem is that you forgot to connect the weather station to
+your computer!</p>
+<div class="highlight-python"><pre>usage: python TestWeatherStation.py [options]
+options are:
+      --help           display this help
+ -c | --change         display any changes in "fixed block" data
+ -d | --decode         display meaningful values instead of raw data
+ -h | --history count  display the last "count" readings
+ -l | --live           display 'live' data
+ -m | --logged         display 'logged' data
+ -u | --unknown        display unknown fixed block values
+ -v | --verbose        increase amount of reassuring messages
+                       (repeat for even more messages e.g. -vvv)</pre>
+</div>
+<p class="rubric">Functions</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><a class="reference internal" href="#TestWeatherStation.main" title="TestWeatherStation.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#TestWeatherStation.raw_dump" title="TestWeatherStation.raw_dump"><tt class="xref py py-obj docutils literal"><span class="pre">raw_dump</span></tt></a>(pos,&nbsp;data)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="TestWeatherStation.raw_dump">
+<tt class="descclassname">TestWeatherStation.</tt><tt class="descname">raw_dump</tt><big>(</big><em>pos</em>, <em>data</em><big>)</big><a class="reference internal" href="../_modules/TestWeatherStation.html#raw_dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TestWeatherStation.raw_dump" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="TestWeatherStation.main">
+<tt class="descclassname">TestWeatherStation.</tt><tt class="descname">main</tt><big>(</big><em>argv=None</em><big>)</big><a class="reference internal" href="../_modules/TestWeatherStation.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TestWeatherStation.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 
 
@@ -90,6 +138,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="USBQualityTest.html" title="USBQualityTest"
              >next</a> |</li>

@@ -36,6 +36,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="pywws.Forecast.html" title="pywws.Forecast"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -120,8 +123,74 @@
 <p>The <tt class="docutils literal"><span class="pre">#wind_dir</span> <span class="pre">...#</span></tt> and <tt class="docutils literal"><span class="pre">#pressure_trend</span> <span class="pre">...#</span></tt> instructions show use of the built-in array <tt class="docutils literal"><span class="pre">wind_dir_text</span></tt> and function <tt class="docutils literal"><span class="pre">pressure_trend_text</span></tt> to convert numerical values into English text.</p>
 <p>Finally we get to datetime values. The <tt class="docutils literal"><span class="pre">#idx</span> <span class="pre">&quot;%H%M&quot;#</span></tt> instruction simply outputs the time (in HHMM format) of the data&#8217;s index. The <tt class="docutils literal"><span class="pre">#idx</span> <span class="pre">&quot;%Y/%m/%d&quot;</span> <span class="pre">&quot;&quot;</span> <span class="pre">&quot;[None,</span> <span class="pre">x][x.hour</span> <span class="pre">==</span> <span class="pre">0</span> <span class="pre">or</span> <span class="pre">loop_count</span> <span class="pre">==</span> <span class="pre">7]&quot;#</span></tt> instruction is a bit more complicated. It outputs the date, but only on the first line or if the date has changed. It does this by indexing the array <tt class="docutils literal"><span class="pre">[None,</span> <span class="pre">x]</span></tt> with a boolean expression that is true when <tt class="docutils literal"><span class="pre">loop_count</span></tt> is 7 (i.e. on the first pass through the loop) or <tt class="docutils literal"><span class="pre">x.hour</span></tt> is zero (i.e. this is the first hour of the day).</p>
 </div>
-<div class="section" id="detailed-api">
-<h2>Detailed API<a class="headerlink" href="#detailed-api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pywws.Template">
+<span id="detailed-api"></span><h2>Detailed API<a class="headerlink" href="#module-pywws.Template" title="Permalink to this headline">¶</a></h2>
+<p>Create text data file based on a template.</p>
+<p>usage: python Template.py [options] data_dir template_file output_file
+options are:</p>
+<blockquote>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">--help</span></kbd></td>
+<td>display this help</td></tr>
+</tbody>
+</table>
+</blockquote>
+<p>data_dir is the root directory of the weather data
+template_file is the template text source file
+output_file is the name of the text file to be created</p>
+<p class="rubric">Functions</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><a class="reference internal" href="#pywws.Template.main" title="pywws.Template.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><a class="reference internal" href="#pywws.Template.Template" title="pywws.Template.Template"><tt class="xref py py-obj docutils literal"><span class="pre">Template</span></tt></a>(params,&nbsp;calib_data,&nbsp;hourly_data,&nbsp;...)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="pywws.Template.Template">
+<em class="property">class </em><tt class="descclassname">pywws.Template.</tt><tt class="descname">Template</tt><big>(</big><em>params</em>, <em>calib_data</em>, <em>hourly_data</em>, <em>daily_data</em>, <em>monthly_data</em>, <em>use_locale=True</em><big>)</big><a class="reference internal" href="../_modules/pywws/Template.html#Template"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Template.Template" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="pywws.Template.Template.process">
+<tt class="descname">process</tt><big>(</big><em>live_data</em>, <em>template_file</em><big>)</big><a class="reference internal" href="../_modules/pywws/Template.html#Template.process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Template.Template.process" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pywws.Template.Template.make_text">
+<tt class="descname">make_text</tt><big>(</big><em>template_file</em>, <em>live_data=None</em><big>)</big><a class="reference internal" href="../_modules/pywws/Template.html#Template.make_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Template.Template.make_text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pywws.Template.Template.make_file">
+<tt class="descname">make_file</tt><big>(</big><em>template_file</em>, <em>output_file</em>, <em>live_data=None</em><big>)</big><a class="reference internal" href="../_modules/pywws/Template.html#Template.make_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Template.Template.make_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pywws.Template.main">
+<tt class="descclassname">pywws.Template.</tt><tt class="descname">main</tt><big>(</big><em>argv=None</em><big>)</big><a class="reference internal" href="../_modules/pywws/Template.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Template.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 </div>
 
@@ -137,7 +206,7 @@
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#processing-instructions">Processing instructions</a></li>
 <li><a class="reference internal" href="#example">Example</a></li>
-<li><a class="reference internal" href="#detailed-api">Detailed API</a></li>
+<li><a class="reference internal" href="#module-pywws.Template">Detailed API</a></li>
 </ul>
 </li>
 </ul>
@@ -171,6 +240,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="pywws.Forecast.html" title="pywws.Forecast"
              >next</a> |</li>

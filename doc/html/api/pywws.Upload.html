@@ -36,6 +36,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="pywws.ToTwitter.html" title="pywws.ToTwitter"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -68,8 +71,42 @@ user = username</pre>
 <p><tt class="docutils literal"><span class="pre">directory</span></tt> is the name of a directory in which all the uploaded files will be put. This will depend on the structure of your web site and the sort of host you use. Your hosting provider should be able to tell you what <tt class="docutils literal"><span class="pre">site</span></tt> and <tt class="docutils literal"><span class="pre">user</span></tt> details to use. You should have already chosen a <tt class="docutils literal"><span class="pre">password</span></tt>.</p>
 <p>The <tt class="docutils literal"><span class="pre">secure</span></tt> option lets you switch from normal ftp to sftp (ftp over ssh). Some hosting providers offer this as a more secure upload mechanism, so you should probably use it if available.</p>
 </div>
-<div class="section" id="detailed-api">
-<h2>Detailed API<a class="headerlink" href="#detailed-api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pywws.Upload">
+<span id="detailed-api"></span><h2>Detailed API<a class="headerlink" href="#module-pywws.Upload" title="Permalink to this headline">¶</a></h2>
+<p>Upload files to a directory by ftp.</p>
+<p>usage: python Upload.py [options] data_dir file [file...]
+options are:</p>
+<blockquote>
+-h or &#8211;help            display this help</blockquote>
+<p>data_dir is the root directory of the weather data
+file is a file to be uploaded</p>
+<p>Login and ftp site details are read from the weather.ini file in
+data_dir.</p>
+<p class="rubric">Functions</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><a class="reference internal" href="#pywws.Upload.Upload" title="pywws.Upload.Upload"><tt class="xref py py-obj docutils literal"><span class="pre">Upload</span></tt></a>(params,&nbsp;files)</td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#pywws.Upload.main" title="pywws.Upload.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="pywws.Upload.Upload">
+<tt class="descclassname">pywws.Upload.</tt><tt class="descname">Upload</tt><big>(</big><em>params</em>, <em>files</em><big>)</big><a class="reference internal" href="../_modules/pywws/Upload.html#Upload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Upload.Upload" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="pywws.Upload.main">
+<tt class="descclassname">pywws.Upload.</tt><tt class="descname">main</tt><big>(</big><em>argv=None</em><big>)</big><a class="reference internal" href="../_modules/pywws/Upload.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Upload.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 </div>
 
@@ -83,7 +120,7 @@ user = username</pre>
   <ul>
 <li><a class="reference internal" href="#">pywws.Upload</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
-<li><a class="reference internal" href="#detailed-api">Detailed API</a></li>
+<li><a class="reference internal" href="#module-pywws.Upload">Detailed API</a></li>
 </ul>
 </li>
 </ul>
@@ -117,6 +154,9 @@ user = username</pre>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="pywws.ToTwitter.html" title="pywws.ToTwitter"
              >next</a> |</li>

@@ -36,6 +36,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="pywws.Template.html" title="pywws.Template"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -162,8 +165,76 @@
 <p>Sets the title of the plot. A single line of text, for example: <tt class="docutils literal"><span class="pre">&lt;title&gt;Morning</span> <span class="pre">winds&lt;/title&gt;</span></tt>. This title appears within the plot area, above the threshold colour key.</p>
 </div>
 </div>
-<div class="section" id="detailed-api">
-<h2>Detailed API<a class="headerlink" href="#detailed-api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pywws.WindRose">
+<span id="detailed-api"></span><h2>Detailed API<a class="headerlink" href="#module-pywws.WindRose" title="Permalink to this headline">¶</a></h2>
+<p>Plot a &#8220;wind rose&#8221;.</p>
+<p>usage: python WindRose.py [options] data_dir temp_dir xml_file output_file
+options are:</p>
+<blockquote>
+-h or &#8211;help            display this help</blockquote>
+<p>data_dir is the root directory of the weather data
+temp_dir is a workspace for temporary files e.g. /tmp
+xml_file is the name of the source file that describes the plot
+output_file is the name of the image file to be created e.g. 24hrs.png</p>
+<p class="rubric">Functions</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><a class="reference internal" href="#pywws.WindRose.main" title="pywws.WindRose.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><a class="reference internal" href="#pywws.WindRose.RosePlotter" title="pywws.WindRose.RosePlotter"><tt class="xref py py-obj docutils literal"><span class="pre">RosePlotter</span></tt></a>(params,&nbsp;raw_data,&nbsp;hourly_data,&nbsp;...)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="pywws.WindRose.RosePlotter">
+<em class="property">class </em><tt class="descclassname">pywws.WindRose.</tt><tt class="descname">RosePlotter</tt><big>(</big><em>params</em>, <em>raw_data</em>, <em>hourly_data</em>, <em>daily_data</em>, <em>monthly_data</em>, <em>work_dir</em><big>)</big><a class="reference internal" href="../_modules/pywws/WindRose.html#RosePlotter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WindRose.RosePlotter" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="pywws.WindRose.RosePlotter.GetPlotList">
+<tt class="descname">GetPlotList</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/pywws/WindRose.html#RosePlotter.GetPlotList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WindRose.RosePlotter.GetPlotList" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pywws.WindRose.RosePlotter.GetDefaultRows">
+<tt class="descname">GetDefaultRows</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/pywws/WindRose.html#RosePlotter.GetDefaultRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WindRose.RosePlotter.GetDefaultRows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pywws.WindRose.RosePlotter.GetDefaultPlotSize">
+<tt class="descname">GetDefaultPlotSize</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/pywws/WindRose.html#RosePlotter.GetDefaultPlotSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WindRose.RosePlotter.GetDefaultPlotSize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pywws.WindRose.RosePlotter.GetPreamble">
+<tt class="descname">GetPreamble</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/pywws/WindRose.html#RosePlotter.GetPreamble"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WindRose.RosePlotter.GetPreamble" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pywws.WindRose.RosePlotter.PlotData">
+<tt class="descname">PlotData</tt><big>(</big><em>plot_no</em>, <em>plot</em>, <em>source</em><big>)</big><a class="reference internal" href="../_modules/pywws/WindRose.html#RosePlotter.PlotData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WindRose.RosePlotter.PlotData" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pywws.WindRose.main">
+<tt class="descclassname">pywws.WindRose.</tt><tt class="descname">main</tt><big>(</big><em>argv=None</em><big>)</big><a class="reference internal" href="../_modules/pywws/WindRose.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WindRose.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 </div>
 
@@ -198,7 +269,7 @@
 <li><a class="reference internal" href="#id1">title</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#detailed-api">Detailed API</a></li>
+<li><a class="reference internal" href="#module-pywws.WindRose">Detailed API</a></li>
 </ul>
 </li>
 </ul>
@@ -232,6 +303,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="pywws.Template.html" title="pywws.Template"
              >next</a> |</li>
