@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>How to make a language file for pywws &mdash; pywws v12.11 documentation</title>
+    <title>How to make a language file for pywws &mdash; pywws v12.11_ae6d58c documentation</title>
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '12.11',
+        VERSION:     '12.11_ae6d58c',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws v12.11 documentation" href="../index.html" />
+    <link rel="top" title="pywws v12.11_ae6d58c documentation" href="../index.html" />
     <link rel="up" title="User guides" href="index.html" />
     <link rel="next" title="weather.ini - configuration file format" href="weather_ini.html" />
     <link rel="prev" title="How to configure pywws to post messages to Twitter" href="twitter.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="twitter.html" title="How to configure pywws to post messages to Twitter"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws v12.11 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws v12.11_ae6d58c documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">User guides</a> &raquo;</li> 
       </ul>
     </div>  
@@ -95,15 +95,10 @@ the list at
 </li>
 <li><p class="first">Create a language file.</p>
 <p>The &#8216;makefile&#8217; included with pywws can create a template file for you to
-fill in. For example, to create a file for the French language:</p>
-<div class="highlight-python"><pre>make lang LANG=fr</pre>
+fill in. For example, to create a file for the French language (code &#8216;fr&#8217;):</p>
+<div class="highlight-python"><pre>make code/languages/fr.po</pre>
 </div>
-<p>This will ask you to confirm your email address, then create a file
-&#8216;languages/fr.po&#8217;. You should now edit this file, filling in every msgstr
-line with a translation of the msgid line immediately above it. The reason
-for including your email address is so that anyone who has questions about
-your translation can get in touch with you. Feel free to put in an invalid
-address if you are concerned about privacy.</p>
+<p>This will ask you to confirm your email address, then create a file &#8216;code/languages/fr.po&#8217;. You should now edit this file, filling in every &#8216;msgstr&#8217; line with a translation of the &#8216;msgid&#8217; line immediately above it. The reason for including your email address is to allow anyone who has questions about your translation to get in touch with you. Feel free to put in an invalid address if you are concerned about privacy.</p>
 <p>After you&#8217;ve edited your new language file it needs to be compiled so that
 pywws can use it. This is also done by the makefile:</p>
 <div class="highlight-python"><pre>make lang</pre>
@@ -125,7 +120,7 @@ of your language file (for example fr.po) to <a class="reference external" href=
 <p>As pywws is extended, new strings may be added which will require your
 translation file to be extended as well. This is fairly easy to do. First
 you need to remove the language master template file:</p>
-<div class="highlight-python"><pre>rm languages/pywws.pot</pre>
+<div class="highlight-python"><pre>rm code/languages/pywws.pot</pre>
 </div>
 <p>Now run the make command again as in section 5 above. This should add the
 new strings to your language file, without changing the strings you&#8217;ve
@@ -180,7 +175,7 @@ already translated.</p>
         <li class="right" >
           <a href="twitter.html" title="How to configure pywws to post messages to Twitter"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws v12.11 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws v12.11_ae6d58c documentation</a> &raquo;</li>
           <li><a href="index.html" >User guides</a> &raquo;</li> 
       </ul>
     </div>
