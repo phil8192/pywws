@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Pywws by jim-easterbrook</title>
+    <title>pywws by jim-easterbrook</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -15,7 +15,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Pywws</h1>
+        <h1>pywws</h1>
         <p>Python software for USB Wireless WeatherStations</p>
 
         <p class="view"><a href="https://github.com/jim-easterbrook/pywws">View the Project on GitHub <small>jim-easterbrook/pywws</small></a></p>
@@ -28,15 +28,90 @@
         </ul>
       </header>
       <section>
-        <p>A collection of Python scripts to read, store and process data from popular USB wireless weather stations such as Elecsa AstroTouch 6975, Watson W-8681, WH-1080PC, WH1080, WH1081, WH3080 etc. I assume any model that is supplied with the EasyWeather Windows software is compatible, but cannot guarantee this.</p>
+        <h2>Introduction</h2>
 
-<p>The software has been developed to run in a low power, low memory environment such as a router. It can be used to create graphs and web pages showing recent weather readings, typically updated every hour. It can also send data to <a href="http://www.wunderground.com/">Weather Underground</a> and post messages to <a href="https://twitter.com/">Twitter</a>.</p>
+<p>pywws is a collection of Python scripts to read, store and process data from popular USB wireless weather stations such as Elecsa AstroTouch 6975, Watson W-8681, WH-1080PC, WH1080, WH1081, WH3080 etc. I assume any model that is supplied with the EasyWeather Windows software is compatible, but cannot guarantee this.</p>
 
-<p>Unlike some other weather station software, no "live" weather displays are produced. The software relies entirely on the weather station's memory. This has the advantage that computer downtime (of less than two weeks or so) does not result in missing data.</p>
+<p>The software has been developed to run in a low power, low memory environment such as a router. It can be used to create graphs and web pages showing recent weather readings, typically updated every hour. It can also send data to services such as <a href="http://www.wunderground.com/">Weather Underground</a> and post messages to <a href="https://twitter.com/">Twitter</a>.</p>
 
-<p>If you'd like to download a zip or tar.gz of the latest release, try the "Featured Downloads" links. If you'd like to try the most up to date pre-release version, try the "Source" tab. If you'd like to read more about the software, and contribute your ideas or experience, try the <a href="http://code.google.com/p/pywws/w/list">Wiki</a> or the <a href="http://groups.google.com/group/pywws">mailing list / discussion group</a>. To keep up to date with developments or releases, please subscribe to the <a href="http://groups.google.com/group/pywws">mailing list</a> or one of the <a href="http://code.google.com/p/pywws/feeds">project feeds</a>.</p>
+<h2>Requirements</h2>
 
-<p>Before trying the software, you might like to read the <a href="doc/html/">pywws documentation</a>, especially the <a href="doc/html/guides/getstarted.html">how to get started guide</a> which describes how to install pywws. You also might like to read the <a href="http://code.google.com/p/pywws/wiki/Compatibility">wiki page on compatibility</a>. If your target system is not listed, it may only be because no one has tried it yet, so do let me know how you get on.</p>
+<p>The software you'll need to run pywws depends on what you plan to do with it. In particular, there is a choice of USB library, to suit what's available on different operating systems.</p>
+
+<ul>
+<li>
+<a href="http://www.python.org/">Python</a> version 2.4 or higher (note: Python 3 is not yet supported)</li>
+<li>USB library option 1:
+
+<ul>
+<li>
+<a href="http://libusb.sf.net">libusb</a> version 0.1.12 (note: libusb 1 is not supported)</li>
+<li>
+<a href="http://pyusb.berlios.de/">PyUSB</a> version 0.4.x</li>
+</ul>
+</li>
+<li>USB library option 2:
+
+<ul>
+<li><a href="https://github.com/signal11/hidapi">hidapi</a></li>
+<li><a href="https://github.com/gbishop/cython-hidapi">cython-hidapi</a></li>
+<li><a href="http://cython.org/">cython</a></li>
+</ul>
+</li>
+<li>For graph drawing:
+
+<ul>
+<li>
+<a href="http://www.gnuplot.info/">gnuplot</a> v4.2 or higher</li>
+</ul>
+</li>
+<li>For secure website uploading (sftp)
+
+<ul>
+<li><a href="http://www.lag.net/paramiko/">paramiko</a></li>
+<li><a href="http://www.dlitz.net/software/pycrypto/">pycrypto</a></li>
+</ul>
+</li>
+<li>For Twitter updates:
+
+<ul>
+<li><a href="http://code.google.com/p/tweepy/">tweepy</a></li>
+<li><a href="http://pypi.python.org/pypi/simplejson">simplejson</a></li>
+</ul>
+</li>
+<li>To create new language translations:
+
+<ul>
+<li><a href="http://www.gnu.org/s/gettext/">gettext</a></li>
+</ul>
+</li>
+</ul><h2>Getting a copy of pywws</h2>
+
+<p>The simplest way to obtain pywws is to download a zip or tar.gz file from the <a href="https://github.com/jim-easterbrook/pywws/downloads">download page</a> and then extract the files into a convenient directory on your computer. These "archive" files contain a snapshot release of the software - a new one is released every few months.</p>
+
+<p>If you'd like to try the latest version of pywws, please use git to clone the <a href="https://github.com/jim-easterbrook/pywws">repository</a>. After doing so you'll need to use make to compile the documentation and language localisation files.</p>
+
+<h2>Documentation</h2>
+
+<p>Documentation is included with pywws downloads, and is also <a href="doc/html/">available online</a>. A good starting place is the <a href="doc/html/guides/getstarted.html">how to get started guide</a> which describes in more detail how to install pywws.</p>
+
+<p>If you have questions not answered in the documentation, please join the <a href="http://groups.google.com/group/pywws">pywws Google mailing list / discussion group</a> and ask there.</p>
+
+<p><img src="http://www.jim-easterbrook.me.uk/weather/img_1504.jpg" alt="Weather station sensors."></p>
+
+<h2>Legalese</h2>
+
+<p>pywws - Python software for USB Wireless WeatherStations.</p>
+
+<p><a href="http://jim-easterbrook.github.com/pywws/">http://jim-easterbrook.github.com/pywws/</a></p>
+
+<p>Copyright (C) 2008-12 Jim Easterbrook <a href="mailto:jim@jim-easterbrook.me.uk">jim@jim-easterbrook.me.uk</a></p>
+
+<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.</p>
+
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</p>
 
 <h3>Credits</h3>
 
