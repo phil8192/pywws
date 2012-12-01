@@ -3,17 +3,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.WeatherStation &mdash; pywws v12.11_95babb0 documentation</title>
+    <title>pywws.WeatherStation &mdash; pywws 12.12_c86e5bd documentation</title>
+    
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '12.11_95babb0',
+        VERSION:     '12.12_c86e5bd',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws v12.11_95babb0 documentation" href="../index.html" />
+    <link rel="top" title="pywws 12.12_c86e5bd documentation" href="../index.html" />
     <link rel="up" title="Python programs and modules" href="index.html" />
     <link rel="next" title="pywws.device_cython_hidapi" href="pywws.device_cython_hidapi.html" />
     <link rel="prev" title="pywws.YoWindow" href="pywws.YoWindow.html" /> 
@@ -44,7 +47,7 @@
         <li class="right" >
           <a href="pywws.YoWindow.html" title="pywws.YoWindow"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws v12.11_95babb0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 12.12_c86e5bd documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>  
@@ -105,40 +108,40 @@ TestWeatherStation program.</p>
 <div class="section" id="detailed-api">
 <h2>Detailed API<a class="headerlink" href="#detailed-api" title="Permalink to this headline">¶</a></h2>
 <p class="rubric">Functions</p>
-<table border="1" class="docutils">
+<table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr><td><a class="reference internal" href="#pywws.WeatherStation.apparent_temp" title="pywws.WeatherStation.apparent_temp"><tt class="xref py py-obj docutils literal"><span class="pre">apparent_temp</span></tt></a>(temp,&nbsp;rh,&nbsp;wind)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.WeatherStation.apparent_temp" title="pywws.WeatherStation.apparent_temp"><tt class="xref py py-obj docutils literal"><span class="pre">apparent_temp</span></tt></a>(temp,&nbsp;rh,&nbsp;wind)</td>
 <td>Compute apparent temperature (real feel), using formula from</td>
 </tr>
-<tr><td><a class="reference internal" href="#pywws.WeatherStation.dew_point" title="pywws.WeatherStation.dew_point"><tt class="xref py py-obj docutils literal"><span class="pre">dew_point</span></tt></a>(temp,&nbsp;hum)</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.WeatherStation.dew_point" title="pywws.WeatherStation.dew_point"><tt class="xref py py-obj docutils literal"><span class="pre">dew_point</span></tt></a>(temp,&nbsp;hum)</td>
 <td>Compute dew point, using formula from</td>
 </tr>
-<tr><td><a class="reference internal" href="#pywws.WeatherStation.get_wind_dir_text" title="pywws.WeatherStation.get_wind_dir_text"><tt class="xref py py-obj docutils literal"><span class="pre">get_wind_dir_text</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.WeatherStation.get_wind_dir_text" title="pywws.WeatherStation.get_wind_dir_text"><tt class="xref py py-obj docutils literal"><span class="pre">get_wind_dir_text</span></tt></a>()</td>
 <td>Return an array to convert wind direction integer to a string.</td>
 </tr>
-<tr><td><a class="reference internal" href="#pywws.WeatherStation.pressure_trend_text" title="pywws.WeatherStation.pressure_trend_text"><tt class="xref py py-obj docutils literal"><span class="pre">pressure_trend_text</span></tt></a>(trend)</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.WeatherStation.pressure_trend_text" title="pywws.WeatherStation.pressure_trend_text"><tt class="xref py py-obj docutils literal"><span class="pre">pressure_trend_text</span></tt></a>(trend)</td>
 <td>Convert pressure trend to a string, as used by the UK met</td>
 </tr>
-<tr><td><a class="reference internal" href="#pywws.WeatherStation.wind_chill" title="pywws.WeatherStation.wind_chill"><tt class="xref py py-obj docutils literal"><span class="pre">wind_chill</span></tt></a>(temp,&nbsp;wind)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.WeatherStation.wind_chill" title="pywws.WeatherStation.wind_chill"><tt class="xref py py-obj docutils literal"><span class="pre">wind_chill</span></tt></a>(temp,&nbsp;wind)</td>
 <td>Compute wind chill, using formula from</td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Classes</p>
-<table border="1" class="docutils">
+<table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr><td><a class="reference internal" href="#pywws.WeatherStation.CUSBDrive" title="pywws.WeatherStation.CUSBDrive"><tt class="xref py py-obj docutils literal"><span class="pre">CUSBDrive</span></tt></a>(library)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.WeatherStation.CUSBDrive" title="pywws.WeatherStation.CUSBDrive"><tt class="xref py py-obj docutils literal"><span class="pre">CUSBDrive</span></tt></a>(library)</td>
 <td>Low level interface to weather station via USB.</td>
 </tr>
-<tr><td><a class="reference internal" href="#pywws.WeatherStation.weather_station" title="pywws.WeatherStation.weather_station"><tt class="xref py py-obj docutils literal"><span class="pre">weather_station</span></tt></a>([ws_type,&nbsp;library,&nbsp;params])</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.WeatherStation.weather_station" title="pywws.WeatherStation.weather_station"><tt class="xref py py-obj docutils literal"><span class="pre">weather_station</span></tt></a>([ws_type,&nbsp;library,&nbsp;params])</td>
 <td>Class that represents the weather station to user program.</td>
 </tr>
 </tbody>
@@ -185,25 +188,40 @@ office.</p>
 <a class="reference external" href="http://site.ambientweatherstore.com/easyweather/ws_1080_2080_protocol.zip">http://site.ambientweatherstore.com/easyweather/ws_1080_2080_protocol.zip</a>.
 I don&#8217;t know the provenance of this, but it looks as if it may
 have come from the manufacturer.</p>
+<dl class="attribute">
+<dt id="pywws.WeatherStation.CUSBDrive.EndMark">
+<tt class="descname">EndMark</tt><em class="property"> = 32</em><a class="headerlink" href="#pywws.WeatherStation.CUSBDrive.EndMark" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pywws.WeatherStation.CUSBDrive.ReadCommand">
+<tt class="descname">ReadCommand</tt><em class="property"> = 161</em><a class="headerlink" href="#pywws.WeatherStation.CUSBDrive.ReadCommand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pywws.WeatherStation.CUSBDrive.WriteCommand">
+<tt class="descname">WriteCommand</tt><em class="property"> = 160</em><a class="headerlink" href="#pywws.WeatherStation.CUSBDrive.WriteCommand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pywws.WeatherStation.CUSBDrive.WriteCommandWord">
+<tt class="descname">WriteCommandWord</tt><em class="property"> = 162</em><a class="headerlink" href="#pywws.WeatherStation.CUSBDrive.WriteCommandWord" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="pywws.WeatherStation.CUSBDrive.read_block">
 <tt class="descname">read_block</tt><big>(</big><em>address</em><big>)</big><a class="reference internal" href="../_modules/pywws/WeatherStation.html#CUSBDrive.read_block"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WeatherStation.CUSBDrive.read_block" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read 32 bytes from the weather station.</p>
-<p>If the read fails for any reason, <tt class="xref py py-obj xref docutils literal"><span class="pre">None</span></tt> is returned.</p>
+<p>If the read fails for any reason, <tt class="xref py py-obj docutils literal"><span class="pre">None</span></tt> is returned.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>address</strong> (<em>int</em>) &#8211; address to read from.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>address</strong> (<em>int</em>) &#8211; address to read from.</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the data from the weather station.</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the data from the weather station.</td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list(int)</p>
-</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list(int)</td>
 </tr>
 </tbody>
 </table>
@@ -217,16 +235,16 @@ have come from the manufacturer.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>address</strong> (<em>int</em>) &#8211; address to write to.</li>
 <li><strong>data</strong> (<em>int</em>) &#8211; the value to write.</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">success status.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">success status.</p>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
 </td>
 </tr>
 </tbody>
@@ -240,6 +258,16 @@ have come from the manufacturer.</p>
 <em class="property">class </em><tt class="descclassname">pywws.WeatherStation.</tt><tt class="descname">weather_station</tt><big>(</big><em>ws_type='1080'</em>, <em>library='auto'</em>, <em>params=None</em><big>)</big><a class="reference internal" href="../_modules/pywws/WeatherStation.html#weather_station"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WeatherStation.weather_station" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class that represents the weather station to user program.</p>
 <p>Connect to weather station and prepare to read data.</p>
+<dl class="attribute">
+<dt id="pywws.WeatherStation.weather_station.avoid">
+<tt class="descname">avoid</tt><em class="property"> = 3.0</em><a class="headerlink" href="#pywws.WeatherStation.weather_station.avoid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pywws.WeatherStation.weather_station.min_pause">
+<tt class="descname">min_pause</tt><em class="property"> = 0.5</em><a class="headerlink" href="#pywws.WeatherStation.weather_station.min_pause" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="pywws.WeatherStation.weather_station.live_data">
 <tt class="descname">live_data</tt><big>(</big><em>logged_only=False</em><big>)</big><a class="reference internal" href="../_modules/pywws/WeatherStation.html#weather_station.live_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WeatherStation.weather_station.live_data" title="Permalink to this definition">¶</a></dt>
@@ -299,6 +327,31 @@ earlier may be returned.</p>
 array of (ptr, value) pairs.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="pywws.WeatherStation.weather_station.reading_format">
+<tt class="descname">reading_format</tt><em class="property"> = {'3080': {'status': (15, 'pb', None), 'hum_out': (4, 'ub', None), 'wind_gust': (10, 'wg', 0.1), 'uv': (19, 'ub', None), 'wind_ave': (9, 'wa', 0.1), 'rain': (13, 'us', 0.3), 'temp_in': (2, 'ss', 0.1), 'illuminance': (16, 'u3', 0.1), 'abs_pressure': (7, 'us', 0.1), 'delay': (0, 'ub', None), 'hum_in': (1, 'ub', None), 'temp_out': (5, 'ss', 0.1), 'wind_dir': (12, 'ub', None)}, '1080': {'status': (15, 'pb', None), 'wind_ave': (9, 'wa', 0.1), 'rain': (13, 'us', 0.3), 'hum_in': (1, 'ub', None), 'temp_out': (5, 'ss', 0.1), 'wind_dir': (12, 'ub', None), 'hum_out': (4, 'ub', None), 'wind_gust': (10, 'wg', 0.1), 'temp_in': (2, 'ss', 0.1), 'delay': (0, 'ub', None), 'abs_pressure': (7, 'us', 0.1)}}</em><a class="headerlink" href="#pywws.WeatherStation.weather_station.reading_format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pywws.WeatherStation.weather_station.lo_fix_format">
+<tt class="descname">lo_fix_format</tt><em class="property"> = {'alarm_1': (21, 'bf', ('bit0', 'time', 'wind_dir', 'bit3', 'hum_in_lo', 'hum_in_hi', 'hum_out_lo', 'hum_out_hi')), 'alarm_3': (23, 'bf', ('temp_in_lo', 'temp_in_hi', 'temp_out_lo', 'temp_out_hi', 'wind_chill_lo', 'wind_chill_hi', 'dew_point_lo', 'dew_point_hi')), 'alarm_2': (22, 'bf', ('wind_ave', 'wind_gust', 'rain_hour', 'rain_day', 'pressure_abs_lo', 'pressure_abs_hi', 'pressure_rel_lo', 'pressure_rel_hi')), 'data_changed': (26, 'ub', None), 'settings_1': (17, 'bf', ('temp_in_F', 'temp_out_F', 'rain_in', 'bit3', 'bit4', 'pressure_hPa', 'pressure_inHg', 'pressure_mmHg')), 'settings_2': (18, 'bf', ('wind_mps', 'wind_kmph', 'wind_knot', 'wind_mph', 'wind_bft', 'bit5', 'bit6', 'bit7')), 'read_period': (16, 'ub', None), 'unknown_01': (25, 'pb', None), 'timezone': (24, 'sb', None), 'data_count': (27, 'us', None), 'current_pos': (30, 'us', None), 'display_2': (20, 'bf', ('temp_out_temp', 'temp_out_chill', 'temp_out_dew', 'rain_hour', 'rain_day', 'rain_week', 'rain_month', 'rain_total')), 'display_3': (29, 'bf', ('illuminance_fc', 'bit1', 'bit2', 'bit3', 'bit4', 'bit5', 'bit6', 'bit7')), 'display_1': (19, 'bf', ('pressure_rel', 'wind_gust', 'clock_12hr', 'date_mdy', 'time_scale_24', 'show_year', 'show_day_name', 'alarm_time'))}</em><a class="headerlink" href="#pywws.WeatherStation.weather_station.lo_fix_format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pywws.WeatherStation.weather_station.fixed_format">
+<tt class="descname">fixed_format</tt><em class="property"> = {'alarm_1': (21, 'bf', ('bit0', 'time', 'wind_dir', 'bit3', 'hum_in_lo', 'hum_in_hi', 'hum_out_lo', 'hum_out_hi')), 'alarm_3': (23, 'bf', ('temp_in_lo', 'temp_in_hi', 'temp_out_lo', 'temp_out_hi', 'wind_chill_lo', 'wind_chill_hi', 'dew_point_lo', 'dew_point_hi')), 'alarm_2': (22, 'bf', ('wind_ave', 'wind_gust', 'rain_hour', 'rain_day', 'pressure_abs_lo', 'pressure_abs_hi', 'pressure_rel_lo', 'pressure_rel_hi')), 'data_changed': (26, 'ub', None), 'max': {'windchill': {'date': (181, 'dt', None), 'val': (110, 'ss', 0.1)}, 'dewpoint': {'date': (191, 'dt', None), 'val': (114, 'ss', 0.1)}, 'wind_ave': {'date': (221, 'dt', None), 'val': (126, 'us', 0.1)}, 'rain': {'week': {'date': (241, 'dt', None), 'val': (134, 'us', 0.3)}, 'total': {'date': (251, 'dt', None), 'val': (138, 'us', 0.3)}, 'day': {'date': (236, 'dt', None), 'val': (132, 'us', 0.3)}, 'hour': {'date': (231, 'dt', None), 'val': (130, 'us', 0.3)}, 'month': {'date': (246, 'dt', None), 'val': (136, 'us', 0.3)}}, 'rel_pressure': {'date': (211, 'dt', None), 'val': (122, 'us', 0.1)}, 'hum_in': {'date': (141, 'dt', None), 'val': (98, 'ub', None)}, 'temp_out': {'date': (171, 'dt', None), 'val': (106, 'ss', 0.1)}, 'hum_out': {'date': (151, 'dt', None), 'val': (100, 'ub', None)}, 'wind_gust': {'date': (226, 'dt', None), 'val': (128, 'us', 0.1)}, 'uv': {'val': (93, 'ub', None)}, 'temp_in': {'date': (161, 'dt', None), 'val': (102, 'ss', 0.1)}, 'illuminance': {'val': (94, 'u3', 0.1)}, 'abs_pressure': {'date': (201, 'dt', None), 'val': (118, 'us', 0.1)}}, 'settings_1': (17, 'bf', ('temp_in_F', 'temp_out_F', 'rain_in', 'bit3', 'bit4', 'pressure_hPa', 'pressure_inHg', 'pressure_mmHg')), 'settings_2': (18, 'bf', ('wind_mps', 'wind_kmph', 'wind_knot', 'wind_mph', 'wind_bft', 'bit5', 'bit6', 'bit7')), 'read_period': (16, 'ub', None), 'rel_pressure': (32, 'us', 0.1), 'unknown_01': (25, 'pb', None), 'unknown_18': (97, 'pb', None), 'timezone': (24, 'sb', None), 'display_1': (19, 'bf', ('pressure_rel', 'wind_gust', 'clock_12hr', 'date_mdy', 'time_scale_24', 'show_year', 'show_day_name', 'alarm_time')), 'date_time': (43, 'dt', None), 'data_count': (27, 'us', None), 'min': {'hum_out': {'date': (156, 'dt', None), 'val': (101, 'ub', None)}, 'dewpoint': {'date': (196, 'dt', None), 'val': (116, 'ss', 0.1)}, 'abs_pressure': {'date': (206, 'dt', None), 'val': (120, 'us', 0.1)}, 'windchill': {'date': (186, 'dt', None), 'val': (112, 'ss', 0.1)}, 'hum_in': {'date': (146, 'dt', None), 'val': (99, 'ub', None)}, 'temp_out': {'date': (176, 'dt', None), 'val': (108, 'ss', 0.1)}, 'rel_pressure': {'date': (216, 'dt', None), 'val': (124, 'us', 0.1)}, 'temp_in': {'date': (166, 'dt', None), 'val': (104, 'ss', 0.1)}}, 'display_2': (20, 'bf', ('temp_out_temp', 'temp_out_chill', 'temp_out_dew', 'rain_hour', 'rain_day', 'rain_week', 'rain_month', 'rain_total')), 'display_3': (29, 'bf', ('illuminance_fc', 'bit1', 'bit2', 'bit3', 'bit4', 'bit5', 'bit6', 'bit7')), 'alarm': {'windchill': {'lo': (62, 'ss', 0.1), 'hi': (60, 'ss', 0.1)}, 'dewpoint': {'lo': (66, 'ss', 0.1), 'hi': (64, 'ss', 0.1)}, 'wind_ave': {'ms': (77, 'ub', 0.1), 'bft': (76, 'ub', None)}, 'rain': {'day': (85, 'us', 0.3), 'hour': (83, 'us', 0.3)}, 'rel_pressure': {'lo': (74, 'us', 0.1), 'hi': (72, 'us', 0.1)}, 'hum_in': {'lo': (49, 'ub', None), 'hi': (48, 'ub', None)}, 'temp_out': {'lo': (58, 'ss', 0.1), 'hi': (56, 'ss', 0.1)}, 'wind_dir': (82, 'ub', None), 'hum_out': {'lo': (55, 'ub', None), 'hi': (54, 'ub', None)}, 'wind_gust': {'ms': (80, 'ub', 0.1), 'bft': (79, 'ub', None)}, 'uv': (92, 'ub', None), 'temp_in': {'lo': (52, 'ss', 0.1), 'hi': (50, 'ss', 0.1)}, 'illuminance': (89, 'u3', 0.1), 'abs_pressure': {'lo': (70, 'us', 0.1), 'hi': (68, 'us', 0.1)}, 'time': (87, 'tt', None)}, 'current_pos': (30, 'us', None), 'lux_wm2_coeff': (36, 'us', 0.1), 'abs_pressure': (34, 'us', 0.1)}</em><a class="headerlink" href="#pywws.WeatherStation.weather_station.fixed_format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pywws.WeatherStation.weather_station.data_start">
+<tt class="descname">data_start</tt><em class="property"> = 256</em><a class="headerlink" href="#pywws.WeatherStation.weather_station.data_start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pywws.WeatherStation.weather_station.reading_len">
+<tt class="descname">reading_len</tt><em class="property"> = {'3080': 20, '1080': 16}</em><a class="headerlink" href="#pywws.WeatherStation.weather_station.reading_len" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>
@@ -331,7 +384,7 @@ array of (ptr, value) pairs.</p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -360,13 +413,13 @@ array of (ptr, value) pairs.</p>
         <li class="right" >
           <a href="pywws.YoWindow.html" title="pywws.YoWindow"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws v12.11_95babb0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 12.12_c86e5bd documentation</a> &raquo;</li>
           <li><a href="index.html" >Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2008-12, Jim Easterbrook.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.1.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>

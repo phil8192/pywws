@@ -3,17 +3,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Process &mdash; pywws v12.11_95babb0 documentation</title>
+    <title>pywws.Process &mdash; pywws 12.12_c86e5bd documentation</title>
+    
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '12.11_95babb0',
+        VERSION:     '12.12_c86e5bd',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws v12.11_95babb0 documentation" href="../index.html" />
+    <link rel="top" title="pywws 12.12_c86e5bd documentation" href="../index.html" />
     <link rel="up" title="Python programs and modules" href="index.html" />
     <link rel="next" title="pywws.calib" href="pywws.calib.html" />
     <link rel="prev" title="pywws.LogData" href="pywws.LogData.html" /> 
@@ -44,7 +47,7 @@
         <li class="right" >
           <a href="pywws.LogData.html" title="pywws.LogData"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws v12.11_95babb0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 12.12_c86e5bd documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>  
@@ -91,52 +94,52 @@ direction is calculated using vector arithmetic.</p>
 <p>Rainfall is converted from the raw &#8220;total since last reset&#8221; figure to
 a more useful total in the last hour, day or month.</p>
 <p class="rubric">Functions</p>
-<table border="1" class="docutils">
+<table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr><td><a class="reference internal" href="#pywws.Process.Process" title="pywws.Process.Process"><tt class="xref py py-obj docutils literal"><span class="pre">Process</span></tt></a>(params,&nbsp;raw_data,&nbsp;calib_data,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.Process" title="pywws.Process.Process"><tt class="xref py py-obj docutils literal"><span class="pre">Process</span></tt></a>(params,&nbsp;raw_data,&nbsp;calib_data,&nbsp;...)</td>
 <td>Generate summaries from raw weather station data.</td>
 </tr>
-<tr><td><a class="reference internal" href="#pywws.Process.calibrate_data" title="pywws.Process.calibrate_data"><tt class="xref py py-obj docutils literal"><span class="pre">calibrate_data</span></tt></a>(logger,&nbsp;params,&nbsp;raw_data,&nbsp;...)</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.Process.calibrate_data" title="pywws.Process.calibrate_data"><tt class="xref py py-obj docutils literal"><span class="pre">calibrate_data</span></tt></a>(logger,&nbsp;params,&nbsp;raw_data,&nbsp;...)</td>
 <td>&#8216;Calibrate&#8217; raw data, using a user-supplied function.</td>
 </tr>
-<tr><td><a class="reference internal" href="#pywws.Process.generate_hourly" title="pywws.Process.generate_hourly"><tt class="xref py py-obj docutils literal"><span class="pre">generate_hourly</span></tt></a>(logger,&nbsp;calib_data,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.generate_hourly" title="pywws.Process.generate_hourly"><tt class="xref py py-obj docutils literal"><span class="pre">generate_hourly</span></tt></a>(logger,&nbsp;calib_data,&nbsp;...)</td>
 <td>Generate hourly summaries from calibrated data.</td>
 </tr>
-<tr><td><a class="reference internal" href="#pywws.Process.generate_daily" title="pywws.Process.generate_daily"><tt class="xref py py-obj docutils literal"><span class="pre">generate_daily</span></tt></a>(logger,&nbsp;day_end_hour,&nbsp;...)</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.Process.generate_daily" title="pywws.Process.generate_daily"><tt class="xref py py-obj docutils literal"><span class="pre">generate_daily</span></tt></a>(logger,&nbsp;day_end_hour,&nbsp;...)</td>
 <td>Generate daily summaries from calibrated and hourly data.</td>
 </tr>
-<tr><td><a class="reference internal" href="#pywws.Process.generate_monthly" title="pywws.Process.generate_monthly"><tt class="xref py py-obj docutils literal"><span class="pre">generate_monthly</span></tt></a>(logger,&nbsp;day_end_hour,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.generate_monthly" title="pywws.Process.generate_monthly"><tt class="xref py py-obj docutils literal"><span class="pre">generate_monthly</span></tt></a>(logger,&nbsp;day_end_hour,&nbsp;...)</td>
 <td>Generate monthly summaries from daily data.</td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Classes</p>
-<table border="1" class="docutils">
+<table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr><td><a class="reference internal" href="#pywws.Process.Average" title="pywws.Process.Average"><tt class="xref py py-obj docutils literal"><span class="pre">Average</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.Average" title="pywws.Process.Average"><tt class="xref py py-obj docutils literal"><span class="pre">Average</span></tt></a>()</td>
 <td>Compute average of multiple data values.</td>
 </tr>
-<tr><td><a class="reference internal" href="#pywws.Process.Maximum" title="pywws.Process.Maximum"><tt class="xref py py-obj docutils literal"><span class="pre">Maximum</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.Process.Maximum" title="pywws.Process.Maximum"><tt class="xref py py-obj docutils literal"><span class="pre">Maximum</span></tt></a>()</td>
 <td>Compute maximum value and timestamp of multiple data values.</td>
 </tr>
-<tr><td><a class="reference internal" href="#pywws.Process.Minimum" title="pywws.Process.Minimum"><tt class="xref py py-obj docutils literal"><span class="pre">Minimum</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.Minimum" title="pywws.Process.Minimum"><tt class="xref py py-obj docutils literal"><span class="pre">Minimum</span></tt></a>()</td>
 <td>Compute minimum value and timestamp of multiple data values.</td>
 </tr>
-<tr><td><a class="reference internal" href="#pywws.Process.HourAcc" title="pywws.Process.HourAcc"><tt class="xref py py-obj docutils literal"><span class="pre">HourAcc</span></tt></a>(last_rain)</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.Process.HourAcc" title="pywws.Process.HourAcc"><tt class="xref py py-obj docutils literal"><span class="pre">HourAcc</span></tt></a>(last_rain)</td>
 <td>&#8216;Accumulate&#8217; raw weather data to produce hourly summary.</td>
 </tr>
-<tr><td><a class="reference internal" href="#pywws.Process.DayAcc" title="pywws.Process.DayAcc"><tt class="xref py py-obj docutils literal"><span class="pre">DayAcc</span></tt></a>(daytime)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.DayAcc" title="pywws.Process.DayAcc"><tt class="xref py py-obj docutils literal"><span class="pre">DayAcc</span></tt></a>(daytime)</td>
 <td>&#8216;Accumulate&#8217; weather data to produce daily summary.</td>
 </tr>
-<tr><td><a class="reference internal" href="#pywws.Process.MonthAcc" title="pywws.Process.MonthAcc"><tt class="xref py py-obj docutils literal"><span class="pre">MonthAcc</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.Process.MonthAcc" title="pywws.Process.MonthAcc"><tt class="xref py py-obj docutils literal"><span class="pre">MonthAcc</span></tt></a>()</td>
 <td>&#8216;Accumulate&#8217; daily weather data to produce monthly summary.</td>
 </tr>
 </tbody>
@@ -325,7 +328,7 @@ weather station readings.</p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -354,13 +357,13 @@ weather station readings.</p>
         <li class="right" >
           <a href="pywws.LogData.html" title="pywws.LogData"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws v12.11_95babb0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 12.12_c86e5bd documentation</a> &raquo;</li>
           <li><a href="index.html" >Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2008-12, Jim Easterbrook.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.1.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>
