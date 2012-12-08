@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>SetWeatherStation &mdash; pywws 12.12_555167c documentation</title>
+    <title>TestModule &mdash; pywws 12.12_555167c documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -28,8 +28,8 @@
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
     <link rel="top" title="pywws 12.12_555167c documentation" href="../index.html" />
     <link rel="up" title="Python programs and modules" href="index.html" />
-    <link rel="next" title="TestWeatherStation" href="TestWeatherStation.html" />
-    <link rel="prev" title="TwitterAuth" href="TwitterAuth.html" /> 
+    <link rel="next" title="USBQualityTest" href="USBQualityTest.html" />
+    <link rel="prev" title="TestWeatherStation" href="TestWeatherStation.html" /> 
   </head>
   <body>
     <div class="related">
@@ -42,10 +42,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="TestWeatherStation.html" title="TestWeatherStation"
+          <a href="USBQualityTest.html" title="USBQualityTest"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="TwitterAuth.html" title="TwitterAuth"
+          <a href="TestWeatherStation.html" title="TestWeatherStation"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">pywws 12.12_555167c documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Python programs and modules</a> &raquo;</li> 
@@ -57,36 +57,18 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-SetWeatherStation">
-<span id="setweatherstation"></span><h1>SetWeatherStation<a class="headerlink" href="#module-SetWeatherStation" title="Permalink to this headline">¶</a></h1>
-<p>Set some weather station parameters.</p>
-<p>usage: python SetWeatherStation.py [options]
-options are:</p>
-<blockquote>
-<div><table class="docutils option-list" frame="void" rules="none">
-<col class="option" />
-<col class="description" />
-<tbody valign="top">
-<tr><td class="option-group">
-<kbd><span class="option">-h</span></kbd></td>
-<td><div class="first last line-block">
-<div class="line">&#8211;help           display this help</div>
+  <div class="section" id="module-TestModule">
+<span id="testmodule"></span><h1>TestModule<a class="headerlink" href="#module-TestModule" title="Permalink to this headline">¶</a></h1>
+<p>Test a pywws module.</p>
+<p>Many of the modules in the pywws package include a simple test script
+that is run when that module is run as a script. Unfortunately Python
+3 does not allow package modules to be run as scripts, producing a
+&#8216;ValueError: Attempted relative import in non-package&#8217; error. This
+script allows module test scripts to be run.</p>
+<div class="highlight-python"><pre>usage: python TestModule.py module [module_options]
+module is a pywws module, e.g. ZambrettiCore
+module_options are any options to be passed to the module's test script</pre>
 </div>
-</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-c</span></kbd></td>
-<td><div class="first line-block">
-<div class="line">&#8211;clock          set weather station clock to computer time</div>
-</div>
-<p class="last">(unlikely to work)</p>
-</td></tr>
-</tbody>
-</table>
-<p>-p f | &#8211;pressure f     set relative pressure to n hPa
--r n | &#8211;read_period n  set logging interval to n minutes
--v   | &#8211;verbose        increase error message verbosity
--z   | &#8211;zero_memory    clear the weather station logged readings</p>
-</div></blockquote>
 <p class="rubric">Functions</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -94,22 +76,14 @@ options are:</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#SetWeatherStation.bcd_encode" title="SetWeatherStation.bcd_encode"><tt class="xref py py-obj docutils literal"><span class="pre">bcd_encode</span></tt></a>(value)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#SetWeatherStation.main" title="SetWeatherStation.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#TestModule.main" title="TestModule.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
 <td></td>
 </tr>
 </tbody>
 </table>
 <dl class="function">
-<dt id="SetWeatherStation.bcd_encode">
-<tt class="descclassname">SetWeatherStation.</tt><tt class="descname">bcd_encode</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../_modules/SetWeatherStation.html#bcd_encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#SetWeatherStation.bcd_encode" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="SetWeatherStation.main">
-<tt class="descclassname">SetWeatherStation.</tt><tt class="descname">main</tt><big>(</big><em>argv=None</em><big>)</big><a class="reference internal" href="../_modules/SetWeatherStation.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#SetWeatherStation.main" title="Permalink to this definition">¶</a></dt>
+<dt id="TestModule.main">
+<tt class="descclassname">TestModule.</tt><tt class="descname">main</tt><big>(</big><em>argv=None</em><big>)</big><a class="reference internal" href="../_modules/TestModule.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TestModule.main" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -124,11 +98,11 @@ options are:</p>
               <img class="logo" src="../_static/pywws_logo.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="TwitterAuth.html"
-                        title="previous chapter">TwitterAuth</a></p>
-  <h4>Next topic</h4>
   <p class="topless"><a href="TestWeatherStation.html"
-                        title="next chapter">TestWeatherStation</a></p>
+                        title="previous chapter">TestWeatherStation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="USBQualityTest.html"
+                        title="next chapter">USBQualityTest</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -156,10 +130,10 @@ options are:</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="TestWeatherStation.html" title="TestWeatherStation"
+          <a href="USBQualityTest.html" title="USBQualityTest"
              >next</a> |</li>
         <li class="right" >
-          <a href="TwitterAuth.html" title="TwitterAuth"
+          <a href="TestWeatherStation.html" title="TestWeatherStation"
              >previous</a> |</li>
         <li><a href="../index.html">pywws 12.12_555167c documentation</a> &raquo;</li>
           <li><a href="index.html" >Python programs and modules</a> &raquo;</li> 

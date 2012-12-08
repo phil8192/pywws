@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Plot &mdash; pywws 12.12_c86e5bd documentation</title>
+    <title>pywws.Plot &mdash; pywws 12.12_555167c documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '12.12_c86e5bd',
+        VERSION:     '12.12_555167c',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 12.12_c86e5bd documentation" href="../../index.html" />
+    <link rel="top" title="pywws 12.12_555167c documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 12.12_c86e5bd documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 12.12_555167c documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -75,7 +75,7 @@
 <span class="kn">from</span> <span class="nn">conversions</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">DataStore</span>
 <span class="kn">import</span> <span class="nn">Localisation</span>
-<span class="kn">from</span> <span class="nn">TimeZone</span> <span class="kn">import</span> <span class="n">Local</span>
+<span class="kn">from</span> <span class="nn">.TimeZone</span> <span class="kn">import</span> <span class="n">Local</span>
 <span class="kn">from</span> <span class="nn">WeatherStation</span> <span class="kn">import</span> <span class="n">dew_point</span><span class="p">,</span> <span class="n">wind_chill</span><span class="p">,</span> <span class="n">apparent_temp</span>
 
 <div class="viewcode-block" id="BasePlotter"><a class="viewcode-back" href="../../api/pywws.Plot.html#pywws.Plot.BasePlotter">[docs]</a><span class="k">class</span> <span class="nc">BasePlotter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -140,7 +140,7 @@
         <span class="n">of</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">cmd_file</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
         <span class="c"># write gnuplot set up</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetDefaultRows</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plot_count</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plot_count</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetValue</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">,</span> <span class="s">&#39;layout&#39;</span><span class="p">,</span> <span class="s">&#39;</span><span class="si">%d</span><span class="s">, </span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">)))</span>
         <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetDefaultPlotSize</span><span class="p">()</span>
@@ -237,7 +237,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot_count</span>
 </div>
 <div class="viewcode-block" id="GraphPlotter.GetDefaultPlotSize"><a class="viewcode-back" href="../../api/pywws.Plot.html#pywws.Plot.GraphPlotter.GetDefaultPlotSize">[docs]</a>    <span class="k">def</span> <span class="nf">GetDefaultPlotSize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="mi">200</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="mi">600</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span>
+        <span class="k">return</span> <span class="mi">200</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="mi">600</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span>
 </div>
 <div class="viewcode-block" id="GraphPlotter.GetPreamble"><a class="viewcode-back" href="../../api/pywws.Plot.html#pywws.Plot.GraphPlotter.GetPreamble">[docs]</a>    <span class="k">def</span> <span class="nf">GetPreamble</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;set style fill solid</span>
@@ -376,7 +376,7 @@
                 <span class="n">idx</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">utcoffset</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">subplot</span><span class="o">.</span><span class="n">cummulative</span> <span class="ow">and</span> <span class="n">subplot</span><span class="o">.</span><span class="n">last_idx</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">source</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_data</span><span class="p">:</span>
-                        <span class="n">interval</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;delay&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+                        <span class="n">interval</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;delay&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">subplot</span><span class="o">.</span><span class="n">last_idx</span> <span class="o">&gt;</span> <span class="n">interval</span><span class="p">:</span>
                         <span class="c"># missing data</span>
                         <span class="n">subplot</span><span class="o">.</span><span class="n">dat</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> ?</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">idx</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()))</span>
@@ -495,7 +495,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 12.12_c86e5bd documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 12.12_555167c documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
