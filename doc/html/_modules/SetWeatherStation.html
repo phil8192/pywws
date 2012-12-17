@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>SetWeatherStation &mdash; pywws 12.12_555167c documentation</title>
+    <title>SetWeatherStation &mdash; pywws 12.12_b8101ab documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '12.12_555167c',
+        VERSION:     '12.12_b8101ab',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 12.12_555167c documentation" href="../index.html" />
+    <link rel="top" title="pywws 12.12_b8101ab documentation" href="../index.html" />
     <link rel="up" title="Module code" href="index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">pywws 12.12_555167c documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 12.12_b8101ab documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -51,19 +51,28 @@
             
   <h1>Source code for SetWeatherStation</h1><div class="highlight"><pre>
 <span class="c">#!/usr/bin/env python</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Set some weather station parameters.</span>
 
-<span class="sd">usage: python SetWeatherStation.py [options]</span>
-<span class="sd">options are:</span>
-<span class="sd"> -h   | --help           display this help</span>
-<span class="sd"> -c   | --clock          set weather station clock to computer time</span>
-<span class="sd">                         (unlikely to work)</span>
-<span class="sd"> -p f | --pressure f     set relative pressure to n hPa</span>
-<span class="sd"> -r n | --read_period n  set logging interval to n minutes</span>
-<span class="sd"> -v   | --verbose        increase error message verbosity</span>
-<span class="sd"> -z   | --zero_memory    clear the weather station logged readings</span>
+<span class="sd">&quot;&quot;&quot;Set some weather station parameters</span>
+<span class="sd">::</span>
+
+<span class="sd">%s</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">__docformat__</span> <span class="o">=</span> <span class="s">&quot;restructuredtext en&quot;</span>
+<span class="n">__usage__</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s"> usage: python SetWeatherStation.py [options]</span>
+<span class="s"> options are:</span>
+<span class="s">  -h   | --help           display this help</span>
+<span class="s">  -c   | --clock          set weather station clock to computer time</span>
+<span class="s">                          (unlikely to work)</span>
+<span class="s">  -p f | --pressure f     set relative pressure to f hPa</span>
+<span class="s">  -r n | --read_period n  set logging interval to n minutes</span>
+<span class="s">  -v   | --verbose        increase error message verbosity</span>
+<span class="s">  -z   | --zero_memory    clear the weather station logged reading count</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="n">__doc__</span> <span class="o">%=</span> <span class="n">__usage__</span>
+<span class="n">__usage__</span> <span class="o">=</span> <span class="n">__doc__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">__usage__</span>
 
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 <span class="kn">import</span> <span class="nn">getopt</span>
@@ -88,7 +97,7 @@
              <span class="s">&#39;verbose&#39;</span><span class="p">,</span> <span class="s">&#39;zero_memory&#39;</span><span class="p">])</span>
     <span class="k">except</span> <span class="n">getopt</span><span class="o">.</span><span class="n">error</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span>
         <span class="k">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#39;Error: </span><span class="si">%s</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">msg</span>
-        <span class="k">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="n">__doc__</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="n">__usage__</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="k">return</span> <span class="mi">1</span>
     <span class="c"># process options</span>
     <span class="n">clock</span> <span class="o">=</span> <span class="bp">False</span>
@@ -98,7 +107,7 @@
     <span class="n">zero_memory</span> <span class="o">=</span> <span class="bp">False</span>
     <span class="k">for</span> <span class="n">o</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">o</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;-h&#39;</span><span class="p">,</span> <span class="s">&#39;--help&#39;</span><span class="p">):</span>
-            <span class="k">print</span> <span class="n">__doc__</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">print</span> <span class="n">__usage__</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
             <span class="k">return</span> <span class="mi">0</span>
         <span class="k">elif</span> <span class="n">o</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;-c&#39;</span><span class="p">,</span> <span class="s">&#39;--clock&#39;</span><span class="p">):</span>
             <span class="n">clock</span> <span class="o">=</span> <span class="bp">True</span>
@@ -113,7 +122,7 @@
     <span class="c"># check arguments</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;Error: No arguments required&quot;</span>
-        <span class="k">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="n">__doc__</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="n">__usage__</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="k">return</span> <span class="mi">2</span>
     <span class="n">logger</span> <span class="o">=</span> <span class="n">ApplicationLogger</span><span class="p">(</span><span class="n">verbose</span><span class="p">)</span>
     <span class="c"># open connection to weather station</span>
@@ -191,7 +200,7 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">pywws 12.12_555167c documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 12.12_b8101ab documentation</a> &raquo;</li>
           <li><a href="index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

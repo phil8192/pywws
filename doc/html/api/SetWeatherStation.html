@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>SetWeatherStation &mdash; pywws 12.12_555167c documentation</title>
+    <title>SetWeatherStation &mdash; pywws 12.12_b8101ab documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '12.12_555167c',
+        VERSION:     '12.12_b8101ab',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 12.12_555167c documentation" href="../index.html" />
+    <link rel="top" title="pywws 12.12_b8101ab documentation" href="../index.html" />
     <link rel="up" title="Python programs and modules" href="index.html" />
     <link rel="next" title="TestWeatherStation" href="TestWeatherStation.html" />
     <link rel="prev" title="TwitterAuth" href="TwitterAuth.html" /> 
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="TwitterAuth.html" title="TwitterAuth"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 12.12_555167c documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 12.12_b8101ab documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>  
@@ -59,34 +59,17 @@
             
   <div class="section" id="module-SetWeatherStation">
 <span id="setweatherstation"></span><h1>SetWeatherStation<a class="headerlink" href="#module-SetWeatherStation" title="Permalink to this headline">¶</a></h1>
-<p>Set some weather station parameters.</p>
-<p>usage: python SetWeatherStation.py [options]
-options are:</p>
-<blockquote>
-<div><table class="docutils option-list" frame="void" rules="none">
-<col class="option" />
-<col class="description" />
-<tbody valign="top">
-<tr><td class="option-group">
-<kbd><span class="option">-h</span></kbd></td>
-<td><div class="first last line-block">
-<div class="line">&#8211;help           display this help</div>
+<p>Set some weather station parameters</p>
+<div class="highlight-python"><pre>usage: python SetWeatherStation.py [options]
+options are:
+ -h   | --help           display this help
+ -c   | --clock          set weather station clock to computer time
+                         (unlikely to work)
+ -p f | --pressure f     set relative pressure to f hPa
+ -r n | --read_period n  set logging interval to n minutes
+ -v   | --verbose        increase error message verbosity
+ -z   | --zero_memory    clear the weather station logged reading count</pre>
 </div>
-</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">-c</span></kbd></td>
-<td><div class="first line-block">
-<div class="line">&#8211;clock          set weather station clock to computer time</div>
-</div>
-<p class="last">(unlikely to work)</p>
-</td></tr>
-</tbody>
-</table>
-<p>-p f | &#8211;pressure f     set relative pressure to n hPa
--r n | &#8211;read_period n  set logging interval to n minutes
--v   | &#8211;verbose        increase error message verbosity
--z   | &#8211;zero_memory    clear the weather station logged readings</p>
-</div></blockquote>
 <p class="rubric">Functions</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -161,7 +144,7 @@ options are:</p>
         <li class="right" >
           <a href="TwitterAuth.html" title="TwitterAuth"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 12.12_555167c documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 12.12_b8101ab documentation</a> &raquo;</li>
           <li><a href="index.html" >Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>

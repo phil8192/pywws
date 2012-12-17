@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Tasks &mdash; pywws 12.12_555167c documentation</title>
+    <title>pywws.Tasks &mdash; pywws 12.12_b8101ab documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '12.12_555167c',
+        VERSION:     '12.12_b8101ab',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 12.12_555167c documentation" href="../../index.html" />
+    <link rel="top" title="pywws 12.12_b8101ab documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 12.12_555167c documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 12.12_b8101ab documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -58,14 +58,14 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
-<span class="kn">from</span> <span class="nn">calib</span> <span class="kn">import</span> <span class="n">Calib</span>
-<span class="kn">import</span> <span class="nn">Plot</span>
+<span class="kn">from</span> <span class="nn">.calib</span> <span class="kn">import</span> <span class="n">Calib</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Plot</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Template</span>
-<span class="kn">from</span> <span class="nn">TimeZone</span> <span class="kn">import</span> <span class="n">Local</span>
-<span class="kn">from</span> <span class="nn">toservice</span> <span class="kn">import</span> <span class="n">ToService</span>
-<span class="kn">import</span> <span class="nn">Upload</span>
-<span class="kn">import</span> <span class="nn">WindRose</span>
-<span class="kn">import</span> <span class="nn">YoWindow</span>
+<span class="kn">from</span> <span class="nn">.TimeZone</span> <span class="kn">import</span> <span class="n">Local</span>
+<span class="kn">from</span> <span class="nn">.toservice</span> <span class="kn">import</span> <span class="n">ToService</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Upload</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">WindRose</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">YoWindow</span>
 
 <div class="viewcode-block" id="RegularTasks"><a class="viewcode-back" href="../../api/pywws.Tasks.html#pywws.Tasks.RegularTasks">[docs]</a><span class="k">class</span> <span class="nc">RegularTasks</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">calib_data</span><span class="p">,</span> <span class="n">hourly_data</span><span class="p">,</span> <span class="n">daily_data</span><span class="p">,</span> <span class="n">monthly_data</span><span class="p">):</span>
@@ -225,7 +225,7 @@
         <span class="k">return</span> <span class="n">OK</span>
 </div>
 <div class="viewcode-block" id="RegularTasks.do_twitter"><a class="viewcode-back" href="../../api/pywws.Tasks.html#pywws.Tasks.RegularTasks.do_twitter">[docs]</a>    <span class="k">def</span> <span class="nf">do_twitter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">ToTwitter</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">ToTwitter</span>
         <span class="n">twitter</span> <span class="o">=</span> <span class="n">ToTwitter</span><span class="o">.</span><span class="n">ToTwitter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Templating </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">template</span><span class="p">)</span>
         <span class="n">input_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template_dir</span><span class="p">,</span> <span class="n">template</span><span class="p">)</span>
@@ -285,7 +285,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 12.12_555167c documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 12.12_b8101ab documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>EWtoPy &mdash; pywws 12.12_555167c documentation</title>
+    <title>EWtoPy &mdash; pywws 12.12_b8101ab documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '12.12_555167c',
+        VERSION:     '12.12_b8101ab',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 12.12_555167c documentation" href="../index.html" />
+    <link rel="top" title="pywws 12.12_b8101ab documentation" href="../index.html" />
     <link rel="up" title="Module code" href="index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">pywws 12.12_555167c documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 12.12_b8101ab documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -51,20 +51,29 @@
             
   <h1>Source code for EWtoPy</h1><div class="highlight"><pre>
 <span class="c">#!/usr/bin/env python</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Convert EasyWeather.dat data to pywws format.</span>
 
-<span class="sd">usage: python EWtoPy.py [options] EasyWeather_file data_dir</span>
-<span class="sd">options are:</span>
-<span class="sd">\t-h or --help\t\tdisplay this help</span>
-<span class="sd">EasyWeather_file is the input data file, e.g. EasyWeather.dat</span>
-<span class="sd">data_dir is the root directory of the weather data</span>
+<span class="sd">&quot;&quot;&quot;Convert EasyWeather.dat data to pywws format</span>
+<span class="sd">::</span>
+
+<span class="sd">%s</span>
 
 <span class="sd">This program assumes that EasyWeather used your local time, and</span>
 <span class="sd">converts time stamps to UTC. This can create ambiguities when the</span>
 <span class="sd">clocks go back in October, which the program attempts to detect and</span>
 <span class="sd">correct.</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">__docformat__</span> <span class="o">=</span> <span class="s">&quot;restructuredtext en&quot;</span>
+<span class="n">__usage__</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s"> usage: python EWtoPy.py [options] EasyWeather_file data_dir</span>
+<span class="s"> options are:</span>
+<span class="s">  -h or --help    display this help</span>
+<span class="s"> EasyWeather_file is the input data file, e.g. EasyWeather.dat</span>
+<span class="s"> data_dir is the root directory of the weather data</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="n">__doc__</span> <span class="o">%=</span> <span class="n">__usage__</span>
+<span class="n">__usage__</span> <span class="o">=</span> <span class="n">__doc__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">__usage__</span>
 
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 <span class="kn">import</span> <span class="nn">getopt</span>
@@ -81,7 +90,7 @@
         <span class="n">opts</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="n">getopt</span><span class="o">.</span><span class="n">getopt</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;help&#39;</span><span class="p">])</span>
     <span class="k">except</span> <span class="n">getopt</span><span class="o">.</span><span class="n">error</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span>
         <span class="k">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#39;Error: </span><span class="si">%s</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">msg</span>
-        <span class="k">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="n">__doc__</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="n">__usage__</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="k">return</span> <span class="mi">1</span>
     <span class="c"># process options</span>
     <span class="k">for</span> <span class="n">o</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
@@ -91,7 +100,7 @@
     <span class="c"># check arguments</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#39;Error: 2 arguments required</span><span class="se">\n</span><span class="s">&#39;</span>
-        <span class="k">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="n">__doc__</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="n">__usage__</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="k">return</span> <span class="mi">2</span>
     <span class="c"># process arguments</span>
     <span class="n">in_name</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -193,7 +202,7 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">pywws 12.12_555167c documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 12.12_b8101ab documentation</a> &raquo;</li>
           <li><a href="index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
