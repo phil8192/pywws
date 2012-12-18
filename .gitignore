@@ -2,5 +2,5 @@
 *~
 
 # Sphinx build side effects
-doc/html/.buildinfo
-doc/doctrees
+doc/*/html/.buildinfo
+doc/*/doctrees
