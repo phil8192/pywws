@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Plot &mdash; pywws 12.12_e27456b documentation</title>
+    <title>pywws.Plot &mdash; pywws 12.12_0cf8aec documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '12.12_e27456b',
+        VERSION:     '12.12_0cf8aec',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,8 +27,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 12.12_e27456b documentation" href="../index.html" />
-    <link rel="up" title="Python programs and modules" href="index.html" />
+    <link rel="top" title="pywws 12.12_0cf8aec documentation" href="../index.html" />
+    <link rel="up" title="Programmes et des modules Python" href="index.html" />
     <link rel="next" title="pywws.WindRose" href="pywws.WindRose.html" />
     <link rel="prev" title="pywws.calib" href="pywws.calib.html" /> 
   </head>
@@ -48,8 +48,8 @@
         <li class="right" >
           <a href="pywws.calib.html" title="pywws.calib"
              accesskey="P">précédent</a> |</li>
-        <li><a href="../index.html">pywws 12.12_e27456b documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Python programs and modules</a> &raquo;</li> 
+        <li><a href="../index.html">pywws 12.12_0cf8aec documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -62,11 +62,11 @@
 <h1>pywws.Plot<a class="headerlink" href="#pywws-plot" title="Lien permanent vers ce titre">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Like Template.py this is one of the more difficult to use modules in the weather station software collection. It plots a graph (or set of graphs) of weather data. Almost everything about the graph is controlled by an XML file. I refer to these files as templates, but they aren&#8217;t templates in the same sense as Template.py uses to create text files.</p>
-<p>Before writing your own graph template files, it might be useful to look at some of the examples in the example_graph_templates directory. If (like I was) you are unfamiliar with XML, I suggest reading the W3 Schools XML tutorial.</p>
+<p>Comme Template.py celui-ci est un des modules les plus difficiles à utiliser dans le logiciel de collecte de la station météo. Il trace un graphe (ou un ensemble de graphes) de données météorologiques. Presque tout le graphe est contrôlé par un fichier XML. Je me réfère à ces fichiers en tant que modèles, mais ils ne sont pas des gabarits dans le même sens que Template.py les utilise pour créer des fichiers texte.</p>
+<p>Avant d&#8217;écrire vos propres fichiers de gabarit de graphe, il pourrait être utile d&#8217;examiner quelques exemples dans le répertoire example_graph_templates. Si (comme moi) vous n&#8217;êtes pas familier avec le langage XML, je vous suggère de lire le tutoriel XML du Site du Zéro.</p>
 <div class="section" id="xml-graph-file-syntax">
-<h3>XML graph file syntax<a class="headerlink" href="#xml-graph-file-syntax" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Here is the simplest useful graph template. It plots the external temperature for the last 24 hours.</p>
+<h3>Syntaxe XML du fichier graphe<a class="headerlink" href="#xml-graph-file-syntax" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voici le modèle de graphe utile le plus simple. Il trace la température extérieure pendant les 24 dernières heures.</p>
 <div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
 &lt;graph&gt;
   &lt;plot&gt;
@@ -77,8 +77,8 @@
   &lt;/plot&gt;
 &lt;/graph&gt;</pre>
 </div>
-<p>In this example, the root element graph has one plot element, which has one subplot element. The subplot element contains a title element and a ycalc element. To plot more data on the same set of axes (for example dew point and temperature), we can add more subplot elements. To plot more than one set of axes (for example wind speed is measured in different units from temperature) in the same file we can add more plot elements.</p>
-<p>The complete element hierarchy is shown below.</p>
+<p>Dans cet exemple, l&#8217;élément racine du graphe a un élément de tracé, lequel a un élément graphe secondaire. L&#8217;élément graphe secondaire contient un élément de titre et un élément ycalc. Pour tracer davantage de données sur le même ensemble d&#8217;axes (par exemple le point de rosée et la température), on peut ajouter plus d&#8217;éléments sous-graphe. Pour tracer plus d&#8217;un ensemble d&#8217;axes (par exemple la vitesse du vent qui est mesurée en unités différentes de la température) dans le même fichier, nous pouvons ajouter plus d&#8217;éléments de graphe.</p>
+<p>La hiérarchie complète de l&#8217;élément est illustré ci-dessous.</p>
 <div class="highlight-python"><pre>graph
     plot
         subplot
@@ -120,158 +120,158 @@
 </div>
 <div class="section" id="graph">
 <h3>graph<a class="headerlink" href="#graph" title="Lien permanent vers ce titre">¶</a></h3>
-<p>This is the root element of the graph XML file. It does not have to be called &#8220;graph&#8221;, but there must be exactly one root element.</p>
+<p>C&#8217;est l&#8217;élément racine du fichier XML de graphe. Il n&#8217;a pas à être appelé &#8220;graph &#8221;, mais il doit y avoir exactement un élément racine.</p>
 </div>
 <div class="section" id="plot">
 <h3>plot<a class="headerlink" href="#plot" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Every graph element should contain at least one plot element. A separate graph is drawn for each plot element, but all share the same X axis.</p>
+<p>Chaque élément graphe doit contenir au moins un élément de tracé. Un graphe distinct est établi pour chaque élément de tracé, mais tous partagent le même axe X.</p>
 </div>
 <div class="section" id="start">
 <h3>start<a class="headerlink" href="#start" title="Lien permanent vers ce titre">¶</a></h3>
-<p>This element sets the date &amp; time of the start of the X axis. It is used in the constructor of a Python datetime object. For example, to start the graph at noon (local time) on Christmas day 2008: <tt class="docutils literal"><span class="pre">&lt;start&gt;year=2008,</span> <span class="pre">month=12,</span> <span class="pre">day=25,</span> <span class="pre">hour=12&lt;/start&gt;</span></tt>. The default value is (stop - duration).</p>
+<p>Cet élément règle la date et l&#8217;heure de départ de l&#8217;axe X. Il est utilisé pour la construction d&#8217;un élément Python datetime. Par exemple, pour démarrer le graphe à midi (heure locale), le jour de Noel 2008: <tt class="docutils literal"><span class="pre">&lt;start&gt;year=2008,</span> <span class="pre">month=12,</span> <span class="pre">day=25,</span> <span class="pre">hour=12&lt;/start&gt;</span></tt>. La valeur par défaut est (stop - duration).</p>
 </div>
 <div class="section" id="stop">
 <h3>stop<a class="headerlink" href="#stop" title="Lien permanent vers ce titre">¶</a></h3>
-<p>This element sets the date &amp; time of the end of the X axis. It is used in the constructor of a Python datetime object. For example, to end the graph at 10 am (local time) on new year&#8217;s day: <tt class="docutils literal"><span class="pre">&lt;stop&gt;year=2009,</span> <span class="pre">month=1,</span> <span class="pre">day=1,</span> <span class="pre">hour=10&lt;/stop&gt;</span></tt>. The default value is (start + duration), unless start is not defined in which case the timestamp of the latest weather station hourly reading is used.</p>
+<p>Cet élément règle la date et l&#8217;heure de fin de l&#8217;axe X. Il est utilisé pour la construction d&#8217;un élément Python datetime. Par exemple, pour terminer le graphe à 10h am (heure locale), le jour du Nouvel An: <tt class="docutils literal"><span class="pre">&lt;stop&gt;year=2009,</span> <span class="pre">month=1,</span> <span class="pre">day=1,</span> <span class="pre">hour=10&lt;/stop&gt;</span></tt>. La valeur par défaut est (start + duration), à moins que start ne soit pas définit dans lequel cas l&#8217;horodate de la dernière lecture horaire de la station météo est employée.</p>
 </div>
 <div class="section" id="duration">
 <h3>duration<a class="headerlink" href="#duration" title="Lien permanent vers ce titre">¶</a></h3>
-<p>This element sets the extent of the X axis of the graph, unless both start and stop are defined. It is used in the constructor of a Python timedelta object. For example, to plot one week: <tt class="docutils literal"><span class="pre">&lt;duration&gt;weeks=1&lt;/duration&gt;</span></tt>. The default value is hours=24.</p>
+<p>Cet élément définit l&#8217;étendue de l&#8217;axe X du graphique, à moins que start (début) et stop (arrêt) soient tous deux définis. Il est utilisé dans le construction d&#8217;un objet Python timedelta. Par exemple, pour tracer une semaine: <tt class="docutils literal"><span class="pre">&lt;duration&gt;weeks=1&lt;/duration&gt;</span></tt>. La valeur par défaut est hours=24.</p>
 </div>
 <div class="section" id="layout">
 <h3>layout<a class="headerlink" href="#layout" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Controls the layout of the plots. Default is a single column. The layout element specifies rows and columns. For example: <tt class="docutils literal"><span class="pre">&lt;layout&gt;4,</span> <span class="pre">2&lt;/layout&gt;</span></tt> will use a grid of 4 rows and 2 columns.</p>
+<p>Contrôle la disposition des tracés. Par défaut sur une seule colonne. L&#8217;élément de mise en page définit les lignes et les colonnes. Par exemple: <tt class="docutils literal"><span class="pre">&lt;layout&gt;4,</span> <span class="pre">2&lt;/layout&gt;</span></tt> utilisera une grille de 4 lignes et 2 colonnes.</p>
 </div>
 <div class="section" id="size">
 <h3>size<a class="headerlink" href="#size" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Sets the overall dimensions of the image file containing the graph. Default (in a single column layout) is a width of 600 pixels and height of 200 pixels for each plot, so a graph with four plot elements would be 600 x 800 pixels. Any size element must include both width and height. For example: <tt class="docutils literal"><span class="pre">&lt;size&gt;800,</span> <span class="pre">600&lt;/size&gt;</span></tt> will produce an image 800 pixels wide and 600 pixels high.</p>
+<p>Définit les dimensions globales du fichier image contenant le graphe. Par défaut (dans une mise en page à simple colonne) une largeur de 600 pixels et une hauteur de 200 pixels pour chaque tracé est employé, donc la dimension d&#8217;un graphe avec quatre éléments tracés serait de 600 x 800 pixels. Tout élément de taille doit inclure à la fois la largeur et la hauteur. Par exemple: <tt class="docutils literal"><span class="pre">&lt;size&gt;800,</span> <span class="pre">600&lt;/size&gt;</span></tt> produira une image 800 pixels de large et 600 pixels de haut.</p>
 </div>
 <div class="section" id="fileformat">
 <h3>fileformat<a class="headerlink" href="#fileformat" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Sets the image format of the file containing the graph. Default is png. Any string recognised by your installation of gnuplot should do. For example: <tt class="docutils literal"><span class="pre">&lt;fileformat&gt;gif&lt;/fileformat&gt;</span></tt> will produce a GIF image.</p>
+<p>Définit le format du fichier d&#8217;image contenant le graphe. Par défaut png. Toute chaîne reconnue par votre installation de gnuplot peut convenir. Par exemple: <tt class="docutils literal"><span class="pre">&lt;fileformat&gt;gif&lt;/fileformat&gt;</span></tt> va produire une image GIF.</p>
 </div>
 <div class="section" id="terminal">
 <h3>terminal<a class="headerlink" href="#terminal" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Allows complete control of gnuplot&#8217;s &#8216;terminal&#8217; settings. You may want to use this if you are plotting to an unusual image format. Any string recognised by your installation of gnuplot&#8217;s &#8216;set terminal&#8217; command should do. For example: <tt class="docutils literal"><span class="pre">&lt;terminal&gt;svg</span> <span class="pre">enhanced</span> <span class="pre">font</span> <span class="pre">&quot;arial,9&quot;</span> <span class="pre">size</span> <span class="pre">600,800</span> <span class="pre">dynamic</span> <span class="pre">rounded&lt;/terminal&gt;</span></tt>. This setting overwrites both size and fileformat.</p>
+<p>Permet un contrôle complet des paramètres &#8216;terminal&#8217; de gnuplot. Vous pouvez utiliser cette option si vous tracez un format d&#8217;image inhabituel. Toute chaîne reconnue par la commande &#8216;terminal&#8217; de votre installation gnuplot devrait faire. Par exemple: <tt class="docutils literal"><span class="pre">&lt;terminal&gt;svg</span> <span class="pre">enhanced</span> <span class="pre">font</span> <span class="pre">&quot;arial,9&quot;</span> <span class="pre">size</span> <span class="pre">600,800</span> <span class="pre">dynamic</span> <span class="pre">rounded&lt;/</span> <span class="pre">terminal&gt;</span></tt>. Ce paramètre spécifie à la fois la taille et le format de fichier.</p>
 </div>
 <div class="section" id="lmargin">
 <h3>lmargin<a class="headerlink" href="#lmargin" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Sets the left margin of the plots, i.e. the distance from the left hand axis to the left hand edge of the image area. According to the gnuplot documentation the units of lmargin are character widths. The default value is 5, which should look OK in most circumstances.</p>
+<p>Définit la marge gauche des graphes, c&#8217;est à dire la distance entre l&#8217;axe de gauche sur le bord gauche de la zone de l&#8217;image. Selon la documentation de gnuplot les unités de lmargin sont des largeurs de caractères. La valeur par défaut est de 5, ce qui devrait être OK dans la plupart des circonstances.</p>
 </div>
 <div class="section" id="rmargin">
 <h3>rmargin<a class="headerlink" href="#rmargin" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Sets the right margin of the plots, i.e. the distance from the right hand axis to the right hand edge of the image area. According to the gnuplot documentation the units of rmargin are character widths. The default value is -1, which sets automatic adjustment.</p>
+<p>Définit la marge droite des graphes, c&#8217;est à dire la distance entre l&#8217;axe de droite à l&#8217;extrémité droite de la zone d&#8217;image. Selon la documentation de gnuplot les unités de rmargin sont des largeurs de caractères. La valeur par défaut est -1, ce qui spécifie le réglage automatique.</p>
 </div>
 <div class="section" id="xformat">
 <h3>xformat<a class="headerlink" href="#xformat" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Sets the format of the time / date xtic labels. The value is a strftime style format string. Default depends on the graph duration: 24 hours or less is &#8220;%H%M&#8221;, 24 hours to 7 days is &#8220;%a %d&#8221; and 7 days or more is &#8220;%Y/%m/%d&#8221;.</p>
+<p>Définit le format des étiquettes de date / heure xtic. La valeur est une chaîne de style format strftime. Par défaut elle dépend de la durée du graphe: 24 heures ou moins est &#8220;%H%M&#8221;, 24 heures sur 7 jours est &#8220;%a% d&#8221; et 7 jours ou plus est &#8220;%Y/%m/%d&#8221;.</p>
 </div>
 <div class="section" id="xlabel">
 <h3>xlabel<a class="headerlink" href="#xlabel" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Sets the X axis label. The value is a strftime style format string. Default depends on the graph duration: 24 hours or less is &#8220;Time (%Z)&#8221;, 24 hours to 7 days is &#8220;Day&#8221; and 7 days or more is &#8220;Date&#8221;. The datetime used to compute this is start, which may produce unexpected results when a graph spans DST start or end.</p>
+<p>Définit l&#8217;étiquette d&#8217;axe X. La valeur est une chaîne de style format strftime. Par défaut dépend de la durée du graphe: 24 heures ou moins est &#8220;Time (%Z)&#8221;, de 24 heures à 7 jours est «Day» et 7 jours ou plus est «Date». Le datetime utilisé pour calculer ce départ, ce qui peut produire des résultats inattendus lorsqu&#8217;un graphique s&#8217;étend de début ou de fin DST.</p>
 </div>
 <div class="section" id="dateformat">
 <h3>dateformat<a class="headerlink" href="#dateformat" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Sets the format of the date labels at each end of X axis. The value is a strftime style format string. Default is &#8220;%Y/%m/%d&#8221;. The right hand label is only drawn if it differs from the left. To have no labels, set an empty format: <tt class="docutils literal"><span class="pre">&lt;dateformat&gt;&lt;/dateformat&gt;</span></tt></p>
+<p>Définit le format des étiquettes de date à chaque extrémité de l&#8217;axe X. La valeur est une chaîne de style format strftime. Par défaut est &#8220;%Y/%m/%d&#8221;. L&#8217;étiquette de droite est uniquement affichée si elle diffère de la gauche. Pour avoir aucune étiquette, définissez un format vide: <tt class="docutils literal"><span class="pre">&lt;dateformat&gt;&lt;/dateformat&gt;</span></tt></p>
 </div>
 <div class="section" id="xtics">
 <h3>xtics<a class="headerlink" href="#xtics" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Sets the spacing of the &#8220;tic&#8221; marks on the X axis. The value is an integer number of hours. The default is to allow gnuplot to set an appropriate interval.</p>
+<p>Définit l&#8217;espacement des &#8220;tic&#8221; des marques sur l&#8217;axe X. La valeur est un nombre entier d&#8217;heures. La valeur par défaut est de laisser gnuplot définir l&#8217;intervalle approprié.</p>
 </div>
 <div class="section" id="title">
 <h3>title<a class="headerlink" href="#title" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Sets the title of the graph. A single line of text, for example: <tt class="docutils literal"><span class="pre">&lt;title&gt;Today's</span> <span class="pre">weather&lt;/title&gt;</span></tt>. This title appears at the very top of the graph, outside any plot area.</p>
+<p>Définit le titre du graphe. Une seule ligne de texte, par exemple: <tt class="docutils literal"><span class="pre">&lt;title&gt;La</span> <span class="pre">météo</span> <span class="pre">du</span> <span class="pre">jour&lt;/</span> <span class="pre">title&gt;</span></tt>. Ce titre apparaît tout en haut du graphe, en dehors de toute zone de traçage.</p>
 </div>
 <div class="section" id="subplot">
 <h3>subplot<a class="headerlink" href="#subplot" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Every plot element should contain at least one subplot element. A separate trace is drawn for each subplot element, but all share the same X and Y axes.</p>
+<p>Chaque élément du graphe doit contenir au moins un élément graphe secondaire. Une tracé distinct est établi pour chaque élément sous-graphe, mais tous partagent les même axes X et Y.</p>
 </div>
 <div class="section" id="bmargin">
 <h3>bmargin<a class="headerlink" href="#bmargin" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Sets the bottom margin, i.e. the spacing between the lower X axis and the edge of the graph (or the next plot). The default is to let gnuplot adjust this automatically, which works OK most of the time but you may wish to fine tune the value to suit your installation.</p>
-<p>The permitted value is any non-negative real number. On my setup 0.9 is a good value, set as follows: <tt class="docutils literal"><span class="pre">&lt;bmargin&gt;0.9&lt;/bmargin&gt;</span></tt>.</p>
+<p>Définit la marge inférieure, c&#8217;est à dire la distance entre la partie inférieure de l&#8217;axe X et le bord du graphique (ou le graphe suivante). La valeur par défaut est de laisser gnuplot ajuster automatiquement, ce qui fonctionne bien la plupart du temps, mais vous pouvez ajuster la valeur en fonction de votre installation.</p>
+<p>La valeur autorisée est un nombre non négatif réel. Sur mon installation 0.9 est une bonne valeur, définie comme suit: <tt class="docutils literal"><span class="pre">&lt;bmargin&gt;</span> <span class="pre">0.9&lt;/</span> <span class="pre">bmargin&gt;</span></tt>.</p>
 </div>
 <div class="section" id="yrange">
 <h3>yrange<a class="headerlink" href="#yrange" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Sets the lower and upper limits of the (left hand) Y axis. The value is anything understood by gnuplot, typically a pair of numbers. The default is to allow gnuplot to set appropriate values, which is unlikely to be what you want. For example, to plot typical UK temperatures with no value going off the graph: <tt class="docutils literal"><span class="pre">&lt;yrange&gt;-10,</span> <span class="pre">30&lt;/yrange&gt;</span></tt>. Note that commas are converted to colons, so <tt class="docutils literal"><span class="pre">&lt;yrange&gt;-10:30&lt;/yrange&gt;</span></tt> would be equivalent.</p>
-<p>You can use an asterisk to have gnuplot choose a suitable value. For example, to have the upper value auto scale whilst fixing the lower value at zero, use <tt class="docutils literal"><span class="pre">&lt;yrange&gt;0:*&lt;/yrange&gt;</span></tt>.</p>
+<p>Définit les limites inférieure et supérieure de l&#8217;axe Y gauche. La valeur est tout ce qui est recconnu par gnuplot, généralement une paire de nombres. La valeur par défaut est de permettre à gnuplot de définir les valeurs appropriées, ce qui est peu susceptible d&#8217;être ce que vous voulez. Par exemple, pour tracer des températures typiques du Royaume-Uni sans valeur va hors du graphe: <tt class="docutils literal"><span class="pre">&lt;yrange&gt;-10,</span> <span class="pre">30&lt;/yrange&gt;</span></tt>. Notez que les virgules sont converties en deux points, donc <tt class="docutils literal"><span class="pre">&lt;yrange&gt;10:30&lt;/</span> <span class="pre">yrange&gt;</span></tt> serait équivalent.</p>
+<p>Vous pouvez utiliser un astérisque pour laisser gnuplot choisir une valeur appropriée. Par exemple, pour automatiser l&#8217;échelle de valeur supérieure, tout en fixant la valeur inférieure à zéro, utilisez <tt class="docutils literal"><span class="pre">&lt;yrange&gt;0:*&lt;/yrange&gt;</span></tt>.</p>
 </div>
 <div class="section" id="y2range">
 <h3>y2range<a class="headerlink" href="#y2range" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Sets the lower and upper limits of the right hand Y axis. Default is for the right hand Y axis to be the same as the left, but setting a different range is useful in dual axis plotting.</p>
+<p>Définit les limites inférieure et supérieure de l&#8217;axe Y de droite. Le défaut est pour l&#8217;axe Y de droite d&#8217;être la même que celle de gauche, mais fixer une plage différente est utile en double axe de traçage.</p>
 </div>
 <div class="section" id="ytics">
 <h3>ytics<a class="headerlink" href="#ytics" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Controls the &#8220;tic&#8221; marks on the left hand Y axis. The value can be anything that&#8217;s understood by gnuplot. For example, to set the tic spacing to 45 use <tt class="docutils literal"><span class="pre">&lt;ytics&gt;45&lt;/ytics&gt;</span></tt>. More complex things are also possible, e.g. to label a wind direction graph with compass points, use <tt class="docutils literal"><span class="pre">&lt;y2tics&gt;('N'</span> <span class="pre">0,</span> <span class="pre">'E'</span> <span class="pre">90,</span> <span class="pre">'S'</span> <span class="pre">180,</span> <span class="pre">'W'</span> <span class="pre">270,</span> <span class="pre">'N'</span> <span class="pre">360)&lt;/y2tics&gt;</span></tt>.</p>
+<p>Contrôle les &#8220;tic&#8221; des marques sur l&#8217;axe Y de gauche. La valeur peut être tout ce qui est compris par gnuplot. Par exemple, pour définir l&#8217;espacement tic à 45 utiliser <tt class="docutils literal"><span class="pre">&lt;ytics&gt;45&lt;/</span> <span class="pre">ytics&gt;</span></tt>. Des choses plus complexes sont également possibles, par exemple étiqueter un diagramme de direction du vent avec des points de boussole, utilisez <tt class="docutils literal"><span class="pre">&lt;y2tics&gt;('N'</span> <span class="pre">0,</span> <span class="pre">'E'</span> <span class="pre">90,</span> <span class="pre">'S'</span> <span class="pre">180,</span> <span class="pre">'W'</span> <span class="pre">270,</span> <span class="pre">'N'</span> <span class="pre">360)&lt;/</span> <span class="pre">y2tics&gt;</span></tt>.</p>
 </div>
 <div class="section" id="y2tics">
 <h3>y2tics<a class="headerlink" href="#y2tics" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Controls the &#8220;tic&#8221; marks on the right hand axis. The format is the same as that for ytics. Default behaviour is to copy the left hand tic marks, but without labels.</p>
+<p>Contrôle les &#8220;tic&#8221; des marques sur l&#8217;axe de droite. Le format est le même que celui de ytics. Le comportement par défaut consiste à copier les marques de graduation de gauche, mais sans étiquette.</p>
 </div>
 <div class="section" id="ylabel">
 <h3>ylabel<a class="headerlink" href="#ylabel" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Adds a label to the (left hand) Y axis. For example, when plotting temperature: <tt class="docutils literal"><span class="pre">&lt;ylabel&gt;°C&lt;/ylabel&gt;</span></tt>. If you use ylabel you will probably want to adjust lmargin.</p>
+<p>Ajoute une étiquette à gauche de l&#8217;axe Y. Par exemple, lors du tracé de la température: <tt class="docutils literal"><span class="pre">&lt;ylabel&gt;°C&lt;/ylabel&gt;</span></tt>. Si vous utilisez ylabel vous voudrez probablement ajuster lmargin.</p>
 </div>
 <div class="section" id="ylabelangle">
 <h3>ylabelangle<a class="headerlink" href="#ylabelangle" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Adjust the angle of the (left hand) Y axis label, if your version of gnuplot supports it. For example, to write the label horizontally: <tt class="docutils literal"><span class="pre">&lt;ylabelangle&gt;90&lt;/ylabelangle&gt;</span></tt>.</p>
+<p>Ajuste l&#8217;angle de l&#8217;étiquette à gauche de l&#8217;axe Y, si votre version de gnuplot le soutient. Par exemple, pour écrire l&#8217;étiquette horizontalement: <tt class="docutils literal"><span class="pre">&lt;ylabelangle&gt;90&lt;/ylabelangle&gt;</span></tt>.</p>
 </div>
 <div class="section" id="y2label">
 <h3>y2label<a class="headerlink" href="#y2label" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Adds a label to the right hand Y axis. For example, when plotting humidity: <tt class="docutils literal"><span class="pre">&lt;y2label&gt;%&lt;/y2label&gt;</span></tt>. This is mostly used when plotting dual axis graphs. If you use y2label you will probably want to adjust rmargin.</p>
+<p>Ajoute une étiquette à l&#8217;axe Y de droite. Par exemple, lors du tracé de l&#8217;humidité: <tt class="docutils literal"><span class="pre">&lt;y2label&gt;%&lt;/y2label&gt;</span></tt>. Cela est principalement utilisé lors du traçage de graphes à deux axes. Si vous utilisez y2label vous voudrez probablement ajuster rmargin.</p>
 </div>
 <div class="section" id="y2labelangle">
 <h3>y2labelangle<a class="headerlink" href="#y2labelangle" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Adjust the angle of the right hand Y axis label, if your version of gnuplot supports it. For example, to write the label horizontally: <tt class="docutils literal"><span class="pre">&lt;y2labelangle&gt;90&lt;/y2labelangle&gt;</span></tt>.</p>
+<p>Ajuste l&#8217;angle de l&#8217;étiquette d&#8217;axe Y à droite, si votre version de gnuplot le permet. Par exemple, pour écrire l&#8217;étiquette horizontalement: <tt class="docutils literal"><span class="pre">&lt;y2labelangle&gt;90&lt;/</span> <span class="pre">y2labelangle&gt;</span></tt>.</p>
 </div>
 <div class="section" id="grid">
 <h3>grid<a class="headerlink" href="#grid" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Adds a grid to the plot. In most situations gnuplot&#8217;s default grid is suitable, so no value is needed: <tt class="docutils literal"><span class="pre">&lt;grid&gt;&lt;/grid&gt;</span></tt>. More control is possible using any of the options understood by gnuplot&#8217;s set grid command. For example, to have horizontal grid lines only: <tt class="docutils literal"><span class="pre">&lt;grid&gt;ytics&lt;/grid&gt;</span></tt>.</p>
+<p>Ajoute une grille au tracé. Dans la plupart des situations, la grille par défaut de gnuplot est appropriée, si aucune valeur n&#8217;est nécessaire: <tt class="docutils literal"><span class="pre">&lt;grid&gt;&lt;/grid&gt;</span></tt>. Plus de contrôle est possible en utilisant l&#8217;une des options comprises par la commande set grid de gnuplot. Par exemple, pour avoir les lignes horizontales de la grille uniquement: <tt class="docutils literal"><span class="pre">&lt;grid&gt;ytics&lt;/grid&gt;</span></tt>.</p>
 </div>
 <div class="section" id="source">
 <h3>source<a class="headerlink" href="#source" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Select the weather data to be plotted. Permitted values are <tt class="docutils literal"><span class="pre">&lt;source&gt;raw&lt;/source&gt;</span></tt>, <tt class="docutils literal"><span class="pre">&lt;source&gt;hourly&lt;/source&gt;</span></tt>, <tt class="docutils literal"><span class="pre">&lt;source&gt;daily&lt;/source&gt;</span></tt> and <tt class="docutils literal"><span class="pre">&lt;source&gt;monthly&lt;/source&gt;</span></tt>. Default is raw. Note that the different sources have different data dictionaries, so this choice affects ycalc.</p>
+<p>Sélectionne les données météorologiques à tracer. Les valeurs autorisées sont <tt class="docutils literal"><span class="pre">&lt;source&gt;raw&lt;/source&gt;</span></tt>, <tt class="docutils literal"><span class="pre">&lt;source&gt;</span> <span class="pre">hourly&lt;/</span> <span class="pre">source&gt;</span></tt>, <tt class="docutils literal"><span class="pre">&lt;source&gt;daily&lt;/source&gt;</span></tt> et <tt class="docutils literal"><span class="pre">&lt;source&gt;monthly&lt;/source&gt;</span></tt>. LA valeur par défaut est raw. Notez que les sources différentes ont des dictionnaires de données différents, donc ce choix affecte ycalc.</p>
 </div>
 <div class="section" id="boxwidth">
 <h3>boxwidth<a class="headerlink" href="#boxwidth" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Sets the width of the &#8220;boxes&#8221; used when drawing bar graphs. The value is an integer expression yielding a number of seconds. Default depends on source: raw is 240, hourly is 2800 and daily is 2800 * 24.</p>
+<p>Définit la largeur des &#8220;boîtes&#8221; utilisés lors de l&#8217;élaboration des graphes à barres. La valeur est une expression entière pour obtenir un nombre de secondes. Le défaut dépend de la source: brut est de 240, horaire est de 2800 et quotidien est de 2800 * 24.</p>
 </div>
 <div class="section" id="id1">
 <h3>title<a class="headerlink" href="#id1" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Sets the title of the plot. A single line of text, for example: <tt class="docutils literal"><span class="pre">&lt;title&gt;Temperature</span> <span class="pre">(°C)&lt;/title&gt;</span></tt>. This title appears within the plot area, above any subplot titles.</p>
+<p>Définit le titre du graphe. Une seule ligne de texte, par exemple: <tt class="docutils literal"><span class="pre">&lt;title&gt;Température</span> <span class="pre">(°C)&lt;/</span> <span class="pre">title&gt;</span></tt>. Ce titre apparaît dans la zone de traçage, au-dessus de tous les titres sous-graphes.</p>
 </div>
 <div class="section" id="command">
 <h3>command<a class="headerlink" href="#command" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Execute any gnuplot command, just before the main &#8220;plot&#8221; command. This option allows advanced users to have greater control over the graph appearance. The value is any valid gnuplot command, typically beginning with the word set. For example: <tt class="docutils literal"><span class="pre">&lt;command&gt;set</span> <span class="pre">key</span> <span class="pre">tmargin</span> <span class="pre">center</span> <span class="pre">horizontal</span> <span class="pre">width</span> <span class="pre">1</span> <span class="pre">noreverse</span> <span class="pre">enhanced</span> <span class="pre">autotitles</span> <span class="pre">box</span> <span class="pre">linetype</span> <span class="pre">-1</span> <span class="pre">linewidth</span> <span class="pre">1&lt;/command&gt;</span></tt>. (Don&#8217;t ask me what this example does — I&#8217;m not an advanced user).</p>
+<p>Exécute n&#8217;importe quelle commande gnuplot, juste avant la principale commande de tracé. Cette option permet aux utilisateurs avancés d&#8217;avoir plus de contrôle sur l&#8217;apparence du graphe. La valeur est une commande gnuplot valide, généralement commençant par un ensemble de mots. Par exemple: <tt class="docutils literal"><span class="pre">&lt;command&gt;set</span> <span class="pre">key</span> <span class="pre">tmargin</span> <span class="pre">center</span> <span class="pre">horizontal</span> <span class="pre">width</span> <span class="pre">1</span> <span class="pre">noreverse</span> <span class="pre">enhanced</span> <span class="pre">autotitles</span> <span class="pre">box</span> <span class="pre">linetype</span> <span class="pre">-1</span> <span class="pre">linewidth</span> <span class="pre">1&lt;/</span> <span class="pre">command&gt;</span></tt>. (Ne me demandez pas ce que cet exemple produit - Je ne suis pas un utilisateur avancé).</p>
 </div>
 <div class="section" id="xcalc">
 <h3>xcalc<a class="headerlink" href="#xcalc" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Controls the X axis positioning of plotted data values. The default value of data[&#8216;idx&#8217;] is correct for most data, but there are some exceptions. For example, when plotting bar charts of hourly rainfall, it&#8217;s nice to centre the bars on 30 minutes past the hour: <tt class="docutils literal"><span class="pre">&lt;xcalc&gt;data['idx'].replace(minute=30,</span> <span class="pre">second=0)&lt;/xcalc&gt;</span></tt>.</p>
+<p>Contrôle le positionnement de l&#8217;axe X du tracé des valeurs de données. La valeur par défaut de data[&#8216;idx&#8217;] est correcte pour la plupart des données, mais il y a quelques exceptions. Par exemple, lors du tracé des diagrammes à barres de pluies horaires, il est bon de centrer les barres sur 30 minutes après l&#8217;heure:  <tt class="docutils literal"><span class="pre">&lt;xcalc&gt;data</span> <span class="pre">['idx'].replace(minute=30,</span> <span class="pre">second=0)&lt;/</span> <span class="pre">xcalc&gt;</span></tt>.</p>
 </div>
 <div class="section" id="ycalc">
 <h3>ycalc<a class="headerlink" href="#ycalc" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Selects the data to be plotted. Any one line Python expression that returns a single float value can be used. At its simplest this just selects one value from the &#8220;data&#8221; dictionary, for example: <tt class="docutils literal"><span class="pre">&lt;ycalc&gt;data['temp_out']&lt;/ycalc&gt;</span></tt> plots the external temperature. More complex expressions are possible, and some helper functions are provided. For example: <tt class="docutils literal"><span class="pre">&lt;ycalc&gt;dew_point(data['temp_out'],</span> <span class="pre">data['hum_out'])&lt;/ycalc&gt;</span></tt> plots the external dew point, and <tt class="docutils literal"><span class="pre">&lt;ycalc&gt;data['wind_ave']</span> <span class="pre">*</span> <span class="pre">3.6</span> <span class="pre">/</span> <span class="pre">1.609344&lt;/ycalc&gt;</span></tt> plots the average wind speed in miles per hour.</p>
-<p>Cumulative plots are also possible. The result of each ycalc computation is stored and made available to the next computation in the variable last_ycalc. This can be used with any data, but is most useful with rainfall: <tt class="docutils literal"><span class="pre">&lt;ycalc&gt;data['rain']</span> <span class="pre">+</span> <span class="pre">last_ycalc&lt;/ycalc&gt;</span></tt>.</p>
+<p>Sélectionne les données à tracer. Toute expression Python sur une ligne qui retourne une valeur flottante simple peut être utilisée. Au plus simple cela sélectionne une seule valeur du dictionnaire &#8220;data&#8221;, par exemple: <tt class="docutils literal"><span class="pre">&lt;ycalc&gt;data['temp_out']&lt;/ycalc&gt;</span></tt> trace la température extérieure. Des expressions plus complexes sont possibles, et certaines fonctions d&#8217;aide sont fournies. Par exemple: <tt class="docutils literal"><span class="pre">&lt;ycalc&gt;dew_point(data['temp_out'],</span> <span class="pre">data['hum_out'])&lt;/</span> <span class="pre">ycalc&gt;</span></tt> trace le point de rosée externe, et <tt class="docutils literal"><span class="pre">&lt;ycalc&gt;data['wind_ave']</span> <span class="pre">*</span> <span class="pre">3,6</span> <span class="pre">/</span> <span class="pre">1.609344&lt;/</span> <span class="pre">ycalc&gt;</span></tt> trace la vitesse moyenne du vent en miles par heure.</p>
+<p>Les courbes cumulatives sont également possibles. Le résultat de chaque calcul ycalc est stocké et mis à la disposition du calcul suivant dans la variable last_ycalc. Ceci peut être utilisé avec toute donnée, mais il est plus utile avec des précipitations: <tt class="docutils literal"><span class="pre">&lt;ycalc&gt;data</span> <span class="pre">['rain']</span> <span class="pre">+</span> <span class="pre">last_ycalc&lt;/</span> <span class="pre">ycalc&gt;</span></tt>.</p>
 </div>
 <div class="section" id="axes">
 <h3>axes<a class="headerlink" href="#axes" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Selects which Y axis the data is plotted against. Default is the left hand axis, but the right hand axis can be chosen with: <tt class="docutils literal"><span class="pre">&lt;axes&gt;x1y2&lt;/axes&gt;</span></tt>. This can be used in conjunction with y2range to plot two unrelated quantities on one graph, for example temperature and humidity.</p>
+<p>Sélectionne contre quel axe Y les données sont tracées. Par défaut c&#8217;est l&#8217;axe de gauche, mais l&#8217;axe de droite peut être choisie avec: <tt class="docutils literal"><span class="pre">&lt;axes&gt;x1y2&lt;/</span> <span class="pre">axes&gt;</span></tt>. Ceci peut être utilisé en conjonction avec y2range pour tracer deux quantités indépendantes sur une courbe, par exemple la température et de l&#8217;humidité.</p>
 </div>
 <div class="section" id="style">
 <h3>style<a class="headerlink" href="#style" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Sets the line style for the graph. Default is a smooth continuous line, thickness 1. To select a bar graph use: <tt class="docutils literal"><span class="pre">&lt;style&gt;box&lt;/style&gt;</span></tt>. To select points without a connecting line use: <tt class="docutils literal"><span class="pre">&lt;style&gt;+&lt;/style&gt;</span></tt> or <tt class="docutils literal"><span class="pre">&lt;style&gt;x&lt;/style&gt;</span></tt>. To select a line thickness 3 (for example) use: <tt class="docutils literal"><span class="pre">&lt;style&gt;line</span> <span class="pre">3&lt;/style&gt;</span></tt>. The thickness of points can be set in a similar fashion. For complete control (for advanced users) a full gnuplot style can be set: <tt class="docutils literal"><span class="pre">&lt;style&gt;smooth</span> <span class="pre">unique</span> <span class="pre">lc</span> <span class="pre">5</span> <span class="pre">lw</span> <span class="pre">3&lt;/style&gt;</span></tt>.</p>
+<p>Définit le style de ligne pour le graphe. Le défaut est une ligne continue lisse, d&#8217;épaisseur 1. Pour sélectionner un graphique à barres, utilisez: <tt class="docutils literal"><span class="pre">&lt;style&gt;box&lt;/</span> <span class="pre">style&gt;</span></tt>. Pour sélectionner des points sans ligne de raccordement, utilisez: <tt class="docutils literal"><span class="pre">&lt;style&gt;+&lt;/</span> <span class="pre">style&gt;</span></tt> ou <tt class="docutils literal"><span class="pre">&lt;style&gt;x&lt;/</span> <span class="pre">style&gt;</span></tt>. Pour sélectionner une épaisseur de ligne à 3 (par exemple): <tt class="docutils literal"><span class="pre">&lt;style&gt;line</span> <span class="pre">3&lt;/</span> <span class="pre">style&gt;</span></tt>. L&#8217;épaisseur des points peut être réglé de la même façon. Pour un contrôle complet (pour utilisateurs avancés) un style gnuplot complet peut être réglé ainsi: <tt class="docutils literal"><span class="pre">&lt;style&gt;smooth</span> <span class="pre">unique</span> <span class="pre">lc</span> <span class="pre">5</span> <span class="pre">lw</span> <span class="pre">3&lt;/</span> <span class="pre">style&gt;</span></tt>.</p>
 </div>
 <div class="section" id="colour">
 <h3>colour<a class="headerlink" href="#colour" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Sets the colour of the subplot line or boxes. Any integer value is accepted. The mapping of colours to numbers is set by gnuplot. Default value is the previous colour plus one.</p>
+<p>Définit la couleur de la ligne de sous-graphe ou des boîtes. Toute valeur entière est acceptée. La charte des couleurs est fixée par gnuplot. La valeur par défaut est la couleur précédente plus un.</p>
 </div>
 <div class="section" id="id2">
 <h3>title<a class="headerlink" href="#id2" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Sets the title of the subplot. A single line of text, for example: <tt class="docutils literal"><span class="pre">&lt;title&gt;Temperature</span> <span class="pre">(°C)&lt;/title&gt;</span></tt>. This title appears within the plot area, next to a short segment of the line colour used for the subplot.</p>
+<p>Définit le titre du sous-graphe. Une seule ligne de texte, par exemple: <tt class="docutils literal"><span class="pre">&lt;title&gt;Température</span> <span class="pre">(°C)&lt;/</span> <span class="pre">title&gt;</span></tt>. Ce titre apparaît dans la zone de graphe, à côté d&#8217;un court segment de la couleur de la ligne utilisée pour le sous-graphe.</p>
 </div>
 </div>
 <div class="section" id="module-pywws.Plot">
-<span id="detailed-api"></span><h2>Detailed API<a class="headerlink" href="#module-pywws.Plot" title="Lien permanent vers ce titre">¶</a></h2>
+<span id="detailed-api"></span><h2>API détaillé<a class="headerlink" href="#module-pywws.Plot" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Plot graphs of weather data according to an XML recipe</p>
 <div class="highlight-python"><pre>usage: python RunModule.py Plot [options] data_dir temp_dir xml_file output_file
 options are:
@@ -281,7 +281,7 @@ temp_dir is a workspace for temporary files e.g. /tmp
 xml_file is the name of the source file that describes the plot
 output_file is the name of the image file to be created e.g. 24hrs.png</pre>
 </div>
-<p class="rubric">Functions</p>
+<p class="rubric">Fonctions</p>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
@@ -384,7 +384,7 @@ output_file is the name of the image file to be created e.g. 24hrs.png</pre>
   <ul>
 <li><a class="reference internal" href="#">pywws.Plot</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a><ul>
-<li><a class="reference internal" href="#xml-graph-file-syntax">XML graph file syntax</a></li>
+<li><a class="reference internal" href="#xml-graph-file-syntax">Syntaxe XML du fichier graphe</a></li>
 <li><a class="reference internal" href="#graph">graph</a></li>
 <li><a class="reference internal" href="#plot">plot</a></li>
 <li><a class="reference internal" href="#start">start</a></li>
@@ -424,7 +424,7 @@ output_file is the name of the image file to be created e.g. 24hrs.png</pre>
 <li><a class="reference internal" href="#id2">title</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-pywws.Plot">Detailed API</a></li>
+<li><a class="reference internal" href="#module-pywws.Plot">API détaillé</a></li>
 </ul>
 </li>
 </ul>
@@ -467,8 +467,8 @@ output_file is the name of the image file to be created e.g. 24hrs.png</pre>
         <li class="right" >
           <a href="pywws.calib.html" title="pywws.calib"
              >précédent</a> |</li>
-        <li><a href="../index.html">pywws 12.12_e27456b documentation</a> &raquo;</li>
-          <li><a href="index.html" >Python programs and modules</a> &raquo;</li> 
+        <li><a href="../index.html">pywws 12.12_0cf8aec documentation</a> &raquo;</li>
+          <li><a href="index.html" >Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
