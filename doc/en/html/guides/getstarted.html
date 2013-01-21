@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>How to get started with pywws &mdash; pywws 13.01_5c28d45 documentation</title>
+    <title>How to get started with pywws &mdash; pywws 13.01_ca7ee82 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.01_5c28d45',
+        VERSION:     '13.01_ca7ee82',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.01_5c28d45 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.01_ca7ee82 documentation" href="../index.html" />
     <link rel="up" title="User guides" href="index.html" />
     <link rel="next" title="How to set up ‘hourly’ logging with pywws" href="hourlylogging.html" />
     <link rel="prev" title="User guides" href="index.html" /> 
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="index.html" title="User guides"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.01_5c28d45 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.01_ca7ee82 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">User guides</a> &raquo;</li> 
       </ul>
     </div>  
@@ -125,13 +125,17 @@ python TestWeatherStation.py</pre>
 <p>If this works then you may be able to allow your normal user account to access the weather station by setting up a &#8216;udev&#8217; rule. See the compatibility wiki page <a class="reference external" href="http://code.google.com/p/pywws/wiki/Compatibility">http://code.google.com/p/pywws/wiki/Compatibility</a> for more details.</p>
 <p>If you have any other problem, please ask for help on the pywws mailing list: <a class="reference external" href="http://groups.google.com/group/pywws">http://groups.google.com/group/pywws</a></p>
 </li>
+<li><p class="first">Set up your weather station.</p>
+<p>If you haven&#8217;t already done so, set your weather station to display the correct relative atmospheric pressure. (See the manual for details of how to do this.) pywws gets the offset between relative and absolute pressure from the station, so this needs to be set before using pywws.</p>
+<p>You can get the correct relative pressure from your location by looking on the internet for weather reports from a nearby station, ideally an official one such as an airport. This is best done during calm weather when the pressure is almost constant over a large area.</p>
+<p>If you change the offset at any time, you can update all your stored data by running the Reprocess.py program.</p>
+</li>
 <li><p class="first">Log your weather station data.</p>
 <p>First, choose a directory to store all your weather station data. This will be written to quite frequently, so a disk drive is preferable to a memory stick, as these have a limited number of writes. In most cases your home directory is suitable, for example:</p>
 <div class="highlight-python"><pre>mkdir ~/weather/data</pre>
 </div>
 <p>This directory is referred to elsewhere in the pywws documentation as your data directory.</p>
 <p>Make sure your computer has the right date &amp; time, and time zone, as these are used to label the weather station data. If you haven&#8217;t already done so, it&#8217;s worth setting up NTP to synchronise your computer to a &#8216;time server&#8217;.</p>
-<p>Make sure your weather station has the correct offset between &#8216;absolute&#8217; and &#8216;relative&#8217; atmospheric pressure. See the instruction book for details on how to set this.</p>
 <p>The first time you run <a class="reference internal" href="../api/pywws.LogData.html#module-pywws.LogData" title="pywws.LogData"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt></a> it will create a configuration file in your data directory called &#8216;weather.ini&#8217; and then stop. You need to edit the configuration file and change the line <tt class="docutils literal"><span class="pre">ws</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">Unknown</span></tt> to <tt class="docutils literal"><span class="pre">ws</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">1080</span></tt> or <tt class="docutils literal"><span class="pre">ws</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">3080</span></tt>. (If your weather station console displays solar illuminance you have a 3080 type, all others are 1080.) Then run <a class="reference internal" href="../api/pywws.LogData.html#module-pywws.LogData" title="pywws.LogData"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt></a> again. This may take several minutes, as it will copy all the data stored in your station&#8217;s memory. The <a class="reference internal" href="../api/pywws.LogData.html#module-pywws.LogData" title="pywws.LogData"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt></a> program has a &#8216;verbose&#8217; option that increases the amount of messages it displays while running. This is useful when running it manually, for example:</p>
 <div class="highlight-python"><pre>python RunModule.py LogData -vvv ~/weather/data</pre>
 </div>
@@ -241,7 +245,7 @@ day end hour = 9</pre>
         <li class="right" >
           <a href="index.html" title="User guides"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.01_5c28d45 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.01_ca7ee82 documentation</a> &raquo;</li>
           <li><a href="index.html" >User guides</a> &raquo;</li> 
       </ul>
     </div>
