@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws &mdash; pywws 13.01_ca7ee82 documentation</title>
+    <title>pywws &mdash; pywws 13.01_4a02078 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '13.01_ca7ee82',
+        VERSION:     '13.01_4a02078',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,8 +27,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="shortcut icon" href="_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.01_ca7ee82 documentation" href="#" />
-    <link rel="next" title="Licence Publique Générale GNU" href="essentials/LICENCE.html" /> 
+    <link rel="top" title="pywws 13.01_4a02078 documentation" href="#" />
+    <link rel="next" title="GNU General Public License" href="essentials/LICENCE.html" /> 
   </head>
   <body>
     <div class="related">
@@ -41,9 +41,9 @@
           <a href="py-modindex.html" title="Index des modules Python"
              >modules</a> |</li>
         <li class="right" >
-          <a href="essentials/LICENCE.html" title="Licence Publique Générale GNU"
+          <a href="essentials/LICENCE.html" title="GNU General Public License"
              accesskey="N">suivant</a> |</li>
-        <li><a href="#">pywws 13.01_ca7ee82 documentation</a> &raquo;</li> 
+        <li><a href="#">pywws 13.01_4a02078 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -56,11 +56,11 @@
 <h1>pywws<a class="headerlink" href="#pywws" title="Lien permanent vers ce titre">¶</a></h1>
 <img alt="_images/img_1504.jpg" class="align-right" src="_images/img_1504.jpg" />
 <div class="line-block">
-<div class="line">Logiciel Python pour Station météo USB sans-fil</div>
+<div class="line">Python software for USB Wireless WeatherStations</div>
 <div class="line"><a class="reference external" href="http://jim-easterbrook.github.com/pywws/">http://jim-easterbrook.github.com/pywws/</a></div>
 <div class="line"><a class="reference external" href="http://github.com/jim-easterbrook/pywws/">http://github.com/jim-easterbrook/pywws/</a></div>
 </div>
-<p>Ce document est disponible dans les langues suivantes (Les versions autres que anglais peuvent ne pas être complètes ou à jour):</p>
+<p>This document is available in the following languages (non-English versions may not be complete or up to date):</p>
 <blockquote>
 <div><ul class="simple">
 <li><a class="reference external" href="../../en/html/index.html">English</a></li>
@@ -69,51 +69,51 @@
 </div></blockquote>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
-<p>pywws est une collection de scripts Python pour lire, stocker et traiter les données des stations météorologiques sans fil USB courantes tels que Elecsa AstroTouch 6975, Watson W-8681, WH-1080PC, WH1080, WH1081, WH3080 etc Je suppose que tout modèle de station fourni avec le logiciel EasyWeather pour Windows est compatible, mais ne peut pas le garantir.</p>
-<p>Le logiciel a été développé pour fonctionner dans environnement de faible puissance, avec peu de mémoire  tel un routeur. Il peut être utilisé pour créer des graphiques et des pages Web affichant de récentes lectures météorologiques, généralement mis à jour à chaque heure. Il peut également envoyer des données à des services tels que: Weather Underground <a class="reference external" href="http://www.wunderground.com/">http://www.wunderground.com/</a> et poster des messages sur <a class="reference external" href="https://twitter.com/">Twitter</a>.</p>
-<p>J&#8217;ai écrit ce logiciel pour répondre à mes besoins, mais ai essayé de le rendre adaptable aux besoins des autres. Vous voudrez peut-être modifier certains ou tous les modules, ou en écrire de nouveaux, pour lui faire faire exactement ce que vous souhaitez. L&#8217;une des raisons pour lesquelles Python est utilisé est qu&#8217;il rend de telles modifications si facile. N&#8217;ayez pas peur, essayez-le vous verrez..</p>
+<p>pywws is a collection of Python scripts to read, store and process data from popular USB wireless weather stations such as Elecsa AstroTouch 6975, Watson W-8681, WH-1080PC, WH1080, WH1081, WH3080 etc. I assume any model that is supplied with the EasyWeather Windows software is compatible, but cannot guarantee this.</p>
+<p>The software has been developed to run in a low power, low memory environment such as a router. It can be used to create graphs and web pages showing recent weather readings, typically updated every hour. It can also send data to services such as <a class="reference external" href="http://www.wunderground.com/">Weather Underground</a> and post messages to <a class="reference external" href="https://twitter.com/">Twitter</a>.</p>
+<p>I have written this software to meet my needs, but have tried to make it adaptable to other people&#8217;s requirements. You may want to edit some or all of the modules, or write some new ones, to get it to do exactly what you want. One of the reasons for using Python is that it makes such alterations so easy. Don&#8217;t be afraid, just jump in and have a go.</p>
 </div>
 <div class="section" id="requirements">
-<h2>Exigences<a class="headerlink" href="#requirements" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Les logiciels que vous aurez besoin pour exécuter pywws dépend de ce que vous comptez en faire. En particulier, le choix de bibliothèque USB, en fonction de ce qui est disponible sur les différents systèmes d&#8217;exploitation.</p>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Lien permanent vers ce titre">¶</a></h2>
+<p>The software you&#8217;ll need to run pywws depends on what you plan to do with it. In particular, there is a choice of USB library, to suit what&#8217;s available on different operating systems.</p>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference external" href="http://python.org/">Python</a> version 2.5 ou ultérieure (note: Le support de Python v3 est en cours de développement - certaines choses peuvent ne pas fonctionner correctement)</li>
-<li>Librarie USB - option 1 (préférable pour les petits systèmes, comme les routeurs):<ul>
+<li><a class="reference external" href="http://python.org/">Python</a> version 2.5 or higher (note: Python 3 support is under development - some things may not work properly)</li>
+<li>USB library option 1 (best for small systems such as routers):<ul>
 <li><a class="reference external" href="http://sourceforge.net/apps/trac/pyusb/">PyUSB</a> version 0.4.x</li>
 <li><a class="reference external" href="http://www.libusb.org/">libusb</a> version 0.1.12</li>
 </ul>
 </li>
-<li>Librairie USB - option 2<ul>
+<li>USB library option 2:<ul>
 <li><a class="reference external" href="http://sourceforge.net/apps/trac/pyusb/">PyUSB</a> version 1.0.x</li>
-<li><a class="reference external" href="http://www.libusb.org/">libusb</a> version 0.1 ou version 1.0</li>
+<li><a class="reference external" href="http://www.libusb.org/">libusb</a> version 0.1 or version 1.0</li>
 </ul>
 </li>
-<li>Librarie USB - option 3 (préférable pour les Mac):<ul>
+<li>USB library option 3 (best for MacOS):<ul>
 <li><a class="reference external" href="https://github.com/signal11/hidapi">hidapi</a></li>
 <li><a class="reference external" href="https://github.com/gbishop/cython-hidapi">cython-hidapi</a></li>
 <li><a class="reference external" href="http://cython.org/">cython</a></li>
 </ul>
 </li>
-<li>Pour le tracé des graphes<ul>
-<li><a class="reference external" href="http://www.gnuplot.info/">gnuplot</a> v4.2 ou ultérieur</li>
+<li>For graph drawing:<ul>
+<li><a class="reference external" href="http://www.gnuplot.info/">gnuplot</a> v4.2 or higher</li>
 </ul>
 </li>
-<li>Pour téléversement sécurisé sur votre site web (sftp)<ul>
+<li>For secure website uploading (sftp)<ul>
 <li><a class="reference external" href="http://www.lag.net/paramiko/">paramiko</a></li>
 <li><a class="reference external" href="http://www.dlitz.net/software/pycrypto/">pycrypto</a></li>
 </ul>
 </li>
-<li>Pour les mises à jour Twitter<ul>
+<li>For Twitter updates:<ul>
 <li><a class="reference external" href="http://code.google.com/p/tweepy/">tweepy</a></li>
 <li><a class="reference external" href="http://pypi.python.org/pypi/simplejson">simplejson</a></li>
 </ul>
 </li>
-<li>Pour créer de nouvelles traductions<ul>
+<li>To create new language translations:<ul>
 <li><a class="reference external" href="http://www.gnu.org/s/gettext/">gettext</a></li>
 </ul>
 </li>
-<li>Pour &#8216;compiler&#8217; la documentation<ul>
+<li>To &#8216;compile&#8217; the documentation:<ul>
 <li><a class="reference external" href="http://sphinx-doc.org/">sphinx</a></li>
 </ul>
 </li>
@@ -121,15 +121,15 @@
 </div></blockquote>
 </div>
 <div class="section" id="getting-a-copy-of-pywws">
-<h2>Obtenir une copie de pywws<a class="headerlink" href="#getting-a-copy-of-pywws" title="Lien permanent vers ce titre">¶</a></h2>
-<p>La façon la plus simple d&#8217;obtenir pywws est de télécharger le fichier zip ou tar.gz depuis <a class="reference external" href="http://pypi.python.org/pypi/pywws/">l&#8217;Indes des paquets Python (PyPI)</a> et ensuite extraire les fichiers dans un répertoire distinct sur votre ordinateur. Ces fichiers &#8216;archives&#8217; contiennent la toute dernière version du logiciel - une nouvelle version sort tous les quelques mois.</p>
-<p>Vous pouvez aussi utiliser <tt class="docutils literal"><span class="pre">pip</span></tt> pour installer pywws directement de PyPI:</p>
+<h2>Getting a copy of pywws<a class="headerlink" href="#getting-a-copy-of-pywws" title="Lien permanent vers ce titre">¶</a></h2>
+<p>The simplest way to obtain pywws is to download a zip or tar.gz file from the <a class="reference external" href="http://pypi.python.org/pypi/pywws/">Python Package Index (PyPI)</a> and then extract the files into a convenient directory on your computer. These files contain a snapshot release of the software - a new one is issued every few months.</p>
+<p>You could also use <tt class="docutils literal"><span class="pre">pip</span></tt> to install pywws directly from PyPI:</p>
 <div class="highlight-python"><pre>sudo pip install pywws</pre>
 </div>
-<p>Si vous souhaitez être au fait des derniers développements de pywws, vous pouvez utiliser <tt class="docutils literal"><span class="pre">git</span></tt> pour cloner le répertoire pywws:</p>
+<p>If you&#8217;d like to keep up to date with latest developments of pywws, you should use <tt class="docutils literal"><span class="pre">git</span></tt> to clone the pywws repository:</p>
 <div class="highlight-python"><pre>git clone https://github.com/jim-easterbrook/pywws.git</pre>
 </div>
-<p>Par la suite, vous devrez employer <tt class="docutils literal"><span class="pre">make</span></tt> pour compiler la documentation et les fichiers de langue (qui exigeront les logiciels <tt class="docutils literal"><span class="pre">gettext</span></tt> et <tt class="docutils literal"><span class="pre">sphinx</span></tt>):</p>
+<p>After doing so you&#8217;ll need to use <tt class="docutils literal"><span class="pre">make</span></tt> to compile the documentation and language localisation files (which will require the <tt class="docutils literal"><span class="pre">gettext</span></tt> and <tt class="docutils literal"><span class="pre">sphinx</span></tt> dependencies):</p>
 <div class="highlight-python"><pre>cd pywws
 make</pre>
 </div>
@@ -141,21 +141,21 @@ make</pre>
 </div>
 <div class="section" id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Lien permanent vers ce titre">¶</a></h2>
-<p>La documentation est inclue avec le téléchargement de pywws, et est également disponible <a class="reference external" href="http://jim-easterbrook.github.com/pywws/">en ligne</a>. Un bon point de départ est le <a class="reference external" href="guides/getstarted.html">Guide de démarrage</a> qui décrit plus en détail comment installer pywws.</p>
+<p>Documentation is included with pywws downloads, and is also available <a class="reference external" href="http://jim-easterbrook.github.com/pywws/doc/html/">online</a>. A good starting place is the <a class="reference external" href="guides/getstarted.html">how to get started guide</a> which describes in more detail how to install pywws.</p>
 <p>If you have questions not answered in the documentation, please join the <a class="reference external" href="http://groups.google.com/group/pywws">pywws Google mailing list / discussion group</a> and ask there. Note that your first message to the group will not appear immediately &#8211; new posters have to be approved by a moderator, to prevent spam messages.</p>
 <div class="section" id="contents">
-<h3>Contentu<a class="headerlink" href="#contents" title="Lien permanent vers ce titre">¶</a></h3>
+<h3>Contents<a class="headerlink" href="#contents" title="Lien permanent vers ce titre">¶</a></h3>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="essentials/LICENCE.html">Licence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="essentials/CHANGELOG.html">Change log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/index.html">User guides</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="guides/getstarted.html">Comment démarrer avec pywws</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guides/hourlylogging.html">Comment configurer la journalisation horaire avec pywws</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guides/livelogging.html">Comment configurer le mode &#8216;live&#8217; avec pywws</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guides/twitter.html">Comment configurer pywws pour poster des messages sur Twitter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guides/language.html">Comment utiliser pywws dans une autre langue</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guides/weather_ini.html">weather.ini - format du fichier de configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/getstarted.html">How to get started with pywws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/hourlylogging.html">How to set up &#8216;hourly&#8217; logging with pywws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/livelogging.html">How to set up &#8216;live&#8217; logging with pywws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/twitter.html">How to configure pywws to post messages to Twitter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/language.html">How to use pywws in another language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/weather_ini.html">weather.ini - configuration file format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="guides/humidex.html">Humidity Index (Humidex)</a></li>
 </ul>
 </li>
@@ -197,7 +197,7 @@ make</pre>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
-<h3>Indexes et tables<a class="headerlink" href="#indices-and-tables" title="Lien permanent vers ce titre">¶</a></h3>
+<h3>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Lien permanent vers ce titre">¶</a></h3>
 <ul class="simple">
 <li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
 <li><a class="reference internal" href="py-modindex.html"><em>Index du module</em></a></li>
@@ -206,20 +206,20 @@ make</pre>
 </div>
 </div>
 <div class="section" id="credits">
-<h2>Crédits<a class="headerlink" href="#credits" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Je n&#8217;aurais pas été en mesure d&#8217;obtenir d&#8217;informations de la station météorologique sans accès aux sources du programme &#8220;wwsr&#8221; de Michael Pendec . Je suis également redevable à Dave Wells pour le décodage du <a class="reference external" href="http://www.jim-easterbrook.me.uk/weather/mm/">&#8220;bloc fixe&#8221; de données de la station météorologique</a>.</p>
-<p>En dernier lieu, un grand vous remercie à tous les utilisateurs de pywws qui ont aidé avec leur questions et suggestions, et particulièrement à ceux qui ont traduit pywws et sa documentation en d&#8217;autres langues.</p>
+<h2>Credits<a class="headerlink" href="#credits" title="Lien permanent vers ce titre">¶</a></h2>
+<p>I would not have been able to get any information from the weather station without access to the source of Michael Pendec&#8217;s &#8220;wwsr&#8221; program. I am also indebted to Dave Wells for decoding the <a class="reference external" href="http://www.jim-easterbrook.me.uk/weather/mm/">weather station&#8217;s &#8220;fixed block&#8221; data</a>.</p>
+<p>Last of all, a big thank you to all the pywws users who have helped with questions and suggestions, and especially to those who have translated pywws and its documentation into other languages.</p>
 </div>
 <div class="section" id="legalese">
-<h2>Termes<a class="headerlink" href="#legalese" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Legalese<a class="headerlink" href="#legalese" title="Lien permanent vers ce titre">¶</a></h2>
 <div class="line-block">
-<div class="line">pywws - Logiciel Python pour stations météo USB sans-fil.</div>
+<div class="line">pywws - Python software for USB Wireless WeatherStations.</div>
 <div class="line"><a class="reference external" href="http://jim-easterbrook.github.com/pywws/">http://jim-easterbrook.github.com/pywws/</a></div>
 <div class="line">Copyright (C) 2008-13 Jim Easterbrook <a class="reference external" href="mailto:jim&#37;&#52;&#48;jim-easterbrook&#46;me&#46;uk">jim<span>&#64;</span>jim-easterbrook<span>&#46;</span>me<span>&#46;</span>uk</a></div>
 </div>
-<p>Ce programme est un logiciel libre, vous pouvez le redistribuer et/ou le modifier selon les termes de la Licence Publique Générale GNU telle que publiée par la Free Software Foundation, soit la version 2 de la Licence, ou (à votre choix) toute version ultérieure.</p>
-<p>Ce programme est distribué dans l&#8217;espoir qu&#8217;il sera utile, mais SANS AUCUNE GARANTIE, sans même la garantie implicite de COMMERCIALISATION ou D&#8217;ADAPTATION A UN USAGE PARTICULIER. Voir la licence GNU General Public pour plus de détails.</p>
-<p>Vous devriez avoir reçu une copie de la licence <a class="reference external" href="essentials/LICENCE.html">GNU General Public License</a> avec ce programme, sinon, écrivez à Free Software Foundation, Inc, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA</p>
+<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p>You should have received a copy of the <a class="reference external" href="essentials/LICENCE.html">GNU General Public License</a> along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA</p>
 </div>
 </div>
 
@@ -236,27 +236,27 @@ make</pre>
   <ul>
 <li><a class="reference internal" href="#">pywws</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
-<li><a class="reference internal" href="#requirements">Exigences</a></li>
-<li><a class="reference internal" href="#getting-a-copy-of-pywws">Obtenir une copie de pywws</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#getting-a-copy-of-pywws">Getting a copy of pywws</a><ul>
 <li><a class="reference internal" href="#upgrading-pywws">Upgrading pywws</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#documentation">Documentation</a><ul>
-<li><a class="reference internal" href="#contents">Contentu</a><ul>
+<li><a class="reference internal" href="#contents">Contents</a><ul>
 </ul>
 </li>
-<li><a class="reference internal" href="#indices-and-tables">Indexes et tables</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#credits">Crédits</a></li>
-<li><a class="reference internal" href="#legalese">Termes</a></li>
+<li><a class="reference internal" href="#credits">Credits</a></li>
+<li><a class="reference internal" href="#legalese">Legalese</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Sujet suivant</h4>
   <p class="topless"><a href="essentials/LICENCE.html"
-                        title="Chapitre suivant">Licence Publique Générale GNU</a></p>
+                        title="Chapitre suivant">GNU General Public License</a></p>
 <div id="searchbox" style="display: none">
   <h3>Recherche rapide</h3>
     <form class="search" action="search.html" method="get">
@@ -284,9 +284,9 @@ make</pre>
           <a href="py-modindex.html" title="Index des modules Python"
              >modules</a> |</li>
         <li class="right" >
-          <a href="essentials/LICENCE.html" title="Licence Publique Générale GNU"
+          <a href="essentials/LICENCE.html" title="GNU General Public License"
              >suivant</a> |</li>
-        <li><a href="#">pywws 13.01_ca7ee82 documentation</a> &raquo;</li> 
+        <li><a href="#">pywws 13.01_4a02078 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
