@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>How to use pywws in another language &mdash; pywws 13.01_4a02078 documentation</title>
+    <title>How to use pywws in another language &mdash; pywws 13.01_74acf6e documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.01_4a02078',
+        VERSION:     '13.01_74acf6e',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.01_4a02078 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.01_74acf6e documentation" href="../index.html" />
     <link rel="up" title="User guides" href="index.html" />
     <link rel="next" title="weather.ini - configuration file format" href="weather_ini.html" />
     <link rel="prev" title="How to configure pywws to post messages to Twitter" href="twitter.html" /> 
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="twitter.html" title="How to configure pywws to post messages to Twitter"
              accesskey="P">précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.01_4a02078 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.01_74acf6e documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">User guides</a> &raquo;</li> 
       </ul>
     </div>  
@@ -139,20 +139,17 @@ making a new language file for pywws. Please, please, please send a copy
 of your language file (for example pywws.po) to <a class="reference external" href="mailto:jim&#37;&#52;&#48;jim-easterbrook&#46;me&#46;uk">jim<span>&#64;</span>jim-easterbrook<span>&#46;</span>me<span>&#46;</span>uk</a>.</p>
 </li>
 <li><p class="first">Update the language file.</p>
-<p>As pywws is extended, new strings may be added which will require your
-translation file to be extended as well. This is fairly easy to do. First
-you need to remove the language master template file, then run the &#8216;make lang_src&#8217; command again:</p>
-<div class="highlight-python"><pre>rm translations/pywws.pot
+<p>As pywws is extended, new strings may be added which will require your translation file to be extended as well. This is fairly easy to do. First you need to remove the language master template files, then run the &#8216;make lang_src&#8217; command again:</p>
+<div class="highlight-python"><pre>rm translations/*.pot
 make lang_src LANG=fr</pre>
 </div>
-<p>This should add the
-new strings to your language file, without changing the strings you&#8217;ve
-already translated.</p>
+<p>This should add the new strings to your language file, without changing the strings you&#8217;ve already translated.</p>
+<p>If the English language source has changed since your last translation, some strings may be marked by gettext as <tt class="docutils literal"><span class="pre">#,</span> <span class="pre">fuzzy</span></tt>. You should check that your translation is still correct for these strings &#8211; the change may be trivial (e.g. a spelling correction) but it could be quite significant. When you&#8217;ve checked (and corrected if necessary) the translation, remove the <tt class="docutils literal"><span class="pre">#,</span> <span class="pre">fuzzy</span></tt> line.</p>
 </li>
 <li><p class="first">Translating the documentation.</p>
 <p>The system used to translate the strings used in pywws can also be used to translate the documentation. The files &#8216;index.po&#8217;, &#8216;essential.po&#8217;, &#8216;guides.po&#8217; and &#8216;api.po&#8217; contain text strings (often whole paragraphs) extracted from the different parts of the documentation.</p>
 <p>These files can be edited in a similar way to &#8216;pywws.po&#8217;. Fill in each &#8216;msgstr&#8217; with a translation of the &#8216;msgid&#8217; above it. Note that some strings (such as URLs) need not be translated. In these cases, leave the &#8216;msgstr&#8217; blank.</p>
-<p>Translating all of the pywws documentation is a lot of work. However, when the documentation is &#8216;compiled&#8217; any untranslated strings revert to their English original. This means that a partial translation could still be useful - I suggest starting with the documentation front page, &#8216;index.po&#8217;.</p>
+<p>Translating all of the pywws documentation is a lot of work. However, when the documentation is &#8216;compiled&#8217; any untranslated strings revert to their English original. This means that a partial translation could still be useful &#8211; I suggest starting with the documentation front page, &#8216;index.po&#8217;.</p>
 <p>Comments or questions? Please subscribe to the pywws mailing list
 <a class="reference external" href="http://groups.google.com/group/pywws">http://groups.google.com/group/pywws</a> and let us know.</p>
 </li>
@@ -206,7 +203,7 @@ already translated.</p>
         <li class="right" >
           <a href="twitter.html" title="How to configure pywws to post messages to Twitter"
              >précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.01_4a02078 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.01_74acf6e documentation</a> &raquo;</li>
           <li><a href="index.html" >User guides</a> &raquo;</li> 
       </ul>
     </div>
