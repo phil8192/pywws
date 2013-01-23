@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
     <link rel="top" title="pywws 13.01_74acf6e documentation" href="../index.html" />
-    <link rel="up" title="Python programs and modules" href="index.html" />
+    <link rel="up" title="Programmes et des modules Python" href="index.html" />
     <link rel="next" title="EWtoPy" href="EWtoPy.html" />
     <link rel="prev" title="RunModule" href="RunModule.html" /> 
   </head>
@@ -49,7 +49,7 @@
           <a href="RunModule.html" title="RunModule"
              accesskey="P">précédent</a> |</li>
         <li><a href="../index.html">pywws 13.01_74acf6e documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Python programs and modules</a> &raquo;</li> 
+          <li><a href="index.html" accesskey="U">Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -60,33 +60,18 @@
             
   <div class="section" id="module-USBQualityTest">
 <span id="usbqualitytest"></span><h1>USBQualityTest<a class="headerlink" href="#module-USBQualityTest" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Test quality of USB connection to weather station</p>
+<p>Teste la qualité de la connexion USB avec votre station météo</p>
 <div class="highlight-python"><pre>usage: python USBQualityTest.py [options]
 options are:
  -h | --help           display this help
  -v | --verbose        increase amount of reassuring messages
                        (repeat for even more messages e.g. -vvv)</pre>
 </div>
-<p>The USB link to my weather station is not 100% reliable. The data
-read from the station by the computer is occasionally corrupted,
-perhaps by interference. I&#8217;ve been trying to solve this by putting
-ferrite beads around the USB cable and relocating possible
-interference sources such as external hard drives. All without any
-success so far.</p>
-<p>This program tests the USB connection for errors by continuously
-reading the entire weather station memory (except for those parts that
-may be changing) looking for errors. Each 32-byte block is read twice,
-and if the two readings differ a warning message is displayed. Also
-displayed are the number of blocks read, and the number of errors
-found.</p>
-<p>I typically get one or two errors per hour, so the test needs to be
-run for several hours to produce a useful measurement. Note that other
-software that accesses the weather station (such as <a class="reference internal" href="Hourly.html"><em>Hourly</em></a> or
-<a class="reference internal" href="LiveLog.html"><em>LiveLog</em></a>) must not be run while the test is in progress.</p>
-<p>If you run this test and get no errors at all, please let me know.
-There is something good about your setup and I&#8217;d love to know what it
-is!</p>
-<p class="rubric">Functions</p>
+<p>La liaison USB à ma station n&#8217;est pas fiable à 100%. Les données lues à partir de la station par l&#8217;ordinateur sont occasionnellement corrompues, peut-être par une interférence. J&#8217;ai essayé de résoudre ce problème en mettant une perle de ferrite autour du câble USB et le déplaçant des sources d&#8217;interférences possibles, tels que les disques durs externes. Le tout sans succès jusqu&#8217;à présent.</p>
+<p>Ce programme teste la connexion USB en lisant de manière continue toute la mémoire de la station météo (sauf les parties qui peuvent être changeantes) à la recherche d&#8217;erreurs. Chaque bloc de 32 octets est lu deux fois, et si les deux lectures diffèrent, un message d&#8217;avertissement s&#8217;affiche. Sont également affichés le nombre de blocs lus, et le nombre d&#8217;erreurs rencontrées.</p>
+<p>En général, j&#8217;obtiens une ou deux erreurs par heure, donc le test doit être exécuté pendant plusieurs heures pour produire une mesure utile. Notez que les autres programmes qui accèdent à la station météo (tels que <a class="reference internal" href="Hourly.html"><em>Hourly</em></a> ou <a class="reference internal" href="LiveLog.html"><em>LiveLog</em></a>) ne doivent pas être exécutés alors que le test est en cours.</p>
+<p>Si vous exécutez ce test et obtenez absolument aucune erreur, s&#8217;il vous plaît faites le moi savoir. Il y a quelque chose de spécial dans votre configuration et j&#8217;aimerais bien savoir ce que c&#8217;est</p>
+<p class="rubric">Fonctions</p>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
@@ -153,7 +138,7 @@ is!</p>
           <a href="RunModule.html" title="RunModule"
              >précédent</a> |</li>
         <li><a href="../index.html">pywws 13.01_74acf6e documentation</a> &raquo;</li>
-          <li><a href="index.html" >Python programs and modules</a> &raquo;</li> 
+          <li><a href="index.html" >Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
     <link rel="top" title="pywws 13.01_74acf6e documentation" href="../index.html" />
-    <link rel="up" title="Python programs and modules" href="index.html" />
+    <link rel="up" title="Programmes et des modules Python" href="index.html" />
     <link rel="next" title="pywws.Process" href="pywws.Process.html" />
     <link rel="prev" title="pywws.Tasks" href="pywws.Tasks.html" /> 
   </head>
@@ -49,7 +49,7 @@
           <a href="pywws.Tasks.html" title="pywws.Tasks"
              accesskey="P">précédent</a> |</li>
         <li><a href="../index.html">pywws 13.01_74acf6e documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Python programs and modules</a> &raquo;</li> 
+          <li><a href="index.html" accesskey="U">Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -60,7 +60,7 @@
             
   <div class="section" id="module-pywws.LogData">
 <span id="pywws-logdata"></span><h1>pywws.LogData<a class="headerlink" href="#module-pywws.LogData" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Save weather station history to file</p>
+<p>Enregistre l&#8217;historique de la station météo dans un fichier</p>
 <div class="highlight-python"><pre>usage: python RunModule.py LogData [options] data_dir
 options are:
  -h   | --help     display this help
@@ -69,26 +69,10 @@ options are:
  -v   | --verbose  increase number of informative messages
 data_dir is the root directory of the weather data</pre>
 </div>
-<p>This program / module gets data from the weather station&#8217;s memory and
-stores it to file. Each time it is run it fetches all data that is
-newer than the last stored data, so it only needs to be run every hour
-or so. As the weather station typically stores two weeks&#8217; readings
-(depending on the logging interval), LogData.py could be run quite
-infrequently if you don&#8217;t need up-to-date data.</p>
-<p>There is no date or time information in the raw weather station data,
-so LogData.py creates a time stamp for each reading. It uses the
-computer&#8217;s clock, rather than the weather station clock which can not
-be read accurately by the computer. A networked computer should have
-its clock set accurately by <a class="reference external" href="http://en.wikipedia.org/wiki/Network_Time_Protocol">ntp</a>.</p>
-<p>Synchronisation with the weather station is achieved by waiting for a
-change in the current data. There are two levels of synchronisation,
-set by the config file or a command line option. Level 0 is quicker,
-but is only accurate to around twelve seconds. Level 1 waits until the
-weather station stores a new logged record, and gets time stamps
-accurate to a couple of seconds. Note that this could take a long
-time, if the logging interval is greater than the recommended five
-minutes.</p>
-<p class="rubric">Functions</p>
+<p>Ce programme / module reçoit les données de la mémoire de la station météo et les stockent dans un fichier. Chaque fois qu&#8217;il est lancé, il récupère toutes les données qui sont plus récentes que les dernières données enregistrées, de sorte qu&#8217;il ne doit être exécuté que toutes les heures. Comme la station météorologique stocke généralement deux semaines de lectures (en fonction de l&#8217;intervalle d&#8217;enregistrement), LogData.py pourrait être exécuté très rarement si vous n&#8217;avez pas besoin de données fréquemment mise à jour.</p>
+<p>Il n&#8217;y a aucune information sur la date ou l&#8217;heure dans les données brutes de la station météo, alors LogData.py crée un horodatage pour chaque lecture. Il utilise l&#8217;horloge de l&#8217;ordinateur, plutôt que l&#8217;horloge de la station météo qui peut ne pas être lue correctement par l&#8217;ordinateur. L&#8217;horloge d&#8217;un Pc en réseau devrait être réglée avec précision par <a class="reference external" href="http://fr.wikipedia.org/wiki/Network_Time_Protocol">ntp</a>.</p>
+<p>La synchronisation avec la station météo est obtenue par l&#8217;attente d&#8217;un changement dans les données en cours. Il y a deux niveaux de synchronisation, fixés par le fichier de configuration ou une option de ligne de commande. Le niveau 0 est plus rapide, mais n&#8217;est exacte qu&#8217;à environ douze secondes. Le niveau 1 attend jusqu&#8217;à ce que la station météo enregistre un nouvel enregistrement, et obtient un horodatage précis sur quelque secondes. Notez que cela peut prendre un certain temps, si l&#8217;intervalle d&#8217;enregistrement est supérieur aux cinq minutes recommandées.</p>
+<p class="rubric">Fonctions</p>
 <table border="1" class="longtable docutils">
 <colgroup>
 <col width="10%" />
@@ -179,7 +163,7 @@ minutes.</p>
           <a href="pywws.Tasks.html" title="pywws.Tasks"
              >précédent</a> |</li>
         <li><a href="../index.html">pywws 13.01_74acf6e documentation</a> &raquo;</li>
-          <li><a href="index.html" >Python programs and modules</a> &raquo;</li> 
+          <li><a href="index.html" >Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
