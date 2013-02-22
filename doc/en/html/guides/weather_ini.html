@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>weather.ini - configuration file format &mdash; pywws 13.01_74acf6e documentation</title>
+    <title>weather.ini - configuration file format &mdash; pywws 13.02_1d38217 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.01_74acf6e',
+        VERSION:     '13.02_1d38217',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.01_74acf6e documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.02_1d38217 documentation" href="../index.html" />
     <link rel="up" title="User guides" href="index.html" />
     <link rel="next" title="Humidity Index (Humidex)" href="humidex.html" />
     <link rel="prev" title="How to use pywws in another language" href="language.html" /> 
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="language.html" title="How to use pywws in another language"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.01_74acf6e documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.02_1d38217 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">User guides</a> &raquo;</li> 
       </ul>
     </div>  
@@ -87,14 +87,16 @@ pywws will initialise the entries to sensible values.</p>
 <div class="section" id="config-miscellaneous-system-configuration">
 <h2>config: miscellaneous system configuration<a class="headerlink" href="#config-miscellaneous-system-configuration" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><pre>[config]
+ws type = 1080
 day end hour = 21
 gnuplot encoding = iso_8859_1
 language = en
 logdata sync = 1</pre>
 </div>
+<p><tt class="docutils literal"><span class="pre">ws</span> <span class="pre">type</span></tt> is the &#8220;class&#8221; of weather station. It should be set to <tt class="docutils literal"><span class="pre">1080</span></tt> for most weather stations, or <tt class="docutils literal"><span class="pre">3080</span></tt> if your station console displays solar illuminance.</p>
 <p><tt class="docutils literal"><span class="pre">day</span> <span class="pre">end</span> <span class="pre">hour</span></tt> is the end of the &#8220;<a class="reference external" href="http://en.wikipedia.org/wiki/Meteorological_day">meteorological day</a>&#8221;, in local time without daylight savings time. Typical values are 21, 9, or 24.</p>
 <p><tt class="docutils literal"><span class="pre">gnuplot</span> <span class="pre">encoding</span></tt> is the text encoding used when plotting graphs. The default value of <tt class="docutils literal"><span class="pre">iso_8859_1</span></tt> allows the degree symbol, which is useful in a weather application! Other values might be needed if your language includes accented characters. The possible values depend on your gnuplot installation so some experimentation may be needed.</p>
-<p><tt class="docutils literal"><span class="pre">language</span></tt> is used to localise pywws. It&#8217;s optional, as pywws usually uses the computer&#8217;s default language as set by the LANG environment variable. The available languages are those in the <tt class="docutils literal"><span class="pre">locale</span></tt> subdirectory of your pywws installation. If you set any other language, pywws will fall back to using English.</p>
+<p><tt class="docutils literal"><span class="pre">language</span></tt> is used to localise pywws. It&#8217;s optional, as pywws usually uses the computer&#8217;s default language as set by the LANG environment variable. The available languages are those in the <tt class="docutils literal"><span class="pre">translations</span></tt> subdirectory of your pywws installation. If you set any other language, pywws will fall back to using English.</p>
 <p><tt class="docutils literal"><span class="pre">logdata</span> <span class="pre">sync</span></tt> sets the quality of synchronisation used by <a class="reference internal" href="../api/pywws.LogData.html"><em>pywws.LogData</em></a>. Set it to 0 for fast &amp; inaccurate or 1 for slower but precise.</p>
 </div>
 <div class="section" id="paths-directories-in-which-templates-etc-are-stored">
@@ -110,8 +112,10 @@ work = /tmp/weather</pre>
 <div class="section" id="fixed-values-copied-from-the-weather-station-s-fixed-block">
 <h2>fixed: values copied from the weather station&#8217;s &#8220;fixed block&#8221;<a class="headerlink" href="#fixed-values-copied-from-the-weather-station-s-fixed-block" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><pre>[fixed]
+station clock = 1360322930.02
+sensor clock = 1360322743.69
 pressure offset = 7.4
-ws type = 1080</pre>
+fixed block = {...}</pre>
 </div>
 <p>This section is written by pywws and should not be edited.</p>
 </div>
@@ -293,7 +297,7 @@ last update = 2010-09-27 19:45:24</pre>
         <li class="right" >
           <a href="language.html" title="How to use pywws in another language"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.01_74acf6e documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.02_1d38217 documentation</a> &raquo;</li>
           <li><a href="index.html" >User guides</a> &raquo;</li> 
       </ul>
     </div>
