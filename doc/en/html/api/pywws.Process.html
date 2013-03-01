@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Process &mdash; pywws 13.02_1d38217 documentation</title>
+    <title>pywws.Process &mdash; pywws 13.03_36dd220 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.02_1d38217',
+        VERSION:     '13.03_36dd220',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.02_1d38217 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.03_36dd220 documentation" href="../index.html" />
     <link rel="up" title="Python programs and modules" href="index.html" />
     <link rel="next" title="pywws.calib" href="pywws.calib.html" />
     <link rel="prev" title="pywws.LogData" href="pywws.LogData.html" /> 
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="pywws.LogData.html" title="pywws.LogData"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.02_1d38217 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.03_36dd220 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>  
@@ -113,7 +113,7 @@ a more useful total in the last hour, day or month.</p>
 <tr class="row-even"><td><a class="reference internal" href="#pywws.Process.generate_daily" title="pywws.Process.generate_daily"><tt class="xref py py-obj docutils literal"><span class="pre">generate_daily</span></tt></a>(logger,&nbsp;day_end_hour,&nbsp;...)</td>
 <td>Generate daily summaries from calibrated and hourly data.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.generate_monthly" title="pywws.Process.generate_monthly"><tt class="xref py py-obj docutils literal"><span class="pre">generate_monthly</span></tt></a>(logger,&nbsp;day_end_hour,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.generate_monthly" title="pywws.Process.generate_monthly"><tt class="xref py py-obj docutils literal"><span class="pre">generate_monthly</span></tt></a>(logger,&nbsp;rain_day_threshold,&nbsp;...)</td>
 <td>Generate monthly summaries from daily data.</td>
 </tr>
 </tbody>
@@ -140,7 +140,7 @@ a more useful total in the last hour, day or month.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.DayAcc" title="pywws.Process.DayAcc"><tt class="xref py py-obj docutils literal"><span class="pre">DayAcc</span></tt></a>(daytime)</td>
 <td>&#8216;Accumulate&#8217; weather data to produce daily summary.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.Process.MonthAcc" title="pywws.Process.MonthAcc"><tt class="xref py py-obj docutils literal"><span class="pre">MonthAcc</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.Process.MonthAcc" title="pywws.Process.MonthAcc"><tt class="xref py py-obj docutils literal"><span class="pre">MonthAcc</span></tt></a>(rain_day_threshold)</td>
 <td>&#8216;Accumulate&#8217; daily weather data to produce monthly summary.</td>
 </tr>
 </tbody>
@@ -250,7 +250,7 @@ local time (1000-2200 and 2200-1000 during DST), regardless of the
 
 <dl class="class">
 <dt id="pywws.Process.MonthAcc">
-<em class="property">class </em><tt class="descclassname">pywws.Process.</tt><tt class="descname">MonthAcc</tt><a class="reference internal" href="../_modules/pywws/Process.html#MonthAcc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Process.MonthAcc" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pywws.Process.</tt><tt class="descname">MonthAcc</tt><big>(</big><em>rain_day_threshold</em><big>)</big><a class="reference internal" href="../_modules/pywws/Process.html#MonthAcc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Process.MonthAcc" title="Permalink to this definition">¶</a></dt>
 <dd><p>&#8216;Accumulate&#8217; daily weather data to produce monthly summary.</p>
 <p>Compute daytime max &amp; nighttime min temperatures.</p>
 <dl class="method">
@@ -290,7 +290,7 @@ local time (1000-2200 and 2200-1000 during DST), regardless of the
 
 <dl class="function">
 <dt id="pywws.Process.generate_monthly">
-<tt class="descclassname">pywws.Process.</tt><tt class="descname">generate_monthly</tt><big>(</big><em>logger</em>, <em>day_end_hour</em>, <em>time_offset</em>, <em>daily_data</em>, <em>monthly_data</em>, <em>process_from</em><big>)</big><a class="reference internal" href="../_modules/pywws/Process.html#generate_monthly"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Process.generate_monthly" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">pywws.Process.</tt><tt class="descname">generate_monthly</tt><big>(</big><em>logger</em>, <em>rain_day_threshold</em>, <em>day_end_hour</em>, <em>time_offset</em>, <em>daily_data</em>, <em>monthly_data</em>, <em>process_from</em><big>)</big><a class="reference internal" href="../_modules/pywws/Process.html#generate_monthly"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Process.generate_monthly" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate monthly summaries from daily data.</p>
 </dd></dl>
 
@@ -358,7 +358,7 @@ weather station readings.</p>
         <li class="right" >
           <a href="pywws.LogData.html" title="pywws.LogData"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.02_1d38217 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.03_36dd220 documentation</a> &raquo;</li>
           <li><a href="index.html" >Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>
