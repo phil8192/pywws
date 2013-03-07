@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Localisation &mdash; pywws 13.03_36dd220 documentation</title>
+    <title>pywws.Localisation &mdash; pywws 13.03_396714d documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.03_36dd220',
+        VERSION:     '13.03_396714d',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.03_36dd220 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.03_396714d documentation" href="../index.html" />
     <link rel="up" title="Python programs and modules" href="index.html" />
     <link rel="next" title="pywws.calib" href="pywws.calib.html" />
     <link rel="prev" title="pywws.TimeZone" href="pywws.TimeZone.html" /> 
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="pywws.TimeZone.html" title="pywws.TimeZone"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.03_36dd220 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.03_396714d documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>  
@@ -89,9 +89,9 @@ locale, but translated strings can still be used.</p>
 can be run as a standalone program to test language codes. A good
 starting point might be your system&#8217;s <tt class="docutils literal"><span class="pre">LANG</span></tt> environment variable,
 for example:</p>
-<div class="highlight-python"><pre>jim@brains:~/Documents/weather/devel$ echo $LANG
+<div class="highlight-python"><pre>jim@brains:~/Documents/weather/pywws/code$ echo $LANG
 en_GB.UTF-8
-jim@brains:~/Documents/weather/devel$ python pywws/Localisation.py -t en_GB.UTF-8
+jim@brains:~/Documents/weather/pywws/code$ python -m pywws.Localisation -t en_GB.UTF-8
 Locale changed from (None, None) to ('en_GB', 'UTF8')
 Translation set OK
 Locale
@@ -101,10 +101,10 @@ Translations
   'NNW' =&gt; 'NNW'
   'rising very rapidly' =&gt; 'rising very rapidly'
   'Rain at times, very unsettled' =&gt; 'Rain at times, very unsettled'
-jim@brains:~/Documents/weather/devel$</pre>
+jim@brains:~/Documents/weather/pywws/code$</pre>
 </div>
 <p>In most cases no more than a two-letter code is required:</p>
-<div class="highlight-python"><pre>jim@brains:~/Documents/weather/devel$ python pywws/Localisation.py -t fr
+<div class="highlight-python"><pre>jim@brains:~/Documents/weather/pywws/code$ python -m pywws.Localisation -t fr
 Locale changed from (None, None) to ('fr_FR', 'UTF8')
 Translation set OK
 Locale
@@ -114,10 +114,10 @@ Translations
   'NNW' =&gt; 'NNO'
   'rising very rapidly' =&gt; 'en hausse très rapide'
   'Rain at times, very unsettled' =&gt; 'Quelques précipitations, très perturbé'
-jim@brains:~/Documents/weather/devel$</pre>
+jim@brains:~/Documents/weather/pywws/code$</pre>
 </div>
 <p>If you try an unsupported language, pywws falls back to English:</p>
-<div class="highlight-python"><pre>jim@brains:~/Documents/weather/devel$ python pywws/Localisation.py -t ja
+<div class="highlight-python"><pre>jim@brains:~/Documents/weather/pywws/code$ python -m pywws.Localisation -t ja
 Failed to set locale: ja
 No translation file found for: ja
 Locale
@@ -127,7 +127,7 @@ Translations
   'NNW' =&gt; 'NNW'
   'rising very rapidly' =&gt; 'rising very rapidly'
   'Rain at times, very unsettled' =&gt; 'Rain at times, very unsettled'
-jim@brains:~/Documents/weather/devel$</pre>
+jim@brains:~/Documents/weather/pywws/code$</pre>
 </div>
 <p>Once you&#8217;ve found a suitable language code that works, you can
 configure pywws to use it by editing your <tt class="docutils literal"><span class="pre">weather.ini</span></tt> file:</p>
@@ -288,7 +288,7 @@ calls <a class="reference internal" href="#pywws.Localisation.SetLocale" title="
         <li class="right" >
           <a href="pywws.TimeZone.html" title="pywws.TimeZone"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.03_36dd220 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.03_396714d documentation</a> &raquo;</li>
           <li><a href="index.html" >Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>
