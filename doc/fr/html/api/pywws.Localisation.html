@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Localisation &mdash; pywws 13.01_74acf6e documentation</title>
+    <title>pywws.Localisation &mdash; pywws 13.05_64abd19 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.01_74acf6e',
+        VERSION:     '13.05_64abd19',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.01_74acf6e documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.05_64abd19 documentation" href="../index.html" />
     <link rel="up" title="Programmes et des modules Python" href="index.html" />
     <link rel="next" title="pywws.calib" href="pywws.calib.html" />
     <link rel="prev" title="pywws.TimeZone" href="pywws.TimeZone.html" /> 
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="pywws.TimeZone.html" title="pywws.TimeZone"
              accesskey="P">précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.01_74acf6e documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.05_64abd19 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>  
@@ -61,7 +61,7 @@
   <div class="section" id="module-pywws.Localisation">
 <span id="pywws-localisation"></span><h1>pywws.Localisation<a class="headerlink" href="#module-pywws.Localisation" title="Lien permanent vers ce titre">¶</a></h1>
 <p>Localisation.py - fournit des traductions de phrases en langue locale</p>
-<div class="highlight-python"><pre>usage: python RunModule.py Localisation [options]
+<div class="highlight-python"><pre>usage: python -m pywws.Localisation [options]
 options are:
  -h       or  --help       display this help
  -t code  or  --test code  test use of a language code</pre>
@@ -75,9 +75,9 @@ options are:
 <h2>En utilisant une langue différente<a class="headerlink" href="#using-a-different-language" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Le langage utilisé par pywws est situé dans la section <tt class="docutils literal"><span class="pre">[config]</span></tt> du fichier <tt class="docutils literal"><span class="pre">weather.ini</span></tt>. Cela peut être un code de langue à deux lettres, comme <tt class="docutils literal"><span class="pre">fr</span></tt> (français), ou pouvez spécifier une variante nationale, telle que <tt class="docutils literal"><span class="pre">fr_CA</span></tt> (canadien-français). Il pourrait également s&#8217;agir d&#8217;un jeu de caractères, par exemple <tt class="docutils literal"><span class="pre">de_DE.UTF-8</span></tt>.</p>
 <p>Le choix de la langue dépend beaucoup du système, donc Localisation.py peut être exécuté comme un programme autonome pour tester les codes linguistiques. Un bon point de départ pourrait être, par exemple, votre variable d&#8217;environnement <tt class="docutils literal"><span class="pre">LANG</span></tt>:</p>
-<div class="highlight-python"><pre>jim@brains:~/Documents/weather/devel$ echo $LANG
+<div class="highlight-python"><pre>jim@brains:~/Documents/weather/pywws/code$ echo $LANG
 en_GB.UTF-8
-jim@brains:~/Documents/weather/devel$ python pywws/Localisation.py -t en_GB.UTF-8
+jim@brains:~/Documents/weather/pywws/code$ python -m pywws.Localisation -t en_GB.UTF-8
 Locale changed from (None, None) to ('en_GB', 'UTF8')
 Translation set OK
 Locale
@@ -87,10 +87,10 @@ Translations
   'NNW' =&gt; 'NNW'
   'rising very rapidly' =&gt; 'rising very rapidly'
   'Rain at times, very unsettled' =&gt; 'Rain at times, very unsettled'
-jim@brains:~/Documents/weather/devel$</pre>
+jim@brains:~/Documents/weather/pywws/code$</pre>
 </div>
 <p>Dans la plupart des cas, pas plus que d&#8217;un code à deux lettres n&#8217;est requis:</p>
-<div class="highlight-python"><pre>jim@brains:~/Documents/weather/devel$ python pywws/Localisation.py -t fr
+<div class="highlight-python"><pre>jim@brains:~/Documents/weather/pywws/code$ python -m pywws.Localisation -t fr
 Locale changed from (None, None) to ('fr_FR', 'UTF8')
 Translation set OK
 Locale
@@ -100,10 +100,10 @@ Translations
   'NNW' =&gt; 'NNO'
   'rising very rapidly' =&gt; 'en hausse très rapide'
   'Rain at times, very unsettled' =&gt; 'Quelques précipitations, très perturbé'
-jim@brains:~/Documents/weather/devel$</pre>
+jim@brains:~/Documents/weather/pywws/code$</pre>
 </div>
 <p>Si vous essayez une langue non prise en charge, pywws reprend l&#8217;anglais:</p>
-<div class="highlight-python"><pre>jim@brains:~/Documents/weather/devel$ python pywws/Localisation.py -t ja
+<div class="highlight-python"><pre>jim@brains:~/Documents/weather/pywws/code$ python -m pywws.Localisation -t ja
 Failed to set locale: ja
 No translation file found for: ja
 Locale
@@ -113,7 +113,7 @@ Translations
   'NNW' =&gt; 'NNW'
   'rising very rapidly' =&gt; 'rising very rapidly'
   'Rain at times, very unsettled' =&gt; 'Rain at times, very unsettled'
-jim@brains:~/Documents/weather/devel$</pre>
+jim@brains:~/Documents/weather/pywws/code$</pre>
 </div>
 <p>Une fois que vous avez trouvé un code de langue approprié qui fonctionne, vous pouvez demander à pywws de l&#8217;utiliser en éditant votre fichier <tt class="docutils literal"><span class="pre">weather.ini</span></tt>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">config</span><span class="p">]</span>
@@ -262,7 +262,7 @@ jim@brains:~/Documents/weather/devel$</pre>
         <li class="right" >
           <a href="pywws.TimeZone.html" title="pywws.TimeZone"
              >précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.01_74acf6e documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.05_64abd19 documentation</a> &raquo;</li>
           <li><a href="index.html" >Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>

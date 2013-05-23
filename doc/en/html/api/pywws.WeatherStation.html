@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.WeatherStation &mdash; pywws 13.04_c853b29 documentation</title>
+    <title>pywws.WeatherStation &mdash; pywws 13.05_64abd19 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.04_c853b29',
+        VERSION:     '13.05_64abd19',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.04_c853b29 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.05_64abd19 documentation" href="../index.html" />
     <link rel="up" title="Python programs and modules" href="index.html" />
     <link rel="next" title="pywws.device_ctypes_hidapi" href="pywws.device_ctypes_hidapi.html" />
     <link rel="prev" title="pywws.YoWindow" href="pywws.YoWindow.html" /> 
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="pywws.YoWindow.html" title="pywws.YoWindow"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.04_c853b29 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.05_64abd19 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>  
@@ -138,10 +138,10 @@ TestWeatherStation program.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.WeatherStation.CUSBDrive" title="pywws.WeatherStation.CUSBDrive"><tt class="xref py py-obj docutils literal"><span class="pre">CUSBDrive</span></tt></a>(library)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.WeatherStation.CUSBDrive" title="pywws.WeatherStation.CUSBDrive"><tt class="xref py py-obj docutils literal"><span class="pre">CUSBDrive</span></tt></a>()</td>
 <td>Low level interface to weather station via USB.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.WeatherStation.weather_station" title="pywws.WeatherStation.weather_station"><tt class="xref py py-obj docutils literal"><span class="pre">weather_station</span></tt></a>([ws_type,&nbsp;library,&nbsp;params])</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.WeatherStation.weather_station" title="pywws.WeatherStation.weather_station"><tt class="xref py py-obj docutils literal"><span class="pre">weather_station</span></tt></a>([ws_type,&nbsp;params])</td>
 <td>Class that represents the weather station to user program.</td>
 </tr>
 </tbody>
@@ -187,7 +187,7 @@ office.</p>
 
 <dl class="class">
 <dt id="pywws.WeatherStation.CUSBDrive">
-<em class="property">class </em><tt class="descclassname">pywws.WeatherStation.</tt><tt class="descname">CUSBDrive</tt><big>(</big><em>library</em><big>)</big><a class="reference internal" href="../_modules/pywws/WeatherStation.html#CUSBDrive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WeatherStation.CUSBDrive" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pywws.WeatherStation.</tt><tt class="descname">CUSBDrive</tt><a class="reference internal" href="../_modules/pywws/WeatherStation.html#CUSBDrive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WeatherStation.CUSBDrive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Low level interface to weather station via USB.</p>
 <p>Loosely modeled on a C++ class obtained from
 <a class="reference external" href="http://site.ambientweatherstore.com/easyweather/ws_1080_2080_protocol.zip">http://site.ambientweatherstore.com/easyweather/ws_1080_2080_protocol.zip</a>.
@@ -260,7 +260,7 @@ have come from the manufacturer.</p>
 
 <dl class="class">
 <dt id="pywws.WeatherStation.weather_station">
-<em class="property">class </em><tt class="descclassname">pywws.WeatherStation.</tt><tt class="descname">weather_station</tt><big>(</big><em>ws_type='1080'</em>, <em>library='auto'</em>, <em>params=None</em><big>)</big><a class="reference internal" href="../_modules/pywws/WeatherStation.html#weather_station"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WeatherStation.weather_station" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pywws.WeatherStation.</tt><tt class="descname">weather_station</tt><big>(</big><em>ws_type='1080'</em>, <em>params=None</em><big>)</big><a class="reference internal" href="../_modules/pywws/WeatherStation.html#weather_station"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WeatherStation.weather_station" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class that represents the weather station to user program.</p>
 <p>Connect to weather station and prepare to read data.</p>
 <dl class="attribute">
@@ -418,7 +418,7 @@ array of (ptr, value) pairs.</p>
         <li class="right" >
           <a href="pywws.YoWindow.html" title="pywws.YoWindow"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.04_c853b29 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.05_64abd19 documentation</a> &raquo;</li>
           <li><a href="index.html" >Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>
