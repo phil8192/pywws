@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.calib &mdash; pywws 13.05_64abd19 documentation</title>
+    <title>pywws.calib &mdash; pywws 13.05_r1011 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.05_64abd19',
+        VERSION:     '13.05_r1011',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.05_64abd19 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.05_r1011 documentation" href="../index.html" />
     <link rel="up" title="Python programs and modules" href="index.html" />
     <link rel="next" title="pywws.conversions" href="pywws.conversions.html" />
     <link rel="prev" title="pywws.Localisation" href="pywws.Localisation.html" /> 
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="pywws.Localisation.html" title="pywws.Localisation"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.05_64abd19 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>  
@@ -83,8 +83,8 @@ directory in the same place as your <tt class="docutils literal"><span class="pr
 <p>Create a plain text file in your <tt class="docutils literal"><span class="pre">modules</span></tt> directory, e.g.
 <tt class="docutils literal"><span class="pre">calib.py</span></tt> and copy the following text into it:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Calib</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pressure_offset</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;fixed&#39;</span><span class="p">,</span> <span class="s">&#39;pressure offset&#39;</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pressure_offset</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;fixed&#39;</span><span class="p">,</span> <span class="s">&#39;pressure offset&#39;</span><span class="p">))</span>
     <span class="k">def</span> <span class="nf">calib</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
         <span class="c"># sanitise data</span>
@@ -127,17 +127,17 @@ end of the file name.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.calib.Calib" title="pywws.calib.Calib"><tt class="xref py py-obj docutils literal"><span class="pre">Calib</span></tt></a>(params)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.calib.Calib" title="pywws.calib.Calib"><tt class="xref py py-obj docutils literal"><span class="pre">Calib</span></tt></a>(params,&nbsp;status)</td>
 <td>Calibration class that implements default or user calibration.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.calib.DefaultCalib" title="pywws.calib.DefaultCalib"><tt class="xref py py-obj docutils literal"><span class="pre">DefaultCalib</span></tt></a>(params)</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.calib.DefaultCalib" title="pywws.calib.DefaultCalib"><tt class="xref py py-obj docutils literal"><span class="pre">DefaultCalib</span></tt></a>(status)</td>
 <td>Default calibration class.</td>
 </tr>
 </tbody>
 </table>
 <dl class="class">
 <dt id="pywws.calib.DefaultCalib">
-<em class="property">class </em><tt class="descclassname">pywws.calib.</tt><tt class="descname">DefaultCalib</tt><big>(</big><em>params</em><big>)</big><a class="reference internal" href="../_modules/pywws/calib.html#DefaultCalib"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.calib.DefaultCalib" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pywws.calib.</tt><tt class="descname">DefaultCalib</tt><big>(</big><em>status</em><big>)</big><a class="reference internal" href="../_modules/pywws/calib.html#DefaultCalib"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.calib.DefaultCalib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Default calibration class.</p>
 <p>This class sets the relative pressure, using a pressure offset
 read from the weather station, and &#8216;sanitises&#8217; the wind direction
@@ -151,7 +151,7 @@ value. This is the bare minimum &#8216;calibration&#8217; required.</p>
 
 <dl class="class">
 <dt id="pywws.calib.Calib">
-<em class="property">class </em><tt class="descclassname">pywws.calib.</tt><tt class="descname">Calib</tt><big>(</big><em>params</em><big>)</big><a class="reference internal" href="../_modules/pywws/calib.html#Calib"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.calib.Calib" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pywws.calib.</tt><tt class="descname">Calib</tt><big>(</big><em>params</em>, <em>status</em><big>)</big><a class="reference internal" href="../_modules/pywws/calib.html#Calib"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.calib.Calib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calibration class that implements default or user calibration.</p>
 <p>Other pywws modules use this method to create a calibration
 object. The constructor creates either a default calibration
@@ -228,7 +228,7 @@ parameter. It then adopts the calibration object&#8217;s
         <li class="right" >
           <a href="pywws.Localisation.html" title="pywws.Localisation"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.05_64abd19 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
           <li><a href="index.html" >Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>

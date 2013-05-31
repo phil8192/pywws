@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Localisation &mdash; pywws 13.05_64abd19 documentation</title>
+    <title>pywws.Localisation &mdash; pywws 13.05_r1011 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '13.05_64abd19',
+        VERSION:     '13.05_r1011',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.05_64abd19 documentation" href="../../index.html" />
+    <link rel="top" title="pywws 13.05_r1011 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.05_64abd19 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -52,6 +52,24 @@
   <h1>Source code for pywws.Localisation</h1><div class="highlight"><pre>
 <span class="c">#!/usr/bin/env python</span>
 <span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="c"># pywws - Python software for USB Wireless Weather Stations</span>
+<span class="c"># http://github.com/jim-easterbrook/pywws</span>
+<span class="c"># Copyright (C) 2008-13  Jim Easterbrook  jim@jim-easterbrook.me.uk</span>
+
+<span class="c"># This program is free software; you can redistribute it and/or</span>
+<span class="c"># modify it under the terms of the GNU General Public License</span>
+<span class="c"># as published by the Free Software Foundation; either version 2</span>
+<span class="c"># of the License, or (at your option) any later version.</span>
+
+<span class="c"># This program is distributed in the hope that it will be useful,</span>
+<span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c"># GNU General Public License for more details.</span>
+
+<span class="c"># You should have received a copy of the GNU General Public License</span>
+<span class="c"># along with this program; if not, write to the Free Software</span>
+<span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</span>
 
 <span class="sd">&quot;&quot;&quot;Localisation.py - provide translations of strings into local</span>
 <span class="sd">language</span>
@@ -88,9 +106,9 @@
 <span class="sd">starting point might be your system&#39;s ``LANG`` environment variable,</span>
 <span class="sd">for example::</span>
 
-<span class="sd">    jim@brains:~/Documents/weather/devel$ echo $LANG</span>
+<span class="sd">    jim@brains:~/Documents/weather/pywws/code$ echo $LANG</span>
 <span class="sd">    en_GB.UTF-8</span>
-<span class="sd">    jim@brains:~/Documents/weather/devel$ python pywws/Localisation.py -t en_GB.UTF-8</span>
+<span class="sd">    jim@brains:~/Documents/weather/pywws/code$ python -m pywws.Localisation -t en_GB.UTF-8</span>
 <span class="sd">    Locale changed from (None, None) to (&#39;en_GB&#39;, &#39;UTF8&#39;)</span>
 <span class="sd">    Translation set OK</span>
 <span class="sd">    Locale</span>
@@ -100,11 +118,11 @@
 <span class="sd">      &#39;NNW&#39; =&gt; &#39;NNW&#39;</span>
 <span class="sd">      &#39;rising very rapidly&#39; =&gt; &#39;rising very rapidly&#39;</span>
 <span class="sd">      &#39;Rain at times, very unsettled&#39; =&gt; &#39;Rain at times, very unsettled&#39;</span>
-<span class="sd">    jim@brains:~/Documents/weather/devel$</span>
+<span class="sd">    jim@brains:~/Documents/weather/pywws/code$</span>
 
 <span class="sd">In most cases no more than a two-letter code is required::</span>
 
-<span class="sd">    jim@brains:~/Documents/weather/devel$ python pywws/Localisation.py -t fr</span>
+<span class="sd">    jim@brains:~/Documents/weather/pywws/code$ python -m pywws.Localisation -t fr</span>
 <span class="sd">    Locale changed from (None, None) to (&#39;fr_FR&#39;, &#39;UTF8&#39;)</span>
 <span class="sd">    Translation set OK</span>
 <span class="sd">    Locale</span>
@@ -114,11 +132,11 @@
 <span class="sd">      &#39;NNW&#39; =&gt; &#39;NNO&#39;</span>
 <span class="sd">      &#39;rising very rapidly&#39; =&gt; &#39;en hausse très rapide&#39;</span>
 <span class="sd">      &#39;Rain at times, very unsettled&#39; =&gt; &#39;Quelques précipitations, très perturbé&#39;</span>
-<span class="sd">    jim@brains:~/Documents/weather/devel$</span>
+<span class="sd">    jim@brains:~/Documents/weather/pywws/code$</span>
 
 <span class="sd">If you try an unsupported language, pywws falls back to English::</span>
 
-<span class="sd">    jim@brains:~/Documents/weather/devel$ python pywws/Localisation.py -t ja</span>
+<span class="sd">    jim@brains:~/Documents/weather/pywws/code$ python -m pywws.Localisation -t ja</span>
 <span class="sd">    Failed to set locale: ja</span>
 <span class="sd">    No translation file found for: ja</span>
 <span class="sd">    Locale</span>
@@ -128,7 +146,7 @@
 <span class="sd">      &#39;NNW&#39; =&gt; &#39;NNW&#39;</span>
 <span class="sd">      &#39;rising very rapidly&#39; =&gt; &#39;rising very rapidly&#39;</span>
 <span class="sd">      &#39;Rain at times, very unsettled&#39; =&gt; &#39;Rain at times, very unsettled&#39;</span>
-<span class="sd">    jim@brains:~/Documents/weather/devel$</span>
+<span class="sd">    jim@brains:~/Documents/weather/pywws/code$</span>
 
 <span class="sd">Once you&#39;ve found a suitable language code that works, you can</span>
 <span class="sd">configure pywws to use it by editing your ``weather.ini`` file::</span>
@@ -148,7 +166,7 @@
 <span class="n">__docformat__</span> <span class="o">=</span> <span class="s">&quot;restructuredtext en&quot;</span>
 
 <span class="n">__usage__</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s"> usage: python RunModule.py Localisation [options]</span>
+<span class="s"> usage: python -m pywws.Localisation [options]</span>
 <span class="s"> options are:</span>
 <span class="s">  -h       or  --help       display this help</span>
 <span class="s">  -t code  or  --test code  test use of a language code</span>
@@ -223,7 +241,7 @@
             <span class="n">lang</span> <span class="o">=</span> <span class="n">lang</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">langs</span> <span class="o">+=</span> <span class="p">[</span><span class="n">lang</span><span class="p">,</span> <span class="n">lang</span><span class="p">[:</span><span class="mi">2</span><span class="p">]]</span>
     <span class="c"># get translation object</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;locale&#39;</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;lang&#39;</span><span class="p">)</span>
     <span class="n">codeset</span> <span class="o">=</span> <span class="n">locale</span><span class="o">.</span><span class="n">getpreferredencoding</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">codeset</span> <span class="o">==</span> <span class="s">&#39;ASCII&#39;</span><span class="p">:</span>
         <span class="n">codeset</span> <span class="o">=</span> <span class="s">&#39;UTF-8&#39;</span>
@@ -337,7 +355,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.05_64abd19 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

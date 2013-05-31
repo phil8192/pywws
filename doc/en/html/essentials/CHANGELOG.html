@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Change Log &mdash; pywws 13.05_64abd19 documentation</title>
+    <title>Change Log &mdash; pywws 13.05_r1011 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.05_64abd19',
+        VERSION:     '13.05_r1011',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.05_64abd19 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.05_r1011 documentation" href="../index.html" />
     <link rel="next" title="User guides" href="../guides/index.html" />
     <link rel="prev" title="GNU General Public License" href="LICENCE.html" /> 
   </head>
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="LICENCE.html" title="GNU General Public License"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.05_64abd19 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -74,6 +74,14 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+Changes in v13.05:
+    1/ Substantially rearranged directories, getting rid of 'code' and 'code3'.
+    2/ Removed 'makefile' - everything is now done via 'setup.py'.
+    3/ Removed 'RunModule.py' - use 'python -m pywws.module' now.
+    4/ Separated storage of config (weather.ini) and status (status.ini).
+    5/ Added 2 more low-level USB access modules.
+    6/ Various bug fixes.
 
 Changes in v13.03:
     1/ Added 'rain days' to monthly data. (Reprocess required when upgrading.)
@@ -286,7 +294,7 @@ Changes in v0.2:
         <li class="right" >
           <a href="LICENCE.html" title="GNU General Public License"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.05_64abd19 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

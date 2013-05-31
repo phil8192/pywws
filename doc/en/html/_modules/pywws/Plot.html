@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Plot &mdash; pywws 13.05_64abd19 documentation</title>
+    <title>pywws.Plot &mdash; pywws 13.05_r1011 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '13.05_64abd19',
+        VERSION:     '13.05_r1011',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.05_64abd19 documentation" href="../../index.html" />
+    <link rel="top" title="pywws 13.05_r1011 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.05_64abd19 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -52,6 +52,24 @@
   <h1>Source code for pywws.Plot</h1><div class="highlight"><pre>
 <span class="c">#!/usr/bin/env python</span>
 
+<span class="c"># pywws - Python software for USB Wireless Weather Stations</span>
+<span class="c"># http://github.com/jim-easterbrook/pywws</span>
+<span class="c"># Copyright (C) 2008-13  Jim Easterbrook  jim@jim-easterbrook.me.uk</span>
+
+<span class="c"># This program is free software; you can redistribute it and/or</span>
+<span class="c"># modify it under the terms of the GNU General Public License</span>
+<span class="c"># as published by the Free Software Foundation; either version 2</span>
+<span class="c"># of the License, or (at your option) any later version.</span>
+
+<span class="c"># This program is distributed in the hope that it will be useful,</span>
+<span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c"># GNU General Public License for more details.</span>
+
+<span class="c"># You should have received a copy of the GNU General Public License</span>
+<span class="c"># along with this program; if not, write to the Free Software</span>
+<span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</span>
+
 <span class="sd">&quot;&quot;&quot;Plot graphs of weather data according to an XML recipe</span>
 <span class="sd">::</span>
 
@@ -61,7 +79,7 @@
 
 <span class="n">__docformat__</span> <span class="o">=</span> <span class="s">&quot;restructuredtext en&quot;</span>
 <span class="n">__usage__</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s"> usage: python RunModule.py Plot [options] data_dir temp_dir xml_file output_file</span>
+<span class="s"> usage: python -m pywws.Plot [options] data_dir temp_dir xml_file output_file</span>
 <span class="s"> options are:</span>
 <span class="s">  -h or --help    display this help</span>
 <span class="s"> data_dir is the root directory of the weather data</span>
@@ -90,14 +108,14 @@
 <span class="kn">from</span> <span class="nn">.WeatherStation</span> <span class="kn">import</span> <span class="n">dew_point</span><span class="p">,</span> <span class="n">wind_chill</span><span class="p">,</span> <span class="n">apparent_temp</span>
 
 <div class="viewcode-block" id="BasePlotter"><a class="viewcode-back" href="../../api/pywws.Plot.html#pywws.Plot.BasePlotter">[docs]</a><span class="k">class</span> <span class="nc">BasePlotter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">raw_data</span><span class="p">,</span> <span class="n">hourly_data</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">raw_data</span><span class="p">,</span> <span class="n">hourly_data</span><span class="p">,</span>
                  <span class="n">daily_data</span><span class="p">,</span> <span class="n">monthly_data</span><span class="p">,</span> <span class="n">work_dir</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">raw_data</span> <span class="o">=</span> <span class="n">raw_data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hourly_data</span> <span class="o">=</span> <span class="n">hourly_data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">daily_data</span> <span class="o">=</span> <span class="n">daily_data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">monthly_data</span> <span class="o">=</span> <span class="n">monthly_data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">work_dir</span> <span class="o">=</span> <span class="n">work_dir</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pressure_offset</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;fixed&#39;</span><span class="p">,</span> <span class="s">&#39;pressure offset&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pressure_offset</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;fixed&#39;</span><span class="p">,</span> <span class="s">&#39;pressure offset&#39;</span><span class="p">))</span>
         <span class="c"># set language related stuff</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;config&#39;</span><span class="p">,</span> <span class="s">&#39;gnuplot encoding&#39;</span><span class="p">,</span> <span class="s">&#39;iso_8859_1&#39;</span><span class="p">)</span>
         <span class="c"># create work directory</span>
@@ -471,9 +489,10 @@
         <span class="k">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="n">__usage__</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="k">return</span> <span class="mi">2</span>
     <span class="n">params</span> <span class="o">=</span> <span class="n">DataStore</span><span class="o">.</span><span class="n">params</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">DataStore</span><span class="o">.</span><span class="n">status</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="n">Localisation</span><span class="o">.</span><span class="n">SetApplicationLanguage</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">GraphPlotter</span><span class="p">(</span>
-        <span class="n">params</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span>
         <span class="n">DataStore</span><span class="o">.</span><span class="n">calib_store</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">DataStore</span><span class="o">.</span><span class="n">hourly_store</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
         <span class="n">DataStore</span><span class="o">.</span><span class="n">daily_store</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">DataStore</span><span class="o">.</span><span class="n">monthly_store</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
         <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -517,7 +536,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.05_64abd19 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

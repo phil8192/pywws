@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Plot &mdash; pywws 13.05_64abd19 documentation</title>
+    <title>pywws.Plot &mdash; pywws 13.05_r1011 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.05_64abd19',
+        VERSION:     '13.05_r1011',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.05_64abd19 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.05_r1011 documentation" href="../index.html" />
     <link rel="up" title="Programmes et des modules Python" href="index.html" />
     <link rel="next" title="pywws.WindRose" href="pywws.WindRose.html" />
     <link rel="prev" title="pywws.calib" href="pywws.calib.html" /> 
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="pywws.calib.html" title="pywws.calib"
              accesskey="P">précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.05_64abd19 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>  
@@ -300,17 +300,17 @@ output_file is the name of the image file to be created e.g. 24hrs.png</pre>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.Plot.BasePlotter" title="pywws.Plot.BasePlotter"><tt class="xref py py-obj docutils literal"><span class="pre">BasePlotter</span></tt></a>(params,&nbsp;raw_data,&nbsp;hourly_data,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.Plot.BasePlotter" title="pywws.Plot.BasePlotter"><tt class="xref py py-obj docutils literal"><span class="pre">BasePlotter</span></tt></a>(params,&nbsp;status,&nbsp;raw_data,&nbsp;...)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.Plot.GraphPlotter" title="pywws.Plot.GraphPlotter"><tt class="xref py py-obj docutils literal"><span class="pre">GraphPlotter</span></tt></a>(params,&nbsp;raw_data,&nbsp;hourly_data,&nbsp;...)</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.Plot.GraphPlotter" title="pywws.Plot.GraphPlotter"><tt class="xref py py-obj docutils literal"><span class="pre">GraphPlotter</span></tt></a>(params,&nbsp;status,&nbsp;raw_data,&nbsp;...)</td>
 <td></td>
 </tr>
 </tbody>
 </table>
 <dl class="class">
 <dt id="pywws.Plot.BasePlotter">
-<em class="property">class </em><tt class="descclassname">pywws.Plot.</tt><tt class="descname">BasePlotter</tt><big>(</big><em>params</em>, <em>raw_data</em>, <em>hourly_data</em>, <em>daily_data</em>, <em>monthly_data</em>, <em>work_dir</em><big>)</big><a class="reference internal" href="../_modules/pywws/Plot.html#BasePlotter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.BasePlotter" title="Lien permanent vers cette définition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pywws.Plot.</tt><tt class="descname">BasePlotter</tt><big>(</big><em>params</em>, <em>status</em>, <em>raw_data</em>, <em>hourly_data</em>, <em>daily_data</em>, <em>monthly_data</em>, <em>work_dir</em><big>)</big><a class="reference internal" href="../_modules/pywws/Plot.html#BasePlotter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.BasePlotter" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><dl class="method">
 <dt id="pywws.Plot.BasePlotter.DoPlot">
 <tt class="descname">DoPlot</tt><big>(</big><em>input_file</em>, <em>output_file</em><big>)</big><a class="reference internal" href="../_modules/pywws/Plot.html#BasePlotter.DoPlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.BasePlotter.DoPlot" title="Lien permanent vers cette définition">¶</a></dt>
@@ -335,7 +335,7 @@ output_file is the name of the image file to be created e.g. 24hrs.png</pre>
 
 <dl class="class">
 <dt id="pywws.Plot.GraphPlotter">
-<em class="property">class </em><tt class="descclassname">pywws.Plot.</tt><tt class="descname">GraphPlotter</tt><big>(</big><em>params</em>, <em>raw_data</em>, <em>hourly_data</em>, <em>daily_data</em>, <em>monthly_data</em>, <em>work_dir</em><big>)</big><a class="reference internal" href="../_modules/pywws/Plot.html#GraphPlotter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.GraphPlotter" title="Lien permanent vers cette définition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pywws.Plot.</tt><tt class="descname">GraphPlotter</tt><big>(</big><em>params</em>, <em>status</em>, <em>raw_data</em>, <em>hourly_data</em>, <em>daily_data</em>, <em>monthly_data</em>, <em>work_dir</em><big>)</big><a class="reference internal" href="../_modules/pywws/Plot.html#GraphPlotter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.GraphPlotter" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><dl class="method">
 <dt id="pywws.Plot.GraphPlotter.GetPlotList">
 <tt class="descname">GetPlotList</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/pywws/Plot.html#GraphPlotter.GetPlotList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Plot.GraphPlotter.GetPlotList" title="Lien permanent vers cette définition">¶</a></dt>
@@ -467,7 +467,7 @@ output_file is the name of the image file to be created e.g. 24hrs.png</pre>
         <li class="right" >
           <a href="pywws.calib.html" title="pywws.calib"
              >précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.05_64abd19 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
           <li><a href="index.html" >Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>

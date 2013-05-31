@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.DataStore &mdash; pywws 13.05_64abd19 documentation</title>
+    <title>pywws.DataStore &mdash; pywws 13.05_r1011 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '13.05_64abd19',
+        VERSION:     '13.05_r1011',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.05_64abd19 documentation" href="../../index.html" />
+    <link rel="top" title="pywws 13.05_r1011 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.05_64abd19 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -50,6 +50,24 @@
           <div class="body">
             
   <h1>Source code for pywws.DataStore</h1><div class="highlight"><pre>
+<span class="c"># pywws - Python software for USB Wireless Weather Stations</span>
+<span class="c"># http://github.com/jim-easterbrook/pywws</span>
+<span class="c"># Copyright (C) 2008-13  Jim Easterbrook  jim@jim-easterbrook.me.uk</span>
+
+<span class="c"># This program is free software; you can redistribute it and/or</span>
+<span class="c"># modify it under the terms of the GNU General Public License</span>
+<span class="c"># as published by the Free Software Foundation; either version 2</span>
+<span class="c"># of the License, or (at your option) any later version.</span>
+
+<span class="c"># This program is distributed in the hope that it will be useful,</span>
+<span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c"># GNU General Public License for more details.</span>
+
+<span class="c"># You should have received a copy of the GNU General Public License</span>
+<span class="c"># along with this program; if not, write to the Free Software</span>
+<span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DataStore.py - stores readings in easy to access files</span>
 
@@ -67,7 +85,7 @@
 <span class="sd">data[datetime.utcnow() - timedelta(hours=12):]</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">ConfigParser</span> <span class="kn">import</span> <span class="n">SafeConfigParser</span>
+<span class="kn">from</span> <span class="nn">ConfigParser</span> <span class="kn">import</span> <span class="n">RawConfigParser</span>
 <span class="kn">import</span> <span class="nn">csv</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -84,50 +102,80 @@
                                <span class="n">date_string</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span>
                                <span class="n">date_string</span><span class="p">[</span><span class="mi">11</span><span class="p">:</span><span class="mi">13</span><span class="p">],</span>
                                <span class="n">date_string</span><span class="p">[</span><span class="mi">14</span><span class="p">:</span><span class="mi">16</span><span class="p">],</span>
-                               <span class="n">date_string</span><span class="p">[</span><span class="mi">17</span><span class="p">:</span><span class="mi">19</span><span class="p">])))</span></div>
-<div class="viewcode-block" id="params"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.params">[docs]</a><span class="k">class</span> <span class="nc">params</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Parameters are stored in a file &quot;weather.ini&quot; in root_dir.&quot;&quot;&quot;</span>
+                               <span class="n">date_string</span><span class="p">[</span><span class="mi">17</span><span class="p">:</span><span class="mi">19</span><span class="p">])))</span>
+</div>
+<div class="viewcode-block" id="ParamStore"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.ParamStore">[docs]</a><span class="k">class</span> <span class="nc">ParamStore</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">root_dir</span><span class="p">):</span>
             <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">root_dir</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="s">&#39;weather.ini&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_dirty</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="c"># open config file</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="n">SafeConfigParser</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="n">RawConfigParser</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-<div class="viewcode-block" id="params.flush"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.params.flush">[docs]</a>    <span class="k">def</span> <span class="nf">flush</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ParamStore.flush"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.ParamStore.flush">[docs]</a>    <span class="k">def</span> <span class="nf">flush</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dirty</span><span class="p">:</span>
             <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_dirty</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="n">of</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">of</span><span class="p">)</span>
-        <span class="n">of</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
-<div class="viewcode-block" id="params.get"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.params.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get a parameter value and return a string.</span>
+        <span class="n">of</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ParamStore.get"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.ParamStore.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get a parameter value and return a string.</span>
 
 <span class="sd">        If default is specified and section or option are not defined</span>
-<span class="sd">        in the weather.ini file, they are created and set to default,</span>
-<span class="sd">        which is then the return value.</span>
+<span class="sd">        in the file, they are created and set to default, which is</span>
+<span class="sd">        then the return value.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">default</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">default</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">)</span></div>
-<div class="viewcode-block" id="params.get_datetime"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.params.get_datetime">[docs]</a>    <span class="k">def</span> <span class="nf">get_datetime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ParamStore.get_datetime"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.ParamStore.get_datetime">[docs]</a>    <span class="k">def</span> <span class="nf">get_datetime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">safestrptime</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">result</span></div>
-<div class="viewcode-block" id="params.set"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.params.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">result</span>
+</div>
+<div class="viewcode-block" id="ParamStore.set"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.ParamStore.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set option in section to string value.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">)</span> <span class="ow">and</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">)</span> <span class="o">==</span> <span class="n">value</span><span class="p">):</span>
+            <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_dirty</span> <span class="o">=</span> <span class="bp">True</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dirty</span> <span class="o">=</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="ParamStore.unset"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.ParamStore.unset">[docs]</a>    <span class="k">def</span> <span class="nf">unset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Remove option from section.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">remove_option</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dirty</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">remove_section</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dirty</span> <span class="o">=</span> <span class="bp">True</span>
+</div></div>
+<div class="viewcode-block" id="params"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.params">[docs]</a><span class="k">class</span> <span class="nc">params</span><span class="p">(</span><span class="n">ParamStore</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parameters are stored in a file &quot;weather.ini&quot; in root_dir.&quot;&quot;&quot;</span>
+        <span class="n">ParamStore</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">,</span> <span class="s">&#39;weather.ini&#39;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="status"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.status">[docs]</a><span class="k">class</span> <span class="nc">status</span><span class="p">(</span><span class="n">ParamStore</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Status is stored in a file &quot;status.ini&quot; in root_dir.&quot;&quot;&quot;</span>
+        <span class="n">ParamStore</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">,</span> <span class="s">&#39;status.ini&#39;</span><span class="p">)</span>
+</div>
 <div class="viewcode-block" id="core_store"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.core_store">[docs]</a><span class="k">class</span> <span class="nc">core_store</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_root_dir</span> <span class="o">=</span> <span class="n">root_dir</span>
@@ -188,7 +236,7 @@
         <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;slice indices must be </span><span class="si">%s</span><span class="s"> or None&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">datetime</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">lst_day</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">toordinal</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lst_day</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">lst_day</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lst_day</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">lst_day</span>
     <span class="k">def</span> <span class="nf">_get_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">lst_day</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_slice</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
@@ -198,7 +246,7 @@
         <span class="n">cache_hi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_hi</span>
         <span class="n">cache_ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span>
         <span class="c"># iterate over complete caches</span>
-        <span class="k">while</span> <span class="n">cache_hi</span> <span class="o">&lt;=</span> <span class="n">lst_day</span><span class="p">:</span>
+        <span class="k">while</span> <span class="n">cache_hi</span> <span class="o">&lt;</span> <span class="n">lst_day</span><span class="p">:</span>
             <span class="k">while</span> <span class="n">cache_ptr</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">cache</span><span class="p">):</span>
                 <span class="k">yield</span> <span class="n">cache</span><span class="p">[</span><span class="n">cache_ptr</span><span class="p">]</span>
                 <span class="n">cache_ptr</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -251,7 +299,7 @@
         <span class="c"># go to start of slice</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_cache_ptr</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
         <span class="c"># delete to end of cache</span>
-        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_hi</span> <span class="o">&lt;=</span> <span class="n">lst_day</span><span class="p">:</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_hi</span> <span class="o">&lt;</span> <span class="n">lst_day</span><span class="p">:</span>
             <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">:]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_cache_dirty</span> <span class="o">=</span> <span class="bp">True</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_load</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">fromordinal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_hi</span><span class="p">))</span>
@@ -580,7 +628,7 @@
         <span class="s">&#39;rel_pressure_min&#39;</span><span class="p">,</span> <span class="s">&#39;rel_pressure_min_t&#39;</span><span class="p">,</span>
         <span class="s">&#39;rel_pressure_max&#39;</span><span class="p">,</span> <span class="s">&#39;rel_pressure_max_t&#39;</span><span class="p">,</span>
         <span class="s">&#39;wind_ave&#39;</span><span class="p">,</span> <span class="s">&#39;wind_gust&#39;</span><span class="p">,</span> <span class="s">&#39;wind_gust_t&#39;</span><span class="p">,</span> <span class="s">&#39;wind_dir&#39;</span><span class="p">,</span>
-        <span class="s">&#39;rain&#39;</span><span class="p">,</span>
+        <span class="s">&#39;rain&#39;</span><span class="p">,</span> <span class="s">&#39;rain_days&#39;</span><span class="p">,</span>
         <span class="s">&#39;illuminance_ave&#39;</span><span class="p">,</span>
         <span class="s">&#39;illuminance_max_lo&#39;</span><span class="p">,</span> <span class="s">&#39;illuminance_max_lo_t&#39;</span><span class="p">,</span>
         <span class="s">&#39;illuminance_max_hi&#39;</span><span class="p">,</span> <span class="s">&#39;illuminance_max_hi_t&#39;</span><span class="p">,</span> <span class="s">&#39;illuminance_max_ave&#39;</span><span class="p">,</span>
@@ -637,6 +685,7 @@
         <span class="s">&#39;wind_gust_t&#39;</span>          <span class="p">:</span> <span class="n">safestrptime</span><span class="p">,</span>
         <span class="s">&#39;wind_dir&#39;</span>             <span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="s">&#39;rain&#39;</span>                 <span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="s">&#39;rain_days&#39;</span>            <span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="s">&#39;illuminance_ave&#39;</span>      <span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="s">&#39;illuminance_max_lo&#39;</span>   <span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="s">&#39;illuminance_max_lo_t&#39;</span> <span class="p">:</span> <span class="n">safestrptime</span><span class="p">,</span>
@@ -693,7 +742,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.05_64abd19 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
