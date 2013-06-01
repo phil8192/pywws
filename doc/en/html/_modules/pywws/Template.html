@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Template &mdash; pywws 13.05_r1011 documentation</title>
+    <title>pywws.Template &mdash; pywws 13.06_r1017 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '13.05_r1011',
+        VERSION:     '13.06_r1017',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.05_r1011 documentation" href="../../index.html" />
+    <link rel="top" title="pywws 13.06_r1017 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.06_r1017 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -155,6 +155,7 @@
         <span class="n">dew_point</span> <span class="o">=</span> <span class="n">WeatherStation</span><span class="o">.</span><span class="n">dew_point</span>
         <span class="n">wind_chill</span> <span class="o">=</span> <span class="n">WeatherStation</span><span class="o">.</span><span class="n">wind_chill</span>
         <span class="n">apparent_temp</span> <span class="o">=</span> <span class="n">WeatherStation</span><span class="o">.</span><span class="n">apparent_temp</span>
+        <span class="n">hour_diff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hour_diff</span>
         <span class="n">rain_hour</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rain_hour</span>
         <span class="n">rain_day</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rain_day</span>
         <span class="n">pressure_offset</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;fixed&#39;</span><span class="p">,</span> <span class="s">&#39;pressure offset&#39;</span><span class="p">))</span>
@@ -319,6 +320,10 @@
         <span class="n">of</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="k">return</span> <span class="mi">0</span>
 </div>
+    <span class="k">def</span> <span class="nf">_hour_diff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="n">hour_ago</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calib_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">calib_data</span><span class="o">.</span><span class="n">nearest</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">HOUR</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">-</span> <span class="n">hour_ago</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
     <span class="k">def</span> <span class="nf">_rain_hour</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">rain_hour</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calib_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">calib_data</span><span class="o">.</span><span class="n">nearest</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">HOUR</span><span class="p">)][</span><span class="s">&#39;rain&#39;</span><span class="p">]</span>
         <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;rain&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">rain_hour</span><span class="p">)</span>
@@ -406,7 +411,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.06_r1017 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

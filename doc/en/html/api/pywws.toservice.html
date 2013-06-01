@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.toservice &mdash; pywws 13.05_r1011 documentation</title>
+    <title>pywws.toservice &mdash; pywws 13.06_r1017 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.05_r1011',
+        VERSION:     '13.06_r1017',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.05_r1011 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.06_r1017 documentation" href="../index.html" />
     <link rel="up" title="Python programs and modules" href="index.html" />
     <link rel="next" title="pywws.YoWindow" href="pywws.YoWindow.html" />
     <link rel="prev" title="pywws.ToTwitter" href="pywws.ToTwitter.html" /> 
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="pywws.ToTwitter.html" title="pywws.ToTwitter"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.06_r1017 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>  
@@ -130,8 +130,8 @@ been written.</p>
 <p>If you haven&#8217;t already done so, visit the organisation&#8217;s web site and
 create an account for your weather station. Make a note of any site ID
 and password details you are given.</p>
-<p>Stop any pywws software that is running and then run <tt class="docutils literal"><span class="pre">toservice</span></tt>
-to create a section in <tt class="docutils literal"><span class="pre">weather.ini</span></tt>:</p>
+<p>Stop any pywws software that is running and then run <tt class="docutils literal"><span class="pre">toservice</span></tt> to
+create a section in <tt class="docutils literal"><span class="pre">weather.ini</span></tt>:</p>
 <div class="highlight-python"><pre>python -m pywws.toservice data_dir service_name</pre>
 </div>
 <p><tt class="docutils literal"><span class="pre">service_name</span></tt> is a single word service name, such as <tt class="docutils literal"><span class="pre">metoffice</span></tt>,
@@ -169,7 +169,7 @@ section, depending on how often you want to send data. For example:</p>
 <span class="n">twitter</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">plot</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">text</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">services</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;underground&#39;</span><span class="p">]</span>
+<span class="n">services</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;underground_rf&#39;</span><span class="p">]</span>
 
 <span class="p">[</span><span class="n">logged</span><span class="p">]</span>
 <span class="n">twitter</span> <span class="o">=</span> <span class="p">[]</span>
@@ -185,12 +185,12 @@ section, depending on how often you want to send data. For example:</p>
 </pre></div>
 </div>
 <p>Note that the <tt class="docutils literal"><span class="pre">[live]</span></tt> section is only used when running
-<tt class="docutils literal"><span class="pre">LiveLog.py</span></tt>. It is a good idea to repeat any service selected in
-<tt class="docutils literal"><span class="pre">[live]</span></tt> in the <tt class="docutils literal"><span class="pre">[logged]</span></tt> or <tt class="docutils literal"><span class="pre">[hourly]</span></tt> section in case you
-switch to running <tt class="xref py py-mod docutils literal"><span class="pre">Hourly</span></tt>.</p>
-<p>Restart your regular pywws program (<tt class="xref py py-mod docutils literal"><span class="pre">Hourly</span></tt> or <tt class="xref py py-mod docutils literal"><span class="pre">LiveLog</span></tt>)
-and visit the appropriate web site to see regular updates from your
-weather station.</p>
+<a class="reference internal" href="pywws.LiveLog.html#module-pywws.LiveLog" title="pywws.LiveLog"><tt class="xref py py-mod docutils literal"><span class="pre">LiveLog</span></tt></a>. It is a good idea to repeat any service
+selected in <tt class="docutils literal"><span class="pre">[live]</span></tt> in the <tt class="docutils literal"><span class="pre">[logged]</span></tt> or <tt class="docutils literal"><span class="pre">[hourly]</span></tt> section in
+case you switch to running <a class="reference internal" href="pywws.Hourly.html#module-pywws.Hourly" title="pywws.Hourly"><tt class="xref py py-mod docutils literal"><span class="pre">Hourly</span></tt></a>.</p>
+<p>Restart your regular pywws program (<a class="reference internal" href="pywws.Hourly.html#module-pywws.Hourly" title="pywws.Hourly"><tt class="xref py py-mod docutils literal"><span class="pre">Hourly</span></tt></a> or
+<a class="reference internal" href="pywws.LiveLog.html#module-pywws.LiveLog" title="pywws.LiveLog"><tt class="xref py py-mod docutils literal"><span class="pre">LiveLog</span></tt></a>) and visit the appropriate web site to see
+regular updates from your weather station.</p>
 </div>
 <div class="section" id="notes-on-the-services">
 <h2>Notes on the services<a class="headerlink" href="#notes-on-the-services" title="Permalink to this headline">¶</a></h2>
@@ -276,14 +276,14 @@ in use.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.toservice.ToService" title="pywws.toservice.ToService"><tt class="xref py py-obj docutils literal"><span class="pre">ToService</span></tt></a>(params,&nbsp;status,&nbsp;calib_data[,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.toservice.ToService" title="pywws.toservice.ToService"><tt class="xref py py-obj docutils literal"><span class="pre">ToService</span></tt></a>(params,&nbsp;status,&nbsp;calib_data,&nbsp;...)</td>
 <td>Upload weather data to weather services such as Weather</td>
 </tr>
 </tbody>
 </table>
 <dl class="class">
 <dt id="pywws.toservice.ToService">
-<em class="property">class </em><tt class="descclassname">pywws.toservice.</tt><tt class="descname">ToService</tt><big>(</big><em>params</em>, <em>status</em>, <em>calib_data</em>, <em>service_name=None</em><big>)</big><a class="reference internal" href="../_modules/pywws/toservice.html#ToService"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.toservice.ToService" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pywws.toservice.</tt><tt class="descname">ToService</tt><big>(</big><em>params</em>, <em>status</em>, <em>calib_data</em>, <em>service_name</em><big>)</big><a class="reference internal" href="../_modules/pywws/toservice.html#ToService"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.toservice.ToService" title="Permalink to this definition">¶</a></dt>
 <dd><p>Upload weather data to weather services such as Weather
 Underground.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -384,39 +384,6 @@ stamp of the most recent record successfully uploaded.</p>
 </table>
 </dd></dl>
 
-<dl class="method">
-<dt id="pywws.toservice.ToService.RapidFire">
-<tt class="descname">RapidFire</tt><big>(</big><em>data</em>, <em>catchup</em><big>)</big><a class="reference internal" href="../_modules/pywws/toservice.html#ToService.RapidFire"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.toservice.ToService.RapidFire" title="Permalink to this definition">¶</a></dt>
-<dd><p>Upload a &#8216;Rapid Fire&#8217; weather data record.</p>
-<p>This method uploads either a single data record (typically one
-obtained during &#8216;live&#8217; logging), or all records since the last
-upload (up to 7 days), according to the value of
-<tt class="xref py py-obj docutils literal"><span class="pre">catchup</span></tt>.</p>
-<p>It sets the <tt class="docutils literal"><span class="pre">last</span> <span class="pre">update</span></tt> configuration value to the time
-stamp of the most recent record successfully uploaded.</p>
-<p>The <tt class="xref py py-obj docutils literal"><span class="pre">data</span></tt> parameter contains the data to be uploaded.
-It should be a &#8216;calibrated&#8217; data record, as stored in
-<a class="reference internal" href="pywws.DataStore.html#pywws.DataStore.calib_store" title="pywws.DataStore.calib_store"><tt class="xref py py-class docutils literal"><span class="pre">pywws.DataStore.calib_store</span></tt></a>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>data</strong> (<em>dict</em>) &#8211; the weather data record.</li>
-<li><strong>catchup</strong> (<em>bool</em>) &#8211; upload all data since last upload.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">success status</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="function">
@@ -493,7 +460,7 @@ It should be a &#8216;calibrated&#8217; data record, as stored in
         <li class="right" >
           <a href="pywws.ToTwitter.html" title="pywws.ToTwitter"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.06_r1017 documentation</a> &raquo;</li>
           <li><a href="index.html" >Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>
