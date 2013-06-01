@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>How to configure pywws to post messages to Twitter &mdash; pywws 13.06_r1017 documentation</title>
+    <title>How to configure pywws to post messages to Twitter &mdash; pywws 13.06_r1018 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.06_r1017',
+        VERSION:     '13.06_r1018',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.06_r1017 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.06_r1018 documentation" href="../index.html" />
     <link rel="up" title="User guides" href="index.html" />
     <link rel="next" title="How to use pywws in another language" href="language.html" />
     <link rel="prev" title="How to integrate pywws with various weather services" href="integration.html" /> 
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="integration.html" title="How to integrate pywws with various weather services"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1017 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.06_r1018 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">User guides</a> &raquo;</li> 
       </ul>
     </div>  
@@ -120,11 +120,11 @@ If you need to change the template (e.g. to change the units or language used) y
 For example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">hourly</span><span class="p">]</span>
 <span class="n">services</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">twitter</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;tweet.txt&#39;</span><span class="p">]</span>
 <span class="n">plot</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;7days.png.xml&#39;</span><span class="p">,</span> <span class="s">&#39;24hrs.png.xml&#39;</span><span class="p">,</span> <span class="s">&#39;rose_12hrs.png.xml&#39;</span><span class="p">]</span>
-<span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;24hrs.txt&#39;</span><span class="p">,</span> <span class="s">&#39;6hrs.txt&#39;</span><span class="p">,</span> <span class="s">&#39;7days.txt&#39;</span><span class="p">,</span> <span class="s">&#39;allmonths.txt &#39;</span><span class="p">]</span>
+<span class="n">text</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;tweet.txt&#39;</span><span class="p">,</span> <span class="s">&#39;T&#39;</span><span class="p">),</span> <span class="s">&#39;24hrs.txt&#39;</span><span class="p">,</span> <span class="s">&#39;6hrs.txt&#39;</span><span class="p">,</span> <span class="s">&#39;7days.txt&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
+<p>Note the use of the <tt class="docutils literal"><span class="pre">'T'</span></tt> flag &#8211; this tells pywws to tweet the template result instead of uploading it to your ftp site.</p>
 <p>You could change the <tt class="docutils literal"><span class="pre">[logged]</span></tt>, <tt class="docutils literal"><span class="pre">[12</span> <span class="pre">hourly]</span></tt> or <tt class="docutils literal"><span class="pre">[daily]</span></tt> sections instead, but I think <tt class="docutils literal"><span class="pre">[hourly]</span></tt> is most appropriate for Twitter updates.</p>
 <p>Comments or questions? Please subscribe to the pywws mailing list <a class="reference external" href="http://groups.google.com/group/pywws">http://groups.google.com/group/pywws</a> and let us know.</p>
 </div>
@@ -191,7 +191,7 @@ For example:</p>
         <li class="right" >
           <a href="integration.html" title="How to integrate pywws with various weather services"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1017 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.06_r1018 documentation</a> &raquo;</li>
           <li><a href="index.html" >User guides</a> &raquo;</li> 
       </ul>
     </div>
