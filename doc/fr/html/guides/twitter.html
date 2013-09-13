@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Comment configurer pywws pour poster des messages sur Twitter &mdash; pywws 13.05_r1011 documentation</title>
+    <title>Comment configurer pywws pour poster des messages sur Twitter &mdash; pywws 13.09_r1065 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.05_r1011',
+        VERSION:     '13.09_r1065',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,10 +27,10 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.05_r1011 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
     <link rel="up" title="Guides utilisateur" href="index.html" />
     <link rel="next" title="Comment utiliser pywws dans une autre langue" href="language.html" />
-    <link rel="prev" title="Comment configurer le mode ‘live’ avec pywws" href="livelogging.html" /> 
+    <link rel="prev" title="Comment intégrer divers services météorologiques à pywws" href="integration.html" /> 
   </head>
   <body>
     <div class="related">
@@ -46,9 +46,9 @@
           <a href="language.html" title="Comment utiliser pywws dans une autre langue"
              accesskey="N">suivant</a> |</li>
         <li class="right" >
-          <a href="livelogging.html" title="Comment configurer le mode ‘live’ avec pywws"
+          <a href="integration.html" title="Comment intégrer divers services météorologiques à pywws"
              accesskey="P">précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Guides utilisateur</a> &raquo;</li> 
       </ul>
     </div>  
@@ -61,33 +61,27 @@
   <div class="section" id="how-to-configure-pywws-to-post-messages-to-twitter">
 <h1>Comment configurer pywws pour poster des messages sur Twitter<a class="headerlink" href="#how-to-configure-pywws-to-post-messages-to-twitter" title="Lien permanent vers ce titre">¶</a></h1>
 <div class="section" id="install-dependencies">
-<h2>Install dependencies<a class="headerlink" href="#install-dependencies" title="Lien permanent vers ce titre">¶</a></h2>
-<ul class="simple">
-<li>Python 2.5+ - <a class="reference external" href="http://python.org/">http://python.org/</a> (Note: Python 3 n&#8217;est pas supporté.)</li>
-<li>tweepy 2.0+ - <a class="reference external" href="https://github.com/tweepy/tweepy">https://github.com/tweepy/tweepy</a></li>
-<li>simplejson - <a class="reference external" href="http://pypi.python.org/pypi/simplejson/">http://pypi.python.org/pypi/simplejson/</a></li>
-</ul>
-<p>Note: simplejson est inclu dans Python 2.6+</p>
+<h2>Fichiers prérequis.<a class="headerlink" href="#install-dependencies" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Posting to Twitter requires some extra software.
+See <a class="reference internal" href="../essentials/dependencies.html"><em>Pré-requis</em></a> - <a class="reference internal" href="../essentials/dependencies.html#dependencies-twitter"><em>Mise à jour Twitter</em></a>.</p>
 </div>
 <div class="section" id="create-a-twitter-account">
-<h2>Create a Twitter account<a class="headerlink" href="#create-a-twitter-account" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Créer un compte Twitter.<a class="headerlink" href="#create-a-twitter-account" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Vous pouvez poster des mise à jour météo sur votre compte Twitter &#8216;normal&#8217;, mais je crois qu&#8217;il est préférable d&#8217;avoir un compte distinct réservé à vos relevés météo. Ce qui pourrait être fort utile à une personne vivant dans votre voisinage, mais ne souhaitant pas savoir ce que vous avez pris au petit déjeuner.</p>
 </div>
 <div class="section" id="authorise-pywws-to-post-to-your-twitter-account">
-<h2>Authorise pywws to post to your Twitter account<a class="headerlink" href="#authorise-pywws-to-post-to-your-twitter-account" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Make sure no other pywws software is running, then run <a class="reference internal" href="../api/pywws.TwitterAuth.html#module-pywws.TwitterAuth" title="pywws.TwitterAuth"><tt class="xref py py-mod docutils literal"><span class="pre">TwitterAuth</span></tt></a>:</p>
+<h2>Autoriser pywws à poster sur votre compte Twitter.<a class="headerlink" href="#authorise-pywws-to-post-to-your-twitter-account" title="Lien permanent vers ce titre">¶</a></h2>
+<p>If you run pywws on a low power device such as a router, you may find it easier to run this authorisation step on another computer, as long as it has <tt class="docutils literal"><span class="pre">python-oauth2</span></tt> installed.
+Use an empty &#8216;data&#8217; directory &#8211; a <tt class="docutils literal"><span class="pre">weather.ini</span></tt> file will be created whose contents can be copied into your real <tt class="docutils literal"><span class="pre">weather.ini</span></tt> file using any text editor.</p>
+<p>Assurez vous qu&#8217;aucune autre instance de pywws ne fonctionne, puis exécutez le module  <a class="reference internal" href="../api/pywws.TwitterAuth.html#module-pywws.TwitterAuth" title="pywws.TwitterAuth"><tt class="xref py py-mod docutils literal"><span class="pre">TwitterAuth</span></tt></a>:</p>
 <div class="highlight-python"><pre>python -m pywws.TwitterAuth /data/weather</pre>
 </div>
 <p>(Remplacez <tt class="docutils literal"><span class="pre">/data/weather</span></tt> par votre répertoire de données.)</p>
-<p>This will open a web browser window (or give you a URL to copy to your web browser) where you can log in to your Twitter account and authorise pywws to post.
-Your web browser will then show a 7 digit number which you need to copy to the <a class="reference internal" href="../api/pywws.TwitterAuth.html#module-pywws.TwitterAuth" title="pywws.TwitterAuth"><tt class="xref py py-mod docutils literal"><span class="pre">TwitterAuth</span></tt></a> program.
-If successful, your <tt class="docutils literal"><span class="pre">weather.ini</span></tt> file will now have a <tt class="docutils literal"><span class="pre">[twitter]</span></tt> section with <tt class="docutils literal"><span class="pre">secret</span></tt> and <tt class="docutils literal"><span class="pre">key</span></tt> entries.
-(Don&#8217;t disclose these to anyone else.)</p>
+<p>Ceci ouvrira une fenêtre de navigation (ou vous donnera une URL à copier dans votre navigateur) où vous pourrez vous connecter à votre compte Twitter et autoriser pywws à poster. Votre navigateur vous affichera alors un nombre à 7 chiffre que vous aurez besoin de copier dans le programme <a class="reference internal" href="../api/pywws.TwitterAuth.html#module-pywws.TwitterAuth" title="pywws.TwitterAuth"><tt class="xref py py-mod docutils literal"><span class="pre">TwitterAuth</span></tt></a>. Si tout s&#8217;est bien déroulé, votre fichier <tt class="docutils literal"><span class="pre">weather.ini</span></tt> devrait comporter une nouvelle section <tt class="docutils literal"><span class="pre">[twitter]</span></tt> avec les entrées <tt class="docutils literal"><span class="pre">secret</span></tt> et <tt class="docutils literal"><span class="pre">key</span></tt>. (Ne révéler à quiconque.)</p>
 </div>
 <div class="section" id="add-location-data-optional">
-<h2>Add location data (optional)<a class="headerlink" href="#add-location-data-optional" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Edit your <tt class="docutils literal"><span class="pre">weather.ini</span></tt> file and add <tt class="docutils literal"><span class="pre">latitude</span></tt> and <tt class="docutils literal"><span class="pre">longitude</span></tt> entries to the <tt class="docutils literal"><span class="pre">[twitter]</span></tt> section.
-For example:</p>
+<h2>Ajouter vos données de localisation (optionel).<a class="headerlink" href="#add-location-data-optional" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Éditez votre fichier <tt class="docutils literal"><span class="pre">weather.ini</span></tt> et ajoutez les entrées <tt class="docutils literal"><span class="pre">latitude</span></tt> et <tt class="docutils literal"><span class="pre">longitude</span></tt> à votre section  <tt class="docutils literal"><span class="pre">[twitter]</span></tt>. Par exemple:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">twitter</span><span class="p">]</span>
 <span class="n">secret</span> <span class="o">=</span> <span class="n">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span>
 <span class="n">key</span> <span class="o">=</span> <span class="n">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span>
@@ -97,7 +91,7 @@ For example:</p>
 </div>
 </div>
 <div class="section" id="create-a-template">
-<h2>Create a template<a class="headerlink" href="#create-a-template" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Créer un gabarit.<a class="headerlink" href="#create-a-template" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Les messages pour Twitter sont générés en utilisant un gabarit, tout comme sont créés les fichiers à téléverser sur votre site web. Copiez le gabarit exemple &#8216;tweet.txt&#8217; dans votre dossier de gabarit, puis testez-le:</p>
 <div class="highlight-python"><pre>python -m pywws.Template /data/weather ~/weather/templates/tweet.txt tweet.txt
 cat tweet.txt</pre>
@@ -105,24 +99,27 @@ cat tweet.txt</pre>
 <p>(Remplacez <tt class="docutils literal"><span class="pre">/data/weather</span></tt> et <tt class="docutils literal"><span class="pre">~/weather/templates</span></tt> par vos répertoires de données et de gabarits.) Si vous avez besoin de modifier le gabarit (ex. pour changer les unités de mesure ou la langue utilisée) vous pouvez l&#8217;éditer maintenant ou ultérieurement.</p>
 </div>
 <div class="section" id="post-your-first-weather-tweet">
-<h2>Post your first weather Tweet<a class="headerlink" href="#post-your-first-weather-tweet" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Now everything is prepared for <a class="reference internal" href="../api/pywws.ToTwitter.html#module-pywws.ToTwitter" title="pywws.ToTwitter"><tt class="xref py py-mod docutils literal"><span class="pre">ToTwitter</span></tt></a> to be run:</p>
+<h2>Poster votre premier Tweet météo.<a class="headerlink" href="#post-your-first-weather-tweet" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Maintenant tout est pret pour exécuter <a class="reference internal" href="../api/pywws.ToTwitter.html#module-pywws.ToTwitter" title="pywws.ToTwitter"><tt class="xref py py-mod docutils literal"><span class="pre">ToTwitter</span></tt></a>:</p>
 <div class="highlight-python"><pre>python -m pywws.ToTwitter /data/weather tweet.txt</pre>
 </div>
 <p>Si celà fonctionne, Votre nouveau compte Twitter aura posté son premier relevé météo. (Vous devriez supprimer le fichier tweet.txt maintenant.)</p>
 </div>
 <div class="section" id="add-twitter-updates-to-your-hourly-tasks">
-<h2>Add Twitter updates to your hourly tasks<a class="headerlink" href="#add-twitter-updates-to-your-hourly-tasks" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Edit your <tt class="docutils literal"><span class="pre">weather.ini</span></tt> file and edit the <tt class="docutils literal"><span class="pre">[hourly]</span></tt> section.
-For example:</p>
+<h2>Ajouter les envois sur Twitter à vos tâche horaire.<a class="headerlink" href="#add-twitter-updates-to-your-hourly-tasks" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Éditez votre fichier <tt class="docutils literal"><span class="pre">weather.ini</span></tt> et modifiez la section <tt class="docutils literal"><span class="pre">[hourly]</span></tt>. Par exemple:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">hourly</span><span class="p">]</span>
 <span class="n">services</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">twitter</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;tweet.txt&#39;</span><span class="p">]</span>
 <span class="n">plot</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;7days.png.xml&#39;</span><span class="p">,</span> <span class="s">&#39;24hrs.png.xml&#39;</span><span class="p">,</span> <span class="s">&#39;rose_12hrs.png.xml&#39;</span><span class="p">]</span>
-<span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;24hrs.txt&#39;</span><span class="p">,</span> <span class="s">&#39;6hrs.txt&#39;</span><span class="p">,</span> <span class="s">&#39;7days.txt&#39;</span><span class="p">,</span> <span class="s">&#39;allmonths.txt &#39;</span><span class="p">]</span>
+<span class="n">text</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;tweet.txt&#39;</span><span class="p">,</span> <span class="s">&#39;T&#39;</span><span class="p">),</span> <span class="s">&#39;24hrs.txt&#39;</span><span class="p">,</span> <span class="s">&#39;6hrs.txt&#39;</span><span class="p">,</span> <span class="s">&#39;7days.txt&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
+<p>Notez l&#8217;usage de l&#8217;indicateur <tt class="docutils literal"><span class="pre">'T'</span></tt> &#8211; ce qui indique à pywws de <tt class="docutils literal"><span class="pre">'Tweeter'</span></tt> le résultat du gabarit au lieu de le verser sur votre site par ftp.</p>
 <p>Vous pourriez tout aussi bien choisir de plutôt modifier les sections <tt class="docutils literal"><span class="pre">[logged]</span></tt>, <tt class="docutils literal"><span class="pre">[12</span> <span class="pre">hourly]</span></tt> ou <tt class="docutils literal"><span class="pre">[daily]</span></tt>, mais je crois que <tt class="docutils literal"><span class="pre">[hourly]</span></tt> est le plus approprié pour les envois sur Twitter.</p>
+<p class="versionchanged">
+<span class="versionmodified">Modifié dans la version 13.06_r1015: </span>added the <tt class="docutils literal"><span class="pre">'T'</span></tt> flag.
+Previously Twitter templates were listed separately in <tt class="docutils literal"><span class="pre">twitter</span></tt> entries in the <tt class="docutils literal"><span class="pre">[hourly]</span></tt> and other sections.
+The older syntax still works, but is deprecated.</p>
 <p>Commentaires ou questions? SVP, souscrivez à la liste d&#8217;envoi de pywws <a class="reference external" href="http://groups.google.com/group/pywws">http://groups.google.com/group/pywws</a> et laissez-le nous savoir.</p>
 </div>
 </div>
@@ -139,20 +136,20 @@ For example:</p>
   <h3><a href="../index.html">Table des matières</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Comment configurer pywws pour poster des messages sur Twitter</a><ul>
-<li><a class="reference internal" href="#install-dependencies">Install dependencies</a></li>
-<li><a class="reference internal" href="#create-a-twitter-account">Create a Twitter account</a></li>
-<li><a class="reference internal" href="#authorise-pywws-to-post-to-your-twitter-account">Authorise pywws to post to your Twitter account</a></li>
-<li><a class="reference internal" href="#add-location-data-optional">Add location data (optional)</a></li>
-<li><a class="reference internal" href="#create-a-template">Create a template</a></li>
-<li><a class="reference internal" href="#post-your-first-weather-tweet">Post your first weather Tweet</a></li>
-<li><a class="reference internal" href="#add-twitter-updates-to-your-hourly-tasks">Add Twitter updates to your hourly tasks</a></li>
+<li><a class="reference internal" href="#install-dependencies">Fichiers prérequis.</a></li>
+<li><a class="reference internal" href="#create-a-twitter-account">Créer un compte Twitter.</a></li>
+<li><a class="reference internal" href="#authorise-pywws-to-post-to-your-twitter-account">Autoriser pywws à poster sur votre compte Twitter.</a></li>
+<li><a class="reference internal" href="#add-location-data-optional">Ajouter vos données de localisation (optionel).</a></li>
+<li><a class="reference internal" href="#create-a-template">Créer un gabarit.</a></li>
+<li><a class="reference internal" href="#post-your-first-weather-tweet">Poster votre premier Tweet météo.</a></li>
+<li><a class="reference internal" href="#add-twitter-updates-to-your-hourly-tasks">Ajouter les envois sur Twitter à vos tâche horaire.</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Sujet précédent</h4>
-  <p class="topless"><a href="livelogging.html"
-                        title="Chapitre précédent">Comment configurer le mode &#8216;live&#8217; avec pywws</a></p>
+  <p class="topless"><a href="integration.html"
+                        title="Chapitre précédent">Comment intégrer divers services météorologiques à pywws</a></p>
   <h4>Sujet suivant</h4>
   <p class="topless"><a href="language.html"
                         title="Chapitre suivant">Comment utiliser pywws dans une autre langue</a></p>
@@ -186,9 +183,9 @@ For example:</p>
           <a href="language.html" title="Comment utiliser pywws dans une autre langue"
              >suivant</a> |</li>
         <li class="right" >
-          <a href="livelogging.html" title="Comment configurer le mode ‘live’ avec pywws"
+          <a href="integration.html" title="Comment intégrer divers services météorologiques à pywws"
              >précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" >Guides utilisateur</a> &raquo;</li> 
       </ul>
     </div>

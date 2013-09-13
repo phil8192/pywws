@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>How to configure pywws to post messages to Twitter &mdash; pywws 13.06_r1021 documentation</title>
+    <title>How to configure pywws to post messages to Twitter &mdash; pywws 13.09_r1065 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.06_r1021',
+        VERSION:     '13.09_r1065',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.06_r1021 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
     <link rel="up" title="User guides" href="index.html" />
     <link rel="next" title="How to use pywws in another language" href="language.html" />
     <link rel="prev" title="How to integrate pywws with various weather services" href="integration.html" /> 
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="integration.html" title="How to integrate pywws with various weather services"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1021 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">User guides</a> &raquo;</li> 
       </ul>
     </div>  
@@ -61,12 +61,8 @@
 <h1>How to configure pywws to post messages to Twitter<a class="headerlink" href="#how-to-configure-pywws-to-post-messages-to-twitter" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="install-dependencies">
 <h2>Install dependencies<a class="headerlink" href="#install-dependencies" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Python 2.5+ - <a class="reference external" href="http://python.org/">http://python.org/</a> (Note: Python 3 is not supported.)</li>
-<li>tweepy 2.0+ - <a class="reference external" href="https://github.com/tweepy/tweepy">https://github.com/tweepy/tweepy</a></li>
-<li>simplejson - <a class="reference external" href="http://pypi.python.org/pypi/simplejson/">http://pypi.python.org/pypi/simplejson/</a></li>
-</ul>
-<p>Note that simplejson is included in Python 2.6+</p>
+<p>Posting to Twitter requires some extra software.
+See <a class="reference internal" href="../essentials/dependencies.html"><em>Dependencies</em></a> - <a class="reference internal" href="../essentials/dependencies.html#dependencies-twitter"><em>Twitter updates</em></a>.</p>
 </div>
 <div class="section" id="create-a-twitter-account">
 <h2>Create a Twitter account<a class="headerlink" href="#create-a-twitter-account" title="Permalink to this headline">¶</a></h2>
@@ -75,6 +71,8 @@ This could be useful to someone who lives in your area, but doesn&#8217;t want t
 </div>
 <div class="section" id="authorise-pywws-to-post-to-your-twitter-account">
 <h2>Authorise pywws to post to your Twitter account<a class="headerlink" href="#authorise-pywws-to-post-to-your-twitter-account" title="Permalink to this headline">¶</a></h2>
+<p>If you run pywws on a low power device such as a router, you may find it easier to run this authorisation step on another computer, as long as it has <tt class="docutils literal"><span class="pre">python-oauth2</span></tt> installed.
+Use an empty &#8216;data&#8217; directory &#8211; a <tt class="docutils literal"><span class="pre">weather.ini</span></tt> file will be created whose contents can be copied into your real <tt class="docutils literal"><span class="pre">weather.ini</span></tt> file using any text editor.</p>
 <p>Make sure no other pywws software is running, then run <a class="reference internal" href="../api/pywws.TwitterAuth.html#module-pywws.TwitterAuth" title="pywws.TwitterAuth"><tt class="xref py py-mod docutils literal"><span class="pre">TwitterAuth</span></tt></a>:</p>
 <div class="highlight-python"><pre>python -m pywws.TwitterAuth /data/weather</pre>
 </div>
@@ -126,6 +124,10 @@ For example:</p>
 </div>
 <p>Note the use of the <tt class="docutils literal"><span class="pre">'T'</span></tt> flag &#8211; this tells pywws to tweet the template result instead of uploading it to your ftp site.</p>
 <p>You could change the <tt class="docutils literal"><span class="pre">[logged]</span></tt>, <tt class="docutils literal"><span class="pre">[12</span> <span class="pre">hourly]</span></tt> or <tt class="docutils literal"><span class="pre">[daily]</span></tt> sections instead, but I think <tt class="docutils literal"><span class="pre">[hourly]</span></tt> is most appropriate for Twitter updates.</p>
+<p class="versionchanged">
+<span class="versionmodified">Changed in version 13.06_r1015: </span>added the <tt class="docutils literal"><span class="pre">'T'</span></tt> flag.
+Previously Twitter templates were listed separately in <tt class="docutils literal"><span class="pre">twitter</span></tt> entries in the <tt class="docutils literal"><span class="pre">[hourly]</span></tt> and other sections.
+The older syntax still works, but is deprecated.</p>
 <p>Comments or questions? Please subscribe to the pywws mailing list <a class="reference external" href="http://groups.google.com/group/pywws">http://groups.google.com/group/pywws</a> and let us know.</p>
 </div>
 </div>
@@ -191,7 +193,7 @@ For example:</p>
         <li class="right" >
           <a href="integration.html" title="How to integrate pywws with various weather services"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1021 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" >User guides</a> &raquo;</li> 
       </ul>
     </div>

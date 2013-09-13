@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>How to set up ‘hourly’ logging with pywws &mdash; pywws 13.06_r1021 documentation</title>
+    <title>How to set up ‘hourly’ logging with pywws &mdash; pywws 13.09_r1065 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.06_r1021',
+        VERSION:     '13.09_r1065',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.06_r1021 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
     <link rel="up" title="User guides" href="index.html" />
     <link rel="next" title="How to set up ‘live’ logging with pywws" href="livelogging.html" />
     <link rel="prev" title="How to get started with pywws" href="getstarted.html" /> 
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="getstarted.html" title="How to get started with pywws"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1021 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">User guides</a> &raquo;</li> 
       </ul>
     </div>  
@@ -135,9 +135,11 @@ twitter = ['forecast.txt']
 plot = ['28days.png.xml']
 text = ['allmonths.txt']</pre>
 </div>
-<p>You can test that all these are working by removing all <tt class="docutils literal"><span class="pre">last</span> <span class="pre">update</span></tt> lines from weather.ini then run <a class="reference internal" href="../api/pywws.Hourly.html#module-pywws.Hourly" title="pywws.Hourly"><tt class="xref py py-mod docutils literal"><span class="pre">Hourly</span></tt></a> again:</p>
+<p>You can test that all these are working by removing the <tt class="docutils literal"><span class="pre">[last</span> <span class="pre">update]</span></tt> section from status.ini, then running <a class="reference internal" href="../api/pywws.Hourly.html#module-pywws.Hourly" title="pywws.Hourly"><tt class="xref py py-mod docutils literal"><span class="pre">Hourly</span></tt></a> again:</p>
 <div class="highlight-python"><pre>python -m pywws.Hourly -v ~/weather/data</pre>
 </div>
+<p class="versionchanged">
+<span class="versionmodified">Changed in version 13.05_r1009: </span>The last update information was previously stored in weather.ini, with <tt class="docutils literal"><span class="pre">last</span> <span class="pre">update</span></tt> entries in several sections.</p>
 </div>
 <div class="section" id="using-a-utility-script">
 <h2>Using a utility script<a class="headerlink" href="#using-a-utility-script" title="Permalink to this headline">¶</a></h2>
@@ -236,7 +238,7 @@ pywws-hourly.py -v /data/weather &gt;$log 2&gt;&amp;1
         <li class="right" >
           <a href="getstarted.html" title="How to get started with pywws"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1021 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" >User guides</a> &raquo;</li> 
       </ul>
     </div>

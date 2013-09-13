@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.DataStore &mdash; pywws 13.05_r1011 documentation</title>
+    <title>pywws.DataStore &mdash; pywws 13.09_r1065 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.05_r1011',
+        VERSION:     '13.09_r1065',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.05_r1011 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
     <link rel="up" title="Programmes et des modules Python" href="index.html" />
     <link rel="next" title="pywws.TimeZone" href="pywws.TimeZone.html" />
     <link rel="prev" title="pywws.device_pyusb" href="pywws.device_pyusb.html" /> 
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="pywws.device_pyusb.html" title="pywws.device_pyusb"
              accesskey="P">précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>  
@@ -58,12 +58,13 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="pywws-datastore">
-<h1>pywws.DataStore<a class="headerlink" href="#pywws-datastore" title="Lien permanent vers ce titre">¶</a></h1>
+  <div class="section" id="module-pywws.DataStore">
+<span id="pywws-datastore"></span><h1>pywws.DataStore<a class="headerlink" href="#module-pywws.DataStore" title="Lien permanent vers ce titre">¶</a></h1>
+<p>DataStore.py - enregistre les lectures dans des fichiers facilement accessibles</p>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Ce module est au cœur de mon logiciel de station météo. Il stocke les données sur le disque, mais sans le coût d&#8217;un système de base de données à grande échelle. Je l&#8217;ai conçu pour fonctionner sur une machine avec peu de mémoire comme mon routeur Asus. Pour minimiser l&#8217;utilisation de la mémoire, il ne charge que l&#8217;équivalent d&#8217;une journée de données à la fois dans la mémoire.</p>
-<p>D&#8217;un  point de vue &#8220;utilisateur&#8221;, les données sont accédées comme un croisement entre une liste et un dictionnaire. Chaque enregistrement de données est indexée par un objet <tt class="docutils literal"><span class="pre">datetime</span></tt> (comportement dictionnaire), mais les enregistrements sont stockés dans l&#8217;ordre et peut être consulté sous forme de tranches (comportement liste).</p>
+<p>Ce module est au cœur de mon logiciel de station météo. Il stocke les données sur disque, mais sans le coût d&#8217;un système de base de données à grande échelle. Je l&#8217;ai conçu pour fonctionner sur une machine avec peu de mémoire comme mon routeur Asus. Pour minimiser l&#8217;utilisation de la mémoire, il ne charge que l&#8217;équivalent d&#8217;une journée de données à la fois dans la mémoire.</p>
+<p>D&#8217;un  point de vue &#8220;utilisateur&#8221;, les données sont accédées comme un croisement entre une liste et un dictionnaire. Chaque enregistrement de données est indexée par un objet <tt class="xref py py-class docutils literal"><span class="pre">datetime.datetime</span></tt> (comportement dictionnaire), mais les enregistrements sont stockés dans l&#8217;ordre et peut être consulté sous forme de tranches (comportement liste).</p>
 <p>Par exemple, pour accéder aux données horaires pour le jour de Noël 2009, on peut faire ce qui suit</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">import</span> <span class="nn">DataStore</span>
@@ -72,13 +73,19 @@
     <span class="k">print</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;idx&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;temp_out&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>Le module fournit cinq classes pour stocker des données différentes. <tt class="docutils literal"><span class="pre">data_store</span></tt> prend les données  &#8220;brutes&#8221; de la station météo; <tt class="docutils literal"><span class="pre">calib_store</span></tt>, <tt class="docutils literal"><span class="pre">hourly_store</span></tt>, <tt class="docutils literal"><span class="pre">daily_store</span></tt> et <tt class="docutils literal"><span class="pre">monthly_store</span></tt> stockent les données traitées (voir <tt class="xref doc docutils literal"><span class="pre">pywws</span> <span class="pre">.Process</span></tt>). Tous les trois sont issues de la même classe <tt class="docutils literal"><span class="pre">core_store</span></tt>, ils ne diffèrent que par les clés et les types de données stockées dans chaque enregistrement.</p>
+<p>D&#8217;autres exemples d&#8217;accès aux données:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># get value nearest 9:30 on Christmas day 2008</span>
+<span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">nearest</span><span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2008</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">30</span><span class="p">))]</span>
+<span class="c"># get entire array, equivalent to data[:]</span>
+<span class="n">data</span><span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">min</span><span class="p">:</span><span class="n">datetime</span><span class="o">.</span><span class="n">max</span><span class="p">]</span>
+<span class="c"># get last 12 hours worth of data</span>
+<span class="n">data</span><span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">12</span><span class="p">):]</span>
+</pre></div>
 </div>
-<div class="section" id="module-pywws.DataStore">
-<span id="detailed-api"></span><h2>API détaillé<a class="headerlink" href="#module-pywws.DataStore" title="Lien permanent vers ce titre">¶</a></h2>
-<p>DataStore.py - enregistre les lectures dans des fichiers facilement accessibles</p>
-<p>Un fichier distinct est utilisé pour les données de chaque jour, pour garder la charge mémoire raisonnable. Un jour à la fois est conservé en mémoire et sauvegardé sur le disque quand un autre jour doit être accessible.</p>
-<p>Les données sont accédées comme un croisement entre une liste et un dictionnaire. Les exemples suivants sont tous valides: # obtenir la donné la plus près de Noel à 9h30  data[data.nearest(datetime(2008, 12, 25, 9, 30))] # obtenir le tableau complet, équivalent de data[:] ou seulement data data[datetime.min:datetime.max] # obtenir les données des dernières 12 heures data[datetime.utcnow() - timedelta(hours=12):]</p>
+<p>Le module fournit cinq classes pour stocker des données différentes.  <a class="reference internal" href="#pywws.DataStore.data_store" title="pywws.DataStore.data_store"><tt class="xref py py-class docutils literal"><span class="pre">data_store</span></tt></a> prend les données  &#8220;brutes&#8221; de la station météo; <a class="reference internal" href="#pywws.DataStore.calib_store" title="pywws.DataStore.calib_store"><tt class="xref py py-class docutils literal"><span class="pre">calib_store</span></tt></a>, <a class="reference internal" href="#pywws.DataStore.hourly_store" title="pywws.DataStore.hourly_store"><tt class="xref py py-class docutils literal"><span class="pre">hourly_store</span></tt></a>, <a class="reference internal" href="#pywws.DataStore.daily_store" title="pywws.DataStore.daily_store"><tt class="xref py py-class docutils literal"><span class="pre">daily_store</span></tt></a> et <a class="reference internal" href="#pywws.DataStore.monthly_store" title="pywws.DataStore.monthly_store"><tt class="xref py py-class docutils literal"><span class="pre">monthly_store</span></tt></a> stockent les données traitées (voir <a class="reference internal" href="pywws.Process.html#module-pywws.Process" title="pywws.Process"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Process</span></tt></a>). Les trois sont dérivés de la même classe <tt class="docutils literal"><span class="pre">core_store</span></tt>, ils ne diffèrent que par les clés et les types de données stockées dans chaque enregistrement.</p>
+</div>
+<div class="section" id="detailed-api">
+<h2>API détaillé<a class="headerlink" href="#detailed-api" title="Lien permanent vers ce titre">¶</a></h2>
 <p class="rubric">Fonctions</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -98,26 +105,44 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.DataStore.data_store" title="pywws.DataStore.data_store"><tt class="xref py py-obj docutils literal"><span class="pre">data_store</span></tt></a>(root_dir)</td>
-<td>Stocke les données brutes de la station météo.</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.DataStore.ParamStore" title="pywws.DataStore.ParamStore"><tt class="xref py py-obj docutils literal"><span class="pre">ParamStore</span></tt></a>(root_dir,&nbsp;file_name)</td>
+<td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.DataStore.calib_store" title="pywws.DataStore.calib_store"><tt class="xref py py-obj docutils literal"><span class="pre">calib_store</span></tt></a>(root_dir)</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">RawConfigParser</span></tt>([defaults,&nbsp;dict_type,&nbsp;...])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.DataStore.calib_store" title="pywws.DataStore.calib_store"><tt class="xref py py-obj docutils literal"><span class="pre">calib_store</span></tt></a>(root_dir)</td>
 <td>Stocke les données  &#8220;calibrées&#8221; de la station météo.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.DataStore.hourly_store" title="pywws.DataStore.hourly_store"><tt class="xref py py-obj docutils literal"><span class="pre">hourly_store</span></tt></a>(root_dir)</td>
-<td>Stocke les données sommaires horaire de la stations météo.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.DataStore.daily_store" title="pywws.DataStore.daily_store"><tt class="xref py py-obj docutils literal"><span class="pre">daily_store</span></tt></a>(root_dir)</td>
-<td>Stocke les données sommaires quotidiens de la stations météo.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.DataStore.monthly_store" title="pywws.DataStore.monthly_store"><tt class="xref py py-obj docutils literal"><span class="pre">monthly_store</span></tt></a>(root_dir)</td>
-<td>Stocke les données mensuelles sommaire de la stations météo.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pywws.DataStore.core_store" title="pywws.DataStore.core_store"><tt class="xref py py-obj docutils literal"><span class="pre">core_store</span></tt></a>(root_dir)</td>
 <td></td>
 </tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.DataStore.daily_store" title="pywws.DataStore.daily_store"><tt class="xref py py-obj docutils literal"><span class="pre">daily_store</span></tt></a>(root_dir)</td>
+<td>Stocke les données sommaires quotidiens de la stations météo.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.DataStore.data_store" title="pywws.DataStore.data_store"><tt class="xref py py-obj docutils literal"><span class="pre">data_store</span></tt></a>(root_dir)</td>
+<td>Stocke les données brutes de la station météo.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">date</span></tt></td>
+<td>date(year, month, day) &#8211;&gt; date object</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">datetime</span></tt></td>
+<td>datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.DataStore.hourly_store" title="pywws.DataStore.hourly_store"><tt class="xref py py-obj docutils literal"><span class="pre">hourly_store</span></tt></a>(root_dir)</td>
+<td>Stocke les données sommaires horaire de la stations météo.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.DataStore.monthly_store" title="pywws.DataStore.monthly_store"><tt class="xref py py-obj docutils literal"><span class="pre">monthly_store</span></tt></a>(root_dir)</td>
+<td>Stocke les données mensuelles sommaire de la stations météo.</td>
+</tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pywws.DataStore.params" title="pywws.DataStore.params"><tt class="xref py py-obj docutils literal"><span class="pre">params</span></tt></a>(root_dir)</td>
 <td>Les paramètres sont stockés dans le fichier &#8220;weather.ini&#8221;, dans le répertoire spécifié par root_dir.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.DataStore.status" title="pywws.DataStore.status"><tt class="xref py py-obj docutils literal"><span class="pre">status</span></tt></a>(root_dir)</td>
+<td>Le status est stocké dans le fichier &#8220;status.ini&#8221;, dans le répertoire spécifié par root_dir.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">timedelta</span></tt></td>
+<td>Différence entre deux valeurs de datetime.</td>
 </tr>
 </tbody>
 </table>
@@ -138,9 +163,7 @@
 <dt id="pywws.DataStore.ParamStore.get">
 <tt class="descname">get</tt><big>(</big><em>section</em>, <em>option</em>, <em>default=None</em><big>)</big><a class="reference internal" href="../_modules/pywws/DataStore.html#ParamStore.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.DataStore.ParamStore.get" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p>Obtient une valeur de paramètre et renvoie une chaîne.</p>
-<p>If default is specified and section or option are not defined
-in the file, they are created and set to default, which is
-then the return value.</p>
+<p>Si la valeur par défaut est spécifiée et la section ou l&#8217;option n&#8217;est pas définie dans le fichier, ils sont créés et définit par défaut, qui est alors la valeur retournée.</p>
 </dd></dl>
 
 <dl class="method">
@@ -157,7 +180,7 @@ then the return value.</p>
 <dl class="method">
 <dt id="pywws.DataStore.ParamStore.unset">
 <tt class="descname">unset</tt><big>(</big><em>section</em>, <em>option</em><big>)</big><a class="reference internal" href="../_modules/pywws/DataStore.html#ParamStore.unset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.DataStore.ParamStore.unset" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p>Remove option from section.</p>
+<dd><p>Supprimer l&#8217;option de la section.</p>
 </dd></dl>
 
 </dd></dl>
@@ -171,7 +194,7 @@ then the return value.</p>
 <dl class="class">
 <dt id="pywws.DataStore.status">
 <em class="property">class </em><tt class="descclassname">pywws.DataStore.</tt><tt class="descname">status</tt><big>(</big><em>root_dir</em><big>)</big><a class="reference internal" href="../_modules/pywws/DataStore.html#status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.DataStore.status" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p>Status is stored in a file &#8220;status.ini&#8221; in root_dir.</p>
+<dd><p>Le status est stocké dans le fichier &#8220;status.ini&#8221;, dans le répertoire spécifié par root_dir.</p>
 </dd></dl>
 
 <dl class="class">
@@ -215,7 +238,7 @@ then the return value.</p>
 
 <dl class="attribute">
 <dt id="pywws.DataStore.data_store.conv">
-<tt class="descname">conv</tt><em class="property"> = {'status': &lt;type 'int'&gt;, 'wind_ave': &lt;type 'float'&gt;, 'rain': &lt;type 'float'&gt;, 'hum_in': &lt;type 'int'&gt;, 'temp_out': &lt;type 'float'&gt;, 'wind_dir': &lt;type 'int'&gt;, 'hum_out': &lt;type 'int'&gt;, 'illuminance': &lt;type 'float'&gt;, 'wind_gust': &lt;type 'float'&gt;, 'idx': &lt;function safestrptime at 0x276aed8&gt;, 'uv': &lt;type 'int'&gt;, 'temp_in': &lt;type 'float'&gt;, 'delay': &lt;type 'int'&gt;, 'abs_pressure': &lt;type 'float'&gt;}</em><a class="headerlink" href="#pywws.DataStore.data_store.conv" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">conv</tt><em class="property"> = {'status': &lt;type 'int'&gt;, 'wind_ave': &lt;type 'float'&gt;, 'rain': &lt;type 'float'&gt;, 'hum_in': &lt;type 'int'&gt;, 'temp_out': &lt;type 'float'&gt;, 'wind_dir': &lt;type 'int'&gt;, 'hum_out': &lt;type 'int'&gt;, 'illuminance': &lt;type 'float'&gt;, 'wind_gust': &lt;type 'float'&gt;, 'idx': &lt;function safestrptime at 0x3019848&gt;, 'uv': &lt;type 'int'&gt;, 'temp_in': &lt;type 'float'&gt;, 'delay': &lt;type 'int'&gt;, 'abs_pressure': &lt;type 'float'&gt;}</em><a class="headerlink" href="#pywws.DataStore.data_store.conv" title="Lien permanent vers cette définition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -231,7 +254,7 @@ then the return value.</p>
 
 <dl class="attribute">
 <dt id="pywws.DataStore.calib_store.conv">
-<tt class="descname">conv</tt><em class="property"> = {'status': &lt;type 'int'&gt;, 'wind_ave': &lt;type 'float'&gt;, 'rain': &lt;type 'float'&gt;, 'rel_pressure': &lt;type 'float'&gt;, 'hum_in': &lt;type 'int'&gt;, 'temp_out': &lt;type 'float'&gt;, 'wind_dir': &lt;type 'int'&gt;, 'hum_out': &lt;type 'int'&gt;, 'illuminance': &lt;type 'float'&gt;, 'wind_gust': &lt;type 'float'&gt;, 'idx': &lt;function safestrptime at 0x276aed8&gt;, 'uv': &lt;type 'int'&gt;, 'temp_in': &lt;type 'float'&gt;, 'delay': &lt;type 'int'&gt;, 'abs_pressure': &lt;type 'float'&gt;}</em><a class="headerlink" href="#pywws.DataStore.calib_store.conv" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">conv</tt><em class="property"> = {'status': &lt;type 'int'&gt;, 'wind_ave': &lt;type 'float'&gt;, 'rain': &lt;type 'float'&gt;, 'rel_pressure': &lt;type 'float'&gt;, 'hum_in': &lt;type 'int'&gt;, 'temp_out': &lt;type 'float'&gt;, 'wind_dir': &lt;type 'int'&gt;, 'hum_out': &lt;type 'int'&gt;, 'illuminance': &lt;type 'float'&gt;, 'wind_gust': &lt;type 'float'&gt;, 'idx': &lt;function safestrptime at 0x3019848&gt;, 'uv': &lt;type 'int'&gt;, 'temp_in': &lt;type 'float'&gt;, 'delay': &lt;type 'int'&gt;, 'abs_pressure': &lt;type 'float'&gt;}</em><a class="headerlink" href="#pywws.DataStore.calib_store.conv" title="Lien permanent vers cette définition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -247,7 +270,7 @@ then the return value.</p>
 
 <dl class="attribute">
 <dt id="pywws.DataStore.hourly_store.conv">
-<tt class="descname">conv</tt><em class="property"> = {'pressure_trend': &lt;type 'float'&gt;, 'wind_ave': &lt;type 'float'&gt;, 'rain': &lt;type 'float'&gt;, 'rel_pressure': &lt;type 'float'&gt;, 'hum_in': &lt;type 'int'&gt;, 'temp_out': &lt;type 'float'&gt;, 'wind_dir': &lt;type 'int'&gt;, 'hum_out': &lt;type 'int'&gt;, 'wind_gust': &lt;type 'float'&gt;, 'idx': &lt;function safestrptime at 0x276aed8&gt;, 'uv': &lt;type 'int'&gt;, 'temp_in': &lt;type 'float'&gt;, 'illuminance': &lt;type 'float'&gt;, 'abs_pressure': &lt;type 'float'&gt;}</em><a class="headerlink" href="#pywws.DataStore.hourly_store.conv" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">conv</tt><em class="property"> = {'pressure_trend': &lt;type 'float'&gt;, 'wind_ave': &lt;type 'float'&gt;, 'rain': &lt;type 'float'&gt;, 'rel_pressure': &lt;type 'float'&gt;, 'hum_in': &lt;type 'int'&gt;, 'temp_out': &lt;type 'float'&gt;, 'wind_dir': &lt;type 'int'&gt;, 'hum_out': &lt;type 'int'&gt;, 'wind_gust': &lt;type 'float'&gt;, 'idx': &lt;function safestrptime at 0x3019848&gt;, 'uv': &lt;type 'int'&gt;, 'temp_in': &lt;type 'float'&gt;, 'illuminance': &lt;type 'float'&gt;, 'abs_pressure': &lt;type 'float'&gt;}</em><a class="headerlink" href="#pywws.DataStore.hourly_store.conv" title="Lien permanent vers cette définition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -263,7 +286,7 @@ then the return value.</p>
 
 <dl class="attribute">
 <dt id="pywws.DataStore.daily_store.conv">
-<tt class="descname">conv</tt><em class="property"> = {'temp_in_min': &lt;type 'float'&gt;, 'temp_in_max': &lt;type 'float'&gt;, 'uv_ave': &lt;type 'float'&gt;, 'temp_out_max': &lt;type 'float'&gt;, 'temp_out_min': &lt;type 'float'&gt;, 'abs_pressure_max': &lt;type 'float'&gt;, 'start': &lt;function safestrptime at 0x276aed8&gt;, 'hum_in_max_t': &lt;function safestrptime at 0x276aed8&gt;, 'uv_max_t': &lt;function safestrptime at 0x276aed8&gt;, 'temp_in_max_t': &lt;function safestrptime at 0x276aed8&gt;, 'abs_pressure_min_t': &lt;function safestrptime at 0x276aed8&gt;, 'illuminance_ave': &lt;type 'float'&gt;, 'rel_pressure_ave': &lt;type 'float'&gt;, 'rain': &lt;type 'float'&gt;, 'rel_pressure_min_t': &lt;function safestrptime at 0x276aed8&gt;, 'wind_gust': &lt;type 'float'&gt;, 'temp_out_min_t': &lt;function safestrptime at 0x276aed8&gt;, 'wind_gust_t': &lt;function safestrptime at 0x276aed8&gt;, 'hum_out_ave': &lt;type 'float'&gt;, 'rel_pressure_min': &lt;type 'float'&gt;, 'hum_out_min_t': &lt;function safestrptime at 0x276aed8&gt;, 'temp_out_max_t': &lt;function safestrptime at 0x276aed8&gt;, 'uv_max': &lt;type 'int'&gt;, 'illuminance_max_t': &lt;function safestrptime at 0x276aed8&gt;, 'rel_pressure_max': &lt;type 'float'&gt;, 'temp_in_ave': &lt;type 'float'&gt;, 'hum_in_min_t': &lt;function safestrptime at 0x276aed8&gt;, 'hum_out_max': &lt;type 'int'&gt;, 'illuminance_max': &lt;type 'float'&gt;, 'wind_ave': &lt;type 'float'&gt;, 'abs_pressure_max_t': &lt;function safestrptime at 0x276aed8&gt;, 'temp_in_min_t': &lt;function safestrptime at 0x276aed8&gt;, 'hum_out_max_t': &lt;function safestrptime at 0x276aed8&gt;, 'hum_out_min': &lt;type 'int'&gt;, 'rel_pressure_max_t': &lt;function safestrptime at 0x276aed8&gt;, 'wind_dir': &lt;type 'int'&gt;, 'temp_out_ave': &lt;type 'float'&gt;, 'abs_pressure_ave': &lt;type 'float'&gt;, 'idx': &lt;function safestrptime at 0x276aed8&gt;, 'hum_in_max': &lt;type 'int'&gt;, 'abs_pressure_min': &lt;type 'float'&gt;, 'hum_in_ave': &lt;type 'float'&gt;, 'hum_in_min': &lt;type 'int'&gt;}</em><a class="headerlink" href="#pywws.DataStore.daily_store.conv" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">conv</tt><em class="property"> = {'temp_in_min': &lt;type 'float'&gt;, 'temp_in_max': &lt;type 'float'&gt;, 'uv_ave': &lt;type 'float'&gt;, 'temp_out_max': &lt;type 'float'&gt;, 'temp_out_min': &lt;type 'float'&gt;, 'abs_pressure_max': &lt;type 'float'&gt;, 'start': &lt;function safestrptime at 0x3019848&gt;, 'hum_in_max_t': &lt;function safestrptime at 0x3019848&gt;, 'uv_max_t': &lt;function safestrptime at 0x3019848&gt;, 'temp_in_max_t': &lt;function safestrptime at 0x3019848&gt;, 'abs_pressure_min_t': &lt;function safestrptime at 0x3019848&gt;, 'illuminance_ave': &lt;type 'float'&gt;, 'rel_pressure_ave': &lt;type 'float'&gt;, 'rain': &lt;type 'float'&gt;, 'rel_pressure_min_t': &lt;function safestrptime at 0x3019848&gt;, 'wind_gust': &lt;type 'float'&gt;, 'temp_out_min_t': &lt;function safestrptime at 0x3019848&gt;, 'wind_gust_t': &lt;function safestrptime at 0x3019848&gt;, 'hum_out_ave': &lt;type 'float'&gt;, 'rel_pressure_min': &lt;type 'float'&gt;, 'hum_out_min_t': &lt;function safestrptime at 0x3019848&gt;, 'temp_out_max_t': &lt;function safestrptime at 0x3019848&gt;, 'uv_max': &lt;type 'int'&gt;, 'illuminance_max_t': &lt;function safestrptime at 0x3019848&gt;, 'rel_pressure_max': &lt;type 'float'&gt;, 'temp_in_ave': &lt;type 'float'&gt;, 'hum_in_min_t': &lt;function safestrptime at 0x3019848&gt;, 'hum_out_max': &lt;type 'int'&gt;, 'illuminance_max': &lt;type 'float'&gt;, 'wind_ave': &lt;type 'float'&gt;, 'abs_pressure_max_t': &lt;function safestrptime at 0x3019848&gt;, 'temp_in_min_t': &lt;function safestrptime at 0x3019848&gt;, 'hum_out_max_t': &lt;function safestrptime at 0x3019848&gt;, 'hum_out_min': &lt;type 'int'&gt;, 'rel_pressure_max_t': &lt;function safestrptime at 0x3019848&gt;, 'wind_dir': &lt;type 'int'&gt;, 'temp_out_ave': &lt;type 'float'&gt;, 'abs_pressure_ave': &lt;type 'float'&gt;, 'idx': &lt;function safestrptime at 0x3019848&gt;, 'hum_in_max': &lt;type 'int'&gt;, 'abs_pressure_min': &lt;type 'float'&gt;, 'hum_in_ave': &lt;type 'float'&gt;, 'hum_in_min': &lt;type 'int'&gt;}</em><a class="headerlink" href="#pywws.DataStore.daily_store.conv" title="Lien permanent vers cette définition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -279,7 +302,7 @@ then the return value.</p>
 
 <dl class="attribute">
 <dt id="pywws.DataStore.monthly_store.conv">
-<tt class="descname">conv</tt><em class="property"> = {'uv_ave': &lt;type 'float'&gt;, 'illuminance_max_hi_t': &lt;function safestrptime at 0x276aed8&gt;, 'uv_max_lo_t': &lt;function safestrptime at 0x276aed8&gt;, 'temp_out_max_hi_t': &lt;function safestrptime at 0x276aed8&gt;, 'temp_out_max_lo': &lt;type 'float'&gt;, 'abs_pressure_max': &lt;type 'float'&gt;, 'rel_pressure_min_t': &lt;function safestrptime at 0x276aed8&gt;, 'temp_in_min_hi': &lt;type 'float'&gt;, 'temp_in_min_lo': &lt;type 'float'&gt;, 'start': &lt;function safestrptime at 0x276aed8&gt;, 'hum_in_max_t': &lt;function safestrptime at 0x276aed8&gt;, 'rain_days': &lt;type 'int'&gt;, 'abs_pressure_min_t': &lt;function safestrptime at 0x276aed8&gt;, 'temp_out_max_hi': &lt;type 'float'&gt;, 'illuminance_ave': &lt;type 'float'&gt;, 'temp_out_min_lo': &lt;type 'float'&gt;, 'illuminance_max_ave': &lt;type 'float'&gt;, 'uv_max_hi': &lt;type 'int'&gt;, 'rel_pressure_ave': &lt;type 'float'&gt;, 'rain': &lt;type 'float'&gt;, 'temp_out_min_hi': &lt;type 'float'&gt;, 'wind_gust': &lt;type 'float'&gt;, 'temp_in_max_hi_t': &lt;function safestrptime at 0x276aed8&gt;, 'temp_in_max_lo': &lt;type 'float'&gt;, 'temp_in_min_ave': &lt;type 'float'&gt;, 'wind_gust_t': &lt;function safestrptime at 0x276aed8&gt;, 'hum_out_ave': &lt;type 'float'&gt;, 'rel_pressure_min': &lt;type 'float'&gt;, 'hum_out_min_t': &lt;function safestrptime at 0x276aed8&gt;, 'illuminance_max_lo': &lt;type 'float'&gt;, 'temp_in_min_lo_t': &lt;function safestrptime at 0x276aed8&gt;, 'illuminance_max_hi': &lt;type 'float'&gt;, 'temp_out_max_lo_t': &lt;function safestrptime at 0x276aed8&gt;, 'temp_in_max_hi': &lt;type 'float'&gt;, 'rel_pressure_max': &lt;type 'float'&gt;, 'uv_max_hi_t': &lt;function safestrptime at 0x276aed8&gt;, 'temp_in_ave': &lt;type 'float'&gt;, 'uv_max_ave': &lt;type 'float'&gt;, 'temp_in_max_ave': &lt;type 'float'&gt;, 'hum_in_min_t': &lt;function safestrptime at 0x276aed8&gt;, 'hum_out_max': &lt;type 'int'&gt;, 'temp_in_min_hi_t': &lt;function safestrptime at 0x276aed8&gt;, 'temp_out_min_ave': &lt;type 'float'&gt;, 'temp_out_min_hi_t': &lt;function safestrptime at 0x276aed8&gt;, 'wind_ave': &lt;type 'float'&gt;, 'abs_pressure_max_t': &lt;function safestrptime at 0x276aed8&gt;, 'hum_out_max_t': &lt;function safestrptime at 0x276aed8&gt;, 'hum_out_min': &lt;type 'int'&gt;, 'rel_pressure_max_t': &lt;function safestrptime at 0x276aed8&gt;, 'uv_max_lo': &lt;type 'int'&gt;, 'wind_dir': &lt;type 'int'&gt;, 'temp_out_ave': &lt;type 'float'&gt;, 'abs_pressure_ave': &lt;type 'float'&gt;, 'idx': &lt;function safestrptime at 0x276aed8&gt;, 'temp_out_min_lo_t': &lt;function safestrptime at 0x276aed8&gt;, 'illuminance_max_lo_t': &lt;function safestrptime at 0x276aed8&gt;, 'hum_in_max': &lt;type 'int'&gt;, 'abs_pressure_min': &lt;type 'float'&gt;, 'temp_in_max_lo_t': &lt;function safestrptime at 0x276aed8&gt;, 'hum_in_ave': &lt;type 'float'&gt;, 'temp_out_max_ave': &lt;type 'float'&gt;, 'hum_in_min': &lt;type 'int'&gt;}</em><a class="headerlink" href="#pywws.DataStore.monthly_store.conv" title="Lien permanent vers cette définition">¶</a></dt>
+<tt class="descname">conv</tt><em class="property"> = {'uv_ave': &lt;type 'float'&gt;, 'illuminance_max_hi_t': &lt;function safestrptime at 0x3019848&gt;, 'uv_max_lo_t': &lt;function safestrptime at 0x3019848&gt;, 'temp_out_max_hi_t': &lt;function safestrptime at 0x3019848&gt;, 'temp_out_max_lo': &lt;type 'float'&gt;, 'abs_pressure_max': &lt;type 'float'&gt;, 'rel_pressure_min_t': &lt;function safestrptime at 0x3019848&gt;, 'temp_in_min_hi': &lt;type 'float'&gt;, 'temp_in_min_lo': &lt;type 'float'&gt;, 'start': &lt;function safestrptime at 0x3019848&gt;, 'hum_in_max_t': &lt;function safestrptime at 0x3019848&gt;, 'rain_days': &lt;type 'int'&gt;, 'abs_pressure_min_t': &lt;function safestrptime at 0x3019848&gt;, 'temp_out_max_hi': &lt;type 'float'&gt;, 'illuminance_ave': &lt;type 'float'&gt;, 'temp_out_min_lo': &lt;type 'float'&gt;, 'illuminance_max_ave': &lt;type 'float'&gt;, 'uv_max_hi': &lt;type 'int'&gt;, 'rel_pressure_ave': &lt;type 'float'&gt;, 'rain': &lt;type 'float'&gt;, 'temp_out_min_hi': &lt;type 'float'&gt;, 'wind_gust': &lt;type 'float'&gt;, 'temp_in_max_hi_t': &lt;function safestrptime at 0x3019848&gt;, 'temp_in_max_lo': &lt;type 'float'&gt;, 'temp_in_min_ave': &lt;type 'float'&gt;, 'wind_gust_t': &lt;function safestrptime at 0x3019848&gt;, 'hum_out_ave': &lt;type 'float'&gt;, 'rel_pressure_min': &lt;type 'float'&gt;, 'hum_out_min_t': &lt;function safestrptime at 0x3019848&gt;, 'illuminance_max_lo': &lt;type 'float'&gt;, 'temp_in_min_lo_t': &lt;function safestrptime at 0x3019848&gt;, 'illuminance_max_hi': &lt;type 'float'&gt;, 'temp_out_max_lo_t': &lt;function safestrptime at 0x3019848&gt;, 'temp_in_max_hi': &lt;type 'float'&gt;, 'rel_pressure_max': &lt;type 'float'&gt;, 'uv_max_hi_t': &lt;function safestrptime at 0x3019848&gt;, 'temp_in_ave': &lt;type 'float'&gt;, 'uv_max_ave': &lt;type 'float'&gt;, 'temp_in_max_ave': &lt;type 'float'&gt;, 'hum_in_min_t': &lt;function safestrptime at 0x3019848&gt;, 'hum_out_max': &lt;type 'int'&gt;, 'temp_in_min_hi_t': &lt;function safestrptime at 0x3019848&gt;, 'temp_out_min_ave': &lt;type 'float'&gt;, 'temp_out_min_hi_t': &lt;function safestrptime at 0x3019848&gt;, 'wind_ave': &lt;type 'float'&gt;, 'abs_pressure_max_t': &lt;function safestrptime at 0x3019848&gt;, 'hum_out_max_t': &lt;function safestrptime at 0x3019848&gt;, 'hum_out_min': &lt;type 'int'&gt;, 'rel_pressure_max_t': &lt;function safestrptime at 0x3019848&gt;, 'uv_max_lo': &lt;type 'int'&gt;, 'wind_dir': &lt;type 'int'&gt;, 'temp_out_ave': &lt;type 'float'&gt;, 'abs_pressure_ave': &lt;type 'float'&gt;, 'idx': &lt;function safestrptime at 0x3019848&gt;, 'temp_out_min_lo_t': &lt;function safestrptime at 0x3019848&gt;, 'illuminance_max_lo_t': &lt;function safestrptime at 0x3019848&gt;, 'hum_in_max': &lt;type 'int'&gt;, 'abs_pressure_min': &lt;type 'float'&gt;, 'temp_in_max_lo_t': &lt;function safestrptime at 0x3019848&gt;, 'hum_in_ave': &lt;type 'float'&gt;, 'temp_out_max_ave': &lt;type 'float'&gt;, 'hum_in_min': &lt;type 'int'&gt;}</em><a class="headerlink" href="#pywws.DataStore.monthly_store.conv" title="Lien permanent vers cette définition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -300,7 +323,7 @@ then the return value.</p>
   <ul>
 <li><a class="reference internal" href="#">pywws.DataStore</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
-<li><a class="reference internal" href="#module-pywws.DataStore">API détaillé</a></li>
+<li><a class="reference internal" href="#detailed-api">API détaillé</a></li>
 </ul>
 </li>
 </ul>
@@ -343,7 +366,7 @@ then the return value.</p>
         <li class="right" >
           <a href="pywws.device_pyusb.html" title="pywws.device_pyusb"
              >précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" >Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>

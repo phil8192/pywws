@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>SetWeatherStation &mdash; pywws 13.06_r1021 documentation</title>
+    <title>pywws.SetWeatherStation &mdash; pywws 13.09_r1065 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.06_r1021',
+        VERSION:     '13.09_r1065',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,10 +26,10 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.06_r1021 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
     <link rel="up" title="Python programs and modules" href="index.html" />
-    <link rel="next" title="TestWeatherStation" href="pywws.TestWeatherStation.html" />
-    <link rel="prev" title="TwitterAuth" href="pywws.TwitterAuth.html" /> 
+    <link rel="next" title="pywws.TestWeatherStation" href="pywws.TestWeatherStation.html" />
+    <link rel="prev" title="pywws.TwitterAuth" href="pywws.TwitterAuth.html" /> 
   </head>
   <body>
     <div class="related">
@@ -42,12 +42,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="pywws.TestWeatherStation.html" title="TestWeatherStation"
+          <a href="pywws.TestWeatherStation.html" title="pywws.TestWeatherStation"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="pywws.TwitterAuth.html" title="TwitterAuth"
+          <a href="pywws.TwitterAuth.html" title="pywws.TwitterAuth"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1021 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>  
@@ -58,7 +58,7 @@
           <div class="body">
             
   <div class="section" id="module-pywws.SetWeatherStation">
-<span id="setweatherstation"></span><h1>SetWeatherStation<a class="headerlink" href="#module-pywws.SetWeatherStation" title="Permalink to this headline">¶</a></h1>
+<span id="pywws-setweatherstation"></span><h1>pywws.SetWeatherStation<a class="headerlink" href="#module-pywws.SetWeatherStation" title="Permalink to this headline">¶</a></h1>
 <p>Set some weather station parameters</p>
 <div class="highlight-python"><pre>usage: python -m pywws.SetWeatherStation [options]
 options are:
@@ -77,11 +77,29 @@ options are:
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.SetWeatherStation.bcd_encode" title="pywws.SetWeatherStation.bcd_encode"><tt class="xref py py-obj docutils literal"><span class="pre">bcd_encode</span></tt></a>(value)</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">ApplicationLogger</span></tt>(verbose[,&nbsp;logfile])</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.SetWeatherStation.main" title="pywws.SetWeatherStation.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.SetWeatherStation.bcd_encode" title="pywws.SetWeatherStation.bcd_encode"><tt class="xref py py-obj docutils literal"><span class="pre">bcd_encode</span></tt></a>(value)</td>
 <td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.SetWeatherStation.main" title="pywws.SetWeatherStation.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">datetime</span></tt></td>
+<td>datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">timedelta</span></tt></td>
+<td>Difference between two datetime values.</td>
 </tr>
 </tbody>
 </table>
@@ -108,10 +126,10 @@ options are:
             </a></p>
   <h4>Previous topic</h4>
   <p class="topless"><a href="pywws.TwitterAuth.html"
-                        title="previous chapter">TwitterAuth</a></p>
+                        title="previous chapter">pywws.TwitterAuth</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="pywws.TestWeatherStation.html"
-                        title="next chapter">TestWeatherStation</a></p>
+                        title="next chapter">pywws.TestWeatherStation</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -139,12 +157,12 @@ options are:
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="pywws.TestWeatherStation.html" title="TestWeatherStation"
+          <a href="pywws.TestWeatherStation.html" title="pywws.TestWeatherStation"
              >next</a> |</li>
         <li class="right" >
-          <a href="pywws.TwitterAuth.html" title="TwitterAuth"
+          <a href="pywws.TwitterAuth.html" title="pywws.TwitterAuth"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1021 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" >Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>

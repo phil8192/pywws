@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.WeatherStation &mdash; pywws 13.05_r1011 documentation</title>
+    <title>pywws.WeatherStation &mdash; pywws 13.09_r1065 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.05_r1011',
+        VERSION:     '13.09_r1065',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.05_r1011 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
     <link rel="up" title="Programmes et des modules Python" href="index.html" />
     <link rel="next" title="pywws.device_ctypes_hidapi" href="pywws.device_ctypes_hidapi.html" />
     <link rel="prev" title="pywws.YoWindow" href="pywws.YoWindow.html" /> 
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="pywws.YoWindow.html" title="pywws.YoWindow"
              accesskey="P">précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>  
@@ -89,20 +89,8 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.WeatherStation.apparent_temp" title="pywws.WeatherStation.apparent_temp"><tt class="xref py py-obj docutils literal"><span class="pre">apparent_temp</span></tt></a>(temp,&nbsp;rh,&nbsp;wind)</td>
-<td>Calcule la température apparente (sensation réelle), en utilisant la formule de</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.WeatherStation.dew_point" title="pywws.WeatherStation.dew_point"><tt class="xref py py-obj docutils literal"><span class="pre">dew_point</span></tt></a>(temp,&nbsp;hum)</td>
-<td>Calcule le point de rosée, en utilisant la formule de</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.WeatherStation.get_wind_dir_text" title="pywws.WeatherStation.get_wind_dir_text"><tt class="xref py py-obj docutils literal"><span class="pre">get_wind_dir_text</span></tt></a>()</td>
-<td>Retourne un tableau pour convertir un entier représentant la direction du vent, en une chaîne de caractères.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.WeatherStation.pressure_trend_text" title="pywws.WeatherStation.pressure_trend_text"><tt class="xref py py-obj docutils literal"><span class="pre">pressure_trend_text</span></tt></a>(trend)</td>
-<td>Converti la tendance de la pression en une chaîne, telle qu&#8217;elle est utilisée par le UK met</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.WeatherStation.wind_chill" title="pywws.WeatherStation.wind_chill"><tt class="xref py py-obj docutils literal"><span class="pre">wind_chill</span></tt></a>(temp,&nbsp;wind)</td>
-<td>Calcule le refroidissement éolien, en utilisant la formule de</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.WeatherStation.decode_status" title="pywws.WeatherStation.decode_status"><tt class="xref py py-obj docutils literal"><span class="pre">decode_status</span></tt></a>(status)</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -116,41 +104,17 @@
 <tr class="row-odd"><td><a class="reference internal" href="#pywws.WeatherStation.CUSBDrive" title="pywws.WeatherStation.CUSBDrive"><tt class="xref py py-obj docutils literal"><span class="pre">CUSBDrive</span></tt></a>()</td>
 <td>Interface de bas niveau de la station météo via USB.</td>
 </tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">USBDevice</span></tt>(vendor_id,&nbsp;product_id)</td>
+<td>Low level USB device access via hidapi library.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">datetime</span></tt></td>
+<td>datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])</td>
+</tr>
 <tr class="row-even"><td><a class="reference internal" href="#pywws.WeatherStation.weather_station" title="pywws.WeatherStation.weather_station"><tt class="xref py py-obj docutils literal"><span class="pre">weather_station</span></tt></a>([ws_type,&nbsp;params,&nbsp;status])</td>
 <td>Classe qui représente la station météo pour le programme utilisateur.</td>
 </tr>
 </tbody>
 </table>
-<dl class="function">
-<dt id="pywws.WeatherStation.dew_point">
-<tt class="descclassname">pywws.WeatherStation.</tt><tt class="descname">dew_point</tt><big>(</big><em>temp</em>, <em>hum</em><big>)</big><a class="reference internal" href="../_modules/pywws/WeatherStation.html#dew_point"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WeatherStation.dew_point" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p>Calcule le point de rosée, en utilisant la formule provenant de <a class="reference external" href="http://en.wikipedia.org/wiki/Dew_point">http://en.wikipedia.org/wiki/Dew_point</a>.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="pywws.WeatherStation.wind_chill">
-<tt class="descclassname">pywws.WeatherStation.</tt><tt class="descname">wind_chill</tt><big>(</big><em>temp</em>, <em>wind</em><big>)</big><a class="reference internal" href="../_modules/pywws/WeatherStation.html#wind_chill"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WeatherStation.wind_chill" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p>Calcule le refroidissement éolien, en utilisant la formule provenant de <a class="reference external" href="http://en.wikipedia.org/wiki/wind_chill">http://en.wikipedia.org/wiki/wind_chill</a></p>
-</dd></dl>
-
-<dl class="function">
-<dt id="pywws.WeatherStation.apparent_temp">
-<tt class="descclassname">pywws.WeatherStation.</tt><tt class="descname">apparent_temp</tt><big>(</big><em>temp</em>, <em>rh</em>, <em>wind</em><big>)</big><a class="reference internal" href="../_modules/pywws/WeatherStation.html#apparent_temp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WeatherStation.apparent_temp" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p>Calcule la température apparente (sensation réelle), en utilisant la formule provenant de <a class="reference external" href="http://www.bom.gov.au/info/thermal_stress/">http://www.bom.gov.au/info/thermal_stress/</a></p>
-</dd></dl>
-
-<dl class="function">
-<dt id="pywws.WeatherStation.get_wind_dir_text">
-<tt class="descclassname">pywws.WeatherStation.</tt><tt class="descname">get_wind_dir_text</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/pywws/WeatherStation.html#get_wind_dir_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WeatherStation.get_wind_dir_text" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p>Retourne un tableau pour convertir un entier représentant la direction du vent, en une chaîne de caractères.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="pywws.WeatherStation.pressure_trend_text">
-<tt class="descclassname">pywws.WeatherStation.</tt><tt class="descname">pressure_trend_text</tt><big>(</big><em>trend</em><big>)</big><a class="reference internal" href="../_modules/pywws/WeatherStation.html#pressure_trend_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WeatherStation.pressure_trend_text" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p>Converti la tendance de la pression en une chaîne, telle qu&#8217;utilisée par le UK Met Office.</p>
-</dd></dl>
-
 <dl class="function">
 <dt id="pywws.WeatherStation.decode_status">
 <tt class="descclassname">pywws.WeatherStation.</tt><tt class="descname">decode_status</tt><big>(</big><em>status</em><big>)</big><a class="reference internal" href="../_modules/pywws/WeatherStation.html#decode_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.WeatherStation.decode_status" title="Lien permanent vers cette définition">¶</a></dt>
@@ -383,7 +347,7 @@
         <li class="right" >
           <a href="pywws.YoWindow.html" title="pywws.YoWindow"
              >précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" >Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>

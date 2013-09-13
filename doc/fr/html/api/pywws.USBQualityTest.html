@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>USBQualityTest &mdash; pywws 13.05_r1011 documentation</title>
+    <title>pywws.USBQualityTest &mdash; pywws 13.09_r1065 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.05_r1011',
+        VERSION:     '13.09_r1065',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,10 +27,10 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.05_r1011 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
     <link rel="up" title="Programmes et des modules Python" href="index.html" />
-    <link rel="next" title="EWtoPy" href="pywws.EWtoPy.html" />
-    <link rel="prev" title="TestWeatherStation" href="pywws.TestWeatherStation.html" /> 
+    <link rel="next" title="pywws.EWtoPy" href="pywws.EWtoPy.html" />
+    <link rel="prev" title="pywws.TestWeatherStation" href="pywws.TestWeatherStation.html" /> 
   </head>
   <body>
     <div class="related">
@@ -43,12 +43,12 @@
           <a href="../py-modindex.html" title="Index des modules Python"
              >modules</a> |</li>
         <li class="right" >
-          <a href="pywws.EWtoPy.html" title="EWtoPy"
+          <a href="pywws.EWtoPy.html" title="pywws.EWtoPy"
              accesskey="N">suivant</a> |</li>
         <li class="right" >
-          <a href="pywws.TestWeatherStation.html" title="TestWeatherStation"
+          <a href="pywws.TestWeatherStation.html" title="pywws.TestWeatherStation"
              accesskey="P">précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>  
@@ -59,7 +59,7 @@
           <div class="body">
             
   <div class="section" id="module-pywws.USBQualityTest">
-<span id="usbqualitytest"></span><h1>USBQualityTest<a class="headerlink" href="#module-pywws.USBQualityTest" title="Lien permanent vers ce titre">¶</a></h1>
+<span id="pywws-usbqualitytest"></span><h1>pywws.USBQualityTest<a class="headerlink" href="#module-pywws.USBQualityTest" title="Lien permanent vers ce titre">¶</a></h1>
 <p>Teste la qualité de la connexion USB avec votre station météo</p>
 <div class="highlight-python"><pre>usage: python -m pywws.USBQualityTest [options]
 options are:
@@ -69,11 +69,7 @@ options are:
 </div>
 <p>La liaison USB à ma station n&#8217;est pas fiable à 100%. Les données lues à partir de la station par l&#8217;ordinateur sont occasionnellement corrompues, peut-être par une interférence. J&#8217;ai essayé de résoudre ce problème en mettant une perle de ferrite autour du câble USB et le déplaçant des sources d&#8217;interférences possibles, tels que les disques durs externes. Le tout sans succès jusqu&#8217;à présent.</p>
 <p>Ce programme teste la connexion USB en lisant de manière continue toute la mémoire de la station météo (sauf les parties qui peuvent être changeantes) à la recherche d&#8217;erreurs. Chaque bloc de 32 octets est lu deux fois, et si les deux lectures diffèrent, un message d&#8217;avertissement s&#8217;affiche. Sont également affichés le nombre de blocs lus, et le nombre d&#8217;erreurs rencontrées.</p>
-<p>I typically get one or two errors per hour, so the test needs to be
-run for several hours to produce a useful measurement. Note that other
-software that accesses the weather station (such as
-<a class="reference internal" href="pywws.Hourly.html"><em>Hourly</em></a> or <a class="reference internal" href="pywws.LiveLog.html"><em>LiveLog</em></a>) must not be run while the
-test is in progress.</p>
+<p>En général, j&#8217;obtiens une ou deux erreurs par heure, donc le test doit être exécuté pendant plusieurs heures pour produire une mesure utile. Notez que les autres programmes qui accèdent à la station météo (tel que <a class="reference internal" href="pywws.Hourly.html"><em>pywws.Hourly</em></a> ou  <a class="reference internal" href="pywws.LiveLog.html"><em>pywws.LiveLog</em></a>) ne doivent pas être exécutés alors que le test est en cours.</p>
 <p>Si vous exécutez ce test et obtenez absolument aucune erreur, s&#8217;il vous plaît faites le moi savoir. Il y a quelque chose de spécial dans votre configuration et j&#8217;aimerais bien savoir ce que c&#8217;est</p>
 <p class="rubric">Fonctions</p>
 <table border="1" class="longtable docutils">
@@ -82,7 +78,10 @@ test is in progress.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.USBQualityTest.main" title="pywws.USBQualityTest.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">ApplicationLogger</span></tt>(verbose[,&nbsp;logfile])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.USBQualityTest.main" title="pywws.USBQualityTest.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
 <td></td>
 </tr>
 </tbody>
@@ -105,10 +104,10 @@ test is in progress.</p>
             </a></p>
   <h4>Sujet précédent</h4>
   <p class="topless"><a href="pywws.TestWeatherStation.html"
-                        title="Chapitre précédent">TestWeatherStation</a></p>
+                        title="Chapitre précédent">pywws.TestWeatherStation</a></p>
   <h4>Sujet suivant</h4>
   <p class="topless"><a href="pywws.EWtoPy.html"
-                        title="Chapitre suivant">EWtoPy</a></p>
+                        title="Chapitre suivant">pywws.EWtoPy</a></p>
 <div id="searchbox" style="display: none">
   <h3>Recherche rapide</h3>
     <form class="search" action="../search.html" method="get">
@@ -136,12 +135,12 @@ test is in progress.</p>
           <a href="../py-modindex.html" title="Index des modules Python"
              >modules</a> |</li>
         <li class="right" >
-          <a href="pywws.EWtoPy.html" title="EWtoPy"
+          <a href="pywws.EWtoPy.html" title="pywws.EWtoPy"
              >suivant</a> |</li>
         <li class="right" >
-          <a href="pywws.TestWeatherStation.html" title="TestWeatherStation"
+          <a href="pywws.TestWeatherStation.html" title="pywws.TestWeatherStation"
              >précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" >Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>

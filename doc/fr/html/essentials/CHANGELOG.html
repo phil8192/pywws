@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Historique &mdash; pywws 13.05_r1011 documentation</title>
+    <title>Historique &mdash; pywws 13.09_r1065 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.05_r1011',
+        VERSION:     '13.09_r1065',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,9 +27,9 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.05_r1011 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
     <link rel="next" title="Guides utilisateur" href="../guides/index.html" />
-    <link rel="prev" title="Licence Publique Générale GNU" href="LICENCE.html" /> 
+    <link rel="prev" title="Pré-requis" href="dependencies.html" /> 
   </head>
   <body>
     <div class="related">
@@ -45,9 +45,9 @@
           <a href="../guides/index.html" title="Guides utilisateur"
              accesskey="N">suivant</a> |</li>
         <li class="right" >
-          <a href="LICENCE.html" title="Licence Publique Générale GNU"
+          <a href="dependencies.html" title="Pré-requis"
              accesskey="P">précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -76,13 +76,15 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-Changes in v13.05:
+Changes in v13.06:
     1/ Substantially rearranged directories, getting rid of 'code' and 'code3'.
     2/ Removed 'makefile' - everything is now done via 'setup.py'.
     3/ Removed 'RunModule.py' - use 'python -m pywws.module' now.
     4/ Separated storage of config (weather.ini) and status (status.ini).
-    5/ Added 2 more low-level USB access modules.
-    6/ Various bug fixes.
+    5/ Replaced toservice.py "rapid fire" mode with a separate config file for
+       Weather Underground rapid fire.
+    6/ Added 2 more low-level USB access modules.
+    7/ Various bug fixes and minor improvements.
 
 Changes in v13.03:
     1/ Added 'rain days' to monthly data. (Reprocess required when upgrading.)
@@ -258,8 +260,8 @@ Changes in v0.2:
               <img class="logo" src="../_static/pywws_logo.png" alt="Logo"/>
             </a></p>
   <h4>Sujet précédent</h4>
-  <p class="topless"><a href="LICENCE.html"
-                        title="Chapitre précédent">Licence Publique Générale GNU</a></p>
+  <p class="topless"><a href="dependencies.html"
+                        title="Chapitre précédent">Pré-requis</a></p>
   <h4>Sujet suivant</h4>
   <p class="topless"><a href="../guides/index.html"
                         title="Chapitre suivant">Guides utilisateur</a></p>
@@ -293,9 +295,9 @@ Changes in v0.2:
           <a href="../guides/index.html" title="Guides utilisateur"
              >suivant</a> |</li>
         <li class="right" >
-          <a href="LICENCE.html" title="Licence Publique Générale GNU"
+          <a href="dependencies.html" title="Pré-requis"
              >précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

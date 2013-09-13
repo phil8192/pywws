@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws &mdash; pywws 13.06_r1021 documentation</title>
+    <title>pywws &mdash; pywws 13.09_r1065 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '13.06_r1021',
+        VERSION:     '13.09_r1065',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="shortcut icon" href="_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.06_r1021 documentation" href="#" />
+    <link rel="top" title="pywws 13.09_r1065 documentation" href="#" />
     <link rel="next" title="GNU General Public License" href="essentials/LICENCE.html" /> 
   </head>
   <body>
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="essentials/LICENCE.html" title="GNU General Public License"
              accesskey="N">next</a> |</li>
-        <li><a href="#">pywws 13.06_r1021 documentation</a> &raquo;</li> 
+        <li><a href="#">pywws 13.09_r1065 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -110,8 +110,10 @@
 </ul>
 </li>
 <li>For Twitter updates:<ul>
-<li><a class="reference external" href="https://github.com/tweepy/tweepy">tweepy</a> v2.0 or higher</li>
-<li><a class="reference external" href="http://pypi.python.org/pypi/simplejson">simplejson</a></li>
+<li><a class="reference external" href="https://github.com/bear/python-twitter">python-twitter</a> v0.8.6 or higher</li>
+<li><a class="reference external" href="https://github.com/simplejson/simplejson">simplejson</a></li>
+<li><a class="reference external" href="https://github.com/simplegeo/python-oauth2">python-oauth2</a></li>
+<li><a class="reference external" href="http://code.google.com/p/httplib2/">httplib2</a></li>
 </ul>
 </li>
 <li>To create new language translations:<ul>
@@ -157,6 +159,15 @@ python setup.py msgfmt</pre>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="essentials/LICENCE.html">Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="essentials/dependencies.html">Dependencies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="essentials/dependencies.html#essential">Essential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="essentials/dependencies.html#graph-drawing">Graph drawing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="essentials/dependencies.html#secure-website-uploading-sftp">Secure website uploading (sftp)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="essentials/dependencies.html#twitter-updates">Twitter updates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="essentials/dependencies.html#to-create-new-language-translations">To create new language translations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="essentials/dependencies.html#to-compile-the-documentation">To &#8216;compile&#8217; the documentation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="essentials/CHANGELOG.html">Change log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/index.html">User guides</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="guides/getstarted.html">How to get started with pywws</a></li>
@@ -171,14 +182,14 @@ python setup.py msgfmt</pre>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html">Python modules</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/pywws.Hourly.html">Hourly</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pywws.LiveLog.html">LiveLog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pywws.Reprocess.html">Reprocess</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pywws.TwitterAuth.html">TwitterAuth</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pywws.SetWeatherStation.html">SetWeatherStation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pywws.TestWeatherStation.html">TestWeatherStation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pywws.USBQualityTest.html">USBQualityTest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pywws.EWtoPy.html">EWtoPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pywws.Hourly.html">pywws.Hourly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pywws.LiveLog.html">pywws.LiveLog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pywws.Reprocess.html">pywws.Reprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pywws.TwitterAuth.html">pywws.TwitterAuth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pywws.SetWeatherStation.html">pywws.SetWeatherStation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pywws.TestWeatherStation.html">pywws.TestWeatherStation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pywws.USBQualityTest.html">pywws.USBQualityTest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pywws.EWtoPy.html">pywws.EWtoPy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/pywws.Tasks.html">pywws.Tasks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/pywws.LogData.html">pywws.LogData</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/pywws.Process.html">pywws.Process</a></li>
@@ -298,7 +309,7 @@ python setup.py msgfmt</pre>
         <li class="right" >
           <a href="essentials/LICENCE.html" title="GNU General Public License"
              >next</a> |</li>
-        <li><a href="#">pywws 13.06_r1021 documentation</a> &raquo;</li> 
+        <li><a href="#">pywws 13.09_r1065 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

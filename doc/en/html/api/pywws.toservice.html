@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.toservice &mdash; pywws 13.06_r1021 documentation</title>
+    <title>pywws.toservice &mdash; pywws 13.09_r1065 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.06_r1021',
+        VERSION:     '13.09_r1065',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.06_r1021 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
     <link rel="up" title="Python programs and modules" href="index.html" />
     <link rel="next" title="pywws.YoWindow" href="pywws.YoWindow.html" />
     <link rel="prev" title="pywws.ToTwitter" href="pywws.ToTwitter.html" /> 
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="pywws.ToTwitter.html" title="pywws.ToTwitter"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1021 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>  
@@ -269,6 +269,21 @@ in use.</p>
 </div>
 <div class="section" id="api">
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<p class="rubric">Functions</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">ApplicationLogger</span></tt>(verbose[,&nbsp;logfile])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.toservice.main" title="pywws.toservice.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Classes</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -276,8 +291,17 @@ in use.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.toservice.ToService" title="pywws.toservice.ToService"><tt class="xref py py-obj docutils literal"><span class="pre">ToService</span></tt></a>(params,&nbsp;status,&nbsp;calib_data,&nbsp;...)</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">SafeConfigParser</span></tt>([defaults,&nbsp;dict_type,&nbsp;...])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.toservice.ToService" title="pywws.toservice.ToService"><tt class="xref py py-obj docutils literal"><span class="pre">ToService</span></tt></a>(params,&nbsp;status,&nbsp;calib_data,&nbsp;...)</td>
 <td>Upload weather data to weather services such as Weather</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">datetime</span></tt></td>
+<td>datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">timedelta</span></tt></td>
+<td>Difference between two datetime values.</td>
 </tr>
 </tbody>
 </table>
@@ -301,30 +325,21 @@ Underground.</p>
 </tbody>
 </table>
 <dl class="method">
-<dt id="pywws.toservice.ToService.translate_data">
-<tt class="descname">translate_data</tt><big>(</big><em>current</em>, <em>fixed_data</em><big>)</big><a class="reference internal" href="../_modules/pywws/toservice.html#ToService.translate_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.toservice.ToService.translate_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert a weather data record to upload format.</p>
-<p>The <tt class="xref py py-obj docutils literal"><span class="pre">current</span></tt> parameter contains the data to be uploaded.
-It should be a &#8216;calibrated&#8217; data record, as stored in
+<dt id="pywws.toservice.ToService.encode_data">
+<tt class="descname">encode_data</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#pywws.toservice.ToService.encode_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode a weather data record.</p>
+<p>The <tt class="xref py py-obj docutils literal"><span class="pre">data</span></tt> parameter contains the data to be encoded. It
+should be a &#8216;calibrated&#8217; data record, as stored in
 <a class="reference internal" href="pywws.DataStore.html#pywws.DataStore.calib_store" title="pywws.DataStore.calib_store"><tt class="xref py py-class docutils literal"><span class="pre">pywws.DataStore.calib_store</span></tt></a>.</p>
-<p>The <tt class="xref py py-obj docutils literal"><span class="pre">fixed_data</span></tt> parameter contains unvarying data that
-is site dependent, for example an ID code and authentication
-data.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>current</strong> (<em>dict</em>) &#8211; the weather data record.</li>
-<li><strong>fixed_data</strong> (<em>dict</em>) &#8211; unvarying upload data.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>dict</em>) &#8211; the weather data record.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">converted data, or <tt class="xref py py-obj docutils literal"><span class="pre">None</span></tt> if invalid data.</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">urlencoded data.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict(string)</p>
-</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
 </tr>
 </tbody>
 </table>
@@ -332,30 +347,63 @@ data.</p>
 
 <dl class="method">
 <dt id="pywws.toservice.ToService.send_data">
-<tt class="descname">send_data</tt><big>(</big><em>data</em>, <em>server</em>, <em>fixed_data</em><big>)</big><a class="reference internal" href="../_modules/pywws/toservice.html#ToService.send_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.toservice.ToService.send_data" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">send_data</tt><big>(</big><em>coded_data</em><big>)</big><a class="reference internal" href="../_modules/pywws/toservice.html#ToService.send_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.toservice.ToService.send_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Upload a weather data record.</p>
-<p>The <tt class="xref py py-obj docutils literal"><span class="pre">data</span></tt> parameter contains the data to be uploaded.
-It should be a &#8216;calibrated&#8217; data record, as stored in
-<a class="reference internal" href="pywws.DataStore.html#pywws.DataStore.calib_store" title="pywws.DataStore.calib_store"><tt class="xref py py-class docutils literal"><span class="pre">pywws.DataStore.calib_store</span></tt></a>.</p>
-<p>The <tt class="xref py py-obj docutils literal"><span class="pre">fixed_data</span></tt> parameter contains unvarying data that
-is site dependent, for example an ID code and authentication
-data.</p>
+<p>The <tt class="xref py py-obj docutils literal"><span class="pre">coded_data</span></tt> parameter contains the data to be uploaded.
+It should be a urlencoded string.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>data</strong> (<em>dict</em>) &#8211; the weather data record.</li>
-<li><strong>server</strong> (<em>string</em>) &#8211; web address to upload to.</li>
-<li><strong>fixed_data</strong> (<em>dict</em>) &#8211; unvarying upload data.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>coded_data</strong> &#8211; the data to upload.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">success status</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">success status</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
-</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pywws.toservice.ToService.next_data">
+<tt class="descname">next_data</tt><big>(</big><em>start</em>, <em>live_data</em><big>)</big><a class="headerlink" href="#pywws.toservice.ToService.next_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get weather data records to upload.</p>
+<p>This method returns either the most recent weather data
+record, or all records since a given datetime, according to
+the value of <tt class="xref py py-obj docutils literal"><span class="pre">start</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>start</strong> &#8211; datetime of first record to get, or None to get</td>
+</tr>
+</tbody>
+</table>
+<p>most recent data only.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>live_data</strong> (<em>dict</em>) &#8211; a current &#8216;live&#8217; data record, or None.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">yields weather data records.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pywws.toservice.ToService.catchup_start">
+<tt class="descname">catchup_start</tt><big>(</big><big>)</big><a class="headerlink" href="#pywws.toservice.ToService.catchup_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get datetime of first &#8216;catchup&#8217; record to send.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">datetime</td>
 </tr>
 </tbody>
 </table>
@@ -363,7 +411,7 @@ data.</p>
 
 <dl class="method">
 <dt id="pywws.toservice.ToService.Upload">
-<tt class="descname">Upload</tt><big>(</big><em>catchup</em><big>)</big><a class="reference internal" href="../_modules/pywws/toservice.html#ToService.Upload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.toservice.ToService.Upload" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">Upload</tt><big>(</big><em>catchup</em>, <em>live_data=None</em><big>)</big><a class="reference internal" href="../_modules/pywws/toservice.html#ToService.Upload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.toservice.ToService.Upload" title="Permalink to this definition">¶</a></dt>
 <dd><p>Upload one or more weather data records.</p>
 <p>This method uploads either the most recent weather data
 record, or all records since the last upload (up to 7 days),
@@ -460,7 +508,7 @@ stamp of the most recent record successfully uploaded.</p>
         <li class="right" >
           <a href="pywws.ToTwitter.html" title="pywws.ToTwitter"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1021 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" >Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>

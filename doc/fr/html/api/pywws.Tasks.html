@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Tasks &mdash; pywws 13.05_r1011 documentation</title>
+    <title>pywws.Tasks &mdash; pywws 13.09_r1065 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.05_r1011',
+        VERSION:     '13.09_r1065',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,10 +27,10 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.05_r1011 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
     <link rel="up" title="Programmes et des modules Python" href="index.html" />
     <link rel="next" title="pywws.LogData" href="pywws.LogData.html" />
-    <link rel="prev" title="EWtoPy" href="pywws.EWtoPy.html" /> 
+    <link rel="prev" title="pywws.EWtoPy" href="pywws.EWtoPy.html" /> 
   </head>
   <body>
     <div class="related">
@@ -46,9 +46,9 @@
           <a href="pywws.LogData.html" title="pywws.LogData"
              accesskey="N">suivant</a> |</li>
         <li class="right" >
-          <a href="pywws.EWtoPy.html" title="EWtoPy"
+          <a href="pywws.EWtoPy.html" title="pywws.EWtoPy"
              accesskey="P">précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>  
@@ -68,15 +68,32 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.Tasks.RegularTasks" title="pywws.Tasks.RegularTasks"><tt class="xref py py-obj docutils literal"><span class="pre">RegularTasks</span></tt></a>(params,&nbsp;status,&nbsp;calib_data,&nbsp;...)</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Calib</span></tt>(params,&nbsp;status)</td>
+<td>Classe qui implémente la calibration par défaut ou la calibration par l&#8217;utilisateur.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.Tasks.RegularTasks" title="pywws.Tasks.RegularTasks"><tt class="xref py py-obj docutils literal"><span class="pre">RegularTasks</span></tt></a>(params,&nbsp;status,&nbsp;calib_data,&nbsp;...)</td>
 <td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">ToService</span></tt>(params,&nbsp;status,&nbsp;calib_data,&nbsp;...)</td>
+<td>Téléverse les données météo pour les services météorologiques tels que Weather</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">datetime</span></tt></td>
+<td>datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">timedelta</span></tt></td>
+<td>Différence entre deux valeurs de datetime.</td>
 </tr>
 </tbody>
 </table>
 <dl class="class">
 <dt id="pywws.Tasks.RegularTasks">
-<em class="property">class </em><tt class="descclassname">pywws.Tasks.</tt><tt class="descname">RegularTasks</tt><big>(</big><em>params</em>, <em>status</em>, <em>calib_data</em>, <em>hourly_data</em>, <em>daily_data</em>, <em>monthly_data</em><big>)</big><a class="reference internal" href="../_modules/pywws/Tasks.html#RegularTasks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Tasks.RegularTasks" title="Lien permanent vers cette définition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pywws.Tasks.</tt><tt class="descname">RegularTasks</tt><big>(</big><em>params</em>, <em>status</em>, <em>calib_data</em>, <em>hourly_data</em>, <em>daily_data</em>, <em>monthly_data</em>, <em>asynch=False</em><big>)</big><a class="reference internal" href="../_modules/pywws/Tasks.html#RegularTasks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Tasks.RegularTasks" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><dl class="method">
+<dt id="pywws.Tasks.RegularTasks.stop_thread">
+<tt class="descname">stop_thread</tt><big>(</big><big>)</big><a class="headerlink" href="#pywws.Tasks.RegularTasks.stop_thread" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="pywws.Tasks.RegularTasks.has_live_tasks">
 <tt class="descname">has_live_tasks</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/pywws/Tasks.html#RegularTasks.has_live_tasks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Tasks.RegularTasks.has_live_tasks" title="Lien permanent vers cette définition">¶</a></dt>
 <dd></dd></dl>
@@ -121,7 +138,7 @@
             </a></p>
   <h4>Sujet précédent</h4>
   <p class="topless"><a href="pywws.EWtoPy.html"
-                        title="Chapitre précédent">EWtoPy</a></p>
+                        title="Chapitre précédent">pywws.EWtoPy</a></p>
   <h4>Sujet suivant</h4>
   <p class="topless"><a href="pywws.LogData.html"
                         title="Chapitre suivant">pywws.LogData</a></p>
@@ -155,9 +172,9 @@
           <a href="pywws.LogData.html" title="pywws.LogData"
              >suivant</a> |</li>
         <li class="right" >
-          <a href="pywws.EWtoPy.html" title="EWtoPy"
+          <a href="pywws.EWtoPy.html" title="pywws.EWtoPy"
              >précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" >Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>

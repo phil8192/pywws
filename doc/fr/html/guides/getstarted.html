@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Comment démarrer avec pywws &mdash; pywws 13.05_r1011 documentation</title>
+    <title>Comment démarrer avec pywws &mdash; pywws 13.09_r1065 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.05_r1011',
+        VERSION:     '13.09_r1065',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.05_r1011 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
     <link rel="up" title="Guides utilisateur" href="index.html" />
     <link rel="next" title="Comment configurer la journalisation horaire avec pywws" href="hourlylogging.html" />
     <link rel="prev" title="Guides utilisateur" href="index.html" /> 
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="index.html" title="Guides utilisateur"
              accesskey="P">précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Guides utilisateur</a> &raquo;</li> 
       </ul>
     </div>  
@@ -61,15 +61,15 @@
   <div class="section" id="how-to-get-started-with-pywws">
 <h1>Comment démarrer avec pywws<a class="headerlink" href="#how-to-get-started-with-pywws" title="Lien permanent vers ce titre">¶</a></h1>
 <div class="section" id="install-dependencies">
-<h2>Install dependencies<a class="headerlink" href="#install-dependencies" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Fichiers prérequis.<a class="headerlink" href="#install-dependencies" title="Lien permanent vers ce titre">¶</a></h2>
 <ul class="simple">
 <li>Python 2.5+ - <a class="reference external" href="http://python.org/">http://python.org/</a> (Note: Le support de Python 3 est en développement)</li>
-<li>USB library option 1 (preferred, except on MacOS):<ul>
+<li>Librarie USB - option 1 (préférable pour les Mac)<ul>
 <li>PyUSB 1.0 - <a class="reference external" href="http://sourceforge.net/apps/trac/pyusb/">http://sourceforge.net/apps/trac/pyusb/</a></li>
 <li>libusb 0.1 or 1.0 - <a class="reference external" href="http://www.libusb.org/">http://www.libusb.org/</a></li>
 </ul>
 </li>
-<li>USB library option 2 (if PyUSB 1.0 is not available):<ul>
+<li>Librarie USB - option 2 (Si PyUSB 1.0 n&#8217;est pas disponible)<ul>
 <li>PyUSB 0.4 - <a class="reference external" href="http://sourceforge.net/apps/trac/pyusb/">http://sourceforge.net/apps/trac/pyusb/</a></li>
 <li>libusb 0.1 - <a class="reference external" href="http://www.libusb.org/">http://www.libusb.org/</a></li>
 </ul>
@@ -79,44 +79,36 @@
 <li>ctypes - <a class="reference external" href="http://docs.python.org/2/library/ctypes.html">http://docs.python.org/2/library/ctypes.html</a></li>
 </ul>
 </li>
-<li>USB library option 4:<ul>
+<li>Librarie USB - option 4:<ul>
 <li>hidapi - <a class="reference external" href="https://github.com/signal11/hidapi">https://github.com/signal11/hidapi</a></li>
 <li>cython-hidapi - <a class="reference external" href="https://github.com/gbishop/cython-hidapi">https://github.com/gbishop/cython-hidapi</a></li>
 <li>cython - <a class="reference external" href="http://cython.org/">http://cython.org/</a></li>
 </ul>
 </li>
 </ul>
-<p>You may be able to install most of these using your operating system&#8217;s package manager.
-This is a lot easier than downloading and compiling source files from the project websites.
-Note that some Linux distributions may use different names for some of the packages, e.g. in Ubuntu, pyusb is python-usb.</p>
-<p>In addition to the above, I recommend installing <a class="reference external" href="http://www.pip-installer.org/">pip</a> (the package may be called python-pip) or <a class="reference external" href="http://peak.telecommunity.com/DevCenter/EasyInstall">easy_install</a>.
-These both simplify installation of software from the <a class="reference external" href="http://pypi.python.org/pypi">Python Package Index (PyPI)</a>.
-For example, PyUSB can be installed from PyPI using the <tt class="docutils literal"><span class="pre">pip</span></tt> command:</p>
+<p>Vous serez peut-être en mesure de les installer sur votre PC via un gestionnaire de paquet. Cette solution est beaucoup plus facile que de télécharger puis compiler les fichiers source à partir des sites de projet. Noter que certaines distributions Linux peuvent utiliser des noms différents pour certains paquets, ex. sur Ubuntu, pyusb se nomme python-usb.</p>
+<p>En plus de ce qui précède, je recommende l&#8217;installation de <a class="reference external" href="http://www.pip-installer.org/">pip</a> (le paquet peut aussi se nommer python-pip) ou <a class="reference external" href="http://peak.telecommunity.com/DevCenter/EasyInstall">easy_install</a>. Ceux-ci simplifient l&#8217;installation de logiciels par le <a class="reference external" href="http://pypi.python.org/pypi">Python Package Index (PyPI)</a>. Par exemple, PyUSB peut être installé à partir de PyPI en utilisant la commande <tt class="docutils literal"><span class="pre">pip</span></tt>:</p>
 <div class="highlight-python"><pre>sudo pip install pyusb</pre>
 </div>
 </div>
 <div class="section" id="download-the-pywws-software">
-<h2>Download the pywws software<a class="headerlink" href="#download-the-pywws-software" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Télécharger le logiciel pywws.<a class="headerlink" href="#download-the-pywws-software" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Créer un dossier pour tous vos fichiers reliés à la météo et vous positionner dans ce dossier. Par exemple (avec un système d&#8217;exploitation Linux ou similaire):</p>
 <div class="highlight-python"><pre>mkdir ~/weather
 cd ~/weather</pre>
 </div>
-<p>You can install pywws directly from PyPI using <tt class="docutils literal"><span class="pre">pip</span></tt> or <tt class="docutils literal"><span class="pre">easy_install</span></tt>, or you can download and extract the files into your weather directory.
-This has the advantage that you can easily read the Python modules and other files.
-It also allows you to run pywws software without the &#8216;root&#8217; privileges usually needed to install software.</p>
+<p>Vous pouvez installer pywws directement à partir de PyPI en utilisant <tt class="docutils literal"><span class="pre">pip</span></tt> ou <tt class="docutils literal"><span class="pre">easy_install</span></tt>, ou vous pouvez télécharger et extraire les fichiers dans votre répertoire météo; ce qui a l&#8217;avantage de pouvoir facilement lire les modules Python et autres fichiers. Il vous permet également d&#8217;exécuter le logiciel pywws sans les privilèges du  &#8216;root&#8217;  habituellement requis pour installer le logiciel.</p>
 <div class="section" id="easy-installation">
-<h3>Easy installation<a class="headerlink" href="#easy-installation" title="Lien permanent vers ce titre">¶</a></h3>
-<p>This is a simple one line command:</p>
+<h3>Installation facile<a class="headerlink" href="#easy-installation" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voici la commande simple en une ligne:</p>
 <div class="highlight-python"><pre>sudo pip install pywws</pre>
 </div>
-<p>The directories everything gets installed to depend on your operating system and Python version.
-The pywws modules are installed in the &#8216;site-packages&#8217; directory (e.g. <tt class="docutils literal"><span class="pre">/usr/lib/python2.7/site-packages</span></tt>).
-Typically the scripts are installed in <tt class="docutils literal"><span class="pre">/usr/bin</span></tt>, and the example files are installed in <tt class="docutils literal"><span class="pre">/usr/share/pywws</span></tt>, but other directories (such as <tt class="docutils literal"><span class="pre">/usr/local/share</span></tt>) could be used.</p>
+<p>Les répertoires où tout est installé dépend de votre système d&#8217;exploitation et de la version de Python employée. Les modules de pywws sont installés dans le répertoire &#8216;site-packages&#8217;  (ex. <tt class="docutils literal"><span class="pre">/usr/lib/python2.7/site-packages</span></tt>). Habituellement, les scripts sont installés dans <tt class="docutils literal"><span class="pre">/usr/bin</span></tt>, et les fichiers exemples sont installés dans <tt class="docutils literal"><span class="pre">/usr/share/pywws</span></tt>, mais d&#8217;autres répertoires (tel que <tt class="docutils literal"><span class="pre">/usr/local/share</span></tt>) peuvent être utilisés.</p>
 </div>
 <div class="section" id="download-and-extract">
-<h3>Download and extract<a class="headerlink" href="#download-and-extract" title="Lien permanent vers ce titre">¶</a></h3>
-<p>You can either download a snapshot release from PyPI, or you can use <tt class="docutils literal"><span class="pre">git</span></tt> to get the most up to date development version of pywws.</p>
-<p>To download a snapshot, visit <a class="reference external" href="http://pypi.python.org/pypi/pywws/">http://pypi.python.org/pypi/pywws/</a> and download one of the .tar.gz or .zip files. Put it in your weather directory, then extract all the files, for example:</p>
+<h3>Téléchargement et extraction<a class="headerlink" href="#download-and-extract" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Vous pouvez soit télécharger une version officielle de pywws à partir de PyPI, ou vous pouvez utiliser <tt class="docutils literal"><span class="pre">git</span></tt> pour obtenir la plus récente version en développement.</p>
+<p>Pour installer une version officielle, visiter <a class="reference external" href="http://pypi.python.org/pypi/pywws/">http://pypi.python.org/pypi/pywws/</a> et télécharger le fichier .tar.gz ou .zip. Enregistrez-le dans votre dossier &#8220;weather&#8221;, puis extraire tous les fichiers de l&#8217;archive, par exemple:</p>
 <div class="highlight-python"><pre>cd ~/weather
 tar zxvf pywws-12.11_95babb0.tar.gz</pre>
 </div>
@@ -124,31 +116,28 @@ tar zxvf pywws-12.11_95babb0.tar.gz</pre>
 <div class="highlight-python"><pre>cd ~/weather
 unzip pywws-12.11_95babb0.zip</pre>
 </div>
-<p>This should create a directory (called <tt class="docutils literal"><span class="pre">pywws-12.11_95babb0</span></tt> in this example) containing all the pywws source files.
-It is convenient to create a soft link to this awkwardly named directory:</p>
+<p>Ceci devrait créer un répertoire (nommé  <tt class="docutils literal"><span class="pre">pywws-12.11_95babb0</span></tt> dans cet exemple) contenant tous les fichiers source de pywws. Il est pratique de créer un lien vers ce répertoire maladroitement nommé:</p>
 <div class="highlight-python"><pre>cd ~/weather
 ln -s pywws-12.11_95babb0 pywws</pre>
 </div>
-<p>Alternatively, to get the latest development version of pywws use <tt class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span></tt>, then use <tt class="docutils literal"><span class="pre">setup.py</span></tt> to compile the language files and documentation:</p>
+<p>Vous pouvez également obtenir la dernière version de développement de pywws, en utilisant <tt class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span></tt>, puis utilisez <tt class="docutils literal"><span class="pre">setup.py</span></tt> pour compiler les fichiers de langue et la documentation:</p>
 <div class="highlight-python"><pre>cd ~/weather
 git clone https://github.com/jim-easterbrook/pywws.git
 cd pywws
 python setup.py msgfmt
 python setup.py build_sphinx</pre>
 </div>
-<p>After downloading and extracting, or cloning the repos, you can then use <tt class="docutils literal"><span class="pre">setup.py</span></tt> to build and install everything:</p>
+<p>Après téléchargement et extraction ou le clonage du dépôt git, vous pouvez ensuite utiliser <tt class="docutils literal"><span class="pre">setup.py</span></tt> Pour tout construire et installer:</p>
 <div class="highlight-python"><pre>cd ~/weather/pywws
 python setup.py build
 sudo python setup.py install</pre>
 </div>
-<p>This is optional, and installs into the same directories as using <tt class="docutils literal"><span class="pre">pip</span></tt> would.
-If you don&#8217;t do this installation process, you will only be able to run pywws modules from your pywws directory.</p>
+<p>Cette étape est facultative, et s&#8217;installe dans les mêmes répertoires qu&#8217;utiliserait <tt class="docutils literal"><span class="pre">pip</span></tt>. Si vous ne faites pas cette procédure d&#8217;installation, vous serez uniquement en mesure d&#8217;exécuter les modules pywws à partir de votre répertoire pywws.</p>
 </div>
 </div>
 <div class="section" id="python-3-users-only-translate-pywws-to-python-3">
-<h2>(Python 3 users only) Translate pywws to Python 3<a class="headerlink" href="#python-3-users-only-translate-pywws-to-python-3" title="Lien permanent vers ce titre">¶</a></h2>
-<p>If your default Python version is 3.x and you installed pywws using <tt class="docutils literal"><span class="pre">pip</span></tt>, or ran <tt class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></tt>, the code will already have been translated from Python 2 to Python 3 as part of the installation process.
-If not, you need to use setup.py to do the translation and create a Python 3 installation:</p>
+<h2>(Utilisateur de Python 3 seulement) Convertir pywws pour Python 3.<a class="headerlink" href="#python-3-users-only-translate-pywws-to-python-3" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Si votre version de Python par défaut est 3.x et que vous avez installé pywws à l&#8217;aide de <tt class="docutils literal"><span class="pre">pip</span></tt>, ou exécuté <tt class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></tt>, le code aura déjà été traduit de Python 2 vers Python 3 et inclu dans le processus d&#8217;installation. Sinon, vous devrez utiliser setup.py pour faire la conversion et créer une installation de Python 3:</p>
 <div class="highlight-python"><pre>cd ~/weather/pywws
 rm -Rf build
 python3 setup.py build
@@ -156,15 +145,12 @@ sudo python3 setup.py install</pre>
 </div>
 </div>
 <div class="section" id="test-the-weather-station-connection">
-<h2>Test the weather station connection<a class="headerlink" href="#test-the-weather-station-connection" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Finally you&#8217;re ready to test your pywws installation.
-Connect the weather station (if not already connected) then run the <a class="reference internal" href="../api/pywws.TestWeatherStation.html#module-pywws.TestWeatherStation" title="pywws.TestWeatherStation"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.TestWeatherStation</span></tt></a> module.
-If you have downloaded but not installed pywws, then don&#8217;t forget to change to the pywws directory first.
-For example:</p>
+<h2>Tester la connexion de la station météo.<a class="headerlink" href="#test-the-weather-station-connection" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Finallement, vous êtes prêt à tester votre installation de pywws. Brancher la station météo (si ce n&#8217;est pas déjà fait), puis exécuter le module  <a class="reference internal" href="../api/pywws.TestWeatherStation.html#module-pywws.TestWeatherStation" title="pywws.TestWeatherStation"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.TestWeatherStation</span></tt></a>. Si vous avez téléchargé pywws mais ne l&#8217;avez pas installé, alors n&#8217;oubliez pas de changer de répertoire pour le dossier source de pywws. Par exemple:</p>
 <div class="highlight-python"><pre>cd ~/weather/pywws
 python -m pywws.TestWeatherStation</pre>
 </div>
-<p>Si tout fonctionne correctement, vous devriez voir apparaitre un lot de chiffre ressemblant à ceci:</p>
+<p>Si tout fonctionne correctement, vous devriez voir apparaitre un lot de chiffres ressemblant à ceci:</p>
 <div class="highlight-python"><pre>0000 55 aa ff ff ff ff ff ff ff ff ff ff ff ff ff ff 05 20 01 51 11 00 00 00 81 00 00 0f 00 00 60 55
 0020 ea 27 a0 27 00 00 00 00 00 00 00 10 10 12 13 45 41 23 c8 00 32 80 47 2d 2c 01 2c 81 5e 01 1e 80
 0040 96 00 c8 80 a0 28 80 25 a0 28 80 25 03 36 00 05 6b 00 00 0a 00 f4 01 18 03 00 00 00 00 00 00 00
@@ -181,32 +167,25 @@ python -m pywws.TestWeatherStation</pre>
 <p>Pour tout autre problème, n&#8217;hésitez pas à demander de l&#8217;aide sur la liste de publipostage de pywws: <a class="reference external" href="http://groups.google.com/group/pywws">http://groups.google.com/group/pywws</a></p>
 </div>
 <div class="section" id="set-up-your-weather-station">
-<h2>Set up your weather station<a class="headerlink" href="#set-up-your-weather-station" title="Lien permanent vers ce titre">¶</a></h2>
-<p>If you haven&#8217;t already done so, set your weather station to display the correct relative atmospheric pressure.
-(See the manual for details of how to do this.)
-pywws gets the offset between relative and absolute pressure from the station, so this needs to be set before using pywws.</p>
-<p>You can get the correct relative pressure from your location by looking on the internet for weather reports from a nearby station, ideally an official one such as an airport.
-This is best done during calm weather when the pressure is almost constant over a large area.</p>
-<p>If you change the offset at any time, you can update all your stored data by running <a class="reference internal" href="../api/pywws.Reprocess.html#module-pywws.Reprocess" title="pywws.Reprocess"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Reprocess</span></tt></a>.</p>
+<h2>Configurer votre station météo.<a class="headerlink" href="#set-up-your-weather-station" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Si vous ne l&#8217;avez pas déjà fait, configurez votre station météo pour afficher la bonne pression atmosphérique relative. (Voir le manuel pour plus d&#8217;informations sur la façon de faire.) pywws obtient le décalage entre la pression relative et absolue de la station, donc cela doit être défini avant d&#8217;utiliser pywws .</p>
+<p>Vous pouvez obtenir la bonne pression relative de votre emplacement en recherchant sur Internet des rapports météorologiques d&#8217;une station à proximité, idéalement une source officielle,  tel un aéroport. Il est préférable de le faire durant une période calme lorsque la pression est presque constante sur une longue période.</p>
+<p>Si vous modifiez le décalage, à tout moment, vous pouvez mettre à jour toutes vos données stockées en exécutant  <a class="reference internal" href="../api/pywws.Reprocess.html#module-pywws.Reprocess" title="pywws.Reprocess"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Reprocess</span></tt></a>.</p>
 </div>
 <div class="section" id="set-the-weather-station-logging-interval">
-<h2>Set the weather station logging interval<a class="headerlink" href="#set-the-weather-station-logging-interval" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Your weather station probably left the factory with a 30 minute logging interval.
-This enables the station to store about 11 weeks of data.
-Most pywws users set up their computers to read data from the station every hour, or more often, and only need the station to store enough data to cover computer failures.
-The recommended interval is 5 minutes, which still allows 2 weeks of storage.
-Use <a class="reference internal" href="../api/pywws.SetWeatherStation.html#module-pywws.SetWeatherStation" title="pywws.SetWeatherStation"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.SetWeatherStation</span></tt></a> to set the interval:</p>
+<h2>Configurer l’intervalle d&#8217;enregistrement de la station météo.<a class="headerlink" href="#set-the-weather-station-logging-interval" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Votre station météo a probablement quitté l&#8217;usine avec un intervalle d&#8217;enregistrement de 30 minutes. Ceci permet à la station d&#8217;enregistrer environ 11 semaines de données. La plupart des utilisateurs de pywws configurent leur ordinateur pour lire les données de la station à chaque heure, ou plus fréquemment et souhaitent que la station contienne assez de données pour couvrir d&#8217;éventuelles panne d&#8217;ordinateur. L’intervalle recommandé est de 5 minutes, ce qui représente 2 semaines de données. Utilisez le programme <a class="reference internal" href="../api/pywws.SetWeatherStation.html#module-pywws.SetWeatherStation" title="pywws.SetWeatherStation"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.SetWeatherStation</span></tt></a>  pour fixer l’intervalle:</p>
 <div class="highlight-python"><pre>python -m pywws.SetWeatherStation -r 5</pre>
 </div>
 </div>
 <div class="section" id="log-your-weather-station-data">
-<h2>Log your weather station data<a class="headerlink" href="#log-your-weather-station-data" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Enregistrer les données de votre station météo.<a class="headerlink" href="#log-your-weather-station-data" title="Lien permanent vers ce titre">¶</a></h2>
 <p>En premier lieu, choisissez un dossier pour entreposer toute les données de votre station météo. Ces données étant écrites très fréquemment, un disque rigide sera préférable à une mémoire Flash (USB), puisque ces dernières ont un nombre d&#8217;écriture limité. Dans la plupart des cas, le répertoire personnel est préférable, par exemple:</p>
 <div class="highlight-python"><pre>mkdir ~/weather/data</pre>
 </div>
 <p>Ce répertoire est référé dans la documentation pywws en tant que votre &#8216;répertoire de données&#8217;.</p>
 <p>Assurez-vous que votre ordinateur ait la date et l&#8217;heure précise, ainsi que le fuseau horaire approprié, puisqu&#8217;ils seront utilisés pour identifier les données de votre station météo. Si vous ne l&#8217;avez pas déjà fait, il pourrait être utile d&#8217;utiliser la synchronisation horaires par réseau (NTP) pour synchroniser votre ordinateur à un &#8216;serveur de temps&#8217;.</p>
-<p>La première fois que vous exécutez <a class="reference internal" href="../api/pywws.LogData.html#module-pywws.LogData" title="pywws.LogData"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt></a> un fichier de configuration, nommé &#8216;weather.ini&#8217;, sera créé dans votre répertoire de données, puis s&#8221;arrêtera. Vous devez éditer ce fichier de configuration et y modifier la ligne <tt class="docutils literal"><span class="pre">ws</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">Unknown</span></tt> à <tt class="docutils literal"><span class="pre">ws</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">1080</span></tt> ou <tt class="docutils literal"><span class="pre">ws</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">3080</span></tt>. (Si la console de votre station météo affiche la luminosité solaire, vous avez une station de type 3080, sinon, vous indiquez le type 1080.) Puis exécutez <a class="reference internal" href="../api/pywws.LogData.html#module-pywws.LogData" title="pywws.LogData"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt></a> de nouveau. Cette fois, l&#8217;exécution peut durer quelques minutes, puisqu&#8217;il copiera l&#8217;intégralité des données météo emmagasinées dans la mémoire de votre station météo. Le programme <a class="reference internal" href="../api/pywws.LogData.html#module-pywws.LogData" title="pywws.LogData"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt></a> possède une option &#8216;verbose&#8217; qui augmente le nombre de messages affichés pendant l&#8217;exécution. Cette option est utile lors d&#8217;exécution manuelle, par exemple:</p>
+<p>La première fois que vous exécutez <a class="reference internal" href="../api/pywws.LogData.html#module-pywws.LogData" title="pywws.LogData"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt></a> un fichier de configuration, nommé &#8216;weather.ini&#8217;, sera créé dans votre répertoire de données, puis s&#8217;arrêtera. Vous devez éditer ce fichier de configuration et y modifier la ligne <tt class="docutils literal"><span class="pre">ws</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">Unknown</span></tt> à <tt class="docutils literal"><span class="pre">ws</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">1080</span></tt> ou <tt class="docutils literal"><span class="pre">ws</span> <span class="pre">type</span> <span class="pre">=</span> <span class="pre">3080</span></tt>. (Si la console de votre station météo affiche la luminosité solaire, vous avez une station de type 3080, sinon, vous indiquez le type 1080.) Puis exécutez <a class="reference internal" href="../api/pywws.LogData.html#module-pywws.LogData" title="pywws.LogData"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt></a> de nouveau. Cette fois, l&#8217;exécution peut durer quelques minutes, puisqu&#8217;il copiera l&#8217;intégralité des données météo emmagasinées dans la mémoire de votre station météo. Le programme <a class="reference internal" href="../api/pywws.LogData.html#module-pywws.LogData" title="pywws.LogData"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt></a> possède une option &#8216;verbose&#8217; qui augmente le nombre de messages affichés pendant l&#8217;exécution. Cette option est utile lors d&#8217;exécution manuelle, par exemple:</p>
 <div class="highlight-python"><pre>python -m pywws.LogData -vvv ~/weather/data</pre>
 </div>
 <p>(Remplacez <tt class="docutils literal"><span class="pre">~/weather/data</span></tt> par votre répertoire de données, si différent.)</p>
@@ -216,13 +195,13 @@ Use <a class="reference internal" href="../api/pywws.SetWeatherStation.html#modu
 <p>(Remplacez année, mois et jour par la date pour laquelle vous devriez avoir des données.)</p>
 </div>
 <div class="section" id="convert-old-easyweather-data-optional">
-<h2>Convert old EasyWeather data (optional)<a class="headerlink" href="#convert-old-easyweather-data-optional" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Convertir les anciennes données de EasyWeather (optionnel).<a class="headerlink" href="#convert-old-easyweather-data-optional" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Si vous utilisiez EasyWeather avant de décider d&#8217;utiliser pywws, vous pouvez convertir les données que EasyWeather a enregistré, vers format de pywws. Localisez votre fichier EasyWeather.dat et convertissez-le ainsi:</p>
 <div class="highlight-python"><pre>python -m pywws.EWtoPy EasyWeather.dat ~/weather/data</pre>
 </div>
 </div>
 <div class="section" id="set-some-configuration-options">
-<h2>Set some configuration options<a class="headerlink" href="#set-some-configuration-options" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Indiquer certaines options de configuration.<a class="headerlink" href="#set-some-configuration-options" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Après avoir exécuté <a class="reference internal" href="../api/pywws.LogData.html#module-pywws.LogData" title="pywws.LogData"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt></a>, il devrait y avoir un fichier de configuration nommé &#8216;weather.ini&#8217; dans votre répertoire de données. Ouvrez ce fichier avec un éditeur de texte. Vous devriez y trouver des lignes semblables à celle-ci:</p>
 <div class="highlight-python"><pre>[config]
 ws type = 1080
@@ -238,26 +217,21 @@ day end hour = 9</pre>
 <p>Pour plus de détails sur les options du fichier de configuration, voir <a class="reference internal" href="weather_ini.html"><em>weather.ini - format du fichier de configuration</em></a>.</p>
 </div>
 <div class="section" id="process-the-raw-data">
-<h2>Process the raw data<a class="headerlink" href="#process-the-raw-data" title="Lien permanent vers ce titre">¶</a></h2>
-<p><a class="reference internal" href="../api/pywws.LogData.html#module-pywws.LogData" title="pywws.LogData"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt></a> just copies the raw data from the weather station.
-To do something useful with that data you probably need hourly, daily and monthly summaries.
-These are created by <a class="reference internal" href="../api/pywws.Process.html#module-pywws.Process" title="pywws.Process"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Process</span></tt></a>. For example:</p>
+<h2>Traitement des données brutes.<a class="headerlink" href="#process-the-raw-data" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference internal" href="../api/pywws.LogData.html#module-pywws.LogData" title="pywws.LogData"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LogData</span></tt></a> ne fait que copier les données brutes à partir de la station météo. Pour faire quelque chose d&#8217;utile avec ces données vous avez probablement besoin des sommaires horaire, quotidien et mensuel. Ces sommaires sont produits à partir du programme <a class="reference internal" href="../api/pywws.Process.html#module-pywws.Process" title="pywws.Process"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Process</span></tt></a>. Par exemple:</p>
 <div class="highlight-python"><pre>python -m pywws.Process ~/weather/data</pre>
 </div>
 <p>Vous devriez avoir ainsi quelques fichiers traités à consulter:</p>
 <div class="highlight-python"><pre>more ~/weather/data/weather/daily/2012/2012-12-16.txt</pre>
 </div>
-<p>If you ever change your <tt class="docutils literal"><span class="pre">day</span> <span class="pre">end</span> <span class="pre">hour</span></tt> configuration setting, you will need to reprocess all your weather data.
-You can do this by running <a class="reference internal" href="../api/pywws.Reprocess.html#module-pywws.Reprocess" title="pywws.Reprocess"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Reprocess</span></tt></a>:</p>
+<p>Si vous changez votre période de fin du jour avec l&#8217;option de configuration <tt class="docutils literal"><span class="pre">day</span> <span class="pre">end</span> <span class="pre">hour</span></tt>, vous devrez re-traiter toutes vos données météo. Pour ce faire, exécutez le programme <a class="reference internal" href="../api/pywws.Reprocess.html#module-pywws.Reprocess" title="pywws.Reprocess"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Reprocess</span></tt></a>:</p>
 <div class="highlight-python"><pre>python -m pywws.Reprocess ~/weather/data</pre>
 </div>
 <p>Vous êtes maintenant prêt pour fixer une journalisation régulière ou continue, tel que décrit dans la section <a class="reference internal" href="hourlylogging.html"><em>Comment configurer la journalisation horaire avec pywws</em></a> ou <a class="reference internal" href="livelogging.html"><em>Comment configurer le mode &#8216;live&#8217; avec pywws</em></a>.</p>
 </div>
 <div class="section" id="read-the-documentation">
-<h2>Read the documentation<a class="headerlink" href="#read-the-documentation" title="Lien permanent vers ce titre">¶</a></h2>
-<p>The doc directory in your pywws source directory contains HTML and plain text versions of the documentation (unless you did a direct installation with <tt class="docutils literal"><span class="pre">pip</span></tt>).
-The HTML files can be read with any web browser.
-Start with the index (<a class="reference internal" href="../index.html"><em>pywws</em></a>) and follow links from there.</p>
+<h2>Lire la documentation.<a class="headerlink" href="#read-the-documentation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le dossier doc du répertoire source de pywws contient une version HTML et une version en texte clair de la documentation ( à moins que vous ayez fait une installation directe avec <tt class="docutils literal"><span class="pre">pip</span></tt>). Les fichiers HTML peuvent être lus avec tous navigateurs. Débutez avec l&#8217;index (<a class="reference internal" href="../index.html"><em>pywws</em></a>) et suivez les liens à partir de ce point.</p>
 <p>Commentaires ou questions? SVP, souscrivez à la liste d&#8217;envoi de pywws <a class="reference external" href="http://groups.google.com/group/pywws">http://groups.google.com/group/pywws</a> et laissez-le nous savoir.</p>
 </div>
 </div>
@@ -274,21 +248,21 @@ Start with the index (<a class="reference internal" href="../index.html"><em>pyw
   <h3><a href="../index.html">Table des matières</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Comment démarrer avec pywws</a><ul>
-<li><a class="reference internal" href="#install-dependencies">Install dependencies</a></li>
-<li><a class="reference internal" href="#download-the-pywws-software">Download the pywws software</a><ul>
-<li><a class="reference internal" href="#easy-installation">Easy installation</a></li>
-<li><a class="reference internal" href="#download-and-extract">Download and extract</a></li>
+<li><a class="reference internal" href="#install-dependencies">Fichiers prérequis.</a></li>
+<li><a class="reference internal" href="#download-the-pywws-software">Télécharger le logiciel pywws.</a><ul>
+<li><a class="reference internal" href="#easy-installation">Installation facile</a></li>
+<li><a class="reference internal" href="#download-and-extract">Téléchargement et extraction</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#python-3-users-only-translate-pywws-to-python-3">(Python 3 users only) Translate pywws to Python 3</a></li>
-<li><a class="reference internal" href="#test-the-weather-station-connection">Test the weather station connection</a></li>
-<li><a class="reference internal" href="#set-up-your-weather-station">Set up your weather station</a></li>
-<li><a class="reference internal" href="#set-the-weather-station-logging-interval">Set the weather station logging interval</a></li>
-<li><a class="reference internal" href="#log-your-weather-station-data">Log your weather station data</a></li>
-<li><a class="reference internal" href="#convert-old-easyweather-data-optional">Convert old EasyWeather data (optional)</a></li>
-<li><a class="reference internal" href="#set-some-configuration-options">Set some configuration options</a></li>
-<li><a class="reference internal" href="#process-the-raw-data">Process the raw data</a></li>
-<li><a class="reference internal" href="#read-the-documentation">Read the documentation</a></li>
+<li><a class="reference internal" href="#python-3-users-only-translate-pywws-to-python-3">(Utilisateur de Python 3 seulement) Convertir pywws pour Python 3.</a></li>
+<li><a class="reference internal" href="#test-the-weather-station-connection">Tester la connexion de la station météo.</a></li>
+<li><a class="reference internal" href="#set-up-your-weather-station">Configurer votre station météo.</a></li>
+<li><a class="reference internal" href="#set-the-weather-station-logging-interval">Configurer l’intervalle d&#8217;enregistrement de la station météo.</a></li>
+<li><a class="reference internal" href="#log-your-weather-station-data">Enregistrer les données de votre station météo.</a></li>
+<li><a class="reference internal" href="#convert-old-easyweather-data-optional">Convertir les anciennes données de EasyWeather (optionnel).</a></li>
+<li><a class="reference internal" href="#set-some-configuration-options">Indiquer certaines options de configuration.</a></li>
+<li><a class="reference internal" href="#process-the-raw-data">Traitement des données brutes.</a></li>
+<li><a class="reference internal" href="#read-the-documentation">Lire la documentation.</a></li>
 </ul>
 </li>
 </ul>
@@ -331,7 +305,7 @@ Start with the index (<a class="reference internal" href="../index.html"><em>pyw
         <li class="right" >
           <a href="index.html" title="Guides utilisateur"
              >précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.05_r1011 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" >Guides utilisateur</a> &raquo;</li> 
       </ul>
     </div>

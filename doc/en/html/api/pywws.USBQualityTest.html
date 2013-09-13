@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>USBQualityTest &mdash; pywws 13.06_r1021 documentation</title>
+    <title>pywws.USBQualityTest &mdash; pywws 13.09_r1065 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.06_r1021',
+        VERSION:     '13.09_r1065',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,10 +26,10 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.06_r1021 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
     <link rel="up" title="Python programs and modules" href="index.html" />
-    <link rel="next" title="EWtoPy" href="pywws.EWtoPy.html" />
-    <link rel="prev" title="TestWeatherStation" href="pywws.TestWeatherStation.html" /> 
+    <link rel="next" title="pywws.EWtoPy" href="pywws.EWtoPy.html" />
+    <link rel="prev" title="pywws.TestWeatherStation" href="pywws.TestWeatherStation.html" /> 
   </head>
   <body>
     <div class="related">
@@ -42,12 +42,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="pywws.EWtoPy.html" title="EWtoPy"
+          <a href="pywws.EWtoPy.html" title="pywws.EWtoPy"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="pywws.TestWeatherStation.html" title="TestWeatherStation"
+          <a href="pywws.TestWeatherStation.html" title="pywws.TestWeatherStation"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1021 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>  
@@ -58,7 +58,7 @@
           <div class="body">
             
   <div class="section" id="module-pywws.USBQualityTest">
-<span id="usbqualitytest"></span><h1>USBQualityTest<a class="headerlink" href="#module-pywws.USBQualityTest" title="Permalink to this headline">¶</a></h1>
+<span id="pywws-usbqualitytest"></span><h1>pywws.USBQualityTest<a class="headerlink" href="#module-pywws.USBQualityTest" title="Permalink to this headline">¶</a></h1>
 <p>Test quality of USB connection to weather station</p>
 <div class="highlight-python"><pre>usage: python -m pywws.USBQualityTest [options]
 options are:
@@ -81,7 +81,7 @@ found.</p>
 <p>I typically get one or two errors per hour, so the test needs to be
 run for several hours to produce a useful measurement. Note that other
 software that accesses the weather station (such as
-<a class="reference internal" href="pywws.Hourly.html"><em>Hourly</em></a> or <a class="reference internal" href="pywws.LiveLog.html"><em>LiveLog</em></a>) must not be run while the
+<a class="reference internal" href="pywws.Hourly.html"><em>pywws.Hourly</em></a> or <a class="reference internal" href="pywws.LiveLog.html"><em>pywws.LiveLog</em></a>) must not be run while the
 test is in progress.</p>
 <p>If you run this test and get no errors at all, please let me know.
 There is something good about your setup and I&#8217;d love to know what it
@@ -93,7 +93,10 @@ is!</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.USBQualityTest.main" title="pywws.USBQualityTest.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">ApplicationLogger</span></tt>(verbose[,&nbsp;logfile])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.USBQualityTest.main" title="pywws.USBQualityTest.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
 <td></td>
 </tr>
 </tbody>
@@ -116,10 +119,10 @@ is!</p>
             </a></p>
   <h4>Previous topic</h4>
   <p class="topless"><a href="pywws.TestWeatherStation.html"
-                        title="previous chapter">TestWeatherStation</a></p>
+                        title="previous chapter">pywws.TestWeatherStation</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="pywws.EWtoPy.html"
-                        title="next chapter">EWtoPy</a></p>
+                        title="next chapter">pywws.EWtoPy</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -147,12 +150,12 @@ is!</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="pywws.EWtoPy.html" title="EWtoPy"
+          <a href="pywws.EWtoPy.html" title="pywws.EWtoPy"
              >next</a> |</li>
         <li class="right" >
-          <a href="pywws.TestWeatherStation.html" title="TestWeatherStation"
+          <a href="pywws.TestWeatherStation.html" title="pywws.TestWeatherStation"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1021 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" >Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>
