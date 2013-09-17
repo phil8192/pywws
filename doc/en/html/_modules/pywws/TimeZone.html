@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.TimeZone &mdash; pywws 13.09_r1065 documentation</title>
+    <title>pywws.TimeZone &mdash; pywws 13.09_r1066 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '13.09_r1065',
+        VERSION:     '13.09_r1066',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1065 documentation" href="../../index.html" />
+    <link rel="top" title="pywws 13.09_r1066 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.09_r1066 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -70,10 +70,26 @@
 <span class="c"># along with this program; if not, write to the Free Software</span>
 <span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.</span>
 
-<span class="sd">&quot;&quot;&quot;Provide a couple of datetime.tzinfo() objects representing local</span>
-<span class="sd">time and UTC.</span>
+<span class="sd">&quot;&quot;&quot;Provide a couple of :py:class:`datetime.tzinfo` objects</span>
+<span class="sd">representing local time and UTC.</span>
 
-<span class="sd">Copied directly from the datetime module documentation.&quot;&quot;&quot;</span>
+<span class="sd">Introduction</span>
+<span class="sd">------------</span>
+
+<span class="sd">This module provides two :py:class:`datetime.tzinfo` objects</span>
+<span class="sd">representing UTC and local time zones. These are used to convert</span>
+<span class="sd">timestamps to and from UTC and local time. The weather station</span>
+<span class="sd">software stores data with UTC timestamps, to avoid problems with</span>
+<span class="sd">daylight savings time, but the template and plot programs output data</span>
+<span class="sd">with local times.</span>
+
+<span class="sd">The module is copied directly from the :py:class:`datetime.tzinfo`</span>
+<span class="sd">module documentation.</span>
+
+<span class="sd">Detailed API</span>
+<span class="sd">------------</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">tzinfo</span><span class="p">,</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">datetime</span>
 <span class="kn">import</span> <span class="nn">time</span> <span class="kn">as</span> <span class="nn">_time</span>
@@ -156,7 +172,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.09_r1066 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

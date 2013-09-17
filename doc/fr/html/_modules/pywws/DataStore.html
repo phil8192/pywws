@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.DataStore &mdash; pywws 13.09_r1065 documentation</title>
+    <title>pywws.DataStore &mdash; pywws 13.09_r1063 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '13.09_r1065',
+        VERSION:     '13.09_r1063',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/translations.js"></script>
     <link rel="shortcut icon" href="../../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1065 documentation" href="../../index.html" />
+    <link rel="top" title="pywws 13.09_r1063 documentation" href="../../index.html" />
     <link rel="up" title="Code du module" href="../index.html" /> 
   </head>
   <body>
@@ -40,7 +40,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Index des modules Python"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.09_r1063 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Code du module</a> &raquo;</li> 
       </ul>
     </div>  
@@ -72,18 +72,50 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DataStore.py - stores readings in easy to access files</span>
 
-<span class="sd">A separate file is used for each day&#39;s data, to keep memory load</span>
-<span class="sd">reasonable. One day at a time is held in memory, and saved to disc</span>
-<span class="sd">when another day needs to be accessed.</span>
+<span class="sd">Introduction</span>
+<span class="sd">------------</span>
 
-<span class="sd">Data is accessed in a cross between dictionary and list behaviour.</span>
-<span class="sd">The following are all valid:</span>
-<span class="sd"># get value nearest 9:30 on Christmas day</span>
-<span class="sd">data[data.nearest(datetime(2008, 12, 25, 9, 30))]</span>
-<span class="sd"># get entire array, equivalent to data[:] or just data</span>
-<span class="sd">data[datetime.min:datetime.max]</span>
-<span class="sd"># get last 12 hours of data</span>
-<span class="sd">data[datetime.utcnow() - timedelta(hours=12):]</span>
+<span class="sd">This module is at the core of pywws. It stores data on disc, but</span>
+<span class="sd">without the overhead of a full scale database system. I have designed</span>
+<span class="sd">it to run on a small memory machine such as my Asus router. To</span>
+<span class="sd">minimise memory usage it only loads one day&#39;s worth of raw data at a</span>
+<span class="sd">time into memory.</span>
+
+<span class="sd">From a &quot;user&quot; point of view, the data is accessed as a cross between a</span>
+<span class="sd">list and a dictionary. Each data record is indexed by a</span>
+<span class="sd">:py:class:`datetime.datetime` object (dictionary behaviour), but</span>
+<span class="sd">records are stored in order and can be accessed as slices (list</span>
+<span class="sd">behaviour).</span>
+
+<span class="sd">For example, to access the hourly data for Christmas day 2009, one</span>
+<span class="sd">might do the following::</span>
+
+<span class="sd">  from datetime import datetime</span>
+<span class="sd">  import DataStore</span>
+<span class="sd">  hourly = DataStore.hourly_store(&#39;weather_data&#39;)</span>
+<span class="sd">  for data in hourly[datetime(2009, 12, 25):datetime(2009, 12, 26)]:</span>
+<span class="sd">      print data[&#39;idx&#39;], data[&#39;temp_out&#39;]</span>
+
+<span class="sd">Some more examples of data access::</span>
+
+<span class="sd">  # get value nearest 9:30 on Christmas day 2008</span>
+<span class="sd">  data[data.nearest(datetime(2008, 12, 25, 9, 30))]</span>
+<span class="sd">  # get entire array, equivalent to data[:]</span>
+<span class="sd">  data[datetime.min:datetime.max]</span>
+<span class="sd">  # get last 12 hours worth of data</span>
+<span class="sd">  data[datetime.utcnow() - timedelta(hours=12):]</span>
+
+<span class="sd">The module provides five classes to store different data.</span>
+<span class="sd">:py:class:`data_store` takes &quot;raw&quot; data from the weather station;</span>
+<span class="sd">:py:class:`calib_store`, :py:class:`hourly_store`,</span>
+<span class="sd">:py:class:`daily_store` and :py:class:`monthly_store` store processed</span>
+<span class="sd">data (see :py:mod:`pywws.Process`). All three are derived from the</span>
+<span class="sd">same ``core_store`` class, they only differ in the keys and types of</span>
+<span class="sd">data stored in each record.</span>
+
+<span class="sd">Detailed API</span>
+<span class="sd">------------</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">ConfigParser</span> <span class="kn">import</span> <span class="n">RawConfigParser</span>
@@ -743,7 +775,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Index des modules Python"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.09_r1063 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Code du module</a> &raquo;</li> 
       </ul>
     </div>

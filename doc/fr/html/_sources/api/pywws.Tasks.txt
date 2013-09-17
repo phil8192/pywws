@@ -17,6 +17,7 @@ pywws.Tasks
       RegularTasks
       ToService
       datetime
+      deque
       timedelta
    
    

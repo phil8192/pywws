@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.ZambrettiCore &mdash; pywws 13.09_r1065 documentation</title>
+    <title>pywws.ZambrettiCore &mdash; pywws 13.09_r1066 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '13.09_r1065',
+        VERSION:     '13.09_r1066',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1065 documentation" href="../../index.html" />
+    <link rel="top" title="pywws 13.09_r1066 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.09_r1066 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -150,8 +150,7 @@
     <span class="k">return</span> <span class="n">forecast_text</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span>
 </div>
 <div class="viewcode-block" id="main"><a class="viewcode-back" href="../../api/pywws.ZambrettiCore.html#pywws.ZambrettiCore.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">WeatherStation</span>
-    <span class="n">wind_dir</span> <span class="o">=</span> <span class="n">WeatherStation</span><span class="o">.</span><span class="n">get_wind_dir_text</span><span class="p">()</span>
+    <span class="kn">from</span> <span class="nn">pywws</span> <span class="kn">import</span> <span class="n">conversions</span>
     <span class="k">for</span> <span class="n">pressure</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1030</span><span class="p">,</span> <span class="mi">960</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">trend_txt</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;S&#39;</span><span class="p">,</span> <span class="s">&#39;R-S&#39;</span><span class="p">,</span> <span class="s">&#39;R-W&#39;</span><span class="p">,</span> <span class="s">&#39;F-W&#39;</span><span class="p">,</span> <span class="s">&#39;F-S&#39;</span><span class="p">):</span>
             <span class="n">trend</span><span class="p">,</span> <span class="n">month</span> <span class="o">=</span> <span class="p">{</span>
@@ -162,10 +161,10 @@
                 <span class="s">&#39;S&#39;</span>   <span class="p">:</span> <span class="p">(</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
                 <span class="p">}[</span><span class="n">trend_txt</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">wind</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">wind</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">wind</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                     <span class="n">wind_txt</span> <span class="o">=</span> <span class="s">&#39;calm&#39;</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">wind_txt</span> <span class="o">=</span> <span class="n">wind_dir</span><span class="p">[</span><span class="n">wind</span><span class="p">]</span>
+                    <span class="n">wind_txt</span> <span class="o">=</span> <span class="n">conversions</span><span class="o">.</span><span class="n">winddir_text</span><span class="p">(</span><span class="n">wind</span><span class="p">)</span>
                 <span class="k">print</span> <span class="s">&#39;</span><span class="si">%4d</span><span class="s"> </span><span class="si">%4s</span><span class="s"> </span><span class="si">%4s</span><span class="s">  </span><span class="si">%3s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span>
                     <span class="n">pressure</span><span class="p">,</span> <span class="n">trend_txt</span><span class="p">,</span> <span class="n">wind_txt</span><span class="p">,</span>
                     <span class="n">ZambrettiCode</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">wind</span><span class="p">,</span> <span class="n">trend</span><span class="p">))</span>
@@ -209,7 +208,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.09_r1066 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

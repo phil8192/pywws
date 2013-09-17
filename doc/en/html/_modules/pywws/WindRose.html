@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.WindRose &mdash; pywws 13.09_r1065 documentation</title>
+    <title>pywws.WindRose &mdash; pywws 13.09_r1066 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '13.09_r1065',
+        VERSION:     '13.09_r1066',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1065 documentation" href="../../index.html" />
+    <link rel="top" title="pywws 13.09_r1066 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.09_r1066 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -76,6 +76,206 @@
 
 <span class="sd">%s</span>
 
+<span class="sd">Introduction</span>
+<span class="sd">------------</span>
+
+<span class="sd">This routine plots one or more &quot;wind roses&quot; (see `Wikipedia</span>
+<span class="sd">&lt;http://en.wikipedia.org/wiki/Wind_rose&gt;`_ for a description). Like</span>
+<span class="sd">:py:mod:`pywws.Plot` almost everything is controlled by an XML</span>
+<span class="sd">&quot;recipe&quot; / template file.</span>
+
+<span class="sd">Before writing your own template files, it might be useful to look at</span>
+<span class="sd">some of the examples in the example_graph_templates directory. If</span>
+<span class="sd">(like I was) you are unfamiliar with XML, I suggest reading the `W3</span>
+<span class="sd">Schools XML tutorial &lt;http://www.w3schools.com/xml/&gt;`_.</span>
+
+<span class="sd">XML graph file syntax</span>
+<span class="sd">---------------------</span>
+
+<span class="sd">Here is the simplest useful wind rose template. It plots wind over the</span>
+<span class="sd">last 24 hours. ::</span>
+
+<span class="sd">  &lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;</span>
+<span class="sd">  &lt;graph&gt;</span>
+<span class="sd">    &lt;windrose&gt;</span>
+<span class="sd">      &lt;ycalc&gt;data[&#39;wind_ave&#39;]&lt;/ycalc&gt;</span>
+<span class="sd">    &lt;/windrose&gt;</span>
+<span class="sd">  &lt;/graph&gt;</span>
+
+<span class="sd">In this example, the root element graph has one windrose element which</span>
+<span class="sd">contains nothing more than a ycalc element.</span>
+
+<span class="sd">The complete element hierarchy is shown below. ::</span>
+
+<span class="sd">    graph</span>
+<span class="sd">        windrose</span>
+<span class="sd">            xcalc</span>
+<span class="sd">            ycalc</span>
+<span class="sd">            threshold</span>
+<span class="sd">            colour</span>
+<span class="sd">            yrange</span>
+<span class="sd">            points</span>
+<span class="sd">            source</span>
+<span class="sd">            title</span>
+<span class="sd">        start</span>
+<span class="sd">        stop</span>
+<span class="sd">        duration</span>
+<span class="sd">        layout</span>
+<span class="sd">        size</span>
+<span class="sd">        fileformat</span>
+<span class="sd">        lmargin, rmargin, tmargin, bmargin</span>
+<span class="sd">        title</span>
+
+<span class="sd">graph</span>
+<span class="sd">^^^^^</span>
+
+<span class="sd">This is the root element of the graph XML file. It does not have to be</span>
+<span class="sd">called &quot;graph&quot;, but there must be exactly one root element.</span>
+
+<span class="sd">windrose</span>
+<span class="sd">^^^^^^^^</span>
+
+<span class="sd">A separate plot is drawn for each windrose element, but all share the</span>
+<span class="sd">same time period.</span>
+
+<span class="sd">start</span>
+<span class="sd">^^^^^</span>
+
+<span class="sd">This element sets the date &amp; time of the wind roses. It is used in the</span>
+<span class="sd">constructor of a Python datetime object. For example, to start at noon</span>
+<span class="sd">(local time) on Christmas day 2008: ``&lt;start&gt;year=2008, month=12,</span>
+<span class="sd">day=25, hour=12&lt;/start&gt;``. The default value is (stop - duration).</span>
+
+<span class="sd">stop</span>
+<span class="sd">^^^^</span>
+
+<span class="sd">This element sets the date &amp; time of the end of the wind roses. It is</span>
+<span class="sd">used in the constructor of a Python datetime object. For example, to</span>
+<span class="sd">end at 10 am (local time) on new year&#39;s day 2009: ``&lt;stop&gt;year=2009,</span>
+<span class="sd">month=1, day=1, hour=10&lt;/stop&gt;``. The default value is (start +</span>
+<span class="sd">duration), unless start is not defined in which case the timestamp of</span>
+<span class="sd">the latest weather station hourly reading is used.</span>
+
+<span class="sd">duration</span>
+<span class="sd">^^^^^^^^</span>
+
+<span class="sd">This element sets the duration of wind roses, unless both start and</span>
+<span class="sd">stop are defined. It is used in the constructor of a Python timedelta</span>
+<span class="sd">object. For example, to plot one week:</span>
+<span class="sd">``&lt;duration&gt;weeks=1&lt;/duration&gt;``. The default value is hours=24.</span>
+
+<span class="sd">layout</span>
+<span class="sd">^^^^^^</span>
+
+<span class="sd">Controls the layout of the plots. Default is a grid that is wider than</span>
+<span class="sd">it is tall. The layout element specifies rows and columns. For</span>
+<span class="sd">example: ``&lt;layout&gt;4, 2&lt;/layout&gt;`` will use a grid of 4 rows and 2</span>
+<span class="sd">columns.</span>
+
+<span class="sd">size</span>
+<span class="sd">^^^^</span>
+
+<span class="sd">Sets the overall dimensions of the image file containing the graph.</span>
+<span class="sd">Default is a height of 600 pixels and a width that depends on the</span>
+<span class="sd">layout. Any size element must include both width and height. For</span>
+<span class="sd">example: ``&lt;size&gt;800, 600&lt;/size&gt;`` will produce an image 800 pixels</span>
+<span class="sd">wide and 600 pixels high.</span>
+
+<span class="sd">fileformat</span>
+<span class="sd">^^^^^^^^^^</span>
+
+<span class="sd">Sets the image format of the file containing the plots. Default is</span>
+<span class="sd">png. Any string recognised by your installation of gnuplot should do.</span>
+<span class="sd">For example: ``&lt;fileformat&gt;gif&lt;/fileformat&gt;`` will produce a GIF</span>
+<span class="sd">image.</span>
+
+<span class="sd">lmargin, rmargin, tmargin, bmargin</span>
+<span class="sd">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+
+<span class="sd">Over-rides the automatically computed left, right, top or bottom</span>
+<span class="sd">margin. Supply any positive real number, for example</span>
+<span class="sd">``&lt;lmargin&gt;1.3&lt;/lmargin&gt;``. Some experimentation may be necessary to</span>
+<span class="sd">find the best values.</span>
+
+<span class="sd">title</span>
+<span class="sd">^^^^^</span>
+
+<span class="sd">Sets the overall title of the plots. A single line of text, for</span>
+<span class="sd">example: ``&lt;title&gt;Today&#39;s weather&lt;/title&gt;``. This title appears at the</span>
+<span class="sd">very top, outside any plot area.</span>
+
+<span class="sd">xcalc</span>
+<span class="sd">^^^^^</span>
+
+<span class="sd">Selects if data is included in the wind rose. The value should be a</span>
+<span class="sd">valid Python logical expression. For example, to plot a rose for</span>
+<span class="sd">afternoon winds only: ``&lt;xcalc&gt;data[&#39;idx&#39;].hour &amp;gt;= 12&lt;/xcalc&gt;``.</span>
+<span class="sd">This allows aggregation of afternoon wind data over several days.</span>
+<span class="sd">Remember that data is indexed in UTC, so you need to use an expression</span>
+<span class="sd">that takes account of your time zone. The default value is &#39;True&#39;.</span>
+
+<span class="sd">ycalc</span>
+<span class="sd">^^^^^</span>
+
+<span class="sd">Selects the data to be plotted. Any one line Python expression that</span>
+<span class="sd">returns a single float value can be used. At its simplest this just</span>
+<span class="sd">selects one value from the &quot;data&quot; dictionary, for example:</span>
+<span class="sd">``&lt;ycalc&gt;data[&#39;wind_ave&#39;]&lt;/ycalc&gt;``. To convert to mph use:</span>
+<span class="sd">``&lt;ycalc&gt;data[&#39;wind_ave&#39;] * 3.6 / 1.609344&lt;/ycalc&gt;``. You are unlikely</span>
+<span class="sd">to want to use anything other than &#39;wind_ave&#39; here.</span>
+
+<span class="sd">threshold</span>
+<span class="sd">^^^^^^^^^</span>
+
+<span class="sd">Sets the thresholds for each colour on the rose petals. Defaults are</span>
+<span class="sd">based on the Wikipedia example. The values should be a correctly</span>
+<span class="sd">ordered list of real numbers, for example: ``&lt;threshold&gt;0.5, 3.5, 7.5,</span>
+<span class="sd">12.5, 18.5, 24.5, 31.5&lt;/threshold&gt;`` approximates to the Beaufort</span>
+<span class="sd">scale, if ycalc has been set to convert windspeeds to mph.</span>
+
+<span class="sd">colour</span>
+<span class="sd">^^^^^^</span>
+
+<span class="sd">Sets the colours of the threshold petal segments. Any sequence of</span>
+<span class="sd">integer values is accepted. The mapping of colours to numbers is set</span>
+<span class="sd">by gnuplot. Default value is 0, 1, 2, 3, etc.</span>
+
+<span class="sd">yrange</span>
+<span class="sd">^^^^^^</span>
+
+<span class="sd">Sets the upper limits of the axes. The rose shows what percentage of</span>
+<span class="sd">the time the wind came from a particular direction. For example, if</span>
+<span class="sd">you live somewhere with a very steady wind you might want to allow</span>
+<span class="sd">higher percentages than normal: ``&lt;yrange&gt;91&lt;/yrange&gt;``. Auto-scaling</span>
+<span class="sd">is also possible, using an asterisk: ``&lt;yrange&gt;*&lt;/yrange&gt;``</span>
+
+<span class="sd">points</span>
+<span class="sd">^^^^^^</span>
+
+<span class="sd">Sets the text of the compass points. The defaults are &#39;N&#39;, &#39;S&#39;, &#39;E&#39; &amp;</span>
+<span class="sd">&#39;W&#39;. For graphs in another language you can over-ride this, for</span>
+<span class="sd">example: ``&lt;points&gt;&#39;No&#39;, &#39;Zu&#39;, &#39;Oo&#39;, &#39;We&#39;&lt;/points&gt;``. (The preferred</span>
+<span class="sd">way to do this is to create a language file, see Localisation.py.)</span>
+
+<span class="sd">source</span>
+<span class="sd">^^^^^^</span>
+
+<span class="sd">Select the weather data to be plotted. Permitted values are</span>
+<span class="sd">``&lt;source&gt;raw&lt;/source&gt;``, ``&lt;source&gt;hourly&lt;/source&gt;``,</span>
+<span class="sd">``&lt;source&gt;daily&lt;/source&gt;`` and ``&lt;source&gt;monthly&lt;/source&gt;``. Default</span>
+<span class="sd">is raw. Note that the different sources have different data</span>
+<span class="sd">dictionaries, so this choice affects ycalc.</span>
+
+<span class="sd">title</span>
+<span class="sd">^^^^^</span>
+
+<span class="sd">Sets the title of the plot. A single line of text, for example:</span>
+<span class="sd">``&lt;title&gt;Morning winds&lt;/title&gt;``. This title appears within the plot</span>
+<span class="sd">area, above the threshold colour key.</span>
+
+<span class="sd">Detailed API</span>
+<span class="sd">------------</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="n">__docformat__</span> <span class="o">=</span> <span class="s">&quot;restructuredtext en&quot;</span>
@@ -99,22 +299,22 @@
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">xml.dom.minidom</span>
 
-<span class="kn">from</span> <span class="nn">.conversions</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">illuminance_wm2</span><span class="p">,</span> <span class="n">pressure_inhg</span><span class="p">,</span> <span class="n">rain_inch</span><span class="p">,</span> <span class="n">temp_f</span><span class="p">,</span>
-    <span class="n">winddir_degrees</span><span class="p">,</span> <span class="n">winddir_text</span><span class="p">,</span> <span class="n">wind_kmph</span><span class="p">,</span> <span class="n">wind_mph</span><span class="p">,</span> <span class="n">wind_kn</span><span class="p">,</span> <span class="n">wind_bft</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">DataStore</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Localisation</span>
-<span class="kn">from</span> <span class="nn">.Plot</span> <span class="kn">import</span> <span class="n">BasePlotter</span>
-<span class="kn">from</span> <span class="nn">.TimeZone</span> <span class="kn">import</span> <span class="n">Local</span>
-<span class="kn">from</span> <span class="nn">.WeatherStation</span> <span class="kn">import</span> <span class="n">dew_point</span>
+<span class="kn">from</span> <span class="nn">pywws.conversions</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">pywws</span> <span class="kn">import</span> <span class="n">DataStore</span>
+<span class="kn">from</span> <span class="nn">pywws</span> <span class="kn">import</span> <span class="n">Localisation</span>
+<span class="kn">from</span> <span class="nn">pywws.Plot</span> <span class="kn">import</span> <span class="n">BasePlotter</span>
+<span class="kn">from</span> <span class="nn">pywws.TimeZone</span> <span class="kn">import</span> <span class="n">Local</span>
 
 <div class="viewcode-block" id="RosePlotter"><a class="viewcode-back" href="../../api/pywws.WindRose.html#pywws.WindRose.RosePlotter">[docs]</a><span class="k">class</span> <span class="nc">RosePlotter</span><span class="p">(</span><span class="n">BasePlotter</span><span class="p">):</span>
 <div class="viewcode-block" id="RosePlotter.GetPlotList"><a class="viewcode-back" href="../../api/pywws.WindRose.html#pywws.WindRose.RosePlotter.GetPlotList">[docs]</a>    <span class="k">def</span> <span class="nf">GetPlotList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetChildren</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">,</span> <span class="s">&#39;windrose&#39;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetChildren</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">,</span> <span class="s">&#39;windrose&#39;</span><span class="p">)</span>
+</div>
 <div class="viewcode-block" id="RosePlotter.GetDefaultRows"><a class="viewcode-back" href="../../api/pywws.WindRose.html#pywws.WindRose.RosePlotter.GetDefaultRows">[docs]</a>    <span class="k">def</span> <span class="nf">GetDefaultRows</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plot_count</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plot_count</span><span class="p">))</span>
+</div>
 <div class="viewcode-block" id="RosePlotter.GetDefaultPlotSize"><a class="viewcode-back" href="../../api/pywws.WindRose.html#pywws.WindRose.RosePlotter.GetDefaultPlotSize">[docs]</a>    <span class="k">def</span> <span class="nf">GetDefaultPlotSize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="mi">600</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="mi">600</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span></div>
+        <span class="k">return</span> <span class="mi">600</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="mi">600</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span>
+</div>
 <div class="viewcode-block" id="RosePlotter.GetPreamble"><a class="viewcode-back" href="../../api/pywws.WindRose.html#pywws.WindRose.RosePlotter.GetPreamble">[docs]</a>    <span class="k">def</span> <span class="nf">GetPreamble</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;set polar</span>
 <span class="s">set angles degrees</span>
@@ -133,7 +333,8 @@
         <span class="n">result</span> <span class="o">+=</span> <span class="s">&#39;set tmargin </span><span class="si">%g</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">lmargin</span><span class="p">)</span>
         <span class="n">lmargin</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">,</span> <span class="s">&#39;bmargin&#39;</span><span class="p">,</span> <span class="s">&#39;-1&#39;</span><span class="p">))</span>
         <span class="n">result</span> <span class="o">+=</span> <span class="s">&#39;set bmargin </span><span class="si">%g</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">lmargin</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">result</span></div>
+        <span class="k">return</span> <span class="n">result</span>
+</div>
 <div class="viewcode-block" id="RosePlotter.PlotData"><a class="viewcode-back" href="../../api/pywws.WindRose.html#pywws.WindRose.RosePlotter.PlotData">[docs]</a>    <span class="k">def</span> <span class="nf">PlotData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plot_no</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span>
         <span class="n">_</span> <span class="o">=</span> <span class="n">Localisation</span><span class="o">.</span><span class="n">translation</span><span class="o">.</span><span class="n">ugettext</span>
         <span class="c"># get statistics</span>
@@ -252,7 +453,8 @@
             <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">result</span> <span class="o">+=</span> <span class="s">&#39;, </span><span class="se">\\</span><span class="s">&#39;</span>
             <span class="n">result</span> <span class="o">+=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
-        <span class="k">return</span> <span class="n">result</span></div></div>
+        <span class="k">return</span> <span class="n">result</span>
+</div></div>
 <div class="viewcode-block" id="main"><a class="viewcode-back" href="../../api/pywws.WindRose.html#pywws.WindRose.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">argv</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">argv</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span>
@@ -279,7 +481,8 @@
         <span class="n">DataStore</span><span class="o">.</span><span class="n">calib_store</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">DataStore</span><span class="o">.</span><span class="n">hourly_store</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
         <span class="n">DataStore</span><span class="o">.</span><span class="n">daily_store</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">DataStore</span><span class="o">.</span><span class="n">monthly_store</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
         <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">DoPlot</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span></div>
+        <span class="p">)</span><span class="o">.</span><span class="n">DoPlot</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</div>
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </pre></div>
@@ -318,7 +521,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.09_r1066 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

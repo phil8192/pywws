@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Template &mdash; pywws 13.09_r1065 documentation</title>
+    <title>pywws.Template &mdash; pywws 13.09_r1066 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '13.09_r1065',
+        VERSION:     '13.09_r1066',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1065 documentation" href="../../index.html" />
+    <link rel="top" title="pywws 13.09_r1066 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.09_r1066 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -51,6 +51,7 @@
             
   <h1>Source code for pywws.Template</h1><div class="highlight"><pre>
 <span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
 
 <span class="c"># pywws - Python software for USB Wireless Weather Stations</span>
 <span class="c"># http://github.com/jim-easterbrook/pywws</span>
@@ -75,6 +76,197 @@
 
 <span class="sd">%s</span>
 
+<span class="sd">Introduction</span>
+<span class="sd">------------</span>
+
+<span class="sd">This is probably the most difficult to use module in the weather</span>
+<span class="sd">station software collection. It generates text files based on a</span>
+<span class="sd">&quot;template&quot; file plus the raw, hourly, daily &amp; monthly weather station</span>
+<span class="sd">data. The template processing goes beyond simple substitution of</span>
+<span class="sd">values to include loops, jumps forwards or backwards in the data,</span>
+<span class="sd">processing of the data and substitution of missing values.</span>
+
+<span class="sd">A template file can be any sort of text file (plain text, xml, html,</span>
+<span class="sd">etc.) to which &quot;processing instructions&quot; have been added. These</span>
+<span class="sd">processing instructions are delimited by hash (&#39;#&#39;) characters. They</span>
+<span class="sd">are not copied to the output, but cause something else to happen:</span>
+<span class="sd">either a data value is inserted or one of a limited number of other</span>
+<span class="sd">actions is carried out.</span>
+
+<span class="sd">Before writing your own template files, it might be useful to look at</span>
+<span class="sd">some of the examples in the example_templates directory.</span>
+
+<span class="sd">Processing instructions</span>
+<span class="sd">-----------------------</span>
+
+<span class="sd">``##``</span>
+<span class="sd">^^^^^^</span>
+
+<span class="sd">output a single &#39;#&#39; character.</span>
+
+<span class="sd">``#! comment text#``</span>
+<span class="sd">^^^^^^^^^^^^^^^^^^^^</span>
+
+<span class="sd">a comment, no output generated. ``comment text`` can be any text</span>
+<span class="sd">without a line break.</span>
+
+<span class="sd">``#monthly#``</span>
+<span class="sd">^^^^^^^^^^^^^</span>
+
+<span class="sd">switch to &quot;monthly&quot; summary data. The index is reset to the most</span>
+<span class="sd">recent value.</span>
+
+<span class="sd">``#daily#``</span>
+<span class="sd">^^^^^^^^^^^</span>
+
+<span class="sd">switch to &quot;daily&quot; summary data. The index is reset to the most recent</span>
+<span class="sd">value.</span>
+
+<span class="sd">``#hourly#``</span>
+<span class="sd">^^^^^^^^^^^^</span>
+
+<span class="sd">switch to &quot;hourly&quot; summary data. The index is reset to the most recent</span>
+<span class="sd">value.</span>
+
+<span class="sd">``#raw#``</span>
+<span class="sd">^^^^^^^^^</span>
+
+<span class="sd">switch to &quot;raw&quot; data. The index is reset to the most recent value.</span>
+
+<span class="sd">``#timezone name#``</span>
+<span class="sd">^^^^^^^^^^^^^^^^^^^</span>
+
+<span class="sd">convert all datetime values to time zone ``name`` before output.</span>
+<span class="sd">Permitted values for name are ``utc`` or ``local``.</span>
+
+<span class="sd">``#roundtime expr#``</span>
+<span class="sd">^^^^^^^^^^^^^^^^^^^^</span>
+
+<span class="sd">switch time rounding on or off, according to ``expr``. When time</span>
+<span class="sd">rounding is on, 30 seconds is added to each time value used. This is</span>
+<span class="sd">useful if you are only printing out hours and minutes, e.g. with a</span>
+<span class="sd">&quot;%%H:%%M&quot; format, and want time values such as 10:23:58 to appear as</span>
+<span class="sd">&quot;10:24&quot;. Use ``&quot;True&quot;`` or ``&quot;False&quot;`` for expr.</span>
+
+<span class="sd">``#jump count#``</span>
+<span class="sd">^^^^^^^^^^^^^^^^</span>
+
+<span class="sd">jump ``count`` values. The data index is adjusted by ``count`` hours</span>
+<span class="sd">or days. Negative values jump back in time.</span>
+
+<span class="sd">It is a good idea to put jumps within a loop at the end, just before</span>
+<span class="sd">the ``#endloop#`` instruction. The loop can then terminate cleanly if</span>
+<span class="sd">it has run out of data.</span>
+
+<span class="sd">``#goto date-time#``</span>
+<span class="sd">^^^^^^^^^^^^^^^^^^^^</span>
+
+<span class="sd">go to ``date-time``. The data index is adjusted to the record</span>
+<span class="sd">immediately after ``date-time``. This can be in UTC or your local time</span>
+<span class="sd">zone, according to the setting of ``timezone``, and must exactly match</span>
+<span class="sd">the ISO date format, for example ``&quot;2010-11-01 12:00:00&quot;`` is noon on</span>
+<span class="sd">1st November 2010.</span>
+
+<span class="sd">Parts of ``date-time`` can be replaced with strftime style %% format</span>
+<span class="sd">characters to specify the current loop index. For example,</span>
+<span class="sd">``&quot;%%Y-%%m-01 12:00:00&quot;`` is noon on 1st of this month.</span>
+
+<span class="sd">``#loop count#``</span>
+<span class="sd">^^^^^^^^^^^^^^^^</span>
+
+<span class="sd">start a loop that will repeat ``count`` times. ``count`` must be one</span>
+<span class="sd">or more.</span>
+
+<span class="sd">``#endloop#``</span>
+<span class="sd">^^^^^^^^^^^^^</span>
+
+<span class="sd">end a loop started by ``#loop count#``. The template processing will</span>
+<span class="sd">go back to the line containing the ``#loop count#`` instruction. Don&#39;t</span>
+<span class="sd">try to nest loops.</span>
+
+<span class="sd">``#key fmt_string no_value_string conversion#``</span>
+<span class="sd">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+
+<span class="sd">output a data value. ``key`` is the data key, e.g. ``temp_out`` for</span>
+<span class="sd">outdoor temperature. ``fmt_string`` is a printf-like format string</span>
+<span class="sd">(actually Python&#39;s %% operator) except for datetime values, when it is</span>
+<span class="sd">input to datetime&#39;s ``strftime()`` method. ``no_value_string`` is</span>
+<span class="sd">output instead of ``fmt_string`` when the data value is absent, e.g.</span>
+<span class="sd">if the station lost contact with the outside sensor. ``conversion`` is</span>
+<span class="sd">a Python expression to convert the data, e.g. to convert wind speed</span>
+<span class="sd">from m/s to mph you could use ``&quot;x * 3.6 / 1.609344&quot;``, or the more</span>
+<span class="sd">convenient provided function ``&quot;wind_mph(x)&quot;``.</span>
+
+<span class="sd">All these values need double quotes &quot; if they contain spaces or other</span>
+<span class="sd">potentially difficult characters. All except ``key`` are optional, but</span>
+<span class="sd">note that if you want to specify a conversion, you also need to</span>
+<span class="sd">specify ``fmt_string`` and ``no_value_string``.</span>
+
+<span class="sd">``#calc expression fmt_string no_value_string conversion#``</span>
+<span class="sd">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+
+<span class="sd">output a value computed from one or more data items. ``expression`` is</span>
+<span class="sd">any valid Python expression, e.g. ``&quot;dew_point(data[&#39;temp_out&#39;],</span>
+<span class="sd">data[&#39;hum_out&#39;])&quot;`` to compute the outdoor dew point. ``fmt_string``,</span>
+<span class="sd">``no_value_string`` and ``conversion`` are as described above. Note</span>
+<span class="sd">that it is probably more efficient to incorporate any conversion into</span>
+<span class="sd">expression.</span>
+
+<span class="sd">Example</span>
+<span class="sd">-------</span>
+
+<span class="sd">Here is an example snippet showing basic and advanced use of the</span>
+<span class="sd">template features. It is part of the 6hrs.txt example template file,</span>
+<span class="sd">which generates an HTML table of 7 hourly readings (which should span</span>
+<span class="sd">6 hours). ::</span>
+
+<span class="sd">  #hourly#</span>
+<span class="sd">  #jump -6#</span>
+<span class="sd">  #loop 7#</span>
+<span class="sd">    &lt;tr&gt;</span>
+<span class="sd">      &lt;td&gt;#idx &quot;%%Y/%%m/%%d&quot; &quot;&quot; &quot;[None, x][x.hour == 0 or loop_count == 7]&quot;#&lt;/td&gt;</span>
+<span class="sd">      &lt;td&gt;#idx &quot;%%H%%M %%Z&quot;#&lt;/td&gt;</span>
+<span class="sd">      &lt;td&gt;#temp_out &quot;%%.1f °C&quot;#&lt;/td&gt;</span>
+<span class="sd">      &lt;td&gt;#hum_out &quot;%%d%%%%&quot;#&lt;/td&gt;</span>
+<span class="sd">      &lt;td&gt;#wind_dir &quot;%%s&quot; &quot;-&quot; &quot;winddir_text(x)&quot;#&lt;/td&gt;</span>
+<span class="sd">      &lt;td&gt;#wind_ave &quot;%%.0f mph&quot; &quot;&quot; &quot;wind_mph(x)&quot;#&lt;/td&gt;</span>
+<span class="sd">      &lt;td&gt;#wind_gust &quot;%%.0f mph&quot; &quot;&quot; &quot;wind_mph(x)&quot;#&lt;/td&gt;</span>
+<span class="sd">      &lt;td&gt;#rain &quot;%%0.1f mm&quot;#&lt;/td&gt;</span>
+<span class="sd">      &lt;td&gt;#rel_pressure &quot;%%.0f hPa&quot;#, #pressure_trend &quot;%%s&quot; &quot;&quot; &quot;pressure_trend_text(x)&quot;#&lt;/td&gt;</span>
+<span class="sd">    &lt;/tr&gt;</span>
+<span class="sd">  #jump 1#</span>
+<span class="sd">  #endloop#</span>
+
+<span class="sd">The first three lines of this snippet do the following: select hourly</span>
+<span class="sd">data, jump back 6 hours, start a loop with a count of 7. A jump</span>
+<span class="sd">forward of one hour appears just before the end of the repeated</span>
+<span class="sd">segment. As this last jump (of one hour) happens each time round the</span>
+<span class="sd">loop, a sequence of 7 data readings will be output. The last line</span>
+<span class="sd">marks the end of the loop — everything between the ``#loop 7#`` and</span>
+<span class="sd">``#endloop#`` lines is output 7 times.</span>
+
+<span class="sd">The ``#temp_out ...#``, ``#hum_out ...#``, ``#rain ...#`` and</span>
+<span class="sd">``#rel_pressure ...#`` instructions show basic data output. They each</span>
+<span class="sd">use a ``fmt_string`` to format the data appropriately. The ``#wind_ave</span>
+<span class="sd">...#`` and ``#wind_gust ...#`` instructions show how to use a</span>
+<span class="sd">conversion expression to convert m/s to mph.</span>
+
+<span class="sd">The ``#wind_dir ...#`` and ``#pressure_trend ...#`` instructions show</span>
+<span class="sd">use of the built-in functions ``winddir_text`` and</span>
+<span class="sd">``pressure_trend_text`` to convert numerical values into text.</span>
+
+<span class="sd">Finally we get to datetime values. The ``#idx &quot;%%H%%M&quot;#`` instruction</span>
+<span class="sd">simply outputs the time (in HHMM format) of the data&#39;s index. The</span>
+<span class="sd">``#idx &quot;%%Y/%%m/%%d&quot; &quot;&quot; &quot;[None, x][x.hour == 0 or loop_count == 7]&quot;#``</span>
+<span class="sd">instruction is a bit more complicated. It outputs the date, but only</span>
+<span class="sd">on the first line or if the date has changed. It does this by indexing</span>
+<span class="sd">the array ``[None, x]`` with a boolean expression that is true when</span>
+<span class="sd">``loop_count`` is 7 (i.e. on the first pass through the loop) or</span>
+<span class="sd">``x.hour`` is zero (i.e. this is the first hour of the day).</span>
+
+<span class="sd">Detailed API</span>
+<span class="sd">------------</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="n">__docformat__</span> <span class="o">=</span> <span class="s">&quot;restructuredtext en&quot;</span>
@@ -98,13 +290,13 @@
 <span class="kn">import</span> <span class="nn">shlex</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="kn">from</span> <span class="nn">pywws.conversions</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">pywws</span> <span class="kn">import</span> <span class="n">conversions</span>
+<span class="kn">from</span> <span class="nn">conversions</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">pywws</span> <span class="kn">import</span> <span class="n">DataStore</span>
 <span class="kn">from</span> <span class="nn">pywws.Forecast</span> <span class="kn">import</span> <span class="n">Zambretti</span><span class="p">,</span> <span class="n">ZambrettiCode</span>
 <span class="kn">from</span> <span class="nn">pywws</span> <span class="kn">import</span> <span class="n">Localisation</span>
 <span class="kn">from</span> <span class="nn">pywws.Logger</span> <span class="kn">import</span> <span class="n">ApplicationLogger</span>
 <span class="kn">from</span> <span class="nn">pywws.TimeZone</span> <span class="kn">import</span> <span class="n">Local</span><span class="p">,</span> <span class="n">utc</span>
-<span class="kn">from</span> <span class="nn">pywws</span> <span class="kn">import</span> <span class="n">WeatherStation</span>
 
 <span class="n">SECOND</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">HOUR</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -150,11 +342,10 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;No calib data - run Process.py first&quot;</span><span class="p">)</span>
                 <span class="k">return</span>
             <span class="n">live_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calib_data</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
-        <span class="n">pressure_trend_text</span> <span class="o">=</span> <span class="n">WeatherStation</span><span class="o">.</span><span class="n">pressure_trend_text</span>
-        <span class="n">wind_dir_text</span> <span class="o">=</span> <span class="n">WeatherStation</span><span class="o">.</span><span class="n">get_wind_dir_text</span><span class="p">()</span>
-        <span class="n">dew_point</span> <span class="o">=</span> <span class="n">WeatherStation</span><span class="o">.</span><span class="n">dew_point</span>
-        <span class="n">wind_chill</span> <span class="o">=</span> <span class="n">WeatherStation</span><span class="o">.</span><span class="n">wind_chill</span>
-        <span class="n">apparent_temp</span> <span class="o">=</span> <span class="n">WeatherStation</span><span class="o">.</span><span class="n">apparent_temp</span>
+        <span class="c"># get conversions module to create its &#39;private&#39; wind dir text</span>
+        <span class="c"># array, then copy it to deprecated wind_dir_text variable</span>
+        <span class="n">winddir_text</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">wind_dir_text</span> <span class="o">=</span> <span class="n">conversions</span><span class="o">.</span><span class="n">_winddir_text_array</span>
         <span class="n">hour_diff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hour_diff</span>
         <span class="n">rain_hour</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rain_hour</span>
         <span class="n">rain_day</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rain_day</span>
@@ -411,7 +602,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.09_r1066 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

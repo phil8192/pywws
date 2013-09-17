@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Plot &mdash; pywws 13.09_r1065 documentation</title>
+    <title>pywws.Plot &mdash; pywws 13.09_r1063 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.09_r1065',
+        VERSION:     '13.09_r1063',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1063 documentation" href="../index.html" />
     <link rel="up" title="Programmes et des modules Python" href="index.html" />
     <link rel="next" title="pywws.WindRose" href="pywws.WindRose.html" />
     <link rel="prev" title="pywws.calib" href="pywws.calib.html" /> 
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="pywws.calib.html" title="pywws.calib"
              accesskey="P">précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1063 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>  
@@ -288,23 +288,29 @@ output_file is the name of the image file to be created e.g. 24hrs.png</pre>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">apparent_temp</span></tt>(temp,&nbsp;rh,&nbsp;wind)</td>
-<td>Calcule la température apparente (sensation réelle), en utilisant la formule de</td>
-</tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">cadhumidex</span></tt>(temp,&nbsp;humidity)</td>
-<td>Calcule l&#8217;Indice d&#8217;Humidité selon les Normes Météo Canadiennes</td>
-</tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">dew_point</span></tt>(temp,&nbsp;hum)</td>
-<td>Calcule le point de rosée, en utilisant la formule de</td>
-</tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">illuminance_wm2</span></tt>(lux)</td>
-<td>Conversion approximative de la luminosité en lux, au rayonnement solaire en W/m2</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.Plot.main" title="pywws.Plot.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">ApplicationLogger</span></tt>(verbose[,&nbsp;logfile])</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">pressure_inhg</span></tt>(hPa)</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">apparent_temp</span></tt>(temp,&nbsp;rh,&nbsp;wind)</td>
+<td>Calcule la température apparente (sensation réelle), en utilisant la formule de</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">cadhumidex</span></tt>(temp,&nbsp;humidity)</td>
+<td>Calcule l&#8217;Indice d&#8217;Humidité selon les Normes Météo Canadiennes</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">dew_point</span></tt>(temp,&nbsp;hum)</td>
+<td>Calcule le point de rosée, en utilisant la formule de</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">illuminance_wm2</span></tt>(lux)</td>
+<td>Conversion approximative de la luminosité en lux, au rayonnement solaire en W/m2</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.Plot.main" title="pywws.Plot.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">pressure_inhg</span></tt>(hPa)</td>
 <td>Converti la pression de hectopascals/millibars, à pouces de mercure</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">pressure_trend_text</span></tt>(trend)</td>
+<td>Converti la tendance de la pression en une chaîne, telle qu&#8217;elle est utilisée par le UK met</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">rain_inch</span></tt>(mm)</td>
 <td>Converti les précipitations de millimètres, à pouces</td>
@@ -312,25 +318,28 @@ output_file is the name of the image file to be created e.g. 24hrs.png</pre>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">temp_f</span></tt>(c)</td>
 <td>Converti la température de Celsius, à Fahrenheit</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">wind_bft</span></tt>(ms)</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">usaheatindex</span></tt>(temp,&nbsp;humidity,&nbsp;dew)</td>
+<td>Calcule l&#8217;Indice de Chaleur selon les normes du Service Météorologique National USA</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">wind_bft</span></tt>(ms)</td>
 <td>Converti la vitesse du vent de mètres par seconde, vers l&#8217;échelle Beaufort</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">wind_chill</span></tt>(temp,&nbsp;wind)</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">wind_chill</span></tt>(temp,&nbsp;wind)</td>
 <td>Calcule le refroidissement éolien, en utilisant la formule de</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">wind_kmph</span></tt>(ms)</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">wind_kmph</span></tt>(ms)</td>
 <td>Converti la vitesse du vent de mètres par seconde, à kilomètres par heure</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">wind_kn</span></tt>(ms)</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">wind_kn</span></tt>(ms)</td>
 <td>Converti la vitesse du vent de mètres par seconde, à noeuds</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">wind_mph</span></tt>(ms)</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">wind_mph</span></tt>(ms)</td>
 <td>Converti la vitesse du vent de mètres par seconde, en miles par heure</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">winddir_degrees</span></tt>(pts)</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">winddir_degrees</span></tt>(pts)</td>
 <td>Converti la direction du vent de 0..15 en degrés</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">winddir_text</span></tt>(pts)</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">winddir_text</span></tt>(pts)</td>
 <td>Converti la direction du vent de 0..15, en points cardinaux</td>
 </tr>
 </tbody>
@@ -518,7 +527,7 @@ output_file is the name of the image file to be created e.g. 24hrs.png</pre>
         <li class="right" >
           <a href="pywws.calib.html" title="pywws.calib"
              >précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1063 documentation</a> &raquo;</li>
           <li><a href="index.html" >Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>
