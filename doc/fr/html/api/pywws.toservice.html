@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.toservice &mdash; pywws 13.09_r1063 documentation</title>
+    <title>pywws.toservice &mdash; pywws 13.09_r1066 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.09_r1063',
+        VERSION:     '13.09_r1066',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1063 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1066 documentation" href="../index.html" />
     <link rel="up" title="Programmes et des modules Python" href="index.html" />
     <link rel="next" title="pywws.YoWindow" href="pywws.YoWindow.html" />
     <link rel="prev" title="pywws.ToTwitter" href="pywws.ToTwitter.html" /> 
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="pywws.ToTwitter.html" title="pywws.ToTwitter"
              accesskey="P">précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1063 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1066 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>  
@@ -269,7 +269,7 @@ id = Buck House</pre>
 <td>Téléverse les données météo pour les services météorologiques tels que Weather</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">datetime</span></tt></td>
-<td>datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])</td>
+<td>datetime(année, mois, jour[, heure[, minute[, seconde[, microseconde[,tzinfo]]]]])</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">timedelta</span></tt></td>
 <td>Différence entre deux valeurs de datetime.</td>
@@ -297,10 +297,8 @@ id = Buck House</pre>
 <dl class="method">
 <dt id="pywws.toservice.ToService.encode_data">
 <tt class="descname">encode_data</tt><big>(</big><em>data</em><big>)</big><a class="reference internal" href="../_modules/pywws/toservice.html#ToService.encode_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.toservice.ToService.encode_data" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p>Encode a weather data record.</p>
-<p>The <tt class="xref py py-obj docutils literal"><span class="pre">data</span></tt> parameter contains the data to be encoded. It
-should be a &#8216;calibrated&#8217; data record, as stored in
-<a class="reference internal" href="pywws.DataStore.html#pywws.DataStore.calib_store" title="pywws.DataStore.calib_store"><tt class="xref py py-class docutils literal"><span class="pre">pywws.DataStore.calib_store</span></tt></a>.</p>
+<dd><p>Encode un enregistrement de données météo.</p>
+<p>Le paramètre <tt class="xref py py-obj docutils literal"><span class="pre">data</span></tt> contient les données à être encodées. Il devrait y avoir un enregistrement &#8216;calibré&#8217; de données, tels que stockés dans <a class="reference internal" href="pywws.DataStore.html#pywws.DataStore.calib_store" title="pywws.DataStore.calib_store"><tt class="xref py py-class docutils literal"><span class="pre">pywws.DataStore.calib_store</span></tt></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -319,8 +317,7 @@ should be a &#8216;calibrated&#8217; data record, as stored in
 <dt id="pywws.toservice.ToService.send_data">
 <tt class="descname">send_data</tt><big>(</big><em>coded_data</em><big>)</big><a class="reference internal" href="../_modules/pywws/toservice.html#ToService.send_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.toservice.ToService.send_data" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p>Téléverse un enregistrement de données météo.</p>
-<p>The <tt class="xref py py-obj docutils literal"><span class="pre">coded_data</span></tt> parameter contains the data to be uploaded.
-It should be a urlencoded string.</p>
+<p>Le paramètre <tt class="xref py py-obj docutils literal"><span class="pre">data</span></tt> contient les données à être téléversées. Il doit être une chaîne urlencodée .</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -338,10 +335,8 @@ It should be a urlencoded string.</p>
 <dl class="method">
 <dt id="pywws.toservice.ToService.next_data">
 <tt class="descname">next_data</tt><big>(</big><em>start</em>, <em>live_data</em><big>)</big><a class="reference internal" href="../_modules/pywws/toservice.html#ToService.next_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.toservice.ToService.next_data" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p>Get weather data records to upload.</p>
-<p>This method returns either the most recent weather data
-record, or all records since a given datetime, according to
-the value of <tt class="xref py py-obj docutils literal"><span class="pre">start</span></tt>.</p>
+<dd><p>Obtien les enregistrements de données météorologiques à téléverser.</p>
+<p>Cette méthode téléverse le plus récent enregistrement de données météo ou tous les enregistrements depuis une date fournie, selon la valeur de <tt class="xref py py-obj docutils literal"><span class="pre">start</span></tt>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -350,7 +345,7 @@ the value of <tt class="xref py py-obj docutils literal"><span class="pre">start
 </tr>
 </tbody>
 </table>
-<p>most recent data only.</p>
+<p>données les plus récentes seulement.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -368,7 +363,7 @@ the value of <tt class="xref py py-obj docutils literal"><span class="pre">start
 <dl class="method">
 <dt id="pywws.toservice.ToService.catchup_start">
 <tt class="descname">catchup_start</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/pywws/toservice.html#ToService.catchup_start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.toservice.ToService.catchup_start" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p>Get datetime of first &#8216;catchup&#8217; record to send.</p>
+<dd><p>Obtien l&#8217;horodatage du premier enregistrement de rattrapage (catchup) envoyé</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -475,7 +470,7 @@ the value of <tt class="xref py py-obj docutils literal"><span class="pre">start
         <li class="right" >
           <a href="pywws.ToTwitter.html" title="pywws.ToTwitter"
              >précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1063 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1066 documentation</a> &raquo;</li>
           <li><a href="index.html" >Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>

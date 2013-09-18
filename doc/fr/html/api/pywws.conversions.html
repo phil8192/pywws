@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.conversions &mdash; pywws 13.09_r1063 documentation</title>
+    <title>pywws.conversions &mdash; pywws 13.09_r1066 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.09_r1063',
+        VERSION:     '13.09_r1066',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1063 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1066 documentation" href="../index.html" />
     <link rel="up" title="Programmes et des modules Python" href="index.html" />
     <link rel="next" title="pywws.Logger" href="pywws.Logger.html" />
     <link rel="prev" title="pywws.calib" href="pywws.calib.html" /> 
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="pywws.calib.html" title="pywws.calib"
              accesskey="P">précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1063 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1066 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>  
@@ -68,10 +68,10 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.apparent_temp" title="pywws.conversions.apparent_temp"><tt class="xref py py-obj docutils literal"><span class="pre">apparent_temp</span></tt></a>(temp,&nbsp;rh,&nbsp;wind)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.apparent_temp" title="pywws.conversions.apparent_temp"><tt class="xref py py-obj docutils literal"><span class="pre">apparent_temp</span></tt></a>(temp,&nbsp;hr,&nbsp;vent)</td>
 <td>Calcule la température apparente (sensation réelle), en utilisant la formule de</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.conversions.cadhumidex" title="pywws.conversions.cadhumidex"><tt class="xref py py-obj docutils literal"><span class="pre">cadhumidex</span></tt></a>(temp,&nbsp;humidity)</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.conversions.cadhumidex" title="pywws.conversions.cadhumidex"><tt class="xref py py-obj docutils literal"><span class="pre">cadhumidex</span></tt></a>(temp,&nbsp;humidité)</td>
 <td>Calcule l&#8217;Indice d&#8217;Humidité selon les Normes Météo Canadiennes</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.dew_point" title="pywws.conversions.dew_point"><tt class="xref py py-obj docutils literal"><span class="pre">dew_point</span></tt></a>(temp,&nbsp;hum)</td>
@@ -92,13 +92,13 @@
 <tr class="row-even"><td><a class="reference internal" href="#pywws.conversions.temp_f" title="pywws.conversions.temp_f"><tt class="xref py py-obj docutils literal"><span class="pre">temp_f</span></tt></a>(c)</td>
 <td>Converti la température de Celsius, à Fahrenheit</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.usaheatindex" title="pywws.conversions.usaheatindex"><tt class="xref py py-obj docutils literal"><span class="pre">usaheatindex</span></tt></a>(temp,&nbsp;humidity,&nbsp;dew)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.usaheatindex" title="pywws.conversions.usaheatindex"><tt class="xref py py-obj docutils literal"><span class="pre">usaheatindex</span></tt></a>(temp,&nbsp;humidité,&nbsp;point&nbsp;de&nbsp;rosée)</td>
 <td>Calcule l&#8217;Indice de Chaleur selon les normes du Service Météorologique National USA</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pywws.conversions.wind_bft" title="pywws.conversions.wind_bft"><tt class="xref py py-obj docutils literal"><span class="pre">wind_bft</span></tt></a>(ms)</td>
 <td>Converti la vitesse du vent de mètres par seconde, vers l&#8217;échelle Beaufort</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.wind_chill" title="pywws.conversions.wind_chill"><tt class="xref py py-obj docutils literal"><span class="pre">wind_chill</span></tt></a>(temp,&nbsp;wind)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.wind_chill" title="pywws.conversions.wind_chill"><tt class="xref py py-obj docutils literal"><span class="pre">wind_chill</span></tt></a>(temp,&nbsp;vent)</td>
 <td>Calcule le refroidissement éolien, en utilisant la formule de</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pywws.conversions.wind_kmph" title="pywws.conversions.wind_kmph"><tt class="xref py py-obj docutils literal"><span class="pre">wind_kmph</span></tt></a>(ms)</td>
@@ -264,7 +264,7 @@
         <li class="right" >
           <a href="pywws.calib.html" title="pywws.calib"
              >précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1063 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1066 documentation</a> &raquo;</li>
           <li><a href="index.html" >Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>
