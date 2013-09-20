@@ -9,12 +9,17 @@ pywws.conversions
 
    .. autosummary::
    
+      apparent_temp
       cadhumidex
+      dew_point
       illuminance_wm2
       pressure_inhg
+      pressure_trend_text
       rain_inch
       temp_f
+      usaheatindex
       wind_bft
+      wind_chill
       wind_kmph
       wind_kn
       wind_mph

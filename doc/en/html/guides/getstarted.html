@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>How to get started with pywws &mdash; pywws 13.09_r1069 documentation</title>
+    <title>How to get started with pywws &mdash; pywws 13.09_r1072 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.09_r1069',
+        VERSION:     '13.09_r1072',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1069 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1072 documentation" href="../index.html" />
     <link rel="up" title="User guides" href="index.html" />
     <link rel="next" title="How to set up ‘hourly’ logging with pywws" href="hourlylogging.html" />
     <link rel="prev" title="User guides" href="index.html" /> 
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="index.html" title="User guides"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1069 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1072 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">User guides</a> &raquo;</li> 
       </ul>
     </div>  
@@ -61,38 +61,8 @@
 <h1>How to get started with pywws<a class="headerlink" href="#how-to-get-started-with-pywws" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="install-dependencies">
 <h2>Install dependencies<a class="headerlink" href="#install-dependencies" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Python 2.5+ - <a class="reference external" href="http://python.org/">http://python.org/</a> (Note: Python 3 support is under development.)</li>
-<li>USB library option 1 (preferred, except on MacOS):<ul>
-<li>PyUSB 1.0 - <a class="reference external" href="http://sourceforge.net/apps/trac/pyusb/">http://sourceforge.net/apps/trac/pyusb/</a></li>
-<li>libusb 0.1 or 1.0 - <a class="reference external" href="http://www.libusb.org/">http://www.libusb.org/</a></li>
-</ul>
-</li>
-<li>USB library option 2 (if PyUSB 1.0 is not available):<ul>
-<li>PyUSB 0.4 - <a class="reference external" href="http://sourceforge.net/apps/trac/pyusb/">http://sourceforge.net/apps/trac/pyusb/</a></li>
-<li>libusb 0.1 - <a class="reference external" href="http://www.libusb.org/">http://www.libusb.org/</a></li>
-</ul>
-</li>
-<li>USB library option 3 (best for MacOS):<ul>
-<li>hidapi - <a class="reference external" href="https://github.com/signal11/hidapi">https://github.com/signal11/hidapi</a></li>
-<li>ctypes - <a class="reference external" href="http://docs.python.org/2/library/ctypes.html">http://docs.python.org/2/library/ctypes.html</a></li>
-</ul>
-</li>
-<li>USB library option 4:<ul>
-<li>hidapi - <a class="reference external" href="https://github.com/signal11/hidapi">https://github.com/signal11/hidapi</a></li>
-<li>cython-hidapi - <a class="reference external" href="https://github.com/gbishop/cython-hidapi">https://github.com/gbishop/cython-hidapi</a></li>
-<li>cython - <a class="reference external" href="http://cython.org/">http://cython.org/</a></li>
-</ul>
-</li>
-</ul>
-<p>You may be able to install most of these using your operating system&#8217;s package manager.
-This is a lot easier than downloading and compiling source files from the project websites.
-Note that some Linux distributions may use different names for some of the packages, e.g. in Ubuntu, pyusb is python-usb.</p>
-<p>In addition to the above, I recommend installing <a class="reference external" href="http://www.pip-installer.org/">pip</a> (the package may be called python-pip) or <a class="reference external" href="http://peak.telecommunity.com/DevCenter/EasyInstall">easy_install</a>.
-These both simplify installation of software from the <a class="reference external" href="http://pypi.python.org/pypi">Python Package Index (PyPI)</a>.
-For example, PyUSB can be installed from PyPI using the <tt class="docutils literal"><span class="pre">pip</span></tt> command:</p>
-<div class="highlight-python"><pre>sudo pip install pyusb</pre>
-</div>
+<p>Before you can do anything with pywws you need to install Python and some USB libraries (to allow Python to access the weather station).
+See <a class="reference internal" href="../essentials/dependencies.html"><em>Dependencies</em></a> for more detail.</p>
 </div>
 <div class="section" id="download-the-pywws-software">
 <h2>Download the pywws software<a class="headerlink" href="#download-the-pywws-software" title="Permalink to this headline">¶</a></h2>
@@ -275,9 +245,10 @@ You can do this by running <a class="reference internal" href="../api/pywws.Repr
 </div>
 <div class="section" id="read-the-documentation">
 <h2>Read the documentation<a class="headerlink" href="#read-the-documentation" title="Permalink to this headline">¶</a></h2>
-<p>The doc directory in your pywws source directory contains HTML and plain text versions of the documentation (unless you did a direct installation with <tt class="docutils literal"><span class="pre">pip</span></tt>).
+<p>The doc directory in your pywws source directory contains HTML documentation (unless you did a direct installation with <tt class="docutils literal"><span class="pre">pip</span></tt>).
 The HTML files can be read with any web browser.
 Start with the index (<a class="reference internal" href="../index.html"><em>pywws</em></a>) and follow links from there.</p>
+<hr class="docutils" />
 <p>Comments or questions? Please subscribe to the pywws mailing list <a class="reference external" href="http://groups.google.com/group/pywws">http://groups.google.com/group/pywws</a> and let us know.</p>
 </div>
 </div>
@@ -351,7 +322,7 @@ Start with the index (<a class="reference internal" href="../index.html"><em>pyw
         <li class="right" >
           <a href="index.html" title="User guides"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1069 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1072 documentation</a> &raquo;</li>
           <li><a href="index.html" >User guides</a> &raquo;</li> 
       </ul>
     </div>

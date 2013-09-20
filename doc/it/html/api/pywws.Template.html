@@ -58,79 +58,8 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="pywws-template">
-<h1>pywws.Template<a class="headerlink" href="#pywws-template" title="link permanente per questa intestazione">¶</a></h1>
-<div class="section" id="introduction">
-<h2>Introduzione<a class="headerlink" href="#introduction" title="link permanente per questa intestazione">¶</a></h2>
-<p>Questo è probabilmente il modulo più difficile da utilizzare dell&#8217;insieme di software della stazione meteo. Genera file di testo basati su un file &#8220;template&#8221; dai dati raw, hourly, daily &amp; monthly  della stazione meteo. L&#8217;elaborazione del modello va al di là della semplice sostituzione di valori da includere in cicli, salti in avanti o indietro dei dati, l&#8217;elaborazione dei dati e la sostituzione di valori mancanti.</p>
-<p>Un file di modello può essere qualsiasi tipo di file di testo (testo normale, xml, html, ecc.) in cui sono stati aggiunti &#8220;processing instructions&#8221;. Queste istruzioni di elaborazione sono delimitate da caratteri di hash (&#8216;#&#8217;). Essi non vengono copiati all&#8217;uscita, ma accade qualcos&#8217;altro: o viene inserito un valore di dati o viene effettuato un numero limitato di altre azioni.</p>
-<p>Prima di scrivere il proprio file di template, potrebbe essere utile esaminare alcuni esempi nella directory example_templates.</p>
-</div>
-<div class="section" id="processing-instructions">
-<h2>Istruzioni di elaborazione<a class="headerlink" href="#processing-instructions" title="link permanente per questa intestazione">¶</a></h2>
-<blockquote>
-<div><ul>
-<li><p class="first"><tt class="docutils literal"><span class="pre">##</span></tt>: l&#8217;output di un singolo carattere &#8216;#&#8217;.</p>
-</li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">#!</span> <span class="pre">comment</span> <span class="pre">text#</span></tt>: un commento, nessun output generato.</p>
-</li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">#monthly#</span></tt>: ritorna i dati &#8220;monthly&#8221; di riepilogo. L&#8217;indice viene reimpostato sul valore più recente.</p>
-</li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">#daily#</span></tt>: ritorna i dati &#8220;daily&#8221; di riepilogo. L&#8217;indice viene reimpostato sul valore più recente.</p>
-</li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">#hourly#</span></tt>: ritorna i dati &#8220;hourly&#8221; di riepilogo. L&#8217;indice viene reimpostato sul valore più recente.</p>
-</li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">#raw#</span></tt>: ritorna i dati &#8220;raw&#8221; di riepilogo. L&#8217;indice viene reimpostato sul valore più recente.</p>
-</li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">#timezone</span> <span class="pre">name#</span></tt>: Converte tutti i valori data e ora sul fuso orario <tt class="docutils literal"><span class="pre">nome</span></tt> prima dell&#8217;output. I valori consentiti per nome sono <tt class="docutils literal"><span class="pre">utc</span></tt> o <tt class="docutils literal"><span class="pre">local</span></tt>.</p>
-</li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">#roundtime</span> <span class="pre">expr#</span></tt>: Interruttore arrotondamento tempo on/off, secondo <tt class="docutils literal"><span class="pre">expr</span></tt>.  Quando l&#8217;arrotondamento del tempo è attivo, 30 secondi vengono aggiunti a ciascun valore di tempo. Questo è utile se si stampa solo in ore e minuti, ad esempio con un formato &#8221; %H: %M&#8221;, e che i valori di tempo come ad esempio 10:23:58 di apparire come &#8220;10:24 &#8221;. Usare <tt class="docutils literal"><span class="pre">&quot;True&quot;</span></tt> o <tt class="docutils literal"><span class="pre">&quot;False&quot;</span></tt> per <tt class="docutils literal"><span class="pre">expr</span></tt>.</p>
-</li>
-<li><p class="first">Salta i valori <tt class="docutils literal"><span class="pre">count</span></tt>. L&#8217;indice dei dati è regolata da <tt class="docutils literal"><span class="pre">count</span></tt> ore o giorni. U valori negativo salta indietro nel tempo.</p>
-<p>È una buona idea inserire salti all&#8217;interno di un loop alla fine, poco prima dell&#8217;istruzione <tt class="docutils literal"><span class="pre">#endloop#</span></tt>. Il ciclo può poi terminare in modo pulito se ha esaurito i dati.</p>
-</li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">#goto</span> <span class="pre">date-time#</span></tt>: va alla <tt class="docutils literal"><span class="pre">date-time</span></tt>&#8216;. L&#8217;indice di dati è impostato al record immediatamente dopo <tt class="docutils literal"><span class="pre">date-time</span></tt>.Questo può essere in UTC o il fuso orario locale, secondo l&#8217;impostazione di <tt class="docutils literal"><span class="pre">timezone</span></tt>, E deve corrispondere esattamente al formato data ISO, per esempio <tt class="docutils literal"><span class="pre">&quot;2010-11-01</span> <span class="pre">12:00:00&quot;</span></tt> è mezzogiorno a partire dal 1° novembre 2010.</p>
-<p>Parti di <tt class="docutils literal"><span class="pre">date-time</span></tt> possono essere sostituite con strftime % stile caratteri di formattazione per specificare l&#8217;attuale indice del ciclo. Ad esempio, <tt class="docutils literal"><span class="pre">&quot;%Y-%m-01</span> <span class="pre">12:00:00&quot;</span></tt> è mezzogiorno a partire dal giorno 1 del mese.</p>
-</li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">#loop</span> <span class="pre">count#</span></tt>: avvia un ciclo che si ripete <tt class="docutils literal"><span class="pre">count</span></tt> volte. <tt class="docutils literal"><span class="pre">count</span></tt> deve essere uno o più.</p>
-</li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">#endloop#</span></tt>: finisce un ciclo avviato da <tt class="docutils literal"><span class="pre">#loop</span> <span class="pre">count#</span></tt>. L&#8217;elaborazione del modello torna alla riga contenente le istruzioni <tt class="docutils literal"><span class="pre">#loop</span> <span class="pre">count#</span></tt>. Non provare a nido loop.</p>
-</li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">#key</span> <span class="pre">fmt_string</span> <span class="pre">no_value_string</span> <span class="pre">conversion#</span></tt>: ricava un valore di dati. <cite>key`</cite> è la chiave dei dati, es. <cite>temp_out`</cite> per la temperatura esterna. <tt class="docutils literal"><span class="pre">fmt_string</span></tt> è un printf come stringa di formattazione (in realtà Python&#8217;s % operatore) tranne che per i valori data e ora, quando si ha data e ora usare il metodo <tt class="docutils literal"><span class="pre">strftime()</span></tt>. <tt class="docutils literal"><span class="pre">no_value_string</span></tt> risulta al posto di <tt class="docutils literal"><span class="pre">fmt_string</span></tt> quando il valore dei dati è assente, ad esempio, se la stazione ha perso il contatto con il sensore esterno. <tt class="docutils literal"><span class="pre">conversion</span></tt> è un espressione Python per convertire i dati, ad esempio per convertire la velocità da m/s a mph è possibile utilizzare <tt class="docutils literal"><span class="pre">&quot;x</span> <span class="pre">*</span> <span class="pre">3.6</span> <span class="pre">/</span> <span class="pre">1.609344&quot;</span></tt>.</p>
-<p>All these values need double quotes &#8221; if they contain spaces or other potentially difficult characters. All except <tt class="docutils literal"><span class="pre">key</span></tt> are optional, but note that if you want to specify a conversion, you also need to specify <tt class="docutils literal"><span class="pre">fmt_string</span></tt> and <tt class="docutils literal"><span class="pre">no_value_string</span></tt>.</p>
-</li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">#calc</span> <span class="pre">expression</span> <span class="pre">fmt_string</span> <span class="pre">no_value_string</span> <span class="pre">conversion#</span></tt>: restituisce un valore calcolato da uno o più elementi di dati. <tt class="docutils literal"><span class="pre">expression</span></tt> È una espressione valida in Python, ad es. <tt class="docutils literal"><span class="pre">&quot;dew_point(data['temp_out'],</span> <span class="pre">data['hum_out'])&quot;</span></tt> per calcolare il punto di rugiada all&#8217;aperto. <tt class="docutils literal"><span class="pre">fmt_string</span></tt>, <tt class="docutils literal"><span class="pre">no_value_string</span></tt> and <tt class="docutils literal"><span class="pre">conversion</span></tt> Sono come descritto sopra. Si noti che, probabilmente, è più efficiente incorporare qualsiasi conversione nell&#8217;espressione stessa.</p>
-</li>
-</ul>
-</div></blockquote>
-</div>
-<div class="section" id="example">
-<h2>Esempio<a class="headerlink" href="#example" title="link permanente per questa intestazione">¶</a></h2>
-<p>Ecco un esempio di base e utilizzo avanzato del modello. E&#8217; parte della 6hrs.txt del file di esempio del modello, che genera una tabella HTML di 7 letture orarie (che deve coprire 6 ore).</p>
-<div class="highlight-python"><pre>#hourly#
-#jump -6#
-#loop 7#
-  &lt;tr&gt;
-    &lt;td&gt;#idx "%Y/%m/%d" "" "[None, x][x.hour == 0 or loop_count == 7]"#&lt;/td&gt;
-    &lt;td&gt;#idx "%H%M %Z"#&lt;/td&gt;
-    &lt;td&gt;#temp_out "%.1f °C"#&lt;/td&gt;
-    &lt;td&gt;#hum_out "%d%%"#&lt;/td&gt;
-    &lt;td&gt;#wind_dir "%s" "-" "wind_dir_text[x]"#&lt;/td&gt;
-    &lt;td&gt;#wind_ave "%.0f mph" "" "x * 3.6 / 1.609344"#&lt;/td&gt;
-    &lt;td&gt;#wind_gust "%.0f mph" "" "x * 3.6 / 1.609344"#&lt;/td&gt;
-    &lt;td&gt;#rain "%0.1f mm"#&lt;/td&gt;
-    &lt;td&gt;#rel_pressure "%.0f hPa"#, #pressure_trend "%s" "" "pressure_trend_text(x)"#&lt;/td&gt;
-  &lt;/tr&gt;
-#jump 1#
-#endloop#</pre>
-</div>
-<p>Le prime tre righe di questo frammento: seleziona i dati orari, salta indietro di 6 ore, avvia un loop con un conteggio di 7. un salto in avanti di un&#8217;ora appare poco prima della fine del segmento ripetuto. A quest&#8217;ultimo salto (di un&#8217;ora) accade ogni volta nel ciclo, una sequenza di 7 letture dei dati sarà il risultato. L&#8217;ultima riga indica la fine del ciclo - tutto tra le linee <tt class="docutils literal"><span class="pre">#loop</span> <span class="pre">7#</span></tt> e <tt class="docutils literal"><span class="pre">#endloop#</span></tt> è ripetuta 7 volte.</p>
-<p>The <tt class="docutils literal"><span class="pre">#temp_out</span> <span class="pre">...#</span></tt>, <tt class="docutils literal"><span class="pre">#hum_out</span> <span class="pre">...#</span></tt>, <tt class="docutils literal"><span class="pre">#rain</span> <span class="pre">...#</span></tt> and <tt class="docutils literal"><span class="pre">#rel_pressure</span> <span class="pre">...#</span></tt> instructions show basic data output. They each use a <tt class="docutils literal"><span class="pre">fmt_string</span></tt> to format the data appropriately. The <tt class="docutils literal"><span class="pre">#wind_ave</span> <span class="pre">...#</span></tt> and <tt class="docutils literal"><span class="pre">#wind_gust</span> <span class="pre">...#</span></tt> instructions show how to use a conversion expression to convert m/s to mph.</p>
-<p>Le istruzioni <tt class="docutils literal"><span class="pre">#temp_out</span> <span class="pre">...#</span></tt>, <tt class="docutils literal"><span class="pre">#hum_out</span> <span class="pre">...#</span></tt>, <tt class="docutils literal"><span class="pre">#rain</span> <span class="pre">...#</span></tt> e <tt class="docutils literal"><span class="pre">#rel_pressure</span> <span class="pre">...#</span></tt> mostrano l&#8217;uso della matrice incorporata <tt class="docutils literal"><span class="pre">wind_dir_text</span></tt> e la funzione <tt class="docutils literal"><span class="pre">pressure_trend_text</span></tt> convertono i valori numerici in testo Inglese.</p>
-<p>Finalmente arriviamo ai valori di datetime. L&#8217;istruzione <tt class="docutils literal"><span class="pre">#idx</span> <span class="pre">&quot;%H%M&quot;#</span></tt> emette semplicemente l&#8217;ora (in formato HHMM) dell&#8217;indice dei dati meteo. L&#8217;istruzione``#idx &#8220;%Y/%m/%d&#8221; &#8220;&#8221; &#8220;[None, x][x.hour == 0 or loop_count == 7]&#8221;#`` è un po&#8217; più complicato. Esso emette la data, ma solo sulla prima riga o se la data è cambiata. Ciò è reso possibile dall&#8217;indicizzazione dell&#8217;array <tt class="docutils literal"><span class="pre">[None,</span> <span class="pre">x]</span></tt> con un&#8217;espressione booleana che è vera quando <tt class="docutils literal"><span class="pre">loop_count</span></tt> è 7 (Cioè il primo passo del ciclo) o <tt class="docutils literal"><span class="pre">x.hour</span></tt> è pari a zero (Vale a dire che questa è la prima ora del giorno).</p>
-</div>
-<div class="section" id="module-pywws.Template">
-<span id="detailed-api"></span><h2>Dettagli API<a class="headerlink" href="#module-pywws.Template" title="link permanente per questa intestazione">¶</a></h2>
+  <div class="section" id="module-pywws.Template">
+<span id="pywws-template"></span><h1>pywws.Template<a class="headerlink" href="#module-pywws.Template" title="link permanente per questa intestazione">¶</a></h1>
 <p>Creare file di dati di testo basato su un modello</p>
 <div class="highlight-python"><pre>usage: python -m pywws.Template [options] data_dir template_file output_file
 options are:
@@ -146,8 +75,50 @@ output_file is the name of the text file to be created</pre>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.Template.main" title="pywws.Template.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">ApplicationLogger</span></tt>(verbose[,&nbsp;logfile])</td>
 <td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Zambretti</span></tt>(params,&nbsp;hourly_data)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">ZambrettiCode</span></tt>(params,&nbsp;hourly_data)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">cadhumidex</span></tt>(temp,&nbsp;humidity)</td>
+<td>Calcolo Indice di umidità come per gli standard Canadian Weather Standards</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">illuminance_wm2</span></tt>(lux)</td>
+<td>Conversione approssimativa di illuminazione in lux a radiazione solare in W/m2</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.Template.main" title="pywws.Template.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">pressure_inhg</span></tt>(hPa)</td>
+<td>Converte la pressione da ettopascal/millibar in pollici di mercurio</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">rain_inch</span></tt>(mm)</td>
+<td>Converte le precipitazioni da millimetri a pollici</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">temp_f</span></tt>(c)</td>
+<td>Converte la temperatura da gradi Celsius a Fahrenheit</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">wind_bft</span></tt>(ms)</td>
+<td>Converte i metri al secondo del vento in scala Beaufort</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">wind_kmph</span></tt>(ms)</td>
+<td>Converte il vento da metri al secondo a chilometri orari</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">wind_kn</span></tt>(ms)</td>
+<td>Converte il vento da metri al secondo a nodi</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">wind_mph</span></tt>(ms)</td>
+<td>Converte il vento da metri al secondo a miglia all&#8217;ora</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">winddir_degrees</span></tt>(pts)</td>
+<td>Convertire la direzione del vento a 0..15 in gradi</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">winddir_text</span></tt>(pts)</td>
+<td>Convertire direzione del vento da 0 .. 15 per i punti della bussola</td>
 </tr>
 </tbody>
 </table>
@@ -160,6 +131,12 @@ output_file is the name of the text file to be created</pre>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="#pywws.Template.Template" title="pywws.Template.Template"><tt class="xref py py-obj docutils literal"><span class="pre">Template</span></tt></a>(params,&nbsp;status,&nbsp;calib_data,&nbsp;...[,&nbsp;...])</td>
 <td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">datetime</span></tt></td>
+<td>datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">timedelta</span></tt></td>
+<td>Difference between two datetime values.</td>
 </tr>
 </tbody>
 </table>
@@ -189,7 +166,6 @@ output_file is the name of the text file to be created</pre>
 <dd></dd></dl>
 
 </div>
-</div>
 
 
           </div>
@@ -200,17 +176,6 @@ output_file is the name of the text file to be created</pre>
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/pywws_logo.png" alt="Logo"/>
             </a></p>
-  <h3><a href="../index.html">Tabella dei contenuti</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">pywws.Template</a><ul>
-<li><a class="reference internal" href="#introduction">Introduzione</a></li>
-<li><a class="reference internal" href="#processing-instructions">Istruzioni di elaborazione</a></li>
-<li><a class="reference internal" href="#example">Esempio</a></li>
-<li><a class="reference internal" href="#module-pywws.Template">Dettagli API</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Argomento precedente</h4>
   <p class="topless"><a href="pywws.WindRose.html"
                         title="capitolo precedente">pywws.WindRose</a></p>

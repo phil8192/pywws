@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Reprocess &mdash; pywws 13.06_r1023 documentation</title>
+    <title>pywws.Reprocess &mdash; pywws 13.06_r1023 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -29,8 +29,8 @@
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
     <link rel="top" title="pywws 13.06_r1023 documentation" href="../index.html" />
     <link rel="up" title="Programmi Python e moduli" href="index.html" />
-    <link rel="next" title="TwitterAuth" href="pywws.TwitterAuth.html" />
-    <link rel="prev" title="LiveLog" href="pywws.LiveLog.html" /> 
+    <link rel="next" title="pywws.TwitterAuth" href="pywws.TwitterAuth.html" />
+    <link rel="prev" title="pywws.LiveLog" href="pywws.LiveLog.html" /> 
   </head>
   <body>
     <div class="related">
@@ -43,10 +43,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >moduli</a> |</li>
         <li class="right" >
-          <a href="pywws.TwitterAuth.html" title="TwitterAuth"
+          <a href="pywws.TwitterAuth.html" title="pywws.TwitterAuth"
              accesskey="N">successivo</a> |</li>
         <li class="right" >
-          <a href="pywws.LiveLog.html" title="LiveLog"
+          <a href="pywws.LiveLog.html" title="pywws.LiveLog"
              accesskey="P">precedente</a> |</li>
         <li><a href="../index.html">pywws 13.06_r1023 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Programmi Python e moduli</a> &raquo;</li> 
@@ -58,18 +58,8 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="reprocess">
-<h1>Reprocess<a class="headerlink" href="#reprocess" title="link permanente per questa intestazione">¶</a></h1>
-<div class="section" id="introduction">
-<h2>Introduzione<a class="headerlink" href="#introduction" title="link permanente per questa intestazione">¶</a></h2>
-<p>Il programma ricrea i dati di riepilogo orari, giornalieri e mensili che è creata dal programma Process.py. Esso deve essere eseguito ogni volta che si esegue l&#8217;aggiornamento a una versione più recente di pywws.</p>
-<p>Il programma è molto semplice da usare:</p>
-<div class="highlight-python"><pre>python -m pywws.Reprocess data_directory</pre>
-</div>
-<p>where <tt class="docutils literal"><span class="pre">data_directory</span></tt> is the location of your stored data.</p>
-</div>
-<div class="section" id="module-pywws.Reprocess">
-<span id="detailed-api"></span><h2>Dettagli API<a class="headerlink" href="#module-pywws.Reprocess" title="link permanente per questa intestazione">¶</a></h2>
+  <div class="section" id="module-pywws.Reprocess">
+<span id="pywws-reprocess"></span><h1>pywws.Reprocess<a class="headerlink" href="#module-pywws.Reprocess" title="link permanente per questa intestazione">¶</a></h1>
 <p>Rigenera i dati di riepilogo orari e giornalieri</p>
 <div class="highlight-python"><pre>usage: python -m pywws.Reprocess [options] data_dir
 options are:
@@ -84,10 +74,13 @@ data_dir is the root directory of the weather data</pre>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.Reprocess.Reprocess" title="pywws.Reprocess.Reprocess"><tt class="xref py py-obj docutils literal"><span class="pre">Reprocess</span></tt></a>(data_dir)</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">ApplicationLogger</span></tt>(verbose[,&nbsp;logfile])</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.Reprocess.main" title="pywws.Reprocess.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.Reprocess.Reprocess" title="pywws.Reprocess.Reprocess"><tt class="xref py py-obj docutils literal"><span class="pre">Reprocess</span></tt></a>(data_dir)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.Reprocess.main" title="pywws.Reprocess.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
 <td></td>
 </tr>
 </tbody>
@@ -103,7 +96,6 @@ data_dir is the root directory of the weather data</pre>
 <dd></dd></dl>
 
 </div>
-</div>
 
 
           </div>
@@ -114,21 +106,12 @@ data_dir is the root directory of the weather data</pre>
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/pywws_logo.png" alt="Logo"/>
             </a></p>
-  <h3><a href="../index.html">Tabella dei contenuti</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Reprocess</a><ul>
-<li><a class="reference internal" href="#introduction">Introduzione</a></li>
-<li><a class="reference internal" href="#module-pywws.Reprocess">Dettagli API</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Argomento precedente</h4>
   <p class="topless"><a href="pywws.LiveLog.html"
-                        title="capitolo precedente">LiveLog</a></p>
+                        title="capitolo precedente">pywws.LiveLog</a></p>
   <h4>Argomento successivo</h4>
   <p class="topless"><a href="pywws.TwitterAuth.html"
-                        title="capitolo successivo">TwitterAuth</a></p>
+                        title="capitolo successivo">pywws.TwitterAuth</a></p>
 <div id="searchbox" style="display: none">
   <h3>Ricerca veloce</h3>
     <form class="search" action="../search.html" method="get">
@@ -156,10 +139,10 @@ data_dir is the root directory of the weather data</pre>
           <a href="../py-modindex.html" title="Python Module Index"
              >moduli</a> |</li>
         <li class="right" >
-          <a href="pywws.TwitterAuth.html" title="TwitterAuth"
+          <a href="pywws.TwitterAuth.html" title="pywws.TwitterAuth"
              >successivo</a> |</li>
         <li class="right" >
-          <a href="pywws.LiveLog.html" title="LiveLog"
+          <a href="pywws.LiveLog.html" title="pywws.LiveLog"
              >precedente</a> |</li>
         <li><a href="../index.html">pywws 13.06_r1023 documentation</a> &raquo;</li>
           <li><a href="index.html" >Programmi Python e moduli</a> &raquo;</li> 

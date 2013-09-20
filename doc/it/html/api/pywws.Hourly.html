@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Hourly &mdash; pywws 13.06_r1023 documentation</title>
+    <title>pywws.Hourly &mdash; pywws 13.06_r1023 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -29,7 +29,7 @@
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
     <link rel="top" title="pywws 13.06_r1023 documentation" href="../index.html" />
     <link rel="up" title="Programmi Python e moduli" href="index.html" />
-    <link rel="next" title="LiveLog" href="pywws.LiveLog.html" />
+    <link rel="next" title="pywws.LiveLog" href="pywws.LiveLog.html" />
     <link rel="prev" title="pywws.Logger" href="pywws.Logger.html" /> 
   </head>
   <body>
@@ -43,7 +43,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >moduli</a> |</li>
         <li class="right" >
-          <a href="pywws.LiveLog.html" title="LiveLog"
+          <a href="pywws.LiveLog.html" title="pywws.LiveLog"
              accesskey="N">successivo</a> |</li>
         <li class="right" >
           <a href="pywws.Logger.html" title="pywws.Logger"
@@ -59,7 +59,7 @@
           <div class="body">
             
   <div class="section" id="module-pywws.Hourly">
-<span id="hourly"></span><h1>Hourly<a class="headerlink" href="#module-pywws.Hourly" title="link permanente per questa intestazione">¶</a></h1>
+<span id="pywws-hourly"></span><h1>pywws.Hourly<a class="headerlink" href="#module-pywws.Hourly" title="link permanente per questa intestazione">¶</a></h1>
 <p>Ottenere dati meteo, elaborarli, preparare grafici i file di testo e caricare su un sito web.</p>
 <p>In genere sono eseguiti ogni ora da cron.</p>
 <div class="highlight-python"><pre>usage: python -m pywws.Hourly [options] data_dir
@@ -77,10 +77,13 @@ data_dir is the root directory of the weather data (e.g. $(HOME)/weather/data)</
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.Hourly.Hourly" title="pywws.Hourly.Hourly"><tt class="xref py py-obj docutils literal"><span class="pre">Hourly</span></tt></a>(data_dir)</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">ApplicationLogger</span></tt>(verbose[,&nbsp;logfile])</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.Hourly.main" title="pywws.Hourly.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.Hourly.Hourly" title="pywws.Hourly.Hourly"><tt class="xref py py-obj docutils literal"><span class="pre">Hourly</span></tt></a>(data_dir)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.Hourly.main" title="pywws.Hourly.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
 <td></td>
 </tr>
 </tbody>
@@ -111,7 +114,7 @@ data_dir is the root directory of the weather data (e.g. $(HOME)/weather/data)</
                         title="capitolo precedente">pywws.Logger</a></p>
   <h4>Argomento successivo</h4>
   <p class="topless"><a href="pywws.LiveLog.html"
-                        title="capitolo successivo">LiveLog</a></p>
+                        title="capitolo successivo">pywws.LiveLog</a></p>
 <div id="searchbox" style="display: none">
   <h3>Ricerca veloce</h3>
     <form class="search" action="../search.html" method="get">
@@ -139,7 +142,7 @@ data_dir is the root directory of the weather data (e.g. $(HOME)/weather/data)</
           <a href="../py-modindex.html" title="Python Module Index"
              >moduli</a> |</li>
         <li class="right" >
-          <a href="pywws.LiveLog.html" title="LiveLog"
+          <a href="pywws.LiveLog.html" title="pywws.LiveLog"
              >successivo</a> |</li>
         <li class="right" >
           <a href="pywws.Logger.html" title="pywws.Logger"

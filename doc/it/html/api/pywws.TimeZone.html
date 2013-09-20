@@ -58,15 +58,8 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="pywws-timezone">
-<h1>pywws.TimeZone<a class="headerlink" href="#pywws-timezone" title="link permanente per questa intestazione">¶</a></h1>
-<div class="section" id="introduction">
-<h2>Introduzione<a class="headerlink" href="#introduction" title="link permanente per questa intestazione">¶</a></h2>
-<p>Questo modulo fornisce due <tt class="docutils literal"><span class="pre">datetime.tzinfo</span></tt> gli oggetti che rappresentano l&#8217;ora UTC e l&#8217;ora locale. Questi sono utilizzati per convertire timestamp da e verso l&#8217;ora UTC e l&#8217;ora locale. Il software della stazione meteo  archivia i dati con data e ora UTC, per evitare problemi con l&#8217;ora legale, ma il modello template e i grafici dei programmi usano l&#8217;ora locale.</p>
-<p>Il modulo viene copiato direttamente dalla documentazione <tt class="docutils literal"><span class="pre">datetime.tzinfo</span></tt>.</p>
-</div>
-<div class="section" id="module-pywws.TimeZone">
-<span id="detailed-api"></span><h2>Dettagli API<a class="headerlink" href="#module-pywws.TimeZone" title="link permanente per questa intestazione">¶</a></h2>
+  <div class="section" id="module-pywws.TimeZone">
+<span id="pywws-timezone"></span><h1>pywws.TimeZone<a class="headerlink" href="#module-pywws.TimeZone" title="link permanente per questa intestazione">¶</a></h1>
 <p>datetime.tzinfo() sono paio di oggetti che rappresentano l&#8217;ora locale e UTC</p>
 <p>Copiate direttamente dalla documentazione del modulo datetime.</p>
 <p class="rubric">Classi</p>
@@ -81,6 +74,15 @@
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pywws.TimeZone.UTC" title="pywws.TimeZone.UTC"><tt class="xref py py-obj docutils literal"><span class="pre">UTC</span></tt></a></td>
 <td>UTC</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">datetime</span></tt></td>
+<td>datetime(year, month, day[, hour[, minute[, second[, microsecond[,tzinfo]]]]])</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">timedelta</span></tt></td>
+<td>Difference between two datetime values.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">tzinfo</span></tt></td>
+<td>Abstract base class for time zone info objects.</td>
 </tr>
 </tbody>
 </table>
@@ -127,7 +129,6 @@
 </dd></dl>
 
 </div>
-</div>
 
 
           </div>
@@ -138,15 +139,6 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/pywws_logo.png" alt="Logo"/>
             </a></p>
-  <h3><a href="../index.html">Tabella dei contenuti</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">pywws.TimeZone</a><ul>
-<li><a class="reference internal" href="#introduction">Introduzione</a></li>
-<li><a class="reference internal" href="#module-pywws.TimeZone">Dettagli API</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Argomento precedente</h4>
   <p class="topless"><a href="pywws.DataStore.html"
                         title="capitolo precedente">pywws.DataStore</a></p>

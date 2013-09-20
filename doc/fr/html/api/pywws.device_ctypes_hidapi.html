@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.device_ctypes_hidapi &mdash; pywws 13.09_r1066 documentation</title>
+    <title>pywws.device_ctypes_hidapi &mdash; pywws 13.09_r1069 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.09_r1066',
+        VERSION:     '13.09_r1069',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,8 +27,9 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1066 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1069 documentation" href="../index.html" />
     <link rel="up" title="Programmes et des modules Python" href="index.html" />
+    <link rel="next" title="pywws.device_cython_hidapi" href="pywws.device_cython_hidapi.html" />
     <link rel="prev" title="pywws.WeatherStation" href="pywws.WeatherStation.html" /> 
   </head>
   <body>
@@ -42,9 +43,12 @@
           <a href="../py-modindex.html" title="Index des modules Python"
              >modules</a> |</li>
         <li class="right" >
+          <a href="pywws.device_cython_hidapi.html" title="pywws.device_cython_hidapi"
+             accesskey="N">suivant</a> |</li>
+        <li class="right" >
           <a href="pywws.WeatherStation.html" title="pywws.WeatherStation"
              accesskey="P">précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1066 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1069 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>  
@@ -56,20 +60,12 @@
             
   <div class="section" id="module-pywws.device_ctypes_hidapi">
 <span id="pywws-device-ctypes-hidapi"></span><h1>pywws.device_ctypes_hidapi<a class="headerlink" href="#module-pywws.device_ctypes_hidapi" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Low level USB interface to weather station, using ctypes to access hidapi.</p>
+<p>Interface USB de bas niveau de la station météo, utilisant ctype pour accéder hidapi.</p>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
-<p>This module handles low level communication with the weather station
-via <a class="reference external" href="http://docs.python.org/2/library/ctypes.html">ctypes</a> and the
-<a class="reference external" href="https://github.com/signal11/hidapi">hidapi</a> library. Alternative
-modules, <tt class="xref doc docutils literal"><span class="pre">pywws.device_cython_hidapi</span></tt> and
-<a class="reference internal" href="pywws.device_pyusb.html"><em>pywws.device_pyusb</em></a>, use other libraries. The choice of which
-module to use depends on which libraries are available for you
-computer.</p>
+<p>Ce module gère la communication de bas niveau avec la station météo via la bibliothèque <a class="reference external" href="http://docs.python.org/2/library/ctypes.html">ctypes</a> et la librairie <a class="reference external" href="https://github.com/signal11/hidapi">hidapi</a> . Les modules alternatifs,  <a class="reference internal" href="pywws.device_cython_hidapi.html"><em>pywws.device_cython_hidapi</em></a> and <a class="reference internal" href="pywws.device_pyusb.html"><em>pywws.device_pyusb</em></a>,  utilisent différentes bibliothèques. Le choix du module à utiliser dépend de la disponibilité des bibliothèques selon votre ordinateur.</p>
 <p>Les utilisateurs de versions récentes de Mac OS n&#8217;ont ont moins de choix. Le système d&#8217;exploitation rend très difficile l&#8217;accès direct aux périphériques HID (comme la station météo), de sorte que la bibliothèque <tt class="docutils literal"><span class="pre">hidapi</span></tt> doit être utilisée.</p>
-<p>Users of OpenWRT and similar embedded Linux platforms will probably
-not be able to install <tt class="docutils literal"><span class="pre">ctypes</span></tt> or <tt class="docutils literal"><span class="pre">cython-hidapi</span></tt>, so are
-constrained to use <tt class="docutils literal"><span class="pre">libusb</span></tt> and its <tt class="docutils literal"><span class="pre">PyUSB</span></tt> Python interface.</p>
+<p>Les utilisateurs de OpenWRT et plateformes embarquées Linux similaires ne seront probablement pas en mesure d&#8217;installer <tt class="docutils literal"><span class="pre">ctypes</span></tt> ou <tt class="docutils literal"><span class="pre">cython-hidapi</span></tt> et sont donc contraints d&#8217;utiliser <tt class="docutils literal"><span class="pre">libusb</span></tt> et son interface Python <tt class="docutils literal"><span class="pre">PyUSB</span></tt>.</p>
 </div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Lien permanent vers ce titre">¶</a></h2>
@@ -82,7 +78,7 @@ cd hidapi
 more README.txt</pre>
 </div>
 </li>
-<li><p class="first">Install ctypes.</p>
+<li><p class="first">Installation ctypes.</p>
 <p>Ceux-ci devraient être disponibles sous forme de paquets pour votre système d&#8217;exploitation. Par exemple:</p>
 <div class="highlight-python"><pre>sudo zypper install python-ctypes</pre>
 </div>
@@ -126,14 +122,14 @@ more README.txt</pre>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="#pywws.device_ctypes_hidapi.USBDevice" title="pywws.device_ctypes_hidapi.USBDevice"><tt class="xref py py-obj docutils literal"><span class="pre">USBDevice</span></tt></a>(vendor_id,&nbsp;product_id)</td>
-<td>Low level USB device access via hidapi library.</td>
+<td>Accès de bas niveau au périphérique USB via la bibliothèque hidapi.</td>
 </tr>
 </tbody>
 </table>
 <dl class="class">
 <dt id="pywws.device_ctypes_hidapi.USBDevice">
 <em class="property">class </em><tt class="descclassname">pywws.device_ctypes_hidapi.</tt><tt class="descname">USBDevice</tt><big>(</big><em>vendor_id</em>, <em>product_id</em><big>)</big><a class="reference internal" href="../_modules/pywws/device_ctypes_hidapi.html#USBDevice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.device_ctypes_hidapi.USBDevice" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p>Low level USB device access via hidapi library.</p>
+<dd><p>Accès de bas niveau au périphérique USB via la bibliothèque hidapi.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -211,6 +207,9 @@ more README.txt</pre>
   <h4>Sujet précédent</h4>
   <p class="topless"><a href="pywws.WeatherStation.html"
                         title="Chapitre précédent">pywws.WeatherStation</a></p>
+  <h4>Sujet suivant</h4>
+  <p class="topless"><a href="pywws.device_cython_hidapi.html"
+                        title="Chapitre suivant">pywws.device_cython_hidapi</a></p>
 <div id="searchbox" style="display: none">
   <h3>Recherche rapide</h3>
     <form class="search" action="../search.html" method="get">
@@ -238,9 +237,12 @@ more README.txt</pre>
           <a href="../py-modindex.html" title="Index des modules Python"
              >modules</a> |</li>
         <li class="right" >
+          <a href="pywws.device_cython_hidapi.html" title="pywws.device_cython_hidapi"
+             >suivant</a> |</li>
+        <li class="right" >
           <a href="pywws.WeatherStation.html" title="pywws.WeatherStation"
              >précédent</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1066 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1069 documentation</a> &raquo;</li>
           <li><a href="index.html" >Programmes et des modules Python</a> &raquo;</li> 
       </ul>
     </div>
