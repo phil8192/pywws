@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.conversions &mdash; pywws 13.06_r1023 documentation</title>
+    <title>pywws.conversions &mdash; pywws 13.09_r1065 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.06_r1023',
+        VERSION:     '13.09_r1065',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.06_r1023 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
     <link rel="up" title="Programmi Python e moduli" href="index.html" />
     <link rel="next" title="pywws.Logger" href="pywws.Logger.html" />
     <link rel="prev" title="pywws.calib" href="pywws.calib.html" /> 
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="pywws.calib.html" title="pywws.calib"
              accesskey="P">precedente</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1023 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Programmi Python e moduli</a> &raquo;</li> 
       </ul>
     </div>  
@@ -68,8 +68,14 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.cadhumidex" title="pywws.conversions.cadhumidex"><tt class="xref py py-obj docutils literal"><span class="pre">cadhumidex</span></tt></a>(temp,&nbsp;humidity)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.apparent_temp" title="pywws.conversions.apparent_temp"><tt class="xref py py-obj docutils literal"><span class="pre">apparent_temp</span></tt></a>(temp,&nbsp;rh,&nbsp;wind)</td>
+<td>Calcola la temperatura apparente (sensazione reale), con formula da</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.conversions.cadhumidex" title="pywws.conversions.cadhumidex"><tt class="xref py py-obj docutils literal"><span class="pre">cadhumidex</span></tt></a>(temp,&nbsp;humidity)</td>
 <td>Calcolo Indice di umidità come per gli standard Canadian Weather Standards</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.dew_point" title="pywws.conversions.dew_point"><tt class="xref py py-obj docutils literal"><span class="pre">dew_point</span></tt></a>(temp,&nbsp;hum)</td>
+<td>Calcola il punto di rugiada, usando la formula da</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pywws.conversions.illuminance_wm2" title="pywws.conversions.illuminance_wm2"><tt class="xref py py-obj docutils literal"><span class="pre">illuminance_wm2</span></tt></a>(lux)</td>
 <td>Conversione approssimativa di illuminazione in lux a radiazione solare in W/m2</td>
@@ -77,28 +83,37 @@
 <tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.pressure_inhg" title="pywws.conversions.pressure_inhg"><tt class="xref py py-obj docutils literal"><span class="pre">pressure_inhg</span></tt></a>(hPa)</td>
 <td>Converte la pressione da ettopascal/millibar in pollici di mercurio</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.conversions.rain_inch" title="pywws.conversions.rain_inch"><tt class="xref py py-obj docutils literal"><span class="pre">rain_inch</span></tt></a>(mm)</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.conversions.pressure_trend_text" title="pywws.conversions.pressure_trend_text"><tt class="xref py py-obj docutils literal"><span class="pre">pressure_trend_text</span></tt></a>(trend)</td>
+<td>Convertire in una stringa carattere l&#8217;andamento della pressione, come utilizzata dal UK met office.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.rain_inch" title="pywws.conversions.rain_inch"><tt class="xref py py-obj docutils literal"><span class="pre">rain_inch</span></tt></a>(mm)</td>
 <td>Converte le precipitazioni da millimetri a pollici</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.temp_f" title="pywws.conversions.temp_f"><tt class="xref py py-obj docutils literal"><span class="pre">temp_f</span></tt></a>(c)</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.conversions.temp_f" title="pywws.conversions.temp_f"><tt class="xref py py-obj docutils literal"><span class="pre">temp_f</span></tt></a>(c)</td>
 <td>Converte la temperatura da gradi Celsius a Fahrenheit</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.usaheatindex" title="pywws.conversions.usaheatindex"><tt class="xref py py-obj docutils literal"><span class="pre">usaheatindex</span></tt></a>(temp,&nbsp;humidity,&nbsp;dew)</td>
+<td>Calcolare l&#8217;indice di calore secondo Standards USA National Weather Service</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pywws.conversions.wind_bft" title="pywws.conversions.wind_bft"><tt class="xref py py-obj docutils literal"><span class="pre">wind_bft</span></tt></a>(ms)</td>
 <td>Converte i metri al secondo del vento in scala Beaufort</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.wind_kmph" title="pywws.conversions.wind_kmph"><tt class="xref py py-obj docutils literal"><span class="pre">wind_kmph</span></tt></a>(ms)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.wind_chill" title="pywws.conversions.wind_chill"><tt class="xref py py-obj docutils literal"><span class="pre">wind_chill</span></tt></a>(temp,&nbsp;wind)</td>
+<td>Calcola il vento gelido, usando la formula di</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.conversions.wind_kmph" title="pywws.conversions.wind_kmph"><tt class="xref py py-obj docutils literal"><span class="pre">wind_kmph</span></tt></a>(ms)</td>
 <td>Converte il vento da metri al secondo a chilometri orari</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.conversions.wind_kn" title="pywws.conversions.wind_kn"><tt class="xref py py-obj docutils literal"><span class="pre">wind_kn</span></tt></a>(ms)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.wind_kn" title="pywws.conversions.wind_kn"><tt class="xref py py-obj docutils literal"><span class="pre">wind_kn</span></tt></a>(ms)</td>
 <td>Converte il vento da metri al secondo a nodi</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.wind_mph" title="pywws.conversions.wind_mph"><tt class="xref py py-obj docutils literal"><span class="pre">wind_mph</span></tt></a>(ms)</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.conversions.wind_mph" title="pywws.conversions.wind_mph"><tt class="xref py py-obj docutils literal"><span class="pre">wind_mph</span></tt></a>(ms)</td>
 <td>Converte il vento da metri al secondo a miglia all&#8217;ora</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.conversions.winddir_degrees" title="pywws.conversions.winddir_degrees"><tt class="xref py py-obj docutils literal"><span class="pre">winddir_degrees</span></tt></a>(pts)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.winddir_degrees" title="pywws.conversions.winddir_degrees"><tt class="xref py py-obj docutils literal"><span class="pre">winddir_degrees</span></tt></a>(pts)</td>
 <td>Convertire la direzione del vento a 0..15 in gradi</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.conversions.winddir_text" title="pywws.conversions.winddir_text"><tt class="xref py py-obj docutils literal"><span class="pre">winddir_text</span></tt></a>(pts)</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.conversions.winddir_text" title="pywws.conversions.winddir_text"><tt class="xref py py-obj docutils literal"><span class="pre">winddir_text</span></tt></a>(pts)</td>
 <td>Convertire direzione del vento da 0 .. 15 per i punti della bussola</td>
 </tr>
 </tbody>
@@ -113,6 +128,12 @@
 <dt id="pywws.conversions.pressure_inhg">
 <tt class="descclassname">pywws.conversions.</tt><tt class="descname">pressure_inhg</tt><big>(</big><em>hPa</em><big>)</big><a class="reference internal" href="../_modules/pywws/conversions.html#pressure_inhg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.conversions.pressure_inhg" title="link permanente per questa definizione">¶</a></dt>
 <dd><p>Converte la pressione da ettopascal/millibar in pollici di mercurio</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pywws.conversions.pressure_trend_text">
+<tt class="descclassname">pywws.conversions.</tt><tt class="descname">pressure_trend_text</tt><big>(</big><em>trend</em><big>)</big><a class="reference internal" href="../_modules/pywws/conversions.html#pressure_trend_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.conversions.pressure_trend_text" title="link permanente per questa definizione">¶</a></dt>
+<dd><p>Converte in una stringa, la tendenza barometrica sono usati per la UK met office.</p>
 </dd></dl>
 
 <dl class="function">
@@ -164,9 +185,35 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="pywws.conversions.dew_point">
+<tt class="descclassname">pywws.conversions.</tt><tt class="descname">dew_point</tt><big>(</big><em>temp</em>, <em>hum</em><big>)</big><a class="reference internal" href="../_modules/pywws/conversions.html#dew_point"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.conversions.dew_point" title="link permanente per questa definizione">¶</a></dt>
+<dd><p>Calcola il punto di rugiada, usando la formula da <a class="reference external" href="http://en.wikipedia.org/wiki/Dew_point">http://en.wikipedia.org/wiki/Dew_point</a>.</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="pywws.conversions.cadhumidex">
 <tt class="descclassname">pywws.conversions.</tt><tt class="descname">cadhumidex</tt><big>(</big><em>temp</em>, <em>humidity</em><big>)</big><a class="reference internal" href="../_modules/pywws/conversions.html#cadhumidex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.conversions.cadhumidex" title="link permanente per questa definizione">¶</a></dt>
 <dd><p>Calcolo Indice di umidità come per gli standard Canadian Weather Standards</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pywws.conversions.usaheatindex">
+<tt class="descclassname">pywws.conversions.</tt><tt class="descname">usaheatindex</tt><big>(</big><em>temp</em>, <em>humidity</em>, <em>dew</em><big>)</big><a class="reference internal" href="../_modules/pywws/conversions.html#usaheatindex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.conversions.usaheatindex" title="link permanente per questa definizione">¶</a></dt>
+<dd><p>Calcolare l&#8217;indice di calore secondo Standards USA National Weather Service</p>
+<p>See <a class="reference external" href="http://en.wikipedia.org/wiki/Heat_index">http://en.wikipedia.org/wiki/Heat_index</a>, formula 1. The
+formula is not valid for T &lt; 26.7C, Dew Point &lt; 12C, or RH &lt; 40%</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pywws.conversions.wind_chill">
+<tt class="descclassname">pywws.conversions.</tt><tt class="descname">wind_chill</tt><big>(</big><em>temp</em>, <em>wind</em><big>)</big><a class="reference internal" href="../_modules/pywws/conversions.html#wind_chill"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.conversions.wind_chill" title="link permanente per questa definizione">¶</a></dt>
+<dd><p>Calcola il vento gelido, usando la formula da <a class="reference external" href="http://en.wikipedia.org/wiki/wind_chill">http://en.wikipedia.org/wiki/wind_chill</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pywws.conversions.apparent_temp">
+<tt class="descclassname">pywws.conversions.</tt><tt class="descname">apparent_temp</tt><big>(</big><em>temp</em>, <em>rh</em>, <em>wind</em><big>)</big><a class="reference internal" href="../_modules/pywws/conversions.html#apparent_temp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.conversions.apparent_temp" title="link permanente per questa definizione">¶</a></dt>
+<dd><p>Calcola la temperatura apparente (temperatura percepita), con formula da <a class="reference external" href="http://www.bom.gov.au/info/thermal_stress/">http://www.bom.gov.au/info/thermal_stress/</a></p>
 </dd></dl>
 
 </div>
@@ -218,7 +265,7 @@
         <li class="right" >
           <a href="pywws.calib.html" title="pywws.calib"
              >precedente</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1023 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" >Programmi Python e moduli</a> &raquo;</li> 
       </ul>
     </div>

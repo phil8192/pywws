@@ -9,12 +9,7 @@ pywws.WeatherStation
 
    .. autosummary::
    
-      apparent_temp
       decode_status
-      dew_point
-      get_wind_dir_text
-      pressure_trend_text
-      wind_chill
    
    
 
@@ -25,6 +20,7 @@ pywws.WeatherStation
    .. autosummary::
    
       CUSBDrive
+      USBDevice
       datetime
       weather_station
    

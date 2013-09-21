@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Process &mdash; pywws 13.06_r1023 documentation</title>
+    <title>pywws.Process &mdash; pywws 13.09_r1065 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.06_r1023',
+        VERSION:     '13.09_r1065',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.06_r1023 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
     <link rel="up" title="Programmi Python e moduli" href="index.html" />
     <link rel="next" title="pywws.calib" href="pywws.calib.html" />
     <link rel="prev" title="pywws.LogData" href="pywws.LogData.html" /> 
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="pywws.LogData.html" title="pywws.LogData"
              accesskey="P">precedente</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1023 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Programmi Python e moduli</a> &raquo;</li> 
       </ul>
     </div>  
@@ -69,9 +69,7 @@ data_dir is the root directory of the weather data</pre>
 </div>
 <p>Questo modulo memorizza i dati grezzi della stazione meteo(tipicamente campionati ogni cinque o dieci minuti) e genera i dati orari, giornalieri e mensili di riepilogo, che è utile per la creazione di tabelle e grafici</p>
 <p>Prima di calcolare i riepiloghi dei dati, i dati grezzi sono &#8220;calibrated&#8221; utilizzando una funzione programmabile dall&#8217;utente. Vedere <a class="reference internal" href="pywws.calib.html"><em>pywws.calib</em></a> per i dettagli</p>
-<p>The hourly data is derived from all the records in one hour, e.g. from
-18:00:00 to 18:59:59, and is given the index of the last complete
-record in that hour.</p>
+<p>Il dato hourly deriva da tutti i record in un&#8217;ora, per esempio dalle 18.00 alle 18:59:59 è l&#8217;indice dell&#8217;ultimo record completo in quell&#8217;ora</p>
 <p>La cartella dati giornalieri (daily) riassume il tempo in un periodo di 24 ore in genere fino alle 21:00 o alle 09:00, ora locale (non DST), anche se la mezzanotte è un altra popolare convenzione. È inoltre indicizzata dall&#8217; ultimo record nel periodo. Durante le ore diurne e notturne, utilizzato per calcolare le temperature massima e minima, si presume che l&#8217;inizio 09:00 o 21:00 dell&#8217;ora solare, o 10.00 e 22.00 quando L&#8217;ORA LEGALE è in vigore, indipendentemente dal giorno della meteorologia.</p>
 <p>Regola la giornata meteorologica con le vostre preferenze, che viene utilizzata dalla stazione meteo ufficiale locale, modificare la linea &#8220;day end hour&#8221; nel vostro file <tt class="docutils literal"><span class="pre">weather.ini</span></tt>, eseguire quindi Reprocess.py per rigenerare la sintesi.</p>
 <p>I dati di riepilogo mensile viene calcolato dal riepilogo giornaliero dei dati. Se la giornata meteorologica non finisce a mezzanotte, ogni mese può iniziare e terminare fino a 12 ore prima o dopo la mezzanotte.</p>
@@ -97,7 +95,7 @@ record in that hour.</p>
 <td>Genera i riepiloghi orari da dati calibrati.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.generate_hourly" title="pywws.Process.generate_hourly"><tt class="xref py py-obj docutils literal"><span class="pre">generate_hourly</span></tt></a>(logger,&nbsp;calib_data,&nbsp;...)</td>
-<td>Generate hourly summaries from calibrated data.</td>
+<td>Generare i riepiloghi orari (hourly)  da dati calibrati.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pywws.Process.generate_monthly" title="pywws.Process.generate_monthly"><tt class="xref py py-obj docutils literal"><span class="pre">generate_monthly</span></tt></a>(logger,&nbsp;rain_day_threshold,&nbsp;...)</td>
 <td>Genera i riepiloghi mensili dai dati giornalieri.</td>
@@ -145,7 +143,7 @@ record in that hour.</p>
 <td>deque(iterable[, maxlen]) &#8211;&gt; deque object</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">timedelta</span></tt></td>
-<td>Difference between two datetime values.</td>
+<td>Differenza tra due valori datetime.</td>
 </tr>
 </tbody>
 </table>
@@ -278,7 +276,7 @@ record in that hour.</p>
 <dl class="function">
 <dt id="pywws.Process.generate_hourly">
 <tt class="descclassname">pywws.Process.</tt><tt class="descname">generate_hourly</tt><big>(</big><em>logger</em>, <em>calib_data</em>, <em>hourly_data</em>, <em>process_from</em><big>)</big><a class="reference internal" href="../_modules/pywws/Process.html#generate_hourly"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Process.generate_hourly" title="link permanente per questa definizione">¶</a></dt>
-<dd><p>Generate hourly summaries from calibrated data.</p>
+<dd><p>Generare i riepiloghi orari (hourly)  da dati calibrati.</p>
 </dd></dl>
 
 <dl class="function">
@@ -354,7 +352,7 @@ record in that hour.</p>
         <li class="right" >
           <a href="pywws.LogData.html" title="pywws.LogData"
              >precedente</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1023 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
           <li><a href="index.html" >Programmi Python e moduli</a> &raquo;</li> 
       </ul>
     </div>

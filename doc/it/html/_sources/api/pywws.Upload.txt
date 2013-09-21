@@ -10,12 +10,17 @@ pywws.Upload
    .. autosummary::
    
       ApplicationLogger
-      Upload
       main
    
    
 
    
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Upload
    
    
 

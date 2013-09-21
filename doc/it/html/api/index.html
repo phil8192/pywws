@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Programmi Python e moduli &mdash; pywws 13.06_r1023 documentation</title>
+    <title>Programmi Python e moduli &mdash; pywws 13.09_r1065 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.06_r1023',
+        VERSION:     '13.09_r1065',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.06_r1023 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
     <link rel="next" title="pywws.Hourly" href="pywws.Hourly.html" />
     <link rel="prev" title="Indice di umidità (Humidex)" href="../guides/humidex.html" /> 
   </head>
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="../guides/humidex.html" title="Indice di umidità (Humidex)"
              accesskey="P">precedente</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1023 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -78,7 +78,7 @@
 <td>Authorise pywws to post to your Twitter account</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="pywws.SetWeatherStation.html#module-pywws.SetWeatherStation" title="pywws.SetWeatherStation"><tt class="xref py py-obj docutils literal"><span class="pre">pywws.SetWeatherStation</span></tt></a></td>
-<td>Impostare alcuni parametri della stazione meteo</td>
+<td>Set some weather station parameters</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="pywws.TestWeatherStation.html#module-pywws.TestWeatherStation" title="pywws.TestWeatherStation"><tt class="xref py py-obj docutils literal"><span class="pre">pywws.TestWeatherStation</span></tt></a></td>
 <td>Testare la connessione alla stazione meteo.</td>
@@ -93,7 +93,7 @@
 <td>Routine per eseguire attività comuni quali disegnare grafici o caricare i file.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="pywws.LogData.html#module-pywws.LogData" title="pywws.LogData"><tt class="xref py py-obj docutils literal"><span class="pre">pywws.LogData</span></tt></a></td>
-<td>Salva i dati della stazione meteo nel file</td>
+<td>Save weather station history to file</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="pywws.Process.html#module-pywws.Process" title="pywws.Process"><tt class="xref py py-obj docutils literal"><span class="pre">pywws.Process</span></tt></a></td>
 <td>Genera riepiloghi orari, giornalieri e mensili di dati grezzi della stazione meteo</td>
@@ -134,20 +134,20 @@
 <tr class="row-odd"><td><a class="reference internal" href="pywws.device_ctypes_hidapi.html#module-pywws.device_ctypes_hidapi" title="pywws.device_ctypes_hidapi"><tt class="xref py py-obj docutils literal"><span class="pre">pywws.device_ctypes_hidapi</span></tt></a></td>
 <td>Low level USB interface to weather station, using ctypes to access hidapi.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pywws.device_cython_hidapi.html#module-pywws.device_cython_hidapi" title="pywws.device_cython_hidapi"><tt class="xref py py-obj docutils literal"><span class="pre">pywws.device_cython_hidapi</span></tt></a></td>
-<td>Low level USB interface to weather station, using cython-hidapi.</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">pywws.device_cython_hidapi</span></tt></td>
+<td></td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="pywws.device_pyusb1.html#module-pywws.device_pyusb1" title="pywws.device_pyusb1"><tt class="xref py py-obj docutils literal"><span class="pre">pywws.device_pyusb1</span></tt></a></td>
-<td>Low level USB interface to weather station, using PyUSB.</td>
+<td>Interfaccia di basso livello della stazione meteo tramite PyUSB.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="pywws.device_pyusb.html#module-pywws.device_pyusb" title="pywws.device_pyusb"><tt class="xref py py-obj docutils literal"><span class="pre">pywws.device_pyusb</span></tt></a></td>
-<td>Low level USB interface to weather station, using PyUSB.</td>
+<td>Interfaccia di basso livello della stazione meteo tramite PyUSB.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="pywws.DataStore.html#module-pywws.DataStore" title="pywws.DataStore"><tt class="xref py py-obj docutils literal"><span class="pre">pywws.DataStore</span></tt></a></td>
 <td>DataStore.py - memorizza le letture in file facile per accedere</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="pywws.TimeZone.html#module-pywws.TimeZone" title="pywws.TimeZone"><tt class="xref py py-obj docutils literal"><span class="pre">pywws.TimeZone</span></tt></a></td>
-<td>Fornisce una coppia di datetime.tzinfo() oggetti che rappresentano l&#8217;ora locale</td>
+<td>Fornisce una coppia di oggetti <tt class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></tt></td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="pywws.Localisation.html#module-pywws.Localisation" title="pywws.Localisation"><tt class="xref py py-obj docutils literal"><span class="pre">pywws.Localisation</span></tt></a></td>
 <td>Localisation.py - fornisce traduzioni di stringhe in lingua locale</td>
@@ -212,7 +212,7 @@
         <li class="right" >
           <a href="../guides/humidex.html" title="Indice di umidità (Humidex)"
              >precedente</a> |</li>
-        <li><a href="../index.html">pywws 13.06_r1023 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
