@@ -140,22 +140,26 @@
 <span class="kn">from</span> <span class="nn">ctypes.util</span> <span class="kn">import</span> <span class="n">find_library</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="c"># open hidapi shared library</span>
-<span class="n">path</span> <span class="o">=</span> <span class="n">find_library</span><span class="p">(</span><span class="s">&#39;hidapi&#39;</span><span class="p">)</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="p">:</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">find_library</span><span class="p">(</span><span class="s">&#39;hidapi-libusb&#39;</span><span class="p">)</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="p">:</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">find_library</span><span class="p">(</span><span class="s">&#39;hidapi-hidraw&#39;</span><span class="p">)</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="p">:</span>
-    <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s">&#39;Cannot find hidapi library&#39;</span><span class="p">)</span>
-<span class="n">hidapi</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-<span class="n">hidapi</span><span class="o">.</span><span class="n">hid_open</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ushort</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ushort</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_wchar_p</span><span class="p">]</span>
-<span class="n">hidapi</span><span class="o">.</span><span class="n">hid_open</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
-<span class="n">hidapi</span><span class="o">.</span><span class="n">hid_read_timeout</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_size_t</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
-<span class="n">hidapi</span><span class="o">.</span><span class="n">hid_write</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_size_t</span><span class="p">]</span>
+<span class="k">if</span> <span class="s">&#39;sphinx&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="c"># building documentation, don&#39;t need to import hidapi</span>
+    <span class="k">pass</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c"># open hidapi shared library</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">find_library</span><span class="p">(</span><span class="s">&#39;hidapi&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">find_library</span><span class="p">(</span><span class="s">&#39;hidapi-libusb&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">find_library</span><span class="p">(</span><span class="s">&#39;hidapi-hidraw&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s">&#39;Cannot find hidapi library&#39;</span><span class="p">)</span>
+    <span class="n">hidapi</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">hidapi</span><span class="o">.</span><span class="n">hid_open</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ushort</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ushort</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_wchar_p</span><span class="p">]</span>
+    <span class="n">hidapi</span><span class="o">.</span><span class="n">hid_open</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
+    <span class="n">hidapi</span><span class="o">.</span><span class="n">hid_read_timeout</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_size_t</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+    <span class="n">hidapi</span><span class="o">.</span><span class="n">hid_write</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_size_t</span><span class="p">]</span>
 
 <div class="viewcode-block" id="USBDevice"><a class="viewcode-back" href="../../api/pywws.device_ctypes_hidapi.html#pywws.device_ctypes_hidapi.USBDevice">[docs]</a><span class="k">class</span> <span class="nc">USBDevice</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vendor_id</span><span class="p">,</span> <span class="n">product_id</span><span class="p">):</span>

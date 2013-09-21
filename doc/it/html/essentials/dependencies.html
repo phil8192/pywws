@@ -72,7 +72,7 @@
 <div class="section" id="usb-library">
 <h3>Libreria USB<a class="headerlink" href="#usb-library" title="link permanente per questa intestazione">¶</a></h3>
 <p>Per recuperare dati da una stazione meteo pywws ha bisogno di una libreria che permette di comunicare via USB. C&#8217;è una varietà di librerie USB che possono essere utilizzate. Non tutte sono disponibili su tutte le piattaforme informatiche, che possono limitare la vostra scelta.</p>
-<p>Su MacOS X il sistema operativo driver generico hid &#8220;claims&#8221; la stazione meteo, impedisce di lavorare a libusb. Questo limita gli utenti Mac all&#8217;opzione 3 o 4.</p>
+<p>Su MacOS X il sistema operativo driver generico hid &#8220;claims&#8221; per la stazione meteo, impedisce di lavorare a libusb. Questo limita gli utenti Mac all&#8217;opzione 3 o 4.</p>
 <ul class="simple">
 <li>USB library opzione 1 (preferito, tranne in MacOS)<ul>
 <li><a class="reference external" href="http://sourceforge.net/apps/trac/pyusb/">PyUSB</a> versione 1.0</li>
@@ -100,14 +100,14 @@
 </div>
 <div class="section" id="graph-drawing">
 <h2>Disegnare grafici<a class="headerlink" href="#graph-drawing" title="link permanente per questa intestazione">¶</a></h2>
-<p>Il modulo <a class="reference internal" href="../api/pywws.Plot.html#module-pywws.Plot" title="pywws.Plot"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Plot</span></tt></a> usa <tt class="docutils literal"><span class="pre">gnuplot</span></tt> per disegnare grafici. Se si vogliono produrre i grafici dei dati meteo, ad esempio, per includere in una pagina web, è necessario installare l&#8217;applicazione <tt class="docutils literal"><span class="pre">gnuplot</span></tt>:</p>
+<p>Il modulo <a class="reference internal" href="../api/pywws.Plot.html#module-pywws.Plot" title="pywws.Plot"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Plot</span></tt></a> usa <tt class="docutils literal"><span class="pre">gnuplot</span></tt> per disegnare grafici. Se si vogliono produrre i grafici dei dati meteo, ad esempio, da includere in una pagina web, è necessario installare l&#8217;applicazione <tt class="docutils literal"><span class="pre">gnuplot</span></tt>:</p>
 <ul class="simple">
 <li><a class="reference external" href="http://www.gnuplot.info/">gnuplot</a> v4.2 o superiore</li>
 </ul>
 </div>
 <div class="section" id="secure-website-uploading-sftp">
 <h2>Secure website uploading (sftp)<a class="headerlink" href="#secure-website-uploading-sftp" title="link permanente per questa intestazione">¶</a></h2>
-<p>Il <a class="reference internal" href="../api/pywws.Upload.html#module-pywws.Upload" title="pywws.Upload"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Upload</span></tt></a> modulo può utilizzare &#8220;ftp over ssh&#8221; (sftp) per caricare i file sul vostro sito web. Il caricamento normale utilizza i moduli Python standard, ma se si desidera utilizzare sftp è necessario installare questi due moduli:</p>
+<p>Il modulo <a class="reference internal" href="../api/pywws.Upload.html#module-pywws.Upload" title="pywws.Upload"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Upload</span></tt></a> può utilizzare &#8220;ftp over ssh&#8221; (sftp) per caricare i file sul vostro sito web. Il caricamento normale utilizza i moduli Python standard, ma se si desidera utilizzare sftp è necessario installare questi due moduli:</p>
 <ul class="simple">
 <li><a class="reference external" href="https://github.com/paramiko/paramiko">paramiko</a></li>
 <li><a class="reference external" href="http://www.dlitz.net/software/pycrypto/">pycrypto</a></li>
@@ -115,7 +115,7 @@
 </div>
 <div class="section" id="twitter-updates">
 <span id="dependencies-twitter"></span><h2>Postare su Twitter<a class="headerlink" href="#twitter-updates" title="link permanente per questa intestazione">¶</a></h2>
-<p>Il: py:mod:&#8217;pywws.ToTwitter&#8217; modulo è essere utilizzato per inviare messaggi delle condizioni meteo a Twitter. Per postare su Twitter richiede tutti e quattro questi moduli:</p>
+<p>Il modulo <a class="reference internal" href="../api/pywws.ToTwitter.html#module-pywws.ToTwitter" title="pywws.ToTwitter"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.ToTwitter</span></tt></a> è utilizzato per inviare messaggi delle condizioni meteo a Twitter. Per postare su Twitter richiede tutti e quattro questi moduli:</p>
 <ul class="simple">
 <li><a class="reference external" href="https://github.com/bear/python-twitter">python-twitter</a> v0.8.6 or higher</li>
 <li><a class="reference external" href="https://github.com/simplejson/simplejson">simplejson</a></li>
