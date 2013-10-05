@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Process &mdash; pywws 13.09_r1074 documentation</title>
+    <title>pywws.Process &mdash; pywws 13.10_r1085 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.09_r1074',
+        VERSION:     '13.10_r1085',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1074 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.10_r1085 documentation" href="../index.html" />
     <link rel="up" title="Python programs and modules" href="../api_index.html" />
     <link rel="next" title="pywws.calib" href="pywws.calib.html" />
     <link rel="prev" title="pywws.LogData" href="pywws.LogData.html" /> 
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="pywws.LogData.html" title="pywws.LogData"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1074 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.10_r1085 documentation</a> &raquo;</li>
           <li><a href="../api_index.html" accesskey="U">Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>  
@@ -104,10 +104,10 @@ a more useful total in the last hour, day or month.</p>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">ApplicationLogger</span></tt>(verbose[,&nbsp;logfile])</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.Process.Process" title="pywws.Process.Process"><tt class="xref py py-obj docutils literal"><span class="pre">Process</span></tt></a>(params,&nbsp;status,&nbsp;raw_data,&nbsp;...)</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.Process.Process" title="pywws.Process.Process"><tt class="xref py py-obj docutils literal"><span class="pre">Process</span></tt></a>(params,&nbsp;raw_data,&nbsp;calib_data,&nbsp;...)</td>
 <td>Generate summaries from raw weather station data.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.calibrate_data" title="pywws.Process.calibrate_data"><tt class="xref py py-obj docutils literal"><span class="pre">calibrate_data</span></tt></a>(logger,&nbsp;params,&nbsp;status,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.calibrate_data" title="pywws.Process.calibrate_data"><tt class="xref py py-obj docutils literal"><span class="pre">calibrate_data</span></tt></a>(logger,&nbsp;params,&nbsp;raw_data,&nbsp;...)</td>
 <td>&#8216;Calibrate&#8217; raw data, using a user-supplied function.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pywws.Process.generate_daily" title="pywws.Process.generate_daily"><tt class="xref py py-obj docutils literal"><span class="pre">generate_daily</span></tt></a>(logger,&nbsp;day_end_hour,&nbsp;...)</td>
@@ -134,7 +134,7 @@ a more useful total in the last hour, day or month.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.Average" title="pywws.Process.Average"><tt class="xref py py-obj docutils literal"><span class="pre">Average</span></tt></a>()</td>
 <td>Compute average of multiple data values.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Calib</span></tt>(params,&nbsp;status)</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Calib</span></tt>(params)</td>
 <td>Calibration class that implements default or user calibration.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.DayAcc" title="pywws.Process.DayAcc"><tt class="xref py py-obj docutils literal"><span class="pre">DayAcc</span></tt></a>(daytime)</td>
@@ -293,7 +293,7 @@ local time (1000-2200 and 2200-1000 during DST), regardless of the
 
 <dl class="function">
 <dt id="pywws.Process.calibrate_data">
-<tt class="descclassname">pywws.Process.</tt><tt class="descname">calibrate_data</tt><big>(</big><em>logger</em>, <em>params</em>, <em>status</em>, <em>raw_data</em>, <em>calib_data</em><big>)</big><a class="reference internal" href="../_modules/pywws/Process.html#calibrate_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Process.calibrate_data" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">pywws.Process.</tt><tt class="descname">calibrate_data</tt><big>(</big><em>logger</em>, <em>params</em>, <em>raw_data</em>, <em>calib_data</em><big>)</big><a class="reference internal" href="../_modules/pywws/Process.html#calibrate_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Process.calibrate_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>&#8216;Calibrate&#8217; raw data, using a user-supplied function.</p>
 </dd></dl>
 
@@ -317,7 +317,7 @@ local time (1000-2200 and 2200-1000 during DST), regardless of the
 
 <dl class="function">
 <dt id="pywws.Process.Process">
-<tt class="descclassname">pywws.Process.</tt><tt class="descname">Process</tt><big>(</big><em>params</em>, <em>status</em>, <em>raw_data</em>, <em>calib_data</em>, <em>hourly_data</em>, <em>daily_data</em>, <em>monthly_data</em><big>)</big><a class="reference internal" href="../_modules/pywws/Process.html#Process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Process.Process" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">pywws.Process.</tt><tt class="descname">Process</tt><big>(</big><em>params</em>, <em>raw_data</em>, <em>calib_data</em>, <em>hourly_data</em>, <em>daily_data</em>, <em>monthly_data</em><big>)</big><a class="reference internal" href="../_modules/pywws/Process.html#Process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Process.Process" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate summaries from raw weather station data.</p>
 <p>The meteorological day end (typically 2100 or 0900 local time) is
 set in the preferences file <tt class="docutils literal"><span class="pre">weather.ini</span></tt>. The default value is
@@ -379,7 +379,7 @@ weather station readings.</p>
         <li class="right" >
           <a href="pywws.LogData.html" title="pywws.LogData"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1074 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.10_r1085 documentation</a> &raquo;</li>
           <li><a href="../api_index.html" >Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>

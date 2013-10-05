@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws &mdash; pywws 13.09_r1074 documentation</title>
+    <title>pywws &mdash; pywws 13.10_r1085 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '13.09_r1074',
+        VERSION:     '13.10_r1085',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="shortcut icon" href="_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1074 documentation" href="#" />
+    <link rel="top" title="pywws 13.10_r1085 documentation" href="#" />
     <link rel="next" title="GNU General Public License" href="essentials/LICENCE.html" /> 
   </head>
   <body>
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="essentials/LICENCE.html" title="GNU General Public License"
              accesskey="N">next</a> |</li>
-        <li><a href="#">pywws 13.09_r1074 documentation</a> &raquo;</li> 
+        <li><a href="#">pywws 13.10_r1085 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -86,20 +86,25 @@ You&#8217;ll need Python 2.5 or later &#8211; Python 3 is partially supported, s
 Note that this will probably require &#8216;root&#8217; privileges, so will need to be run using <tt class="docutils literal"><span class="pre">sudo</span></tt>:</p>
 <div class="highlight-python"><pre>sudo pip install pywws</pre>
 </div>
-<p>If you don&#8217;t have root privileges, or don&#8217;t want to install pywws, you can download a zip or tar.gz file from PyPI and then extract the files into a convenient directory on your computer.</p>
+<p>If you don&#8217;t have root privileges, or don&#8217;t want to install pywws into the system directories, you can download a zip or tar.gz file from PyPI and then extract the files into any convenient directory on your computer.</p>
 <p>The PyPI files contain a snapshot release of the software - a new one is issued every few months.
 If you&#8217;d like to keep up to date with latest developments of pywws, you should use <tt class="docutils literal"><span class="pre">git</span></tt> to clone the pywws repository:</p>
 <div class="highlight-python"><pre>git clone https://github.com/jim-easterbrook/pywws.git</pre>
 </div>
 <p>After doing so you can compile the documentation and language localisation files (which will require the <tt class="docutils literal"><span class="pre">sphinx</span></tt> and <tt class="docutils literal"><span class="pre">gettext</span></tt> dependencies):</p>
 <div class="highlight-python"><pre>cd pywws
-python setup.py build_sphinx
-python setup.py msgfmt</pre>
+python setup.py msgfmt
+python setup.py build_sphinx</pre>
 </div>
+<p>This is optional &#8211; the documentation is available online and you might prefer to use pywws in English.</p>
 <p>For more details, see <a class="reference internal" href="guides/getstarted.html"><em>How to get started with pywws</em></a>.</p>
 <div class="section" id="upgrading-pywws">
 <h3>Upgrading pywws<a class="headerlink" href="#upgrading-pywws" title="Permalink to this headline">¶</a></h3>
-<p>The method used to upgrade pywws depends on how you originally obtained it. If you downloaded a zip or tar.gz file, you just need to do the same again, with the new version, then delete your old download when you&#8217;ve finished setting up the new one. (Note that upgrading is much easier if you do not keep your templates, user modules and weather data in the same directory as the downloaded files.) If you used <tt class="docutils literal"><span class="pre">pip</span></tt> you just need to repeat the command. <tt class="docutils literal"><span class="pre">git</span></tt> users just need to do a <tt class="docutils literal"><span class="pre">git</span> <span class="pre">pull</span></tt> command.</p>
+<p>The method used to upgrade pywws depends on how you originally obtained it. If you downloaded a zip or tar.gz file, you just need to do the same again, with the new version, then delete your old download when you&#8217;ve finished setting up the new one. (Note that upgrading is much easier if you do not keep your templates, user modules and weather data in the same directory as the downloaded files.)
+<tt class="docutils literal"><span class="pre">git</span></tt> users just need to do a <tt class="docutils literal"><span class="pre">git</span> <span class="pre">pull</span></tt> command.
+If you used <tt class="docutils literal"><span class="pre">pip</span></tt> you need to use the upgrade option:</p>
+<div class="highlight-python"><pre>sudo pip install pywws -U</pre>
+</div>
 <p>Some new versions of pywws have changed what&#8217;s stored in the hourly, daily or monthly summary data files. These new versions are incompatible with processed data from earlier versions. The <a class="reference internal" href="api/pywws.Reprocess.html#module-pywws.Reprocess" title="pywws.Reprocess"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Reprocess</span></tt></a> module regenerates all the summary data. It should be run after any major upgrade.</p>
 </div>
 </div>
@@ -262,7 +267,7 @@ python setup.py msgfmt</pre>
         <li class="right" >
           <a href="essentials/LICENCE.html" title="GNU General Public License"
              >next</a> |</li>
-        <li><a href="#">pywws 13.09_r1074 documentation</a> &raquo;</li> 
+        <li><a href="#">pywws 13.10_r1085 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

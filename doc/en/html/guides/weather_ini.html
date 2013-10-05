@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>weather.ini - configuration file format &mdash; pywws 13.09_r1074 documentation</title>
+    <title>weather.ini - configuration file format &mdash; pywws 13.10_r1085 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.09_r1074',
+        VERSION:     '13.10_r1085',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1074 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.10_r1085 documentation" href="../index.html" />
     <link rel="up" title="User guides" href="index.html" />
     <link rel="next" title="Humidity Index (Humidex)" href="humidex.html" />
     <link rel="prev" title="How to use pywws in another language" href="language.html" /> 
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="language.html" title="How to use pywws in another language"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1074 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.10_r1085 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">User guides</a> &raquo;</li> 
       </ul>
     </div>  
@@ -90,6 +90,7 @@ In normal use you should not need to edit it.</p>
 <div class="highlight-python"><pre>[config]
 ws type = 1080
 day end hour = 21
+pressure offset = 9.4
 gnuplot encoding = iso_8859_1
 template encoding = iso-8859-1
 language = en
@@ -98,14 +99,22 @@ rain day threshold = 0.2
 asynchronous = False</pre>
 </div>
 <p><tt class="docutils literal"><span class="pre">ws</span> <span class="pre">type</span></tt> is the &#8220;class&#8221; of weather station. It should be set to <tt class="docutils literal"><span class="pre">1080</span></tt> for most weather stations, or <tt class="docutils literal"><span class="pre">3080</span></tt> if your station console displays solar illuminance.</p>
-<p><tt class="docutils literal"><span class="pre">day</span> <span class="pre">end</span> <span class="pre">hour</span></tt> is the end of the &#8220;<a class="reference external" href="http://en.wikipedia.org/wiki/Meteorological_day">meteorological day</a>&#8221;, in local time without daylight savings time. Typical values are 21, 9, or 24.</p>
+<p><tt class="docutils literal"><span class="pre">day</span> <span class="pre">end</span> <span class="pre">hour</span></tt> is the end of the &#8220;<a class="reference external" href="http://en.wikipedia.org/wiki/Meteorological_day">meteorological day</a>&#8221;, in local time without daylight savings time. Typical values are 21, 9, or 24.
+You must update all your stored data by running <a class="reference internal" href="../api/pywws.Reprocess.html#module-pywws.Reprocess" title="pywws.Reprocess"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Reprocess</span></tt></a> after you change this value.</p>
+<p><tt class="docutils literal"><span class="pre">pressure</span> <span class="pre">offset</span></tt> is the difference between absolute and relative (sea level) air pressure.
+The initial value is copied from the weather station, assuming you have set it up to display the correct relative pressure, but you can adjust the value in weather.ini to calibrate your station.
+You must update all your stored data by running <a class="reference internal" href="../api/pywws.Reprocess.html#module-pywws.Reprocess" title="pywws.Reprocess"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Reprocess</span></tt></a> after you change this value.</p>
+<p class="versionchanged">
+<span class="versionmodified">Changed in version 13.10_r1082: </span>made <tt class="docutils literal"><span class="pre">pressure</span> <span class="pre">offset</span></tt> a config item.
+Previously it was always read from the weather station.</p>
 <p><tt class="docutils literal"><span class="pre">gnuplot</span> <span class="pre">encoding</span></tt> is the text encoding used when plotting graphs. The default value of <tt class="docutils literal"><span class="pre">iso_8859_1</span></tt> allows the degree symbol, which is useful in a weather application! Other values might be needed if your language includes accented characters. The possible values depend on your gnuplot installation so some experimentation may be needed.</p>
 <p><tt class="docutils literal"><span class="pre">template</span> <span class="pre">encoding</span></tt> is the text encoding used for templates.
 The default value is <tt class="docutils literal"><span class="pre">iso-8859-1</span></tt>, which is the encoding used in the example templates.
 If you create templates with a different character set, you should change this value to match your templates.</p>
 <p><tt class="docutils literal"><span class="pre">language</span></tt> is used to localise pywws. It&#8217;s optional, as pywws usually uses the computer&#8217;s default language as set by the LANG environment variable. The available languages are those in the <tt class="docutils literal"><span class="pre">translations</span></tt> subdirectory of your pywws installation. If you set any other language, pywws will fall back to using English.</p>
 <p><tt class="docutils literal"><span class="pre">logdata</span> <span class="pre">sync</span></tt> sets the quality of synchronisation used by <a class="reference internal" href="../api/pywws.LogData.html"><em>pywws.LogData</em></a>. Set it to 0 for fast &amp; inaccurate or 1 for slower but precise.</p>
-<p><tt class="docutils literal"><span class="pre">rain</span> <span class="pre">day</span> <span class="pre">threshold</span></tt> is the amount of rain (in mm) that has to fall in one day for it to qualify as a rainy day in the monthly summary data.</p>
+<p><tt class="docutils literal"><span class="pre">rain</span> <span class="pre">day</span> <span class="pre">threshold</span></tt> is the amount of rain (in mm) that has to fall in one day for it to qualify as a rainy day in the monthly summary data.
+You must update all your stored data by running <a class="reference internal" href="../api/pywws.Reprocess.html#module-pywws.Reprocess" title="pywws.Reprocess"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Reprocess</span></tt></a> after you change this value.</p>
 <p class="versionadded">
 <span class="versionmodified">New in version 13.09_r1057: </span><tt class="docutils literal"><span class="pre">asynchrouous</span></tt> controls the use of a separate upload thread in <a class="reference internal" href="../api/pywws.LiveLog.html#module-pywws.LiveLog" title="pywws.LiveLog"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.LiveLog</span></tt></a>.</p>
 </div>
@@ -242,11 +251,8 @@ The following sections are currently in use:</p>
 <div class="section" id="fixed-values-copied-from-the-weather-station-s-fixed-block">
 <h2>fixed: values copied from the weather station&#8217;s &#8220;fixed block&#8221;<a class="headerlink" href="#fixed-values-copied-from-the-weather-station-s-fixed-block" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><pre>[fixed]
-pressure offset = 7.4
 fixed block = {...}</pre>
 </div>
-<p><tt class="docutils literal"><span class="pre">pressure</span> <span class="pre">offset</span></tt> is the difference between absolute and relative air pressure.
-It is copied from the weather station, assuming you have set it up to display the correct relative pressure.</p>
 <p><tt class="docutils literal"><span class="pre">fixed</span> <span class="pre">block</span></tt> is all the data stored in the first 256 bytes of the station&#8217;s memory.
 This includes maximum and minimum values, alarm threshold settings, display units and so on.</p>
 </div>
@@ -349,7 +355,7 @@ They are used to allow unsuccessful tasks (e.g. network failure preventing uploa
         <li class="right" >
           <a href="language.html" title="How to use pywws in another language"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1074 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.10_r1085 documentation</a> &raquo;</li>
           <li><a href="index.html" >User guides</a> &raquo;</li> 
       </ul>
     </div>

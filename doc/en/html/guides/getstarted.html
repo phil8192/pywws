@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>How to get started with pywws &mdash; pywws 13.09_r1074 documentation</title>
+    <title>How to get started with pywws &mdash; pywws 13.10_r1085 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.09_r1074',
+        VERSION:     '13.10_r1085',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1074 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.10_r1085 documentation" href="../index.html" />
     <link rel="up" title="User guides" href="index.html" />
     <link rel="next" title="How to set up ‘hourly’ logging with pywws" href="hourlylogging.html" />
     <link rel="prev" title="User guides" href="index.html" /> 
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="index.html" title="User guides"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1074 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.10_r1085 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">User guides</a> &raquo;</li> 
       </ul>
     </div>  
@@ -82,6 +82,9 @@ It also allows you to run pywws software without the &#8216;root&#8217; privileg
 <p>The directories everything gets installed to depend on your operating system and Python version.
 The pywws modules are installed in the &#8216;site-packages&#8217; directory (e.g. <tt class="docutils literal"><span class="pre">/usr/lib/python2.7/site-packages</span></tt>).
 Typically the scripts are installed in <tt class="docutils literal"><span class="pre">/usr/bin</span></tt>, and the example files are installed in <tt class="docutils literal"><span class="pre">/usr/share/pywws</span></tt>, but other directories (such as <tt class="docutils literal"><span class="pre">/usr/local/share</span></tt>) could be used.</p>
+<p>Upgrading pywws is also a one line command:</p>
+<div class="highlight-python"><pre>sudo pip install pywws -U</pre>
+</div>
 </div>
 <div class="section" id="download-and-extract">
 <h3>Download and extract<a class="headerlink" href="#download-and-extract" title="Permalink to this headline">¶</a></h3>
@@ -99,10 +102,12 @@ It is convenient to create a soft link to this awkwardly named directory:</p>
 <div class="highlight-python"><pre>cd ~/weather
 ln -s pywws-12.11_95babb0 pywws</pre>
 </div>
-<p>Alternatively, to get the latest development version of pywws use <tt class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span></tt>, then use <tt class="docutils literal"><span class="pre">setup.py</span></tt> to compile the language files and documentation:</p>
+<p>Alternatively, to get the latest development version of pywws use <tt class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span></tt>:</p>
 <div class="highlight-python"><pre>cd ~/weather
-git clone https://github.com/jim-easterbrook/pywws.git
-cd pywws
+git clone https://github.com/jim-easterbrook/pywws.git</pre>
+</div>
+<p>After cloning you may want to use <tt class="docutils literal"><span class="pre">setup.py</span></tt> to compile the language files and documentation, if you have installed the <tt class="docutils literal"><span class="pre">gettext</span></tt> and <tt class="docutils literal"><span class="pre">sphinx</span></tt> packages:</p>
+<div class="highlight-python"><pre>cd ~/weather/pywws
 python setup.py msgfmt
 python setup.py build_sphinx</pre>
 </div>
@@ -113,6 +118,13 @@ sudo python setup.py install</pre>
 </div>
 <p>This is optional, and installs into the same directories as using <tt class="docutils literal"><span class="pre">pip</span></tt> would.
 If you don&#8217;t do this installation process, you will only be able to run pywws modules from your pywws directory.</p>
+<p>Upgrading a cloned repos is done with <tt class="docutils literal"><span class="pre">git</span> <span class="pre">pull</span></tt>, after which you can recompile and reinstall if you wish:</p>
+<div class="highlight-python"><pre>cd ~/weather/pywws
+git pull</pre>
+</div>
+<p>Upgrading a downloaded snapshot is the same process as the first installation.
+Download the .tar.gz or .zip file, extract its contents, then delete the soft link pointing to the old download and create one pointing to the new download.
+Once you are satisfied the new version is working OK you can delete the old download entirely.</p>
 </div>
 </div>
 <div class="section" id="python-3-users-only-translate-pywws-to-python-3">
@@ -155,12 +167,11 @@ See the compatibility wiki page <a class="reference external" href="http://code.
 </div>
 <div class="section" id="set-up-your-weather-station">
 <h2>Set up your weather station<a class="headerlink" href="#set-up-your-weather-station" title="Permalink to this headline">¶</a></h2>
-<p>If you haven&#8217;t already done so, set your weather station to display the correct relative atmospheric pressure.
+<p>If you haven&#8217;t already done so, you should set your weather station to display the correct relative atmospheric pressure.
 (See the manual for details of how to do this.)
-pywws gets the offset between relative and absolute pressure from the station, so this needs to be set before using pywws.</p>
+pywws gets the offset between relative and absolute pressure from the station, so this should be set before using pywws.</p>
 <p>You can get the correct relative pressure from your location by looking on the internet for weather reports from a nearby station, ideally an official one such as an airport.
 This is best done during calm weather when the pressure is almost constant over a large area.</p>
-<p>If you change the offset at any time, you can update all your stored data by running <a class="reference internal" href="../api/pywws.Reprocess.html#module-pywws.Reprocess" title="pywws.Reprocess"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Reprocess</span></tt></a>.</p>
 </div>
 <div class="section" id="set-the-weather-station-logging-interval">
 <h2>Set the weather station logging interval<a class="headerlink" href="#set-the-weather-station-logging-interval" title="Permalink to this headline">¶</a></h2>
@@ -175,7 +186,7 @@ Use <a class="reference internal" href="../api/pywws.SetWeatherStation.html#modu
 <div class="section" id="log-your-weather-station-data">
 <h2>Log your weather station data<a class="headerlink" href="#log-your-weather-station-data" title="Permalink to this headline">¶</a></h2>
 <p>First, choose a directory to store all your weather station data.
-This will be written to quite frequently, so a disk drive is preferable to a memory stick, as these have a limited number of writes.
+This will be written to quite frequently, so a disk drive is preferable to a flash memory stick or card, as these have a limited number of writes.
 In most cases your home directory is suitable, for example:</p>
 <div class="highlight-python"><pre>mkdir ~/weather/data</pre>
 </div>
@@ -211,7 +222,8 @@ Find your EasyWeather.dat file and then convert it:</p>
 Open this with a text editor. You should find something like the following:</p>
 <div class="highlight-python"><pre>[config]
 ws type = 1080
-logdata sync = 1</pre>
+logdata sync = 1
+pressure offset = 9.4</pre>
 </div>
 <p>You need to add a new entry in the <tt class="docutils literal"><span class="pre">[config]</span></tt> section called <tt class="docutils literal"><span class="pre">day</span> <span class="pre">end</span> <span class="pre">hour</span></tt>.
 This tells pywws what convention you want to use when calculating daily summary data.
@@ -223,9 +235,15 @@ You should not need to change it when daylight savings time is in effect.</p>
 <div class="highlight-python"><pre>[config]
 ws type = 1080
 logdata sync = 1
+pressure offset = 9.4
 day end hour = 9</pre>
 </div>
+<p>You can also edit the <tt class="docutils literal"><span class="pre">pressure</span> <span class="pre">offset</span></tt> value to adjust how pywws calculates the relative (sea level) air pressure from the absolute value that the station measures.
+If you change the pressure offset or day end hour in future, you must update all your stored data by running <a class="reference internal" href="../api/pywws.Reprocess.html#module-pywws.Reprocess" title="pywws.Reprocess"><tt class="xref py py-mod docutils literal"><span class="pre">pywws.Reprocess</span></tt></a>.</p>
 <p>For more detail on the configuration file options, see <a class="reference internal" href="weather_ini.html"><em>weather.ini - configuration file format</em></a>.</p>
+<p class="versionchanged">
+<span class="versionmodified">Changed in version 13.10_r1082: </span>made <tt class="docutils literal"><span class="pre">pressure</span> <span class="pre">offset</span></tt> a config item.
+Previously it was always read from the weather station.</p>
 </div>
 <div class="section" id="process-the-raw-data">
 <h2>Process the raw data<a class="headerlink" href="#process-the-raw-data" title="Permalink to this headline">¶</a></h2>
@@ -322,7 +340,7 @@ Start with the index (<a class="reference internal" href="../index.html"><em>pyw
         <li class="right" >
           <a href="index.html" title="User guides"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1074 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.10_r1085 documentation</a> &raquo;</li>
           <li><a href="index.html" >User guides</a> &raquo;</li> 
       </ul>
     </div>
