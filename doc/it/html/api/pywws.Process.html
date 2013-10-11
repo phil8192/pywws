@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Process &mdash; pywws 13.09_r1065 documentation</title>
+    <title>pywws.Process &mdash; pywws 13.10_r1087 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.09_r1065',
+        VERSION:     '13.10_r1087',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,8 +27,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
-    <link rel="up" title="Programmi Python e moduli" href="index.html" />
+    <link rel="top" title="pywws 13.10_r1087 documentation" href="../index.html" />
+    <link rel="up" title="Programmi Python e moduli" href="../api_index.html" />
     <link rel="next" title="pywws.calib" href="pywws.calib.html" />
     <link rel="prev" title="pywws.LogData" href="pywws.LogData.html" /> 
   </head>
@@ -48,8 +48,8 @@
         <li class="right" >
           <a href="pywws.LogData.html" title="pywws.LogData"
              accesskey="P">precedente</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Programmi Python e moduli</a> &raquo;</li> 
+        <li><a href="../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
+          <li><a href="../api_index.html" accesskey="U">Programmi Python e moduli</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -85,10 +85,10 @@ data_dir is the root directory of the weather data</pre>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">ApplicationLogger</span></tt>(verbose[,&nbsp;logfile])</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.Process.Process" title="pywws.Process.Process"><tt class="xref py py-obj docutils literal"><span class="pre">Process</span></tt></a>(params,&nbsp;status,&nbsp;raw_data,&nbsp;...)</td>
+<tr class="row-even"><td><a class="reference internal" href="#pywws.Process.Process" title="pywws.Process.Process"><tt class="xref py py-obj docutils literal"><span class="pre">Process</span></tt></a>(params,&nbsp;raw_data,&nbsp;calib_data,&nbsp;...)</td>
 <td>Genera i dati riepilogativi della stazione meteorologica.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.calibrate_data" title="pywws.Process.calibrate_data"><tt class="xref py py-obj docutils literal"><span class="pre">calibrate_data</span></tt></a>(logger,&nbsp;params,&nbsp;status,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.calibrate_data" title="pywws.Process.calibrate_data"><tt class="xref py py-obj docutils literal"><span class="pre">calibrate_data</span></tt></a>(logger,&nbsp;params,&nbsp;raw_data,&nbsp;...)</td>
 <td>&#8216;Calibrare&#8217;, corregge i dati grezzi (raw), utilizzando una funzione fornita dall&#8217;utente</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pywws.Process.generate_daily" title="pywws.Process.generate_daily"><tt class="xref py py-obj docutils literal"><span class="pre">generate_daily</span></tt></a>(logger,&nbsp;day_end_hour,&nbsp;...)</td>
@@ -115,7 +115,7 @@ data_dir is the root directory of the weather data</pre>
 <tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.Average" title="pywws.Process.Average"><tt class="xref py py-obj docutils literal"><span class="pre">Average</span></tt></a>()</td>
 <td>Calcola la media di più valori di dati.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Calib</span></tt>(params,&nbsp;status)</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Calib</span></tt>(params)</td>
 <td>Classe di taratura che implementa il default o la calibrazione da parte dell&#8217;utente.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pywws.Process.DayAcc" title="pywws.Process.DayAcc"><tt class="xref py py-obj docutils literal"><span class="pre">DayAcc</span></tt></a>(daytime)</td>
@@ -269,7 +269,7 @@ data_dir is the root directory of the weather data</pre>
 
 <dl class="function">
 <dt id="pywws.Process.calibrate_data">
-<tt class="descclassname">pywws.Process.</tt><tt class="descname">calibrate_data</tt><big>(</big><em>logger</em>, <em>params</em>, <em>status</em>, <em>raw_data</em>, <em>calib_data</em><big>)</big><a class="reference internal" href="../_modules/pywws/Process.html#calibrate_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Process.calibrate_data" title="link permanente per questa definizione">¶</a></dt>
+<tt class="descclassname">pywws.Process.</tt><tt class="descname">calibrate_data</tt><big>(</big><em>logger</em>, <em>params</em>, <em>raw_data</em>, <em>calib_data</em><big>)</big><a class="reference internal" href="../_modules/pywws/Process.html#calibrate_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Process.calibrate_data" title="link permanente per questa definizione">¶</a></dt>
 <dd><p>&#8216;Calibrare&#8217;, corregge i dati grezzi (raw), utilizzando una funzione fornita dall&#8217;utente</p>
 </dd></dl>
 
@@ -293,7 +293,7 @@ data_dir is the root directory of the weather data</pre>
 
 <dl class="function">
 <dt id="pywws.Process.Process">
-<tt class="descclassname">pywws.Process.</tt><tt class="descname">Process</tt><big>(</big><em>params</em>, <em>status</em>, <em>raw_data</em>, <em>calib_data</em>, <em>hourly_data</em>, <em>daily_data</em>, <em>monthly_data</em><big>)</big><a class="reference internal" href="../_modules/pywws/Process.html#Process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Process.Process" title="link permanente per questa definizione">¶</a></dt>
+<tt class="descclassname">pywws.Process.</tt><tt class="descname">Process</tt><big>(</big><em>params</em>, <em>raw_data</em>, <em>calib_data</em>, <em>hourly_data</em>, <em>daily_data</em>, <em>monthly_data</em><big>)</big><a class="reference internal" href="../_modules/pywws/Process.html#Process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.Process.Process" title="link permanente per questa definizione">¶</a></dt>
 <dd><p>Genera i dati riepilogativi della stazione meteorologica.</p>
 <p>La fine del giorno meteorologico (tipicamente 21:00 o 09:00 ora solare) è impostata nel file delle preferenze <tt class="docutils literal"><span class="pre">weather.ini</span></tt>. Il valore predefinito è 21:00 (22:00 durante l&#8217;ora legale), seguendo la storica convenzione per letture della stazione meteo.</p>
 </dd></dl>
@@ -352,8 +352,8 @@ data_dir is the root directory of the weather data</pre>
         <li class="right" >
           <a href="pywws.LogData.html" title="pywws.LogData"
              >precedente</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Programmi Python e moduli</a> &raquo;</li> 
+        <li><a href="../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
+          <li><a href="../api_index.html" >Programmi Python e moduli</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

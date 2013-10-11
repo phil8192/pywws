@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.DataStore &mdash; pywws 13.09_r1065 documentation</title>
+    <title>pywws.DataStore &mdash; pywws 13.10_r1087 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '13.09_r1065',
+        VERSION:     '13.10_r1087',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/translations.js"></script>
     <link rel="shortcut icon" href="../../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1065 documentation" href="../../index.html" />
+    <link rel="top" title="pywws 13.10_r1087 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -40,7 +40,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >moduli</a> |</li>
-        <li><a href="../../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -91,7 +91,7 @@
 <span class="sd">might do the following::</span>
 
 <span class="sd">  from datetime import datetime</span>
-<span class="sd">  import DataStore</span>
+<span class="sd">  from pywws import DataStore</span>
 <span class="sd">  hourly = DataStore.hourly_store(&#39;weather_data&#39;)</span>
 <span class="sd">  for data in hourly[datetime(2009, 12, 25):datetime(2009, 12, 26)]:</span>
 <span class="sd">      print data[&#39;idx&#39;], data[&#39;temp_out&#39;]</span>
@@ -104,6 +104,9 @@
 <span class="sd">  data[datetime.min:datetime.max]</span>
 <span class="sd">  # get last 12 hours worth of data</span>
 <span class="sd">  data[datetime.utcnow() - timedelta(hours=12):]</span>
+
+<span class="sd">Note that the :py:class:`datetime.datetime` index is in UTC. You may</span>
+<span class="sd">need to apply an offset to convert to local time.</span>
 
 <span class="sd">The module provides five classes to store different data.</span>
 <span class="sd">:py:class:`data_store` takes &quot;raw&quot; data from the weather station;</span>
@@ -250,8 +253,10 @@
                 <span class="n">dirs</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
                 <span class="k">continue</span>
             <span class="k">break</span>
+
     <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
     <span class="k">def</span> <span class="nf">_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">step</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;slice step not permitted&quot;</span><span class="p">)</span>
@@ -271,6 +276,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">lst_day</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lst_day</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">lst_day</span>
+
     <span class="k">def</span> <span class="nf">_get_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">lst_day</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_slice</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         <span class="c"># go to start of slice</span>
@@ -294,6 +300,7 @@
             <span class="k">yield</span> <span class="n">cache</span><span class="p">[</span><span class="n">cache_ptr</span><span class="p">]</span>
             <span class="n">cache_ptr</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span>
+
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the data item or items with index i.</span>
 
@@ -308,6 +315,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">]</span>
+
     <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Store a value x with index i.</span>
 
@@ -327,6 +335,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cache_dirty</span> <span class="o">=</span> <span class="bp">True</span>
+
     <span class="k">def</span> <span class="nf">_del_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">lst_day</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_slice</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         <span class="c"># go to start of slice</span>
@@ -343,6 +352,7 @@
             <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_cache_dirty</span> <span class="o">=</span> <span class="bp">True</span>
         <span class="k">return</span>
+
     <span class="k">def</span> <span class="nf">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Delete the data item or items with index i.</span>
 
@@ -358,6 +368,7 @@
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cache_dirty</span> <span class="o">=</span> <span class="bp">True</span>
+
 <div class="viewcode-block" id="core_store.before"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.core_store.before">[docs]</a>    <span class="k">def</span> <span class="nf">before</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return datetime of newest existing data record whose</span>
 <span class="sd">        datetime is &lt; idx.</span>
@@ -374,7 +385,8 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span>
             <span class="n">day</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_lo</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="bp">None</span></div>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
 <div class="viewcode-block" id="core_store.after"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.core_store.after">[docs]</a>    <span class="k">def</span> <span class="nf">after</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return datetime of oldest existing data record whose</span>
 <span class="sd">        datetime is &gt;= idx.</span>
@@ -391,7 +403,8 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">):</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span>
             <span class="n">day</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_hi</span>
-        <span class="k">return</span> <span class="bp">None</span></div>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
 <div class="viewcode-block" id="core_store.nearest"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.core_store.nearest">[docs]</a>    <span class="k">def</span> <span class="nf">nearest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return datetime of record whose datetime is nearest idx.&quot;&quot;&quot;</span>
         <span class="n">hi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
@@ -402,12 +415,14 @@
             <span class="k">return</span> <span class="n">hi</span>
         <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">hi</span> <span class="o">-</span> <span class="n">idx</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">lo</span> <span class="o">-</span> <span class="n">idx</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">hi</span>
-        <span class="k">return</span> <span class="n">lo</span></div>
+        <span class="k">return</span> <span class="n">lo</span>
+</div>
     <span class="k">def</span> <span class="nf">_set_cache_ptr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
         <span class="n">day</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">day</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_lo</span> <span class="ow">or</span> <span class="n">day</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_hi</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_load</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_binary_search</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">_binary_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
         <span class="n">hi</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="n">hi</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">idx</span><span class="p">:</span>
@@ -427,6 +442,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span>
         <span class="k">return</span> <span class="n">hi</span>
+
     <span class="k">def</span> <span class="nf">_load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_date</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="p">[]</span>
@@ -446,6 +462,7 @@
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
 <div class="viewcode-block" id="core_store.flush"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.core_store.flush">[docs]</a>    <span class="k">def</span> <span class="nf">flush</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_dirty</span><span class="p">:</span>
             <span class="k">return</span>
@@ -467,7 +484,8 @@
             <span class="n">row</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_list</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)]:</span>
                 <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
-            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span></div>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</div>
     <span class="k">def</span> <span class="nf">_get_cache_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_date</span><span class="p">):</span>
         <span class="c"># default implementation - one file per day</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_root_dir</span><span class="p">,</span>
@@ -476,11 +494,13 @@
                             <span class="n">target_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s">.txt&quot;</span><span class="p">))</span>
         <span class="n">lo</span> <span class="o">=</span> <span class="n">target_date</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span>
         <span class="n">hi</span> <span class="o">=</span> <span class="n">lo</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="n">path</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span></div>
+        <span class="k">return</span> <span class="n">path</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span>
+</div>
 <div class="viewcode-block" id="data_store"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.data_store">[docs]</a><span class="k">class</span> <span class="nc">data_store</span><span class="p">(</span><span class="n">core_store</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Stores raw weather station data.&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">):</span>
         <span class="n">core_store</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="s">&#39;raw&#39;</span><span class="p">))</span>
+
     <span class="n">key_list</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s">&#39;idx&#39;</span><span class="p">,</span> <span class="s">&#39;delay&#39;</span><span class="p">,</span> <span class="s">&#39;hum_in&#39;</span><span class="p">,</span> <span class="s">&#39;temp_in&#39;</span><span class="p">,</span> <span class="s">&#39;hum_out&#39;</span><span class="p">,</span> <span class="s">&#39;temp_out&#39;</span><span class="p">,</span>
         <span class="s">&#39;abs_pressure&#39;</span><span class="p">,</span> <span class="s">&#39;wind_ave&#39;</span><span class="p">,</span> <span class="s">&#39;wind_gust&#39;</span><span class="p">,</span> <span class="s">&#39;wind_dir&#39;</span><span class="p">,</span> <span class="s">&#39;rain&#39;</span><span class="p">,</span>
@@ -501,11 +521,13 @@
         <span class="s">&#39;status&#39;</span>       <span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="s">&#39;illuminance&#39;</span>  <span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="s">&#39;uv&#39;</span>           <span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="p">}</span></div>
+        <span class="p">}</span>
+</div>
 <div class="viewcode-block" id="calib_store"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.calib_store">[docs]</a><span class="k">class</span> <span class="nc">calib_store</span><span class="p">(</span><span class="n">core_store</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Stores &#39;calibrated&#39; weather station data.&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">):</span>
         <span class="n">core_store</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="s">&#39;calib&#39;</span><span class="p">))</span>
+
     <span class="n">key_list</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s">&#39;idx&#39;</span><span class="p">,</span> <span class="s">&#39;delay&#39;</span><span class="p">,</span> <span class="s">&#39;hum_in&#39;</span><span class="p">,</span> <span class="s">&#39;temp_in&#39;</span><span class="p">,</span> <span class="s">&#39;hum_out&#39;</span><span class="p">,</span> <span class="s">&#39;temp_out&#39;</span><span class="p">,</span>
         <span class="s">&#39;abs_pressure&#39;</span><span class="p">,</span> <span class="s">&#39;rel_pressure&#39;</span><span class="p">,</span> <span class="s">&#39;wind_ave&#39;</span><span class="p">,</span> <span class="s">&#39;wind_gust&#39;</span><span class="p">,</span> <span class="s">&#39;wind_dir&#39;</span><span class="p">,</span>
@@ -527,11 +549,13 @@
         <span class="s">&#39;status&#39;</span>       <span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="s">&#39;illuminance&#39;</span>  <span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="s">&#39;uv&#39;</span>           <span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="p">}</span></div>
+        <span class="p">}</span>
+</div>
 <div class="viewcode-block" id="hourly_store"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.hourly_store">[docs]</a><span class="k">class</span> <span class="nc">hourly_store</span><span class="p">(</span><span class="n">core_store</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Stores hourly summary weather station data.&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">):</span>
         <span class="n">core_store</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="s">&#39;hourly&#39;</span><span class="p">))</span>
+
     <span class="n">key_list</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s">&#39;idx&#39;</span><span class="p">,</span> <span class="s">&#39;hum_in&#39;</span><span class="p">,</span> <span class="s">&#39;temp_in&#39;</span><span class="p">,</span> <span class="s">&#39;hum_out&#39;</span><span class="p">,</span> <span class="s">&#39;temp_out&#39;</span><span class="p">,</span>
         <span class="s">&#39;abs_pressure&#39;</span><span class="p">,</span> <span class="s">&#39;rel_pressure&#39;</span><span class="p">,</span> <span class="s">&#39;pressure_trend&#39;</span><span class="p">,</span>
@@ -552,11 +576,13 @@
         <span class="s">&#39;rain&#39;</span>              <span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="s">&#39;illuminance&#39;</span>       <span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="s">&#39;uv&#39;</span>                <span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="p">}</span></div>
+        <span class="p">}</span>
+</div>
 <div class="viewcode-block" id="daily_store"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.daily_store">[docs]</a><span class="k">class</span> <span class="nc">daily_store</span><span class="p">(</span><span class="n">core_store</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Stores daily summary weather station data.&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">):</span>
         <span class="n">core_store</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="s">&#39;daily&#39;</span><span class="p">))</span>
+
     <span class="n">key_list</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s">&#39;idx&#39;</span><span class="p">,</span> <span class="s">&#39;start&#39;</span><span class="p">,</span>
         <span class="s">&#39;hum_out_ave&#39;</span><span class="p">,</span>
@@ -623,6 +649,7 @@
         <span class="s">&#39;uv_max&#39;</span>             <span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="s">&#39;uv_max_t&#39;</span>           <span class="p">:</span> <span class="n">safestrptime</span><span class="p">,</span>
         <span class="p">}</span>
+
     <span class="k">def</span> <span class="nf">_get_cache_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_date</span><span class="p">):</span>
         <span class="c"># one file per month</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_root_dir</span><span class="p">,</span>
@@ -633,11 +660,13 @@
             <span class="n">hi</span> <span class="o">=</span> <span class="n">lo</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">month</span><span class="o">=</span><span class="n">lo</span><span class="o">.</span><span class="n">month</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">hi</span> <span class="o">=</span> <span class="n">lo</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">lo</span><span class="o">.</span><span class="n">year</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">path</span><span class="p">,</span> <span class="n">lo</span><span class="o">.</span><span class="n">toordinal</span><span class="p">(),</span> <span class="n">hi</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span></div>
+        <span class="k">return</span> <span class="n">path</span><span class="p">,</span> <span class="n">lo</span><span class="o">.</span><span class="n">toordinal</span><span class="p">(),</span> <span class="n">hi</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span>
+</div>
 <div class="viewcode-block" id="monthly_store"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.monthly_store">[docs]</a><span class="k">class</span> <span class="nc">monthly_store</span><span class="p">(</span><span class="n">core_store</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Stores monthly summary weather station data.&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">):</span>
         <span class="n">core_store</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="s">&#39;monthly&#39;</span><span class="p">))</span>
+
     <span class="n">key_list</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s">&#39;idx&#39;</span><span class="p">,</span> <span class="s">&#39;start&#39;</span><span class="p">,</span>
         <span class="s">&#39;hum_out_ave&#39;</span><span class="p">,</span>
@@ -732,6 +761,7 @@
         <span class="s">&#39;uv_max_hi_t&#39;</span>          <span class="p">:</span> <span class="n">safestrptime</span><span class="p">,</span>
         <span class="s">&#39;uv_max_ave&#39;</span>           <span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="p">}</span>
+
     <span class="k">def</span> <span class="nf">_get_cache_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_date</span><span class="p">):</span>
         <span class="c"># one file per year</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_root_dir</span><span class="p">,</span>
@@ -775,7 +805,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >moduli</a> |</li>
-        <li><a href="../../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.toservice &mdash; pywws 13.09_r1065 documentation</title>
+    <title>pywws.toservice &mdash; pywws 13.10_r1087 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '13.09_r1065',
+        VERSION:     '13.10_r1087',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/translations.js"></script>
     <link rel="shortcut icon" href="../../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1065 documentation" href="../../index.html" />
+    <link rel="top" title="pywws 13.10_r1087 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -40,7 +40,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >moduli</a> |</li>
-        <li><a href="../../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -187,64 +187,6 @@
 <span class="sd">:py:mod:`~pywws.LiveLog`) and visit the appropriate web site to see</span>
 <span class="sd">regular updates from your weather station.</span>
 
-<span class="sd">Notes on the services</span>
-<span class="sd">---------------------</span>
-
-<span class="sd">UK Met Office</span>
-<span class="sd">=============</span>
-
-<span class="sd">* Create account: https://register.metoffice.gov.uk/WaveRegistrationClient/public/register.do?service=weatherobservations</span>
-<span class="sd">* API: http://wow.metoffice.gov.uk/support?category=dataformats#automatic</span>
-<span class="sd">* Example ``weather.ini`` section::</span>
-
-<span class="sd">    [metoffice]</span>
-<span class="sd">    site id = 12345678</span>
-<span class="sd">    aws pin = 987654</span>
-
-<span class="sd">Open Weather Map</span>
-<span class="sd">================</span>
-
-<span class="sd">* Create account: http://openweathermap.org/login</span>
-<span class="sd">* API: http://openweathermap.org/API</span>
-<span class="sd">* Example ``weather.ini`` section::</span>
-
-<span class="sd">    [openweathermap]</span>
-<span class="sd">    lat = 51.501</span>
-<span class="sd">    long = -0.142</span>
-<span class="sd">    alt = 10</span>
-<span class="sd">    user = Elizabeth Windsor</span>
-<span class="sd">    password = corgi</span>
-<span class="sd">    id = Buck House</span>
-
-<span class="sd">The default behaviour is to use your user name to identify the weather</span>
-<span class="sd">station. However, it&#39;s possible for a user to have more than one</span>
-<span class="sd">weather station, so there is an undocumented ``name`` parameter in the</span>
-<span class="sd">API that can be used to identify the station. This appears as ``id``</span>
-<span class="sd">in ``weather.ini``. Make sure you don&#39;t choose a name that is already</span>
-<span class="sd">in use.</span>
-
-<span class="sd">PWS Weather</span>
-<span class="sd">===================</span>
-
-<span class="sd">* Create account: http://www.pwsweather.com/register.php</span>
-<span class="sd">* API based on WU protocol: `&lt;http://wiki.wunderground.com/index.php/PWS_-_Upload_Protocol&gt;`_</span>
-<span class="sd">* Example ``weather.ini`` section::</span>
-
-<span class="sd">    [pwsweather]</span>
-<span class="sd">    station = ABCDEFGH1</span>
-<span class="sd">    password = xxxxxxx</span>
-
-<span class="sd">Weather Underground</span>
-<span class="sd">===================</span>
-
-<span class="sd">* Create account: http://www.wunderground.com/members/signup.asp</span>
-<span class="sd">* API: `&lt;http://wiki.wunderground.com/index.php/PWS_-_Upload_Protocol&gt;`_</span>
-<span class="sd">* Example ``weather.ini`` section::</span>
-
-<span class="sd">    [underground]</span>
-<span class="sd">    station = ABCDEFGH1</span>
-<span class="sd">    password = xxxxxxx</span>
-
 <span class="sd">API</span>
 <span class="sd">---</span>
 
@@ -279,6 +221,7 @@
 <span class="kn">from</span> <span class="nn">pywws</span> <span class="kn">import</span> <span class="n">Template</span>
 
 <span class="n">FIVE_MINS</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">FIFTY_SECS</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ToService"><a class="viewcode-back" href="../../api/pywws.toservice.html#pywws.toservice.ToService">[docs]</a><span class="k">class</span> <span class="nc">ToService</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Upload weather data to weather services such as Weather</span>
@@ -313,6 +256,10 @@
         <span class="c"># &#39;derived&#39; services such as &#39;underground_rf&#39; share their</span>
         <span class="c"># parent&#39;s config and templates</span>
         <span class="n">config_section</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">service_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;_&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">config_section</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">service_name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">config_section</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">old_response</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">old_ex</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="c"># set default socket timeout, so urlopen calls don&#39;t hang forever</span>
@@ -423,7 +370,7 @@
 <span class="sd">        the value of :obj:`start`.</span>
 
 <span class="sd">        :param start: datetime of first record to get, or None to get</span>
-<span class="sd">        most recent data only.</span>
+<span class="sd">         most recent data only.</span>
 
 <span class="sd">        :type start: datetime</span>
 
@@ -436,14 +383,28 @@
 <span class="sd">        :rtype: dict</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">start</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">live_data</span><span class="p">:</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">max</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">before</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">live_data</span><span class="p">:</span>
+            <span class="n">stop</span> <span class="o">=</span> <span class="n">live_data</span><span class="p">[</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">FIFTY_SECS</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">stop</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">]:</span>
+            <span class="k">yield</span> <span class="n">data</span>
         <span class="k">if</span> <span class="n">live_data</span><span class="p">:</span>
             <span class="k">yield</span> <span class="n">live_data</span>
-        <span class="k">elif</span> <span class="n">start</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">:]:</span>
-                <span class="k">yield</span> <span class="n">data</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c"># use most recent logged data</span>
-            <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">before</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">max</span><span class="p">)]</span>
+</div>
+<div class="viewcode-block" id="ToService.set_status"><a class="viewcode-back" href="../../api/pywws.toservice.html#pywws.toservice.ToService.set_status">[docs]</a>    <span class="k">def</span> <span class="nf">set_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+            <span class="s">&#39;last update&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">service_name</span><span class="p">,</span> <span class="n">timestamp</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">:</span>
+            <span class="n">last_update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">get_datetime</span><span class="p">(</span><span class="s">&#39;last update&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">last_update</span> <span class="ow">and</span> <span class="n">last_update</span> <span class="o">&gt;=</span> <span class="n">timestamp</span> <span class="o">-</span> <span class="n">FIVE_MINS</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+                    <span class="s">&#39;last update&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">timestamp</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">))</span>
 </div>
 <div class="viewcode-block" id="ToService.catchup_start"><a class="viewcode-back" href="../../api/pywws.toservice.html#pywws.toservice.ToService.catchup_start">[docs]</a>    <span class="k">def</span> <span class="nf">catchup_start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get datetime of first &#39;catchup&#39; record to send.</span>
@@ -461,10 +422,14 @@
                             <span class="n">last_update</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">))</span>
         <span class="n">last_update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">get_datetime</span><span class="p">(</span><span class="s">&#39;last update&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">service_name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">last_update</span><span class="p">:</span>
-            <span class="n">start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">last_update</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">30</span><span class="p">))</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">last_update</span> <span class="o">+</span> <span class="n">FIFTY_SECS</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">:</span>
+            <span class="n">last_update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">get_datetime</span><span class="p">(</span><span class="s">&#39;last update&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">last_update</span><span class="p">:</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">last_update</span> <span class="o">+</span> <span class="n">FIFTY_SECS</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">start</span>
 </div>
-<div class="viewcode-block" id="ToService.Upload"><a class="viewcode-back" href="../../api/pywws.toservice.html#pywws.toservice.ToService.Upload">[docs]</a>    <span class="k">def</span> <span class="nf">Upload</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">catchup</span><span class="p">,</span> <span class="n">live_data</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ToService.Upload"><a class="viewcode-back" href="../../api/pywws.toservice.html#pywws.toservice.ToService.Upload">[docs]</a>    <span class="k">def</span> <span class="nf">Upload</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">catchup</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">live_data</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Upload one or more weather data records.</span>
 
 <span class="sd">        This method uploads either the most recent weather data</span>
@@ -494,8 +459,7 @@
                 <span class="k">continue</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_data</span><span class="p">(</span><span class="n">coded_data</span><span class="p">):</span>
                 <span class="k">return</span> <span class="bp">False</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&#39;last update&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">service_name</span><span class="p">,</span>
-                            <span class="n">data</span><span class="p">[</span><span class="s">&#39;idx&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_status</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;idx&#39;</span><span class="p">])</span>
             <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%d</span><span class="s"> records sent&#39;</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
@@ -530,7 +494,7 @@
     <span class="n">logger</span> <span class="o">=</span> <span class="n">ApplicationLogger</span><span class="p">(</span><span class="n">verbose</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">ToService</span><span class="p">(</span>
         <span class="n">DataStore</span><span class="o">.</span><span class="n">params</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">DataStore</span><span class="o">.</span><span class="n">status</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
-        <span class="n">DataStore</span><span class="o">.</span><span class="n">calib_store</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">Upload</span><span class="p">(</span><span class="n">catchup</span><span class="p">)</span>
+        <span class="n">DataStore</span><span class="o">.</span><span class="n">calib_store</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">Upload</span><span class="p">(</span><span class="n">catchup</span><span class="o">=</span><span class="n">catchup</span><span class="p">)</span>
 </div>
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
@@ -570,7 +534,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >moduli</a> |</li>
-        <li><a href="../../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

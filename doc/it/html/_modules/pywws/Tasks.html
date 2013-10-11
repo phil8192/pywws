@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Tasks &mdash; pywws 13.09_r1065 documentation</title>
+    <title>pywws.Tasks &mdash; pywws 13.10_r1087 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '13.09_r1065',
+        VERSION:     '13.10_r1087',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/translations.js"></script>
     <link rel="shortcut icon" href="../../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1065 documentation" href="../../index.html" />
+    <link rel="top" title="pywws 13.10_r1087 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -40,7 +40,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >moduli</a> |</li>
-        <li><a href="../../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -85,7 +85,7 @@
 <span class="kn">from</span> <span class="nn">pywws</span> <span class="kn">import</span> <span class="n">Plot</span>
 <span class="kn">from</span> <span class="nn">pywws</span> <span class="kn">import</span> <span class="n">Template</span>
 <span class="kn">from</span> <span class="nn">pywws.TimeZone</span> <span class="kn">import</span> <span class="n">Local</span>
-<span class="kn">from</span> <span class="nn">pywws.toservice</span> <span class="kn">import</span> <span class="n">ToService</span>
+<span class="kn">from</span> <span class="nn">pywws.toservice</span> <span class="kn">import</span> <span class="n">ToService</span><span class="p">,</span> <span class="n">FIVE_MINS</span><span class="p">,</span> <span class="n">FIFTY_SECS</span>
 <span class="kn">from</span> <span class="nn">pywws</span> <span class="kn">import</span> <span class="n">Upload</span>
 <span class="kn">from</span> <span class="nn">pywws</span> <span class="kn">import</span> <span class="n">WindRose</span>
 <span class="kn">from</span> <span class="nn">pywws</span> <span class="kn">import</span> <span class="n">YoWindow</span>
@@ -111,7 +111,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">local_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
             <span class="s">&#39;paths&#39;</span><span class="p">,</span> <span class="s">&#39;local_files&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s">&#39;~/weather/results/&#39;</span><span class="p">))</span>
         <span class="c"># create calibration object</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">calibrator</span> <span class="o">=</span> <span class="n">Calib</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calibrator</span> <span class="o">=</span> <span class="n">Calib</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
         <span class="c"># create templater object</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">templater</span> <span class="o">=</span> <span class="n">Template</span><span class="o">.</span><span class="n">Template</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">calib_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hourly_data</span><span class="p">,</span>
@@ -289,6 +289,10 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">local_dir</span><span class="p">):</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">local_dir</span><span class="p">)</span>
             <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">local_files</span><span class="p">:</span>
+                <span class="n">targ</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">local_dir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="nb">file</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">targ</span><span class="p">):</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">targ</span><span class="p">)</span>
                 <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_dir</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">uploads</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">asynch</span><span class="p">:</span>
@@ -296,6 +300,10 @@
                     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;upload thread has terminated&#39;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">uploads_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
             <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">uploads</span><span class="p">:</span>
+                <span class="n">targ</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">uploads_directory</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="nb">file</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">targ</span><span class="p">):</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">targ</span><span class="p">)</span>
                 <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uploads_directory</span><span class="p">)</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">asynch</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">uploads_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
@@ -311,7 +319,7 @@
                     <span class="k">break</span>
                 <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;service&#39;</span><span class="p">:</span>
                     <span class="n">name</span><span class="p">,</span> <span class="n">timestamp</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&#39;last update&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">set_status</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">service_queued</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">OK</span>
 
@@ -396,12 +404,17 @@
                 <span class="n">coded_data</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">encode_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">coded_data</span><span class="p">:</span>
                     <span class="k">continue</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">to_thread</span><span class="o">.</span><span class="n">put</span><span class="p">(</span>
-                    <span class="p">(</span><span class="s">&#39;service&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;idx&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">),</span> <span class="n">coded_data</span><span class="p">))</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">service_start</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">to_thread</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="s">&#39;service&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;idx&#39;</span><span class="p">],</span> <span class="n">coded_data</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">service_start</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">FIFTY_SECS</span>
+                <span class="n">parent</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">parent</span>
+                <span class="k">if</span> <span class="n">parent</span><span class="p">:</span>
+                    <span class="n">last_update</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">get_datetime</span><span class="p">(</span>
+                        <span class="s">&#39;last update&#39;</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">last_update</span> <span class="ow">and</span> <span class="n">last_update</span> <span class="o">&gt;=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">FIVE_MINS</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">service_start</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">FIFTY_SECS</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">service_queued</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">service</span><span class="o">.</span><span class="n">Upload</span><span class="p">(</span><span class="n">live_data</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">,</span> <span class="n">live_data</span><span class="p">)</span>
+            <span class="n">service</span><span class="o">.</span><span class="n">Upload</span><span class="p">(</span><span class="n">live_data</span><span class="o">=</span><span class="n">live_data</span><span class="p">)</span>
 
 <div class="viewcode-block" id="RegularTasks.do_twitter"><a class="viewcode-back" href="../../api/pywws.Tasks.html#pywws.Tasks.RegularTasks.do_twitter">[docs]</a>    <span class="k">def</span> <span class="nf">do_twitter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">twitter</span><span class="p">:</span>
@@ -469,7 +482,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >moduli</a> |</li>
-        <li><a href="../../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

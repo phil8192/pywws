@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Come impostare ‘hourly’ per la registrazione oraria con pywws &mdash; pywws 13.09_r1065 documentation</title>
+    <title>Come impostare ‘hourly’ per la registrazione oraria con pywws &mdash; pywws 13.10_r1087 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.09_r1065',
+        VERSION:     '13.10_r1087',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.09_r1065 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.10_r1087 documentation" href="../index.html" />
     <link rel="up" title="Guide per gli utenti" href="index.html" />
     <link rel="next" title="Come impostare una registrazione ‘live’ con pywws" href="livelogging.html" />
     <link rel="prev" title="Come iniziare con pywws" href="getstarted.html" /> 
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="getstarted.html" title="Come iniziare con pywws"
              accesskey="P">precedente</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Guide per gli utenti</a> &raquo;</li> 
       </ul>
     </div>  
@@ -79,9 +79,10 @@
 <div class="highlight-python"><pre>[paths]
 work = /tmp/weather
 templates = /home/xxx/weather/templates/
-graph_templates = /home/xxx/weather/graph_templates/</pre>
+graph_templates = /home/xxx/weather/graph_templates/
+local_files = /home/xxx/weather/results/</pre>
 </div>
-<p>Modificare queste per soddisfare le vostre preferenze di installazione. <tt class="docutils literal"><span class="pre">work</span></tt> è una directory temporanea utilizzata per archiviare i file intermedi, <tt class="docutils literal"><span class="pre">templates</span></tt> è la directory per i tuoi file modello di testo e <tt class="docutils literal"><span class="pre">graph_templates</span></tt> è la directory per i tuoi file grafici di modello. Non usare le directory di esempio pywws per questi, perchè saranno sovrascritti quando si aggiorna pywws.</p>
+<p>Modificare queste per soddisfare le vostre preferenze di installazione. <tt class="docutils literal"><span class="pre">work</span></tt> è una directory temporanea utilizzata per archiviare i file intermedi, <tt class="docutils literal"><span class="pre">templates</span></tt> è la directory per i tuoi file modello di testo e <tt class="docutils literal"><span class="pre">graph_templates</span></tt> è la directory per i tuoi file grafici di modello e <tt class="docutils literal"><span class="pre">local_files</span></tt> è una directory dove viene messo l&#8217;output del modello che non è stato caricato in un sito web. Non usare le directory di esempio pywws per questi, perchè saranno sovrascritti quando si aggiorna pywws.</p>
 <p>Copiare i modelli di testo e grafico nelle directory appropriate. Si possono trovare alcuni esempi forniti con pywws utili per iniziare. Se hai installato pywws con <tt class="docutils literal"><span class="pre">pip</span></tt> gli esempi dovrebbero essere in <tt class="docutils literal"><span class="pre">/usr/share/pywws</span></tt> o <tt class="docutils literal"><span class="pre">/usr/local/share/pywws</span></tt> o simili.</p>
 </div>
 <div class="section" id="configuring-periodic-tasks">
@@ -89,7 +90,6 @@ graph_templates = /home/xxx/weather/graph_templates/</pre>
 <p>In weather.ini si dovrebbe avere le sezioni <tt class="docutils literal"><span class="pre">[logged]</span></tt>, <tt class="docutils literal"><span class="pre">[hourly]</span></tt>, <tt class="docutils literal"><span class="pre">[12</span> <span class="pre">hourly]</span></tt> e <tt class="docutils literal"><span class="pre">[daily]</span></tt> simili ai seguenti:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">logged</span><span class="p">]</span>
 <span class="n">services</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">twitter</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">plot</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">text</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -98,34 +98,35 @@ graph_templates = /home/xxx/weather/graph_templates/</pre>
 </pre></div>
 </div>
 <p>Questo specifica cosa <a class="reference internal" href="../api/pywws.Hourly.html#module-pywws.Hourly" title="pywws.Hourly"><tt class="xref py py-mod docutils literal"><span class="pre">Hourly</span></tt></a> dovrebbe fare quando viene eseguito. Attività nella sezione <tt class="docutils literal"><span class="pre">[logged]</span></tt> vengono eseguite ogni volta che ci nuovi dati registrati, le attività nella sezione <tt class="docutils literal"><span class="pre">[hourly]</span></tt> vengono effettuate ogni ora, le attività nella sezione <tt class="docutils literal"><span class="pre">[12</span> <span class="pre">hourly]</span></tt> vengono eseguite due volte al giorno e le attività nella sezione <tt class="docutils literal"><span class="pre">[daily]</span></tt> vengono eseguite una volta al giorno.</p>
-<p>La voce <tt class="docutils literal"><span class="pre">services</span></tt> è un elenco di servizi meteo online per caricare i dati. Le voci <tt class="docutils literal"><span class="pre">plot</span></tt> e <tt class="docutils literal"><span class="pre">text</span></tt> sono elenchi di file di modello grafico e file di testo per essere caricati su un sito web, e la voce <tt class="docutils literal"><span class="pre">twitter</span></tt> è un elenco di modelli per i messaggi da inviare a Twitter. Aggiungere i nomi dei file di modello e servizi meteo alle voci appropriate, ad esempio:</p>
+<p>La voce <tt class="docutils literal"><span class="pre">services</span></tt> è un elenco di servizi meteo online per inviare i dati meteo. Le voci <tt class="docutils literal"><span class="pre">plot</span></tt> e <tt class="docutils literal"><span class="pre">text</span></tt> sono elenchi di file di modello grafico e file di testo per essere elaborati e, opzionalmente, caricati su un sito web. Aggiungere i nomi dei file di modello e servizi meteo alle voci appropriate, ad esempio:</p>
 <div class="highlight-python"><pre>[logged]
 services = ['underground', 'metoffice']
-twitter = []
 plot = []
 text = []
 
 [hourly]
 services = []
-twitter = ['tweet.txt']
 plot = ['7days.png.xml', '24hrs.png.xml', 'rose_24hrs.png.xml']
-text = ['24hrs.txt', '6hrs.txt', '7days.txt']
+text = [('tweet.txt', 'T'), '24hrs.txt', '6hrs.txt', '7days.txt']
 
 [12 hourly]
 services = []
-twitter = []
 plot = []
 text = []
 
 [daily]
 services = []
-twitter = ['forecast.txt']
 plot = ['28days.png.xml']
-text = ['allmonths.txt']</pre>
+text = [('forecast.txt', 'T'), 'allmonths.txt']</pre>
 </div>
-<p>È possibile verificare che tutti questi stiano lavorando rimuovendo tutte le linee <tt class="docutils literal"><span class="pre">last</span> <span class="pre">update</span></tt> da status.ini quindi eseguire nuovamente <a class="reference internal" href="../api/pywws.Hourly.html#module-pywws.Hourly" title="pywws.Hourly"><tt class="xref py py-mod docutils literal"><span class="pre">Hourly</span></tt></a>:</p>
+<p>Si noti l&#8217;uso del flag <tt class="docutils literal"><span class="pre">'T'</span></tt> &#8211; questo dice a pywws si inviare il risultato a Twitter invece di caricarlo sul proprio sito ftp.</p>
+<p>È possibile verificare che tutti questi stiano lavorando rimuovendo tutte le linee <tt class="docutils literal"><span class="pre">last</span> <span class="pre">update</span></tt> da status.ini, quindi eseguire nuovamente <a class="reference internal" href="../api/pywws.Hourly.html#module-pywws.Hourly" title="pywws.Hourly"><tt class="xref py py-mod docutils literal"><span class="pre">Hourly</span></tt></a>:</p>
 <div class="highlight-python"><pre>python -m pywws.Hourly -v ~/weather/data</pre>
 </div>
+<p class="versionchanged">
+<span class="versionmodified">Cambiato nella versione 13.06_r1015: </span>added the <tt class="docutils literal"><span class="pre">'T'</span></tt> flag.
+Previously Twitter templates were listed separately in <tt class="docutils literal"><span class="pre">twitter</span></tt> entries in the <tt class="docutils literal"><span class="pre">[hourly]</span></tt> and other sections.
+The older syntax still works, but is deprecated.</p>
 <p class="versionchanged">
 <span class="versionmodified">Cambiato nella versione 13.05_r1009: </span>The last update information was previously stored in weather.ini, with <tt class="docutils literal"><span class="pre">last</span> <span class="pre">update</span></tt> entries in several sections.</p>
 </div>
@@ -157,6 +158,7 @@ pywws-hourly.py -v /data/weather &gt;$log 2&gt;&amp;1
 /home/jim/scripts/email-log.sh $log "weather log"</pre>
 </div>
 <p>Sarà necessario modificare questo file un bel pò per soddisfare i vostri percorsi di file e così via, ma dà un&#8217;idea di cosa fare.</p>
+<hr class="docutils" />
 <p>Commenti o domande? Si prega di iscriversi per al mailing list pywws <a class="reference external" href="http://groups.google.com/group/pywws">http://groups.google.com/group/pywws</a> e facci sapere.</p>
 </div>
 </div>
@@ -221,7 +223,7 @@ pywws-hourly.py -v /data/weather &gt;$log 2&gt;&amp;1
         <li class="right" >
           <a href="getstarted.html" title="Come iniziare con pywws"
              >precedente</a> |</li>
-        <li><a href="../index.html">pywws 13.09_r1065 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
           <li><a href="index.html" >Guide per gli utenti</a> &raquo;</li> 
       </ul>
     </div>
