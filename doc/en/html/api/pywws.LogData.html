@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.LogData &mdash; pywws 13.10_r1091 documentation</title>
+    <title>pywws.LogData &mdash; pywws 13.11_r1104 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.10_r1091',
+        VERSION:     '13.11_r1104',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.10_r1091 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.11_r1104 documentation" href="../index.html" />
     <link rel="up" title="Python programs and modules" href="../api_index.html" />
     <link rel="next" title="pywws.Process" href="pywws.Process.html" />
     <link rel="prev" title="pywws.Tasks" href="pywws.Tasks.html" /> 
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="pywws.Tasks.html" title="pywws.Tasks"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">pywws 13.10_r1091 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.11_r1104 documentation</a> &raquo;</li>
           <li><a href="../api_index.html" accesskey="U">Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>  
@@ -97,13 +97,13 @@ minutes.</p>
 <tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">ApplicationLogger</span></tt>(verbose[,&nbsp;logfile])</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.LogData.Catchup" title="pywws.LogData.Catchup"><tt class="xref py py-obj docutils literal"><span class="pre">Catchup</span></tt></a>(ws,&nbsp;logger,&nbsp;raw_data,&nbsp;last_date,&nbsp;...)</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Catchup</span></tt></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#pywws.LogData.CheckFixedBlock" title="pywws.LogData.CheckFixedBlock"><tt class="xref py py-obj docutils literal"><span class="pre">CheckFixedBlock</span></tt></a>(ws,&nbsp;params,&nbsp;status,&nbsp;logger)</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">CheckFixedBlock</span></tt></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#pywws.LogData.LogData" title="pywws.LogData.LogData"><tt class="xref py py-obj docutils literal"><span class="pre">LogData</span></tt></a>(params,&nbsp;status,&nbsp;raw_data[,&nbsp;sync,&nbsp;clear])</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">LogData</span></tt></td>
 <td></td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pywws.LogData.main" title="pywws.LogData.main"><tt class="xref py py-obj docutils literal"><span class="pre">main</span></tt></a>([argv])</td>
@@ -126,20 +126,30 @@ minutes.</p>
 </tr>
 </tbody>
 </table>
-<dl class="function">
-<dt id="pywws.LogData.Catchup">
-<tt class="descclassname">pywws.LogData.</tt><tt class="descname">Catchup</tt><big>(</big><em>ws</em>, <em>logger</em>, <em>raw_data</em>, <em>last_date</em>, <em>last_ptr</em><big>)</big><a class="reference internal" href="../_modules/pywws/LogData.html#Catchup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.LogData.Catchup" title="Permalink to this definition">¶</a></dt>
+<dl class="class">
+<dt id="pywws.LogData.DataLogger">
+<em class="property">class </em><tt class="descclassname">pywws.LogData.</tt><tt class="descname">DataLogger</tt><big>(</big><em>params</em>, <em>status</em>, <em>raw_data</em><big>)</big><a class="headerlink" href="#pywws.LogData.DataLogger" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="pywws.LogData.DataLogger.check_fixed_block">
+<tt class="descname">check_fixed_block</tt><big>(</big><big>)</big><a class="headerlink" href="#pywws.LogData.DataLogger.check_fixed_block" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="pywws.LogData.CheckFixedBlock">
-<tt class="descclassname">pywws.LogData.</tt><tt class="descname">CheckFixedBlock</tt><big>(</big><em>ws</em>, <em>params</em>, <em>status</em>, <em>logger</em><big>)</big><a class="reference internal" href="../_modules/pywws/LogData.html#CheckFixedBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.LogData.CheckFixedBlock" title="Permalink to this definition">¶</a></dt>
+<dl class="method">
+<dt id="pywws.LogData.DataLogger.catchup">
+<tt class="descname">catchup</tt><big>(</big><em>last_date</em>, <em>last_ptr</em><big>)</big><a class="headerlink" href="#pywws.LogData.DataLogger.catchup" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="pywws.LogData.LogData">
-<tt class="descclassname">pywws.LogData.</tt><tt class="descname">LogData</tt><big>(</big><em>params</em>, <em>status</em>, <em>raw_data</em>, <em>sync=None</em>, <em>clear=False</em><big>)</big><a class="reference internal" href="../_modules/pywws/LogData.html#LogData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pywws.LogData.LogData" title="Permalink to this definition">¶</a></dt>
+<dl class="method">
+<dt id="pywws.LogData.DataLogger.log_data">
+<tt class="descname">log_data</tt><big>(</big><em>sync=None</em>, <em>clear=False</em><big>)</big><a class="headerlink" href="#pywws.LogData.DataLogger.log_data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="pywws.LogData.DataLogger.live_data">
+<tt class="descname">live_data</tt><big>(</big><em>logged_only=False</em><big>)</big><a class="headerlink" href="#pywws.LogData.DataLogger.live_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
 
 <dl class="function">
 <dt id="pywws.LogData.main">
@@ -195,7 +205,7 @@ minutes.</p>
         <li class="right" >
           <a href="pywws.Tasks.html" title="pywws.Tasks"
              >previous</a> |</li>
-        <li><a href="../index.html">pywws 13.10_r1091 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.11_r1104 documentation</a> &raquo;</li>
           <li><a href="../api_index.html" >Python programs and modules</a> &raquo;</li> 
       </ul>
     </div>
