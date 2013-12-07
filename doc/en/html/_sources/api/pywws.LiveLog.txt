@@ -10,8 +10,6 @@ pywws.LiveLog
    .. autosummary::
    
       ApplicationLogger
-      Catchup
-      CheckFixedBlock
       LiveLog
       main
    
@@ -23,6 +21,7 @@ pywws.LiveLog
 
    .. autosummary::
    
+      DataLogger
       datetime
       timedelta
    
