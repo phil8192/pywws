@@ -16,6 +16,12 @@ pywws.TwitterAuth
 
    
    
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Twitter
+   
    
 
    

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.WindRose &mdash; pywws 13.10_r1087 documentation</title>
+    <title>pywws.WindRose &mdash; pywws 13.12.dev1118 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '13.10_r1087',
+        VERSION:     '13.12.dev1118',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/translations.js"></script>
     <link rel="shortcut icon" href="../../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.10_r1087 documentation" href="../../index.html" />
+    <link rel="top" title="pywws 13.12.dev1118 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -40,7 +40,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >moduli</a> |</li>
-        <li><a href="../../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.12.dev1118 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -319,13 +319,19 @@
 <div class="viewcode-block" id="RosePlotter.GetPreamble"><a class="viewcode-back" href="../../api/pywws.WindRose.html#pywws.WindRose.RosePlotter.GetPreamble">[docs]</a>    <span class="k">def</span> <span class="nf">GetPreamble</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;set polar</span>
 <span class="s">set angles degrees</span>
-<span class="s">set xtics axis nomirror</span>
-<span class="s">set ytics axis nomirror</span>
 <span class="s">set zeroaxis</span>
 <span class="s">set grid polar 22.5</span>
 <span class="s">set size square</span>
 <span class="s">unset border</span>
+<span class="s">set noytics</span>
 <span class="s">&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gnuplot_version</span> <span class="o">&gt;=</span> <span class="mf">4.6</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="s">&quot;&quot;&quot;set noxtics</span>
+<span class="s">set rtics nomirror</span>
+<span class="s">unset raxis</span>
+<span class="s">&quot;&quot;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="s">&#39;set xtics axis nomirror</span><span class="se">\n</span><span class="s">&#39;</span>
         <span class="n">lmargin</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">,</span> <span class="s">&#39;lmargin&#39;</span><span class="p">,</span> <span class="s">&#39;-1&#39;</span><span class="p">))</span>
         <span class="n">result</span> <span class="o">+=</span> <span class="s">&#39;set lmargin </span><span class="si">%g</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">lmargin</span><span class="p">)</span>
         <span class="n">lmargin</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">,</span> <span class="s">&#39;rmargin&#39;</span><span class="p">,</span> <span class="s">&#39;-1&#39;</span><span class="p">))</span>
@@ -401,6 +407,7 @@
                 <span class="n">yrange</span> <span class="o">=</span> <span class="mi">21</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">yrange</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">yrange</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="s">&#39;set rrange [0:</span><span class="si">%d</span><span class="s">]</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">yrange</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">+=</span> <span class="s">&#39;set xrange [-</span><span class="si">%d</span><span class="s">:</span><span class="si">%d</span><span class="s">]</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">yrange</span><span class="p">,</span> <span class="n">yrange</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">+=</span> <span class="s">&#39;set yrange [-</span><span class="si">%d</span><span class="s">:</span><span class="si">%d</span><span class="s">]</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">yrange</span><span class="p">,</span> <span class="n">yrange</span><span class="p">)</span>
         <span class="n">points</span> <span class="o">=</span> <span class="p">[</span><span class="n">_</span><span class="p">(</span><span class="s">&#39;N&#39;</span><span class="p">),</span> <span class="n">_</span><span class="p">(</span><span class="s">&#39;S&#39;</span><span class="p">),</span> <span class="n">_</span><span class="p">(</span><span class="s">&#39;E&#39;</span><span class="p">),</span> <span class="n">_</span><span class="p">(</span><span class="s">&#39;W&#39;</span><span class="p">)]</span>
@@ -478,7 +485,7 @@
     <span class="n">params</span> <span class="o">=</span> <span class="n">DataStore</span><span class="o">.</span><span class="n">params</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="n">Localisation</span><span class="o">.</span><span class="n">SetApplicationLanguage</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">RosePlotter</span><span class="p">(</span>
-        <span class="n">params</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">,</span> <span class="n">DataStore</span><span class="o">.</span><span class="n">status</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
         <span class="n">DataStore</span><span class="o">.</span><span class="n">calib_store</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">DataStore</span><span class="o">.</span><span class="n">hourly_store</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
         <span class="n">DataStore</span><span class="o">.</span><span class="n">daily_store</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">DataStore</span><span class="o">.</span><span class="n">monthly_store</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
         <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -522,7 +529,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >moduli</a> |</li>
-        <li><a href="../../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.12.dev1118 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

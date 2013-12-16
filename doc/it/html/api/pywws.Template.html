@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Template &mdash; pywws 13.10_r1087 documentation</title>
+    <title>pywws.Template &mdash; pywws 13.12.dev1118 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '13.10_r1087',
+        VERSION:     '13.12.dev1118',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="shortcut icon" href="../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.10_r1087 documentation" href="../index.html" />
+    <link rel="top" title="pywws 13.12.dev1118 documentation" href="../index.html" />
     <link rel="up" title="Programmi Python e moduli" href="../api_index.html" />
     <link rel="next" title="pywws.Forecast" href="pywws.Forecast.html" />
     <link rel="prev" title="pywws.WindRose" href="pywws.WindRose.html" /> 
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="pywws.WindRose.html" title="pywws.WindRose"
              accesskey="P">precedente</a> |</li>
-        <li><a href="../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.12.dev1118 documentation</a> &raquo;</li>
           <li><a href="../api_index.html" accesskey="U">Programmi Python e moduli</a> &raquo;</li> 
       </ul>
     </div>  
@@ -76,6 +76,12 @@ output_file is the name of the text file to be created</pre>
 </div>
 <div class="section" id="processing-instructions">
 <h2>Istruzioni di elaborazione<a class="headerlink" href="#processing-instructions" title="link permanente per questa intestazione">¶</a></h2>
+<p>Note that if the closing &#8216;#&#8217; of a processing instruction is the last
+character on a line then the following line break is not outputted.
+This makes templates easier to edit as you can have a separate line
+for each processing instruction and still produce output with no line
+breaks. If you want to output a line break after a processing
+instruction, put a blank line immediately after it.</p>
 <div class="section" id="id1">
 <h3><tt class="docutils literal"><span class="pre">##</span></tt><a class="headerlink" href="#id1" title="link permanente per questa intestazione">¶</a></h3>
 <p>output di un singolo carattere &#8216;#&#8217;.</p>
@@ -99,10 +105,20 @@ output_file is the name of the text file to be created</pre>
 <div class="section" id="raw">
 <h3><tt class="docutils literal"><span class="pre">#raw#</span></tt><a class="headerlink" href="#raw" title="link permanente per questa intestazione">¶</a></h3>
 <p>ritorna i dati &#8220;raw&#8221; di riepilogo. L&#8217;indice viene reimpostato sul valore più recente.</p>
+<p class="versionchanged">
+<span class="versionmodified">Cambiato nella versione 11.09: </span>This now selects &#8220;calibrated&#8221; data. The directive name remains
+unchanged for backwards compatibility.</p>
 </div>
 <div class="section" id="timezone-name">
 <h3><tt class="docutils literal"><span class="pre">#timezone</span> <span class="pre">name#</span></tt><a class="headerlink" href="#timezone-name" title="link permanente per questa intestazione">¶</a></h3>
 <p>Converte tutti i valori data e ora del fuso orario <tt class="docutils literal"><span class="pre">name</span></tt> prima dell&#8217;output. I valori consentiti per nome sono <tt class="docutils literal"><span class="pre">utc</span></tt> o <tt class="docutils literal"><span class="pre">local</span></tt>.</p>
+</div>
+<div class="section" id="locale-expr">
+<h3><tt class="docutils literal"><span class="pre">#locale</span> <span class="pre">expr#</span></tt><a class="headerlink" href="#locale-expr" title="link permanente per questa intestazione">¶</a></h3>
+<p>switch use of &#8216;locale&#8217; on or off, according to <tt class="docutils literal"><span class="pre">expr</span></tt>. When locale
+is on floating point numbers may use a comma as the decimal separator
+instead of a point, depending on your localisation settings. Use
+<tt class="docutils literal"><span class="pre">&quot;True&quot;</span></tt> or <tt class="docutils literal"><span class="pre">&quot;False&quot;</span></tt> for expr.</p>
 </div>
 <div class="section" id="roundtime-expr">
 <h3><tt class="docutils literal"><span class="pre">#roundtime</span> <span class="pre">expr#</span></tt><a class="headerlink" href="#roundtime-expr" title="link permanente per questa intestazione">¶</a></h3>
@@ -299,6 +315,7 @@ output_file is the name of the text file to be created</pre>
 <li><a class="reference internal" href="#hourly"><tt class="docutils literal"><span class="pre">#hourly#</span></tt></a></li>
 <li><a class="reference internal" href="#raw"><tt class="docutils literal"><span class="pre">#raw#</span></tt></a></li>
 <li><a class="reference internal" href="#timezone-name"><tt class="docutils literal"><span class="pre">#timezone</span> <span class="pre">name#</span></tt></a></li>
+<li><a class="reference internal" href="#locale-expr"><tt class="docutils literal"><span class="pre">#locale</span> <span class="pre">expr#</span></tt></a></li>
 <li><a class="reference internal" href="#roundtime-expr"><tt class="docutils literal"><span class="pre">#roundtime</span> <span class="pre">expr#</span></tt></a></li>
 <li><a class="reference internal" href="#jump-count"><tt class="docutils literal"><span class="pre">#jump</span> <span class="pre">count#</span></tt></a></li>
 <li><a class="reference internal" href="#goto-date-time"><tt class="docutils literal"><span class="pre">#goto</span> <span class="pre">date-time#</span></tt></a></li>
@@ -352,7 +369,7 @@ output_file is the name of the text file to be created</pre>
         <li class="right" >
           <a href="pywws.WindRose.html" title="pywws.WindRose"
              >precedente</a> |</li>
-        <li><a href="../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
+        <li><a href="../index.html">pywws 13.12.dev1118 documentation</a> &raquo;</li>
           <li><a href="../api_index.html" >Programmi Python e moduli</a> &raquo;</li> 
       </ul>
     </div>

@@ -17,6 +17,12 @@ pywws.Hourly
 
    
    
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      DataLogger
+   
    
 
    

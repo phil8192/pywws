@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.DataStore &mdash; pywws 13.10_r1087 documentation</title>
+    <title>pywws.DataStore &mdash; pywws 13.12.dev1118 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '13.10_r1087',
+        VERSION:     '13.12.dev1118',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/translations.js"></script>
     <link rel="shortcut icon" href="../../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.10_r1087 documentation" href="../../index.html" />
+    <link rel="top" title="pywws 13.12.dev1118 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -40,7 +40,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >moduli</a> |</li>
-        <li><a href="../../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.12.dev1118 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -123,10 +123,12 @@
 
 <span class="kn">from</span> <span class="nn">ConfigParser</span> <span class="kn">import</span> <span class="n">RawConfigParser</span>
 <span class="kn">import</span> <span class="nn">csv</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">MAXYEAR</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">DAY</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <div class="viewcode-block" id="safestrptime"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.safestrptime">[docs]</a><span class="k">def</span> <span class="nf">safestrptime</span><span class="p">(</span><span class="n">date_string</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="c"># time.strptime is time consuming (because it&#39;s so flexible?) so don&#39;t use</span>
@@ -212,27 +214,61 @@
         <span class="sd">&quot;&quot;&quot;Status is stored in a file &quot;status.ini&quot; in root_dir.&quot;&quot;&quot;</span>
         <span class="n">ParamStore</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">,</span> <span class="s">&#39;status.ini&#39;</span><span class="p">)</span>
 </div>
+<span class="k">class</span> <span class="nc">_Cache</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ptr</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lo</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">max</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hi</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">min</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dirty</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ptr</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">ptr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lo</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">lo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hi</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">hi</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dirty</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">set_ptr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="n">hi</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">hi</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">idx</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ptr</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">hi</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">idx</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ptr</span> <span class="o">=</span> <span class="n">hi</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">return</span>
+        <span class="n">lo</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ptr</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">idx</span><span class="p">:</span>
+            <span class="n">lo</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hi</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="k">while</span> <span class="n">hi</span> <span class="o">&gt;</span> <span class="n">lo</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">mid</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">idx</span><span class="p">:</span>
+                <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ptr</span> <span class="o">=</span> <span class="n">hi</span>
+
 <div class="viewcode-block" id="core_store"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.core_store">[docs]</a><span class="k">class</span> <span class="nc">core_store</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_root_dir</span> <span class="o">=</span> <span class="n">root_dir</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_one_day</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="c"># initialise cache</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cache_lo</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">max</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cache_hi</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">min</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cache_dirty</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="c"># initialise caches</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span> <span class="o">=</span> <span class="n">_Cache</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span> <span class="o">=</span> <span class="n">_Cache</span><span class="p">()</span>
         <span class="c"># get conservative first and last days for which data (might) exist</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_fst_day</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">max</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span> <span class="o">-</span> <span class="mi">500</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_lst_day</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">min</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span> <span class="o">+</span> <span class="mi">500</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lo_limit</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">max</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">min</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_root_dir</span><span class="p">):</span>
             <span class="n">files</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
             <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">file</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;.&#39;</span><span class="p">:</span>
                     <span class="k">continue</span>
-                <span class="n">path</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_cache_path</span><span class="p">(</span>
+                <span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lo_limit</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_cache_path</span><span class="p">(</span>
                     <span class="n">safestrptime</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s">.txt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">())</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_fst_day</span> <span class="o">=</span> <span class="n">lo</span>
                 <span class="k">break</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">dirs</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
@@ -244,62 +280,65 @@
             <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">file</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;.&#39;</span><span class="p">:</span>
                     <span class="k">continue</span>
-                <span class="n">path</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_cache_path</span><span class="p">(</span>
+                <span class="n">path</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_cache_path</span><span class="p">(</span>
                     <span class="n">safestrptime</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s">.txt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">())</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_lst_day</span> <span class="o">=</span> <span class="n">hi</span>
                 <span class="k">break</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">dirs</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
                 <span class="n">dirs</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
                 <span class="k">continue</span>
             <span class="k">break</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lo_limit_dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lo_limit</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lo_limit</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lo_limit</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit_dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">step</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">step</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;slice step not permitted&quot;</span><span class="p">)</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">start</span>
-        <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">a</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromordinal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fst_day</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lo_limit_dt</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;slice indices must be </span><span class="si">%s</span><span class="s"> or None&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">datetime</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="n">a</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fst_day</span><span class="p">:</span>
-            <span class="n">a</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromordinal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fst_day</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lo_limit_dt</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lo_limit_dt</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">stop</span>
-        <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">b</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">max</span>
-            <span class="n">lst_day</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lst_day</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit_dt</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;slice indices must be </span><span class="si">%s</span><span class="s"> or None&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">datetime</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">lst_day</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lst_day</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">lst_day</span>
+        <span class="k">elif</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit_dt</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit_dt</span>
+        <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
 
     <span class="k">def</span> <span class="nf">_get_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">lst_day</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_slice</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_slice</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
+            <span class="k">return</span>
         <span class="c"># go to start of slice</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_set_cache_ptr</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-        <span class="n">cache</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span>
-        <span class="n">cache_hi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_hi</span>
-        <span class="n">cache_ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_cache_ptr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+        <span class="n">cache</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">cache_hi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">hi</span>
+        <span class="n">cache_ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">ptr</span>
         <span class="c"># iterate over complete caches</span>
-        <span class="k">while</span> <span class="n">cache_hi</span> <span class="o">&lt;</span> <span class="n">lst_day</span><span class="p">:</span>
-            <span class="k">while</span> <span class="n">cache_ptr</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">cache</span><span class="p">):</span>
-                <span class="k">yield</span> <span class="n">cache</span><span class="p">[</span><span class="n">cache_ptr</span><span class="p">]</span>
-                <span class="n">cache_ptr</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_load</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">fromordinal</span><span class="p">(</span><span class="n">cache_hi</span><span class="p">))</span>
-            <span class="n">cache</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span>
-            <span class="n">cache_hi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_hi</span>
+        <span class="k">while</span> <span class="n">cache_hi</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="o">.</span><span class="n">date</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">[</span><span class="n">cache_ptr</span><span class="p">:]:</span>
+                <span class="k">yield</span> <span class="n">data</span>
+            <span class="k">if</span> <span class="n">cache_hi</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="p">,</span> <span class="n">cache_hi</span><span class="p">)</span>
+            <span class="n">cache</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">data</span>
+            <span class="n">cache_hi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">hi</span>
             <span class="n">cache_ptr</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="c"># iterate over part of cache</span>
-        <span class="k">while</span> <span class="n">cache_ptr</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">cache</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">cache</span><span class="p">[</span><span class="n">cache_ptr</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">b</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">[</span><span class="n">cache_ptr</span><span class="p">:]:</span>
+            <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">b</span><span class="p">:</span>
                 <span class="k">return</span>
-            <span class="k">yield</span> <span class="n">cache</span><span class="p">[</span><span class="n">cache_ptr</span><span class="p">]</span>
-            <span class="n">cache_ptr</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">return</span>
+            <span class="k">yield</span> <span class="n">data</span>
 
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the data item or items with index i.</span>
@@ -310,11 +349,11 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_slice</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;list indices must be </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">datetime</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_set_cache_ptr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span> <span class="ow">or</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_cache_ptr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">ptr</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="ow">or</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">ptr</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">ptr</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Store a value x with index i.</span>
@@ -325,33 +364,40 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;index &#39;</span><span class="si">%s</span><span class="s">&#39; is not </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">datetime</span><span class="p">))</span>
         <span class="n">x</span><span class="p">[</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_set_cache_ptr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_fst_day</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fst_day</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_lo</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_lst_day</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lst_day</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_hi</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span> <span class="ow">and</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_cache_ptr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lo_limit</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lo_limit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">lo</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">hi</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lo_limit_dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_lo_limit</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lo_limit</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lo_limit</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit_dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">ptr</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">ptr</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">ptr</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cache_dirty</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">ptr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">dirty</span> <span class="o">=</span> <span class="bp">True</span>
 
     <span class="k">def</span> <span class="nf">_del_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">lst_day</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_slice</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_slice</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
+            <span class="k">return</span>
         <span class="c"># go to start of slice</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_set_cache_ptr</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_cache_ptr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
         <span class="c"># delete to end of cache</span>
-        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_hi</span> <span class="o">&lt;</span> <span class="n">lst_day</span><span class="p">:</span>
-            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">:]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_cache_dirty</span> <span class="o">=</span> <span class="bp">True</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_load</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">fromordinal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_hi</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">hi</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="o">.</span><span class="n">date</span><span class="p">():</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">ptr</span><span class="p">:]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">dirty</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">hi</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">hi</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">ptr</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="c"># delete part of cache</span>
-        <span class="k">while</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span> <span class="ow">and</span>
-               <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">):</span>
-            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_cache_dirty</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="k">return</span>
+        <span class="n">ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">ptr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">set_ptr</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">ptr</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">ptr</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">dirty</span> <span class="o">=</span> <span class="bp">True</span>
 
     <span class="k">def</span> <span class="nf">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Delete the data item or items with index i.</span>
@@ -362,12 +408,12 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_del_slice</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;list indices must be </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">datetime</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_set_cache_ptr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span> <span class="ow">or</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_cache_ptr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">ptr</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="ow">or</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">ptr</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cache_dirty</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">ptr</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">dirty</span> <span class="o">=</span> <span class="bp">True</span>
 
 <div class="viewcode-block" id="core_store.before"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.core_store.before">[docs]</a>    <span class="k">def</span> <span class="nf">before</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return datetime of newest existing data record whose</span>
@@ -377,14 +423,14 @@
 <span class="sd">        return None.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;&#39;</span><span class="si">%s</span><span class="s">&#39; is not </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">datetime</span><span class="p">))</span>
-        <span class="n">day</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">idx</span><span class="o">.</span><span class="n">toordinal</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lst_day</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="k">while</span> <span class="n">day</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fst_day</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">day</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_lo</span> <span class="ow">or</span> <span class="n">day</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_hi</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_load</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">fromordinal</span><span class="p">(</span><span class="n">day</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_binary_search</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">)</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span>
-            <span class="n">day</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_lo</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">day</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">idx</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit</span> <span class="o">-</span> <span class="n">DAY</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">day</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lo_limit</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">day</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">lo</span> <span class="ow">or</span> <span class="n">day</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">hi</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">set_ptr</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">ptr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">ptr</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span>
+            <span class="n">day</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">lo</span> <span class="o">-</span> <span class="n">DAY</span>
         <span class="k">return</span> <span class="bp">None</span>
 </div>
 <div class="viewcode-block" id="core_store.after"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.core_store.after">[docs]</a>    <span class="k">def</span> <span class="nf">after</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
@@ -395,14 +441,14 @@
 <span class="sd">        return None.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;&#39;</span><span class="si">%s</span><span class="s">&#39; is not </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">datetime</span><span class="p">))</span>
-        <span class="n">day</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">idx</span><span class="o">.</span><span class="n">toordinal</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fst_day</span><span class="p">)</span>
-        <span class="k">while</span> <span class="n">day</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lst_day</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">day</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_lo</span> <span class="ow">or</span> <span class="n">day</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_hi</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_load</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">fromordinal</span><span class="p">(</span><span class="n">day</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_binary_search</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">)</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">):</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span>
-            <span class="n">day</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_hi</span>
+        <span class="n">day</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">idx</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lo_limit</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">day</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hi_limit</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">day</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">lo</span> <span class="ow">or</span> <span class="n">day</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">hi</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">set_ptr</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">ptr</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">ptr</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span>
+            <span class="n">day</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">hi</span>
         <span class="k">return</span> <span class="bp">None</span>
 </div>
 <div class="viewcode-block" id="core_store.nearest"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.core_store.nearest">[docs]</a>    <span class="k">def</span> <span class="nf">nearest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
@@ -417,83 +463,80 @@
             <span class="k">return</span> <span class="n">hi</span>
         <span class="k">return</span> <span class="n">lo</span>
 </div>
-    <span class="k">def</span> <span class="nf">_set_cache_ptr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-        <span class="n">day</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">day</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_lo</span> <span class="ow">or</span> <span class="n">day</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_hi</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_load</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_binary_search</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_set_cache_ptr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="n">day</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">day</span> <span class="o">&lt;</span> <span class="n">cache</span><span class="o">.</span><span class="n">lo</span> <span class="ow">or</span> <span class="n">day</span> <span class="o">&gt;=</span> <span class="n">cache</span><span class="o">.</span><span class="n">hi</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_load</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">set_ptr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_binary_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
-        <span class="n">hi</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="n">hi</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">idx</span><span class="p">:</span>
-            <span class="k">return</span> <span class="mi">0</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">hi</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">idx</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">hi</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="n">lo</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">start</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">start</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">idx</span><span class="p">:</span>
-            <span class="n">lo</span> <span class="o">=</span> <span class="n">start</span>
+    <span class="k">def</span> <span class="nf">_load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">target_date</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flush</span><span class="p">(</span><span class="n">cache</span><span class="p">)</span>
+        <span class="n">new_path</span><span class="p">,</span> <span class="n">new_lo</span><span class="p">,</span> <span class="n">new_hi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_cache_path</span><span class="p">(</span><span class="n">target_date</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">new_path</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+            <span class="n">cache</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">new_path</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+            <span class="n">cache</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">ptr</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">cache</span><span class="o">.</span><span class="n">lo</span><span class="p">,</span> <span class="n">cache</span><span class="o">.</span><span class="n">hi</span> <span class="o">=</span> <span class="n">new_path</span><span class="p">,</span> <span class="n">new_lo</span><span class="p">,</span> <span class="n">new_hi</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">cache</span><span class="o">.</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">csvfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">cache</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">hi</span> <span class="o">=</span> <span class="n">start</span>
-        <span class="k">while</span> <span class="n">hi</span> <span class="o">&gt;</span> <span class="n">lo</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">mid</span><span class="p">][</span><span class="s">&#39;idx&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">idx</span><span class="p">:</span>
-                <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span>
-        <span class="k">return</span> <span class="n">hi</span>
-
-    <span class="k">def</span> <span class="nf">_load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_date</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cache_ptr</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cache_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_lo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_hi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_cache_path</span><span class="p">(</span><span class="n">target_date</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_path</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
-                <span class="n">csvfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_path</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">csvfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_path</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span>
-            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">quoting</span><span class="o">=</span><span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_NONE</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
-                <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
-                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key_list</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
-                    <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
-                        <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="n">csvfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">cache</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">quoting</span><span class="o">=</span><span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_NONE</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key_list</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">cache</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="n">csvfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 <div class="viewcode-block" id="core_store.flush"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.core_store.flush">[docs]</a>    <span class="k">def</span> <span class="nf">flush</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_dirty</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wr_cache</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rd_cache</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_flush</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cache</span><span class="o">.</span><span class="n">dirty</span><span class="p">:</span>
             <span class="k">return</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cache_dirty</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_path</span><span class="p">):</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">dirty</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cache</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">cache</span><span class="o">.</span><span class="n">path</span><span class="p">):</span>
                 <span class="c"># existing data has been wiped, so delete file</span>
-                <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_path</span><span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">cache</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
             <span class="k">return</span>
-        <span class="nb">dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_path</span><span class="p">)</span>
+        <span class="nb">dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">cache</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="nb">dir</span><span class="p">):</span>
             <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="n">csvfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">csvfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">cache</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">csvfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_path</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="n">csvfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">cache</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">quoting</span><span class="o">=</span><span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_NONE</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">cache</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
             <span class="n">row</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_list</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)]:</span>
-                <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">float</span><span class="p">):</span>
+                    <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
             <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
-</div>
+        <span class="n">csvfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
     <span class="k">def</span> <span class="nf">_get_cache_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_date</span><span class="p">):</span>
         <span class="c"># default implementation - one file per day</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_root_dir</span><span class="p">,</span>
                             <span class="n">target_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;%Y&quot;</span><span class="p">),</span>
                             <span class="n">target_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;%Y-%m&quot;</span><span class="p">),</span>
                             <span class="n">target_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s">.txt&quot;</span><span class="p">))</span>
-        <span class="n">lo</span> <span class="o">=</span> <span class="n">target_date</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span>
-        <span class="n">hi</span> <span class="o">=</span> <span class="n">lo</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">lo</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">target_date</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">max</span> <span class="o">-</span> <span class="n">DAY</span><span class="p">)</span>
+        <span class="n">hi</span> <span class="o">=</span> <span class="n">lo</span> <span class="o">+</span> <span class="n">DAY</span>
         <span class="k">return</span> <span class="n">path</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span>
 </div>
 <div class="viewcode-block" id="data_store"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.data_store">[docs]</a><span class="k">class</span> <span class="nc">data_store</span><span class="p">(</span><span class="n">core_store</span><span class="p">):</span>
@@ -658,9 +701,12 @@
         <span class="n">lo</span> <span class="o">=</span> <span class="n">target_date</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">lo</span><span class="o">.</span><span class="n">month</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">:</span>
             <span class="n">hi</span> <span class="o">=</span> <span class="n">lo</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">month</span><span class="o">=</span><span class="n">lo</span><span class="o">.</span><span class="n">month</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">lo</span><span class="o">.</span><span class="n">year</span> <span class="o">&lt;</span> <span class="n">MAXYEAR</span><span class="p">:</span>
             <span class="n">hi</span> <span class="o">=</span> <span class="n">lo</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">lo</span><span class="o">.</span><span class="n">year</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">path</span><span class="p">,</span> <span class="n">lo</span><span class="o">.</span><span class="n">toordinal</span><span class="p">(),</span> <span class="n">hi</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hi</span> <span class="o">=</span> <span class="n">lo</span>
+            <span class="n">lo</span> <span class="o">=</span> <span class="n">hi</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">month</span><span class="o">=</span><span class="n">hi</span><span class="o">.</span><span class="n">month</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">path</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span>
 </div>
 <div class="viewcode-block" id="monthly_store"><a class="viewcode-back" href="../../api/pywws.DataStore.html#pywws.DataStore.monthly_store">[docs]</a><span class="k">class</span> <span class="nc">monthly_store</span><span class="p">(</span><span class="n">core_store</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Stores monthly summary weather station data.&quot;&quot;&quot;</span>
@@ -767,8 +813,12 @@
         <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_root_dir</span><span class="p">,</span>
                             <span class="n">target_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;%Y-01-01.txt&quot;</span><span class="p">))</span>
         <span class="n">lo</span> <span class="o">=</span> <span class="n">target_date</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">hi</span> <span class="o">=</span> <span class="n">lo</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">lo</span><span class="o">.</span><span class="n">year</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">path</span><span class="p">,</span> <span class="n">lo</span><span class="o">.</span><span class="n">toordinal</span><span class="p">(),</span> <span class="n">hi</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span></div>
+        <span class="k">if</span> <span class="n">lo</span><span class="o">.</span><span class="n">year</span> <span class="o">&lt;</span> <span class="n">MAXYEAR</span><span class="p">:</span>
+            <span class="n">hi</span> <span class="o">=</span> <span class="n">lo</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">lo</span><span class="o">.</span><span class="n">year</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hi</span> <span class="o">=</span> <span class="n">lo</span>
+            <span class="n">lo</span> <span class="o">=</span> <span class="n">hi</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">hi</span><span class="o">.</span><span class="n">year</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">path</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span></div>
 </pre></div>
 
           </div>
@@ -805,7 +855,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >moduli</a> |</li>
-        <li><a href="../../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.12.dev1118 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

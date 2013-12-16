@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pywws.Template &mdash; pywws 13.10_r1087 documentation</title>
+    <title>pywws.Template &mdash; pywws 13.12.dev1118 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '13.10_r1087',
+        VERSION:     '13.12.dev1118',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="../../_static/translations.js"></script>
     <link rel="shortcut icon" href="../../_static/pywws_logo.ico"/>
-    <link rel="top" title="pywws 13.10_r1087 documentation" href="../../index.html" />
+    <link rel="top" title="pywws 13.12.dev1118 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -40,7 +40,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >moduli</a> |</li>
-        <li><a href="../../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.12.dev1118 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -100,6 +100,13 @@
 <span class="sd">Processing instructions</span>
 <span class="sd">-----------------------</span>
 
+<span class="sd">Note that if the closing &#39;#&#39; of a processing instruction is the last</span>
+<span class="sd">character on a line then the following line break is not outputted.</span>
+<span class="sd">This makes templates easier to edit as you can have a separate line</span>
+<span class="sd">for each processing instruction and still produce output with no line</span>
+<span class="sd">breaks. If you want to output a line break after a processing</span>
+<span class="sd">instruction, put a blank line immediately after it.</span>
+
 <span class="sd">``##``</span>
 <span class="sd">^^^^^^</span>
 
@@ -134,11 +141,23 @@
 
 <span class="sd">switch to &quot;raw&quot; data. The index is reset to the most recent value.</span>
 
+<span class="sd">.. versionchanged:: 11.09</span>
+<span class="sd">   This now selects &quot;calibrated&quot; data. The directive name remains</span>
+<span class="sd">   unchanged for backwards compatibility.</span>
+
 <span class="sd">``#timezone name#``</span>
 <span class="sd">^^^^^^^^^^^^^^^^^^^</span>
 
 <span class="sd">convert all datetime values to time zone ``name`` before output.</span>
 <span class="sd">Permitted values for name are ``utc`` or ``local``.</span>
+
+<span class="sd">``#locale expr#``</span>
+<span class="sd">^^^^^^^^^^^^^^^^^</span>
+
+<span class="sd">switch use of &#39;locale&#39; on or off, according to ``expr``. When locale</span>
+<span class="sd">is on floating point numbers may use a comma as the decimal separator</span>
+<span class="sd">instead of a point, depending on your localisation settings. Use</span>
+<span class="sd">``&quot;True&quot;`` or ``&quot;False&quot;`` for expr.</span>
 
 <span class="sd">``#roundtime expr#``</span>
 <span class="sd">^^^^^^^^^^^^^^^^^^^^</span>
@@ -358,6 +377,8 @@
         <span class="n">data_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hourly_data</span>
         <span class="c"># start off in utc</span>
         <span class="n">time_zone</span> <span class="o">=</span> <span class="n">utc</span>
+        <span class="c"># start off with default use_locale setting</span>
+        <span class="n">use_locale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_locale</span>
         <span class="c"># jump to last item</span>
         <span class="n">idx</span><span class="p">,</span> <span class="n">valid_data</span> <span class="o">=</span> <span class="n">jump</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">valid_data</span><span class="p">:</span>
@@ -418,7 +439,7 @@
                             <span class="k">yield</span> <span class="n">command</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
                     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
                         <span class="k">yield</span> <span class="n">x</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
-                    <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_locale</span><span class="p">:</span>
+                    <span class="k">elif</span> <span class="ow">not</span> <span class="n">use_locale</span><span class="p">:</span>
                         <span class="k">yield</span> <span class="n">fmt</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
                     <span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="ow">or</span> <span class="s">&#39;</span><span class="si">%%</span><span class="s">&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fmt</span><span class="p">:</span>
                         <span class="k">yield</span> <span class="n">locale</span><span class="o">.</span><span class="n">format_string</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
@@ -454,6 +475,8 @@
                     <span class="k">else</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;Unknown time zone: </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">command</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
                         <span class="k">return</span>
+                <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;locale&#39;</span><span class="p">:</span>
+                    <span class="n">use_locale</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">command</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
                 <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;roundtime&#39;</span><span class="p">:</span>
                     <span class="k">if</span> <span class="nb">eval</span><span class="p">(</span><span class="n">command</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
                         <span class="n">round_time</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
@@ -603,7 +626,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >moduli</a> |</li>
-        <li><a href="../../index.html">pywws 13.10_r1087 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">pywws 13.12.dev1118 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
