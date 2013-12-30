@@ -222,6 +222,10 @@ class RegularTasks(object):
                 if 'L' in flags:
                     if upload not in local_files:
                         local_files.append(upload)
+
+		if "P" in flags:
+                	self.do_pusher(template, live_data)
+
                 elif upload not in uploads:
                     uploads.append(upload)
             for template, flags in self._parse_templates(section, 'plot'):
@@ -378,6 +382,14 @@ class RegularTasks(object):
         else:
             self.logger.info("Tweeting")
             return self.twitter.Upload(tweet)
+
+
+    def do_pusher(self, template, data=None):
+        from pywws import ToPusher
+        input_file = os.path.join(self.template_dir, template)
+        push = self.templater.make_text(input_file, live_data=data)
+        return ToPusher.ToPusher(self.params).Upload(eval(push))
+
 
     def do_plot(self, template):
         self.logger.info("Graphing %s", template)
