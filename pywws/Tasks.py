@@ -388,8 +388,14 @@ class RegularTasks(object):
         from pywws import ToPusher
         input_file = os.path.join(self.template_dir, template)
         push = self.templater.make_text(input_file, live_data=data)
-        return ToPusher.ToPusher(self.params).Upload(eval(push))
-
+	try:
+		push_dict = eval(push)
+        	return ToPusher.ToPusher(self.params).Upload(push_dict)
+	except:
+		self.logger.error("could not eval:")
+		self.logger.error(push);
+		return False	
+		
 
     def do_plot(self, template):
         self.logger.info("Graphing %s", template)
