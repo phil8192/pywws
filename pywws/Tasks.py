@@ -393,7 +393,7 @@ class RegularTasks(object):
         	return ToPusher.ToPusher(self.params).Upload(push_dict)
 	except:
 		self.logger.error("could not eval:")
-		self.logger.error(push);
+		self.logger.error(push)
 		return False	
 		
 
