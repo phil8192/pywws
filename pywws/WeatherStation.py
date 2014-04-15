@@ -39,10 +39,10 @@ reduce USB traffic. The caching behaviour can be over-ridden with the
 ``unbuffered`` parameter to ``get_data`` and ``get_raw_data``.
 
 Decoding the data is controlled by the static dictionaries
-``reading_format``, ``lo_fix_format`` and ``fixed_format``. The keys
+``_reading_format``, ``lo_fix_format`` and ``fixed_format``. The keys
 are names of data items and the values can be an ``(offset, type,
 multiplier)`` tuple or another dictionary. So, for example, the
-reading_format dictionary entry ``'rain' : (13, 'us', 0.3)`` means
+_reading_format dictionary entry ``'rain' : (13, 'us', 0.3)`` means
 that the rain value is an unsigned short (two bytes), 13 bytes from
 the start of the block, and should be multiplied by 0.3 to get a
 useful value.
@@ -106,77 +106,114 @@ if not USBDevice:
 if not USBDevice:
     raise ImportError('No USB library found')
 
-# get meaning for status integer
-rain_overflow   = 0x80
-lost_connection = 0x40
-unknown         = 0x20
-unknown         = 0x10
-unknown         = 0x08
-unknown         = 0x04
-unknown         = 0x02
-unknown         = 0x01
-
 def decode_status(status):
     result = {}
-    for key, mask in (('rain_overflow',   0x80),
-                      ('lost_connection', 0x40),
-                      ('unknown',         0x3f),
+    for key, mask in (('invalid_wind_dir', 0x800),
+                      ('rain_overflow',    0x080),
+                      ('lost_connection',  0x040),
+                      ('unknown',          0x73f),
                       ):
         result[key] = status & mask
     return result
 
 # decode weather station raw data formats
+def _plain_byte(raw, offset):
+    return raw[offset]
+
+def _unsigned_byte(raw, offset):
+    res = raw[offset]
+    if res == 0xFF:
+        return None
+    return res
+
+def _signed_byte(raw, offset):
+    res = raw[offset]
+    if res == 0xFF:
+        return None
+    if res >= 128:
+        return 128 - res
+    return res
+
+def _unsigned_short(raw, offset):
+    lo = raw[offset]
+    hi = raw[offset+1]
+    if lo == 0xFF and hi == 0xFF:
+        return None
+    return (hi * 256) + lo
+
+def _signed_short(raw, offset):
+    lo = raw[offset]
+    hi = raw[offset+1]
+    if lo == 0xFF and hi == 0xFF:
+        return None
+    if hi >= 128:
+        return ((128 - hi) * 256) - lo
+    return (hi * 256) + lo
+
+def _unsigned_int3(raw, offset):
+    lo = raw[offset]
+    md = raw[offset+1]
+    hi = raw[offset+2]
+    if lo == 0xFF and md == 0xFF and hi == 0xFF:
+        return None
+    return (hi * 256 * 256) + (md * 256) + lo
+
+def _bcd_decode(byte):
+    hi = (byte // 16) & 0x0F
+    lo = byte & 0x0F
+    return (hi * 10) + lo
+
+def _date_time(raw, offset):
+    year = _bcd_decode(raw[offset])
+    month = _bcd_decode(raw[offset+1])
+    day = _bcd_decode(raw[offset+2])
+    hour = _bcd_decode(raw[offset+3])
+    minute = _bcd_decode(raw[offset+4])
+    return '%4d-%02d-%02d %02d:%02d' % (year + 2000, month, day, hour, minute)
+
+def _time(raw, offset):
+    hour = _bcd_decode(raw[offset])
+    minute = _bcd_decode(raw[offset+1])
+    return '%02d:%02d' % (hour, minute)
+
+def _wind_ave(raw, offset):
+    # wind average - 12 bits split across a byte and a nibble
+    result = raw[offset] + ((raw[offset+2] & 0x0F) << 8)
+    if result == 0xFFF:
+        result = None
+    return result
+
+def _wind_gust(raw, offset):
+    # wind gust - 12 bits split across a byte and a nibble
+    result = raw[offset] + ((raw[offset+1] & 0xF0) << 4)
+    if result == 0xFFF:
+        result = None
+    return result
+
+def _bit_field(raw, offset):
+    # convert byte to list of 8 booleans
+    mask = 1
+    result = []
+    for i in range(8):
+        result.append(raw[offset] & mask != 0)
+        mask = mask << 1
+    return result
+
+_decoders = {
+    'pb' : _plain_byte,
+    'ub' : _unsigned_byte,
+    'sb' : _signed_byte,
+    'us' : _unsigned_short,
+    'ss' : _signed_short,
+    'u3' : _unsigned_int3,
+    'dt' : _date_time,
+    'tt' : _time,
+    'wa' : _wind_ave,
+    'wg' : _wind_gust,
+    'bf' : _bit_field,
+    }
+
 def _decode(raw, format):
-    def _signed_byte(raw, offset):
-        res = raw[offset]
-        if res == 0xFF:
-            return None
-        sign = 1
-        if res >= 128:
-            sign = -1
-            res = res - 128
-        return sign * res
-    def _signed_short(raw, offset):
-        lo = raw[offset]
-        hi = raw[offset+1]
-        if lo == 0xFF and hi == 0xFF:
-            return None
-        sign = 1
-        if hi >= 128:
-            sign = -1
-            hi = hi - 128
-        return sign * ((hi * 256) + lo)
-    def _unsigned_short(raw, offset):
-        lo = raw[offset]
-        hi = raw[offset+1]
-        if lo == 0xFF and hi == 0xFF:
-            return None
-        return (hi * 256) + lo
-    def _unsigned_int3(raw, offset):
-        lo = raw[offset]
-        md = raw[offset+1]
-        hi = raw[offset+2]
-        if lo == 0xFF and md == 0xFF and hi == 0xFF:
-            return None
-        return (hi * 256 * 256) + (md * 256) + lo
-    def _bcd_decode(byte):
-        hi = (byte // 16) & 0x0F
-        lo = byte & 0x0F
-        return (hi * 10) + lo
-    def _date_time(raw, offset):
-        year = _bcd_decode(raw[offset])
-        month = _bcd_decode(raw[offset+1])
-        day = _bcd_decode(raw[offset+2])
-        hour = _bcd_decode(raw[offset+3])
-        minute = _bcd_decode(raw[offset+4])
-        return '%4d-%02d-%02d %02d:%02d' % (year + 2000, month, day, hour, minute)
-    def _bit_field(raw, offset):
-        mask = 1
-        result = []
-        for i in range(8):
-            result.append(raw[offset] & mask != 0)
-            mask = mask << 1
-        return result
     if not raw:
         return None
     if isinstance(format, dict):
@@ -185,44 +222,11 @@ def _decode(raw, format):
             result[key] = _decode(raw, value)
     else:
         pos, type, scale = format
-        if type == 'ub':
-            result = raw[pos]
-            if result == 0xFF:
-                result = None
-        elif type == 'sb':
-            result = _signed_byte(raw, pos)
-        elif type == 'us':
-            result = _unsigned_short(raw, pos)
-        elif type == 'u3':
-            result = _unsigned_int3(raw, pos)
-        elif type == 'ss':
-            result = _signed_short(raw, pos)
-        elif type == 'dt':
-            result = _date_time(raw, pos)
-        elif type == 'tt':
-            result = '%02d:%02d' % (_bcd_decode(raw[pos]),
-                                    _bcd_decode(raw[pos+1]))
-        elif type == 'pb':
-            result = raw[pos]
-        elif type == 'wa':
-            # wind average - 12 bits split across a byte and a nibble
-            result = raw[pos] + ((raw[pos+2] & 0x0F) << 8)
-            if result == 0xFFF:
-                result = None
-        elif type == 'wg':
-            # wind gust - 12 bits split across a byte and a nibble
-            result = raw[pos] + ((raw[pos+1] & 0xF0) << 4)
-            if result == 0xFFF:
-                result = None
-        elif type == 'bf':
+        result = _decoders[type](raw, pos)
+        if type == 'bf':
             # bit field - 'scale' is a list of bit names
-            result = {}
-            for k, v in zip(scale, _bit_field(raw, pos)):
-                result[k] = v
-            return result
-        else:
-            raise IOError('unknown type %s' % type)
-        if scale and result:
+            result = dict(zip(scale, result))
+        elif scale and result:
             result = float(result) * scale
     return result
 
@@ -371,20 +375,17 @@ class weather_station(object):
             self._station_clock = None
         ptr_time = 0
         data_time = 0
-        last_status = None
+        last_status = decode_status(0)
         while True:
+            # sleep until just before next reading is due
             if not self._sensor_clock:
                 next_live = None
             if not self._station_clock:
                 next_log = None
             now = time.time()
-            # wake up just before next reading is due
             advance = now + max(self.avoid, self.min_pause) + self.min_pause
             if next_live:
-                if logged_only:
-                    pause = 600.0
-                else:
-                    pause = next_live - advance
+                pause = next_live - advance
             else:
                 pause = self.min_pause
             if next_log:
@@ -399,84 +400,38 @@ class weather_station(object):
             last_ptr_time = ptr_time
             new_ptr = self.current_pos()
             ptr_time = time.time()
-            valid_time = ptr_time - last_ptr_time < self.margin
-            if new_ptr != old_ptr:
-                self.logger.debug('live_data new ptr: %06x', new_ptr)
-                last_log = ptr_time
-                # re-read data, to be absolutely sure it's the last
-                # logged data before the pointer was updated
-                result = self.get_data(old_ptr, unbuffered=True)
-                if valid_time:
-                    # pointer has just changed, so definitely at a logging time
-                    if self._station_clock:
-                        diff = (ptr_time - self._station_clock) % 60
-                        if diff > 2 and diff < 58:
-                            self.logger.error('unexpected station clock change')
-                            self._station_clock = None
-                    if not self._station_clock:
-                        self._station_clock = ptr_time
-                        self.logger.warning(
-                            'setting station clock %g', ptr_time % 60.0)
-                        if self.status:
-                            self.status.set(
-                                'clock', 'station', str(self._station_clock))
-                    if not next_log:
-                        self.logger.warning('live_data log synchronised')
-                    next_log = ptr_time
-                elif next_log and ptr_time < next_log - self.margin:
-                    self.logger.warning(
-                        'live_data lost log sync %g', ptr_time - next_log)
-                    next_log = None
-                    self._station_clock = None
-                if next_log:
-                    result['idx'] = datetime.utcfromtimestamp(int(next_log))
-                    next_log += log_interval
-                    yield result, old_ptr, True
-                old_ptr = new_ptr
-                old_data['delay'] = 0
-                data_time = 0
-            elif ptr_time > last_log + log_interval + 180:
-                # if station stops logging data, don't keep reading
-                # USB until it locks up
-                raise IOError('station is not logging data')
-            elif next_log and ptr_time > next_log + 6.0:
-                self.logger.warning('live_data log extended')
-                next_log += 60.0
             # get new data
-            if logged_only and next_live:
-                continue
             last_data_time = data_time
             new_data = self.get_data(old_ptr, unbuffered=True)
             data_time = time.time()
-            # log any change of status
-            if new_data['status'] != last_status:
-                self.logger.warning(
-                    'status %s', str(decode_status(new_data['status'])))
-            last_status = new_data['status']
-            # 'good' time stamp if we haven't just woken up from long
-            # pause and data read wasn't delayed
-            valid_time = data_time - last_data_time < self.margin
-            # some stations lose sync when they lose contact
-            if next_live and (
-                    decode_status(new_data['status'])['lost_connection'] or
-                    decode_status(old_data['status'])['lost_connection']):
-                valid_time = False
-            changed = False
-            for key in ('hum_in', 'temp_in', 'hum_out', 'temp_out',
-                        'abs_pressure', 'wind_ave', 'wind_gust', 'wind_dir',
-                        'rain', 'status'):
-                if new_data[key] != old_data[key]:
-                    changed = True
-                    break
-            if changed:
+            # when ptr changes, internal sensor data gets updated
+            if new_ptr != old_ptr:
+                for key in ('hum_in', 'temp_in', 'abs_pressure'):
+                    old_data[key] = new_data[key]
+            # log any change of status except 'invalid_wind_dir'
+            new_status = decode_status(new_data['status'])
+            last_status['invalid_wind_dir'] = new_status['invalid_wind_dir']
+            if new_status != last_status:
+                self.logger.warning('status %s', str(new_status))
+            last_status = new_status
+            if (new_status['lost_connection'] and not
+                decode_status(old_data['status'])['lost_connection']):
+                # 'lost connection' decision can happen at any time
+                old_data = new_data
+            # has data changed?
+            if any(new_data[key] != old_data[key] for key in (
+                    'hum_in', 'temp_in', 'hum_out', 'temp_out',
+                    'abs_pressure', 'wind_ave', 'wind_gust', 'wind_dir',
+                    'rain', 'status')):
                 self.logger.debug('live_data new data')
-                result = dict(new_data)
-                if valid_time:
+                if data_time - last_data_time < self.margin:
                     # data has just changed, so definitely at a 48s update time
                     if self._sensor_clock:
                         diff = (data_time - self._sensor_clock) % live_interval
                         if diff > 2.0 and diff < (live_interval - 2.0):
                             self.logger.error('unexpected sensor clock change')
+                            self.logger.warning('old data %s', str(old_data))
+                            self.logger.warning('new data %s', str(new_data))
                             self._sensor_clock = None
                     if not self._sensor_clock:
                         self._sensor_clock = data_time
@@ -497,13 +452,55 @@ class weather_station(object):
                     self._sensor_clock = None
                 if next_live:
                     if not logged_only:
+                        result = dict(new_data)
                         result['idx'] = datetime.utcfromtimestamp(int(next_live))
                         yield result, old_ptr, False
                     next_live += live_interval
                 old_data = new_data
             elif next_live and data_time > next_live + 6.0:
-                self.logger.warning('live_data missed')
+                self.logger.info('live_data missed')
                 next_live += live_interval
+            # has ptr changed?
+            if new_ptr != old_ptr:
+                self.logger.info('live_data new ptr: %06x', new_ptr)
+                last_log = ptr_time
+                if ptr_time - last_ptr_time < self.margin:
+                    # pointer has just changed, so definitely at a logging time
+                    if self._station_clock:
+                        diff = (ptr_time - self._station_clock) % 60
+                        if diff > 2.0 and diff < 58.0:
+                            self.logger.error('unexpected station clock change')
+                            self._station_clock = None
+                    if not self._station_clock:
+                        self._station_clock = ptr_time
+                        self.logger.warning(
+                            'setting station clock %g', ptr_time % 60.0)
+                        if self.status:
+                            self.status.set(
+                                'clock', 'station', str(self._station_clock))
+                    if not next_log:
+                        self.logger.warning('live_data log synchronised')
+                    next_log = ptr_time
+                elif next_log and ptr_time < next_log - self.margin:
+                    self.logger.warning(
+                        'live_data lost log sync %g', ptr_time - next_log)
+                    next_log = None
+                    self._station_clock = None
+                if next_log:
+                    result = dict(new_data)
+                    result['idx'] = datetime.utcfromtimestamp(int(next_log))
+                    next_log += log_interval
+                    yield result, old_ptr, True
+                old_ptr = new_ptr
+                old_data['delay'] = 0
+                data_time = 0
+            elif ptr_time > last_log + log_interval + 180:
+                # if station stops logging data, don't keep reading
+                # USB until it locks up
+                raise IOError('station is not logging data')
+            elif next_log and ptr_time > next_log + 6.0:
+                self.logger.warning('live_data log extended')
+                next_log += 60.0
 
     def inc_ptr(self, ptr):
         """Get next circular buffer data pointer."""
@@ -556,8 +553,16 @@ class weather_station(object):
 
         If unbuffered is false then a cached value that was obtained
         earlier may be returned."""
-        return _decode(self.get_raw_data(ptr, unbuffered),
-                       self.reading_format[self.ws_type])
+        result = _decode(self.get_raw_data(ptr, unbuffered),
+                         self._reading_format[self.ws_type])
+        # split up 'wind_dir' byte
+        if result['wind_dir'] is not None:
+            result['status'] |= (result['wind_dir'] & 0xF0) << 4
+            if result['wind_dir'] & 0x80:
+                result['wind_dir'] = None
+            else:
+                result['wind_dir'] &= 0x0F
+        return result
 
     def current_pos(self):
         """Get circular buffer location where current data is being written."""
@@ -669,8 +674,8 @@ class weather_station(object):
     # specifies an (offset, type, multiplier) tuple that is understood
     # by _decode.
     # depends on weather station type
-    reading_format = {}
-    reading_format['1080'] = {
+    _reading_format = {}
+    _reading_format['1080'] = {
         'delay'        : (0, 'ub', None),
         'hum_in'       : (1, 'ub', None),
         'temp_in'      : (2, 'ss', 0.1),
@@ -683,11 +688,11 @@ class weather_station(object):
         'rain'         : (13, 'us', 0.3),
         'status'       : (15, 'pb', None),
         }
-    reading_format['3080'] = {
+    _reading_format['3080'] = {
         'illuminance' : (16, 'u3', 0.1),
         'uv'          : (19, 'ub', None),
         }
-    reading_format['3080'].update(reading_format['1080'])
+    _reading_format['3080'].update(_reading_format['1080'])
     lo_fix_format = {
         'read_period'   : (16, 'ub', None),
         'settings_1'    : (17, 'bf', ('temp_in_F', 'temp_out_F', 'rain_in',
