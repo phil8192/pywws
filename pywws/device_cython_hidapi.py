@@ -132,7 +132,8 @@ class USBDevice(object):
         result = list()
         while size > 0:
             count = min(size, 8)
-            buf = self.hid.read(count)
+            #buf = self.hid.read(count)
+	    buf = self.hid.read_timeout(count, 60000)
             if len(buf) < count:
                 raise IOError(
                     'pywws.device_cython_hidapi.USBDevice.read_data failed')
